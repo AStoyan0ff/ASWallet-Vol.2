@@ -1,5 +1,5 @@
 <h1 align="center">
-  💰 ASWallet 💰
+  💰 ASWallet-Vol.2 💰
 </h1>
 
 <p align="center">
@@ -7,609 +7,667 @@
 </p>
 
 <p align="center">
-  Personal FinTech Wallet Application built with Spring Boot
+  Personal FinTech Wallet — Main Application (Spring Boot)
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk">
   <img src="https://img.shields.io/badge/version-2.0.1-blue">
-  <img src="https://img.shields.io/badge/Spring%20Boot-4.x-brightgreen?logo=springboot">
+  <img src="https://img.shields.io/badge/Spring%20Boot-4.0.6-brightgreen?logo=springboot">
   <img src="https://img.shields.io/badge/Spring%20Security-Authentication-success?logo=springsecurity">
   <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql">
   <img src="https://img.shields.io/badge/Thymeleaf-Frontend-green?logo=thymeleaf">
-  <img src="https://img.shields.io/badge/HTML5-Markup-E34F26?logo=html5">
-  <img src="https://img.shields.io/badge/CSS3-Styling-1572B6?logo=css3">
-  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black">
   <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven">
 </p>
 
-<h1 align="center">
-  AStoyanoff's Wallet Project
-</h1>
+<h1 align="center">AStoyanoff's Wallet Project</h1>
+
 <p align="center">
-  ASWallet is a personal fintech/wallet web application built with Spring Boot.
-  Users register an account, link a bank card, receive a welcome bonus, and manage wallet balance through deposits, withdrawals, and transfers in a secure environment.
+  ASWallet-Vol.2 is a full-stack personal wallet platform. Users register, manage a digital wallet,
+  link a bank card, receive a welcome bonus, and perform deposits, withdrawals, and transfers.
+  The system includes profile management, admin tooling, messaging, scheduling, caching,
+  PDF export, and a planned REST microservice integrated via OpenFeign.
 </p>
 
 ---
 
-## Recommended Display Settings (optional)
+## Table of Contents
 
-The UI was primarily tuned and reviewed at:
-
-- Windows Display Scale: **125%**
-- Browser Zoom: **75%–80%**
-- Resolution: **1920×1080**
-
-The layout is responsive (fluid panels, media queries). At **100% browser zoom**
-the UI may appear slightly larger but should remain usable. These settings are
-a reviewer convenience, not a requirement.
-
----
-
-## Features
-
-### Authentication & Security
-
-* User Registration with Bean Validation (username, email, password)
-* User Login & Logout
-* Spring Security Authentication
-* BCrypt Password Encryption
-* Change Password Functionality
-* Forgot Password (token-based reset via email)
-* Custom UserDetailsService with role-based authorities (`USER` / `ADMIN`)
-* Delete Account (reset tokens, bank card, transactions, wallet, user)
-
-> Spring Advanced additions (profile, account status, transfer confirm, etc.) are documented in the **[Spring Advanced](#spring-advanced)** section below.
-
-### Bank Card
-
-* **No card required at registration** — register with account details only
-* Add bank card later from **Bank Details** (`/wallet/bank-details`)
-* **€50.00 welcome bonus** credited to the wallet on **first** successful card registration
-* Welcome bonus recorded in transaction history (`Welcome bonus - bank card registered`)
-* Only last 4 digits and card metadata stored (full PAN and CVC are not persisted)
-* Deposit and withdraw require a registered bank card
-* Transfer requires the **receiver** to have a registered bank card
-
-### Wallet Management
-
-* Automatic wallet creation after registration (starting balance **€0.00**)
-* **€50.00 welcome bonus** when the user adds their first bank card
-* Wallet balance tracking
-* Deposit funds (from saved card + CVC confirmation)
-* Withdraw funds (to saved card)
-* Transfer funds between users (by receiver username)
-* **Transfer confirm** — two-step review/confirm flow (see [Spring Advanced](#spring-advanced))
-* Transaction history with type, status, amount, description, date, from/to
-* Transaction statuses: `COMPLETED` (default for successful operations), `PENDING`, `FAILED`, `CANCELLED` — color-coded chips in history
-* Successful wallet operations are saved as `COMPLETED` (`TransactionServiceImpl` + `@PrePersist` default)
-* Transaction validation (amount limits, balance checks, description patterns)
-
-### Admin Panel
-
-* Role-based access (`/admin/**` - `ROLE_ADMIN` only)
-* View all registered users with wallet balance and currency
-* Remove users (transactions, wallet, bank card, reset tokens, and account) via `UserDeletionService`
-* Default admin account and bank card bootstrapped on first startup
-* Admin Panel button on `/wallet` (visible for admin only)
-
-### Email Notifications
-
-* Registration confirmation email
-* Password reset link email
-* Transaction notification emails (deposit, withdraw, transfer sent/received, welcome bonus)
-
-Email sending uses **Spring Mail (SMTP)** and is decoupled from business logic using **Spring Application Events**:
-
-* `UserRegisteredEvent` → registration email (after commit)
-* `TransactionCompletedEvent` → transaction emails (after commit)
-
-### UI
-
-* Dark theme with page-specific background images
-* Server-rendered Thymeleaf templates
-* Glass-style form panels (`backdrop-filter`, semi-transparent overlays)
-* **Materialize effect** on form panels — blur reveal, staggered fields, animated neon border, ambient glow pulse
-* **Danger styling** — dark red neon outline and glow on Delete Account and Forgot Password
-* **Password visibility toggle** (eye icon) on login, register, reset/change password, delete account, bank details CVC
-* Responsive layout; some forms aligned left/right on desktop, centered on mobile
-* **App version footer** on all pages (`ASWallet v2.0.1`) via shared Thymeleaf fragment
-* Client-side helpers: card number formatting (`bank-details.js`), password strength (`change-password.js`), scroll/materialize animations (`home.js`), password toggle (`password-toggle.js`)
-
-### Error Handling
-
-* Global Exception Handling
-* Custom Exceptions
-
-Examples:
-
-* `UserNotFoundException`
-* `UserAlreadyExistsException`
-* `PasswordMismatchException`
-* `WalletNotFoundException`
-* `NotTransferMoneyYourselfException`
-* `ReceiverNotFoundException`
-* `ReceiverBankCardNotFoundException`
-* `SenderNotFoundException`
-* `InsufficientBalanceException`
-* `EmailAlreadyExistsException`
-* `InvalidOrExpiredTokenException`
-* `InvalidCardDetailsException`
-* `CannotDeleteSelfException`
-* `CannotDeleteAdminException`
+1. [Overview](#overview)
+2. [System Architecture](#system-architecture)
+3. [Tech Stack](#tech-stack)
+4. [Domain Model](#domain-model)
+5. [Application Features](#application-features)
+6. [REST Microservice (planned)](#rest-microservice-planned)
+7. [Web Pages & Routes](#web-pages--routes)
+8. [Security](#security)
+9. [Scheduling & Caching](#scheduling--caching)
+10. [Email & Events](#email--events)
+11. [Error Handling](#error-handling)
+12. [Frontend Assets](#frontend-assets)
+13. [Complete Project Structure](#complete-project-structure)
+14. [Configuration](#configuration)
+15. [Getting Started](#getting-started)
+16. [For Examiners / Reviewers](#for-examiners--reviewers)
+17. [Spring Advanced Assignment](#spring-advanced-assignment)
+18. [Version](#version)
+19. [Planned Work](#planned-work)
+20. [Author](#author)
 
 ---
 
-## Spring Advanced
+## Overview
 
-Work added for the **Spring Advanced** 
+ASWallet-Vol.2 is designed as a **two-application system** (per Spring Advanced requirements):
 
-Advanced-related code is marked in the codebase with `// Advanced`, `<!-- Advanced -->`, or `/* Advanced */` comments.
+| Application                       | Port (default) | Role                                                         |
+|-----------------------------------|----------------|--------------------------------------------------------------|
+| **ASWallet-Vol.2 Main**           | `8080`         | Thymeleaf UI, wallet logic, security, MySQL `as_wallet`      |
+| **REST Microservice** *(planned)* | `8081`         | REST API, separate DB, consumed by Main via **Feign Client** |
 
-### Implemented so far
-
-| Area | Status | Notes |
-|------|--------|-------|
-| View & edit own profile | Done | `/profile`, `/profile/edit` |
-| `UserProfileDetails` entity | Done | Separate table, one-to-one with `User` |
-| Account status (`ACTIVE` / `INACTIVE`) | Done | Enum + login enforcement |
-| Admin changes user status | Done | `/admin` — cannot change self or other admins |
-| Transfer confirm (2-step) | Done | Review → confirm before execute |
-| Account status in transaction history | Done | **Account Status** column (From/To users) |
-| REST microservice + Feign | Pending | Required by assignment |
-| 70% test coverage | Pending | Required by assignment |
-| Scheduling & caching | Pending | Required by assignment |
-| Admin role management | Pending | Required by assignment |
-
-### User profile
-
-Profile **`UserProfileDetails`** entity.
-
-| Layer | Files |
-|-------|-------|
-| Entity | `Models/UserProfileDetails.java` |
-| Repository | `Repositories/UserProfileDetailsRepository.java` |
-| Service | `Services/Interface/UserProfileDetailsService.java`, `UserProfileDetailsServiceImpl.java` |
-| DTOs | `UserProfileDetailsViewDTO.java`, `ProfileEditRequest.java` |
-| Controller | `Controllers/ProfileController.java` |
-| Templates | `profile.html`, `profile-edit.html` |
-
-**Endpoints**
-
-| Method | URL | Description |
-|--------|-----|-------------|
-| GET | `/profile` | View profile (read-only) |
-| GET | `/profile/edit` | Edit form |
-| POST | `/profile/edit` | Save profile changes |
-
-**Profile fields**
-
-* First name, last name, phone, avatar URL — optional, editable by the user
-* Username, email — read-only on edit form
-* Avatar — circle image on view page; URL set only in edit form
-
-**Validation** (`ProfileEditRequest` + `ValidationPatterns`)
-
-* `OPTIONAL_PERSON_NAME` — first/last name
-* `OPTIONAL_PHONE` — phone number
-* `OPTIONAL_AVATAR_URL` — http(s) URL or `/images/...` path
-
-**Lifecycle**
-
-* Default profile created on **registration** (`UserServiceImpl` → `createDefaultForUser`)
-* Missing profiles **backfilled on startup** (`AdminBootstrapConfig` → `ensureProfileExistsForAllUsers`)
-* Profile deleted with user in `UserDeletionService`
-
-### Account status
-
-| Item | Detail |
-|------|--------|
-| Enum | `Enums/AccountStatus.java` — `ACTIVE`, `INACTIVE` |
-| Storage | `UserProfileDetails.accountStatus` (default `ACTIVE`) |
-| Profile view | User sees **Active** / **Inactive** on `/profile` (read-only) |
-| Login | `AppUserPrincipal.isEnabled()` returns `true` only when status is `ACTIVE` |
-| Inactive login | `UserController` catches `DisabledException` with a clear message |
-| Admin UI | Status column + dropdown on `/admin` |
-| Admin action | `POST /admin/users/{id}/status` with `ACTIVE` or `INACTIVE` |
-| Restrictions | Admin cannot change **own** status or **other admin** accounts |
-| Exceptions | `CannotChangeSelfAccountStatusException`, `CannotChangeAdminAccountStatusException` |
-
-### Transfer confirm (2-step flow)
-
-| Step | Endpoint | Action |
-|------|----------|--------|
-| 1 | `POST /transactions/transfer` | Validate form → store pending transfer in session → redirect |
-| 2 | `GET /transactions/transfer/confirm` | Review page (`transfer-confirm.html`) |
-| 3 | `POST /transactions/transfer/confirm` | Execute transfer → clear session |
-
-Session key: `pendingTransferMoneyDTO`. User can go back to edit before confirming.
-
-### Transaction history — account status
-
-On `/transactions/history`, the table includes an **Account Status**:
-
-* **Account Status** — shows `ACTIVE` / `INACTIVE` badge for each visible participant 
-
-Helps users see whether transfer partners are inactive before sending money again.
-
-Data is loaded in `TransactionServiceImpl` via `senderAccountStatus` / `receiverAccountStatus` on `TransactionViewDTO`.
-
-### Admin panel (account status UI)
-
-* Per-user status dropdown with **Update** (green) and **Remove** (red) buttons — equal size
-* `AdminUserViewDTO.accountStatus` populated from `UserProfileDetailsService`
-
-### UI pages (Advanced)
-
-| Page | Template | Background |
-|------|----------|------------|
-| Profile view | `profile.html` | `userDetails.png` |
-| Profile edit | `profile-edit.html` | `editDetails.png` |
-| Transfer confirm | `transfer-confirm.html` | `transfer.png` |
-| Admin (status) | `admin.html` | `5.png` |
-| History (status) | `transaction-history.html` | `4.png` |
-
-Wallet dashboard links: **Profile** → `/profile`, **History** → `/transactions/history`.
-
-### Requirement mapping 
-
-| Requirement | Covered by |
-|-------------|------------|
-| Authenticated users view/edit own profile | `/profile`, `/profile/edit` |
-| Separate domain entity (`UserProfileDetails`) | Profile + account status |
-| Thymeleaf + validation + error handling | Profile forms, `GlobalExceptionHandler` |
-| Admin manages users | Delete user + change account status |
-| CSRF on forms | All POST forms include `_csrf` token |
-
-> **Note:** Profile update and account-status change operate on user-related data and may **not count** toward the required number of *valid domain functionalities* per the assignment rules. Wallet operations (deposit, withdraw, transfer) remain the primary domain functionalities.
-
-### Still to do for assignment
-
-* Second Spring Boot app (REST microservice) + **Feign Client**
-* Separate databases for main app and microservice
-* **70%** automated test coverage
-* **Scheduling** (cron + non-cron) and **caching**
-* Admin **role management** for other users
-* Optional: Spring Boot **4.x** alignment per latest assignment text
+The **main application** (this repository) is ready for local demo and defense.
+The **microservice module** will be added as a separate Spring Boot app with its own database.
 
 ---
 
-## User Flow
-
-1. **Register** at `/register` (username, email, password) → wallet + default profile created with **€0.00**
-2. **Login** at `/login` (inactive accounts are rejected)
-3. Open **Profile** from the wallet dashboard to view or edit personal details
-4. Open **Bank Details** from the wallet dashboard
-5. **Add bank card** → receive **€50.00 welcome bonus**
-6. Use **Deposit**, **Withdraw**, **Transfer** (review → confirm), and **History** as needed
-
----
-
-## Background Images
-
-| Image | Page |
-|-------|------|
-| `2.png` | Home `/` |
-| `log-reg.png` | Login, Register, Delete Account |
-| `res-pass.png` | Forgot Password, Reset Password, Account Deleted |
-| `wallet.png` | Wallet dashboard `/wallet` |
-| `userDetails.png` | Profile `/profile` |
-| `editDetails.png` | Edit Profile `/profile/edit` |
-| `change-password.png` | Change Password |
-| `6.png` | Bank Details |
-| `4.png` | Deposit, Withdraw, Transaction History |
-| `transfer.png` | Transfer |
-| `5.png` | Admin Panel |
-
----
-
-## Project Structure
+## System Architecture
 
 ```
-src/main/java/STARTER
-├── AsWalletApplication.java
-├── Configuration
-│   ├── SecurityConfig.java
-│   ├── AdminBootstrapConfig.java
-│   ├── AppModelAdvice.java
-│   └── WalletBalanceBackfillConfig.java
-├── Controllers
-│   ├── HomeController.java
-│   ├── UserController.java
-│   ├── WalletController.java          
-│   ├── TransactionController.java
-│   ├── TransactionHistoryController.java
-│   ├── ProfileController.java
-│   ├── PasswordResetController.java
-│   └── AdminController.java
-├── Services
-│   ├── Interface
-│   │   └── UserProfileDetailsService.java
-│   └── Impl
-│       ├── UserDeletionService.java
-│       ├── UserProfileDetailsServiceImpl.java
-│       └── ...
-├── Repositories
-│   └── UserProfileDetailsRepository.java
-├── Models
-│   ├── User.java, Wallet.java, Transaction.java
-│   ├── BankCard.java
-│   └── UserProfileDetails.java
-├── DTOs
-│   ├── UserProfileDetailsViewDTO.java
-│   └── ProfileEditRequest.java
-├── Events
-│   ├── UserRegisteredEvent.java
-│   ├── UserRegisteredEventListener.java
-│   ├── TransactionCompletedEvent.java
-│   └── TransactionCompletedEventListener.java
-├── Enums
-│   ├── UserRole.java
-│   ├── AccountStatus.java
-│   ├── TransactionStatus.java
-│   └── TransactionType.java
-├── CustomException
-├── GlobalExceptionHandler
-└── Utils
-    ├── DateTimeDisplay.java
-    ├── ValidationPatterns.java
-    └── CardValidationUtils.java
-
-src/main/resources
-├── templates
-│   ├── home.html
-│   ├── login.html, register.html
-│   ├── forgot-password.html, reset-password.html
-│   ├── wallet.html, bank-details.html
-│   ├── deposit.html, withdraw.html, transfer.html, transfer-confirm.html
-│   ├── transaction-history.html
-│   ├── profile.html, profile-edit.html
-│   ├── change-password.html, delete-account.html, account-deleted.html
-│   ├── admin.html
-│   └── fragments/app-footer.html, password-visibility-toggle.html
-├── static
-│   ├── css/style.css
-│   ├── js/home.js, bank-details.js, change-password.js, deposit.js, password-toggle.js
-│   └── images/
-└── application.properties
-
-src/test/java/STARTER
-└── AsWalletApplicationTests.java
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         Browser (Thymeleaf UI)                            │
+└─────────────────────────────────┬───────────────────────────────────────┘
+                                  │ HTTP
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                 ASWallet-Vol.2 Main Application (:8080)                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────┐  ┌───────────────┐  │
+│  │ Controllers │→ │   Services   │→ │ Repositories│→ │ MySQL         │  │
+│  │  (MVC)      │  │  (business)  │  │   (JPA)     │  │ as_wallet     │  │
+│  └─────────────┘  └──────────────┘  └─────────────┘  └───────────────┘  │
+│         │                  │                                            │
+│         │                  ├── Spring Cache                             │
+│         │                  ├── @Scheduled jobs                          │
+│         │                  └── Application Events → Email (SMTP)        │
+│         │                                                               │
+│         └── Feign Client (planned) ───────────────────────────────┐     │
+└───────────────────────────────────────────────────────────────────│─────┘
+                                                                    │ REST
+                                                                    ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│              REST Microservice (:8081) — planned                        │
+│  REST Controllers → Services → JPA → MySQL (separate database)           │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Layered design (main app):**
+
+```
+Presentation   →  Controllers, Thymeleaf templates, DTOs
+Business       →  Services (Interface + Impl)
+Persistence    →  Repositories, JPA Entities, Specifications
+Cross-cutting  →  Security, Events, Scheduling, Cache, ExceptionHandler
+```
+
+---
+
+## Tech Stack
+
+### Main Application (implemented)
+
+| Layer       | Technology                                                |
+|-------------|-----------------------------------------------------------|
+| Language    | Java 21                                                   |
+| Framework   | Spring Boot 4.0.6                                         |
+| Web         | Spring MVC, Thymeleaf                                     |
+| Security    | Spring Security (session, CSRF, roles)                    |
+| Persistence | Spring Data JPA, Hibernate                                |
+| Database    | MySQL                                                     |
+| Validation  | Jakarta Bean Validation                                   |
+| Mail        | Spring Mail (SMTP — ABV)                                  |
+| Events      | Spring `ApplicationEvent` + `@TransactionalEventListener` |
+| Scheduling  | `@EnableScheduling`, cron + fixed delay                   |
+| Caching     | `@EnableCaching`, `ConcurrentMapCacheManager`             |
+| PDF         | OpenPDF 2.0.3                                             |
+| Frontend    | HTML5, modular CSS, vanilla JavaScript                    |
+| Build       | Maven                                                     |
+| Utilities   | Lombok                                                    |
+
+### Microservice (planned)
+
+| Layer       | Technology                                         |
+|-------------|----------------------------------------------------|
+| Framework   | Spring Boot 4.0.6 (separate module)                |
+| API         | Spring Web (REST)                                  |
+| Integration | **Spring Cloud OpenFeign** (in main app)           |
+| Database    | MySQL (separate schema)                            |
+| Testing     | Unit, integration, API tests (70% coverage target) |
+
+---
+
+## Domain Model
+
+All entities extend `BaseClass` with **UUID** primary key (`GenerationType.UUID`).
+
+### Entity relationship diagram
+
+```
+User (1) ────── (1) Wallet (1) ────── (*) Transaction (*) ────── (1) Wallet
+  │                      ▲                                        │
+  │                      └──────── sender / receiver ────────────┘
+  │
+  ├── (1) UserProfileDetails     account status, preferences, daily limit, avatar
+  ├── (1) BankCard               last 4 digits, holder, expiry, IBAN
+  └── technical: PasswordResetToken, LoginActivity
+
+AdminMailboxMessage              admin ↔ user messaging (recipientUserId → User)
+```
+
+### Entities
+
+| Entity                | Table                    | Purpose                                                      |
+|-----------------------|--------------------------|--------------------------------------------------------------|
+| `User`                | `users`                  | Account: username, email, password (BCrypt), role, createdAt |
+| `Wallet`              | `wallets`                | Balance (EUR), linked to one user                            |
+| `Transaction`         | `transactions`           | Amount, type, status, description, sender/receiver wallets   |
+| `BankCard`            | `bank_cards`             | Card metadata + generated IBAN (no full PAN/CVC stored)      |
+| `UserProfileDetails`  | `user_profile_details`   | Profile, account status, settings, daily withdraw limit      |
+| `AdminMailboxMessage` | `admin_mailbox_messages` | Two-way admin/user mailbox                                   |
+| `PasswordResetToken`  | `password_reset_tokens`  | Forgot-password flow                                         |
+| `LoginActivity`       | `login_activity`         | Login audit for admin review                                 |
+
+### Enums
+
+| Enum                | Values                                                    |
+|---------------------|-----------------------------------------------------------|
+| `UserRole`          | `USER`, `ADMIN`                                           |
+| `AccountStatus`     | `ACTIVE`, `INACTIVE`                                      |
+| `TransactionType`   | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                         |
+| `TransactionStatus` | `COMPLETED`, `PENDING`, `FAILED`, `CANCELLED`             |
+| `SpendingCategory`  | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT` |
+
+---
+
+## Application Features
+
+### Authentication & account lifecycle
+
+- Registration, login, logout
+- BCrypt passwords; CSRF on all POST forms
+- Forgot / reset password (email token, SHA-256 stored, expiry, scheduled cleanup)
+- Change password
+- Delete own account (cascade: wallet, card, transactions, profile, tokens, messages)
+- Inactive users cannot log in (`AccountStatus.INACTIVE`)
+
+### Wallet operations
+
+- Auto wallet on register (€0.00)
+- €50.00 welcome bonus on first bank card registration
+- Deposit (card + CVC)
+- Withdraw (card; daily limit for non-admin users)
+- Transfer by receiver username (2-step confirm; receiver needs card)
+- Pending transfers: scheduler processes → `COMPLETED` / `FAILED`; stale auto-cancel; user cancel
+- Transaction history, clear history, spending category per operation
+
+### Bank card
+
+- Optional at registration; add later at `/wallet/bank-details`
+- Stores: last 4 digits, holder, expiry, IBAN (generated)
+- Black/gold card UI; live preview on add; masked view on read
+
+### Profile & settings
+
+- View / edit profile (name, phone, local avatar upload)
+- Settings hub: hide balance, email notification toggles
+- Daily withdraw limit editor (€50–€500)
+- Contact Us page (about text + support details)
+
+### Admin
+
+- User list with balance, role, status
+- Change account status and role (with restriction rules)
+- Delete non-admin users
+- Per-user manage page
+- Login activity audit
+- Mailbox: send to users, inbox, threads
+
+### User mailbox
+
+- Send message to admin, inbox, view thread, delete messages, unread badge on dashboard
+
+### Export
+
+- Filter transactions (type, status, dates) via JPA Specifications
+- Preview on page; download PDF (OpenPDF)
+
+---
+
+## REST Microservice (planned)
+
+> Required by the **Spring Advanced** assignment. Not yet in this repository.
+
+### Planned layout
+
+```
+ASWallet-Vol.2/                    (monorepo or multi-module — TBD)
+├── main/                          ← current application (this codebase)
+└── aswallet-microservice/         ← separate Spring Boot app
+    ├── src/main/java/...
+    ├── src/main/resources/application.properties   (port 8081, own DB)
+    └── pom.xml
+```
+
+### Integration (main app)
+
+```java
+
+@FeignClient(name = "aswallet-microservice", url = "${app.microservice.base-url}")
+public interface AsWalletMicroserviceClient {
+    // ≥ 1 GET + ≥ 2 POST/PUT/DELETE used by main app
+}
+```
+
+### Planned requirements
+
+| Requirement                       | Plan                                             |
+|-----------------------------------|--------------------------------------------------|
+| Separate Spring Boot app          | Own `main`, port `8081`                          |
+| Separate database                 | e.g. `as_wallet_svc`                             |
+| ≥ 1 domain entity in microservice | TBD (e.g. fraud check / audit service)           |
+| ≥ 2 valid functionalities in MS   | Triggered from main UI → Feign → MS state change |
+| Feign in main app                 | Spring Cloud OpenFeign + client interface        |
+| 70% test coverage                 | Unit + integration + API in both apps            |
+
+---
+
+## Web Pages & Routes
+
+### Public
+
+| Method   | URL                | Template               |
+|----------|--------------------|------------------------|
+| GET      | `/`                | `home.html`            |
+| GET/POST | `/login`           | `login.html`           |
+| GET/POST | `/register`        | `register.html`        |
+| GET/POST | `/forgot-password` | `forgot-password.html` |
+| GET/POST | `/reset-password`  | `reset-password.html`  |
+| GET      | `/account-deleted` | `account-deleted.html` |
+
+### Authenticated (USER / ADMIN)
+
+| Method   | URL                              | Template                   |
+|----------|----------------------------------|----------------------------|
+| GET      | `/wallet`                        | `wallet.html`              |
+| GET/POST | `/wallet/bank-details`           | `bank-details.html`        |
+| GET/POST | `/wallet/settings`               | `settings.html`            |
+| GET/POST | `/wallet/change-password`        | `change-password.html`     |
+| GET/POST | `/wallet/delete-account`         | `delete-account.html`      |
+| GET/POST | `/wallet/daily-limit/edit`       | `daily-limit-edit.html`    |
+| GET      | `/wallet/export`                 | `transaction-export.html`  |
+| GET      | `/wallet/export/pdf`             | *(PDF download)*           |
+| GET      | `/wallet/contact-us`             | `contact-us.html`          |
+| GET/POST | `/wallet/messages/send`          | `wallet-send-message.html` |
+| GET      | `/wallet/messages`               | `wallet-messages.html`     |
+| GET      | `/wallet/messages/{id}`          | `wallet-message-view.html` |
+| GET/POST | `/transactions/deposit`          | `deposit.html`             |
+| GET/POST | `/transactions/withdraw`         | `withdraw.html`            |
+| GET/POST | `/transactions/transfer`         | `transfer.html`            |
+| GET/POST | `/transactions/transfer/confirm` | `transfer-confirm.html`    |
+| GET      | `/transactions/history`          | `transaction-history.html` |
+| GET      | `/profile`                       | `profile.html`             |
+| GET/POST | `/profile/edit`                  | `profile-edit.html`        |
+
+### Admin only (`ROLE_ADMIN`)
+
+| Method   | URL                                       | Template                    |
+|----------|-------------------------------------------|-----------------------------|
+| GET      | `/admin`                                  | `admin.html`                |
+| GET      | `/admin/login-activity`                   | `admin-login-activity.html` |
+| GET      | `/admin/users/{id}/manage`                | `admin-user-manage.html`    |
+| GET/POST | `/admin/messages/send`                    | `admin-send-message.html`   |
+| GET      | `/admin/messages/inbox`                   | `admin-message-inbox.html`  |
+| GET      | `/admin/messages/users/{username}/thread` | `admin-message-thread.html` |
+
+### Thymeleaf fragments
+
+| Fragment                   | File                                        |
+|----------------------------|---------------------------------------------|
+| App version footer         | `fragments/app-footer.html`                 |
+| Password visibility toggle | `fragments/password-visibility-toggle.html` |
+| Spending category field    | `fragments/spending-category-field.html`    |
+| Transaction filter fields  | `fragments/transaction-filter-fields.html`  |
 
 ---
 
 ## Security
 
-Passwords are never stored in plain text.
+| Mechanism        | Implementation                                              |
+|------------------|-------------------------------------------------------------|
+| Authentication   | Spring Security form login                                  |
+| Password storage | BCrypt (`BCryptPasswordEncoder`)                            |
+| Session          | HTTP session + `JSESSIONID`                                 |
+| CSRF             | Enabled on all POST forms                                   |
+| Roles            | `ROLE_USER`, `ROLE_ADMIN`                                   |
+| Authorization    | `SecurityConfig` — public paths, `/admin/**` → ADMIN        |
+| Account lock     | `INACTIVE` → login blocked                                  |
+| Reset tokens     | SHA-256 hash, single-use, expiry                            |
+| Card data        | Last 4 + metadata only; CVC never stored                    |
+| Role reload      | `ReloadUserAuthoritiesFilter` after promotion               |
+| Avatars          | Local upload to `uploads/avatars/` (gitignored)             |
+| Secrets          | `MAIL_PASSWORD`, `ADMIN_PASSWORD` via environment variables |
 
-ASWallet uses:
+---
 
-* BCryptPasswordEncoder
-* Spring Security Authentication
-* Session-based Authentication
-* Pending transfer data in (HTTP session) between review and confirm steps
-* **CSRF protection** on all POST forms (hidden `_csrf` token)
-* Role-based authorization (`ROLE_USER`, `ROLE_ADMIN`)
-* SHA-256 hashed password reset tokens (single-use, expiring)
-* Bank card data minimization (last 4 digits + holder name + expiry only)
-* Sensitive credentials via environment variables where possible
+## Scheduling & Caching
+
+### Scheduled jobs
+
+| Class                                                  | Trigger                                               | Purpose                     |
+|--------------------------------------------------------|-------------------------------------------------------|-----------------------------|
+| `PendingTransferScheduler.processPendingTransfers`     | Cron `app.transfer.process.cron`                      | Process `PENDING` transfers |
+| `PendingTransferScheduler.cancelStalePendingTransfers` | Fixed delay `app.transfer.stale-check.fixed-delay-ms` | Cancel stale pending        |
+| `PasswordResetTokenCleanupScheduler`                   | Cron `app.password-reset.cleanup.cron`                | Delete expired/used tokens  |
+
+### Cache (`CacheConfig`)
+
+| Cache name           | Used for           |
+|----------------------|--------------------|
+| `profiles`           | User profile reads |
+| `walletSettings`     | Settings reads     |
+| `transactionHistory` | History reads      |
+
+Eviction: `ApplicationCacheEviction` on updates and new transactions.
+
+---
+
+## Email & Events
+
+| Event                       | Listener                            | Emails                                                    |
+|-----------------------------|-------------------------------------|-----------------------------------------------------------|
+| `UserRegisteredEvent`       | `UserRegisteredEventListener`       | Registration confirmation                                 |
+| `TransactionCompletedEvent` | `TransactionCompletedEventListener` | Deposit / withdraw / transfer (respects settings toggles) |
+
+SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD` environment variable.
+
+---
+
+## Error Handling
+
+`GlobalExceptionHandler` — unified handling for built-in and **20+ custom domain exceptions**, including:
+
+`InsufficientBalanceException`, `DailyWithdrawLimitExceededException`, `InvalidCardDetailsException`,
+`CannotChangeAdminAccountStatusException`, `MailboxMessageNotFoundException`, `PendingTransferNotFoundException`,
+`InvalidAvatarFileException`, and others under `CustomException/`.
+
+---
+
+## Frontend Assets
+
+### CSS (`static/css/`)
+
+| File                         | Scope                                  |
+|------------------------------|----------------------------------------|
+| `style.css`                  | Entry — imports all modules            |
+| `base/variables.css`         | Design tokens                          |
+| `base/reset.css`             | Reset, footer, shared form base        |
+| `base/layout-panels.css`     | Panels, backgrounds, shared layout     |
+| `pages/home.css`             | Landing, bank-card login/register      |
+| `pages/auth.css`             | Auth forms, materialize animations     |
+| `pages/wallet.css`           | Dashboard, balance card, quick actions |
+| `pages/transactions.css`     | Deposit, withdraw, transfer, history   |
+| `pages/bank-details.css`     | Bank card add/view                     |
+| `pages/profile.css`          | Profile, daily limit                   |
+| `pages/settings.css`         | Settings hub, toggles                  |
+| `pages/admin.css`            | Admin panel, mailbox, login activity   |
+| `pages/account-security.css` | Password, delete account               |
+| `pages/contact-us.css`       | Contact page                           |
+
+### JavaScript (`static/js/`)
+
+| File                     | Purpose                                    |
+|--------------------------|--------------------------------------------|
+| `home.js`                | Materialize reveal, bank card shine effect |
+| `password-toggle.js`     | Show/hide password                         |
+| `bank-details.js`        | Card number format, live preview           |
+| `wallet-card.js`         | Balance card animations                    |
+| `wallet-iban.js`         | IBAN show/hide toggle                      |
+| `wallet-settings.js`     | AJAX settings save                         |
+| `deposit.js`             | Deposit form helpers                       |
+| `change-password.js`     | Password strength meter                    |
+| `daily-limit-edit.js`    | Limit stepper UI                           |
+| `profile-edit.js`        | Avatar preview                             |
+| `transaction-history.js` | Auto-refresh for pending transfers         |
+| `admin.js`               | Admin panel interactions                   |
+
+### Images (`static/images/`)
+
+`2.png`, `4.png`, `5.png`, `wallet.png`, `log-reg.png`, `res-pass.png`, `transfer.png`, `bank-details.png`,
+`userDetails.png`, `editDetails.png`, `setings.png`, `change-password.png`, `delete-account.png`, `daily-limit.png`,
+`export-file.png`, `contactUs.png`, `mailbox.png`, `emv-chip.png`, `noContact.png`, `default-avatar.svg`
+
+---
+
+## Complete Project Structure
+
+```
+ASWallet-Vol.2/
+├── pom.xml
+├── README.md
+├── .gitignore
+│
+└── src/
+    ├── main/
+    │   ├── java/STARTER/
+    │   │   ├── ASWalletApplication.java
+    │   │   ├── Configuration/
+    │   │   │   ├── AdminBootstrapConfig.java
+    │   │   │   ├── AppModelAdvice.java
+    │   │   │   ├── AsyncConfig.java
+    │   │   │   ├── AvatarUploadConfig.java
+    │   │   │   ├── BankCardIbanBackfillConfig.java
+    │   │   │   ├── CacheConfig.java
+    │   │   │   ├── SchedulingConfig.java
+    │   │   │   ├── SecurityConfig.java
+    │   │   │   ├── SupportMailboxBackfillConfig.java
+    │   │   │   ├── WalletBalanceBackfillConfig.java
+    │   │   │   └── WithdrawDailyLimitBackfillConfig.java
+    │   │   ├── Controllers/              (13 controllers)
+    │   │   ├── Services/
+    │   │   │   ├── Interface/              (13 interfaces)
+    │   │   │   └── Impl/                 (16 implementations)
+    │   │   ├── Repositories/             (8 repositories)
+    │   │   ├── Models/                   (9 entities)
+    │   │   ├── DTOs/                     (25 DTOs)
+    │   │   ├── Enums/                    (5 enums)
+    │   │   ├── Events/                   (4 event classes)
+    │   │   ├── Scheduling/               (2 schedulers)
+    │   │   ├── Security/                 (2 classes)
+    │   │   ├── Specifications/           (TransactionSpecifications)
+    │   │   ├── CustomException/          (20 exceptions)
+    │   │   ├── GlobalExceptionHandler/
+    │   │   └── Utils/                    (5 utilities)
+    │   └── resources/
+    │       ├── application.properties
+    │       ├── Spring-Advanced             # Assignment brief
+    │       ├── templates/                  # 31 pages + 4 fragments
+    │       └── static/
+    │           ├── css/                    # 14 files (base + pages)
+    │           ├── js/                     # 12 scripts
+    │           └── images/                 # 20 assets
+    └── test/
+        └── java/STARTER/
+            └── AsWalletApplicationTests.java
+```
+
+### Planned addition (microservice)
+
+```
+aswallet-microservice/                       # separate module — to be added
+├── pom.xml
+└── src/main/java/.../
+    ├── *Application.java
+    ├── controller/
+    ├── model/
+    ├── repository/
+    ├── service/
+    └── dto/
+```
 
 ---
 
 ## Configuration
 
-### Database
+### Database (main app)
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/as_wallet
-spring.datasource.username = your-mysql-username
-spring.datasource.password = your-mysql-password
+spring.datasource.url=jdbc:mysql://localhost:3306/as_wallet?createDatabaseIfNotExist=true
+spring.datasource.username=your-mysql-username
+spring.datasource.password=your-mysql-password
+spring.jpa.hibernate.ddl-auto=update
 ```
 
-### Environment Variables
+Use `application-local.properties` (gitignored) for local credentials.
 
-| Variable | Purpose |
-|----------|---------|
-| `MAIL_PASSWORD` | SMTP password for `aswallet.noreply@abv.bg` |
-| `ADMIN_PASSWORD` | Password for the default admin account (on first create) |
+### Environment variables
 
-Optional admin bank card defaults (in `application.properties`):
+| Variable         | Purpose                                     |
+|------------------|---------------------------------------------|
+| `MAIL_PASSWORD`  | SMTP password for `aswallet.noreply@abv.bg` |
+| `ADMIN_PASSWORD` | Default admin password on first bootstrap   |
+| `ADMIN_CARD_*`   | Optional admin bootstrap card overrides     |
 
-| Property | Default |
-|----------|---------|
-| `app.admin.card.number` | `4111111111111111` |
-| `app.admin.card.holder` | `AS Wallet Admin` |
-| `app.admin.card.expiry-month` | `12` |
-| `app.admin.card.expiry-year` | `30` |
-| `app.admin.card.cvc` | `123` |
-
-### Application Properties
+### Key properties
 
 ```properties
-app.version = 2.0.1
-app.base-url = http://localhost:8080
-app.password-reset.expiry-hours = 1
-app.admin.username = admin
-app.admin.email = aswallet.noreply@abv.bg
-app.admin.password = ${ADMIN_PASSWORD:admin123}
-spring.mail.host = smtp.abv.bg
-spring.mail.port = 465
-spring.mail.username = aswallet.noreply@abv.bg
-spring.mail.password = ${MAIL_PASSWORD}
-spring.thymeleaf.cache = false
-spring.web.resources.cache.period = 0
+spring.application.name=ASWallet-Vol.2
+app.version=2.0.1
+app.base-url=http://localhost:8080
+app.admin.username=admin
+app.transfer.processing-delay-seconds=5
+app.transfer.process.cron=0 */1 * * * *
+app.withdraw.daily-limit.min=50
+app.withdraw.daily-limit.max=500
+app.withdraw.day-timezone=Europe/Sofia
+# Microservice (planned)
+# app.microservice.base-url=http://localhost:8081
 ```
-
-Optional local overrides: create `application-local.properties` (gitignored) and uncomment `spring.config.import` in `application.properties` if needed.
 
 ---
 
 ## Getting Started
 
-### Clone Repository
+### Prerequisites
+
+- Java 21
+- Maven
+- MySQL
+
+### Run main application
 
 ```bash
-git clone https://github.com/AStoyan0ff/ASWallet.git
+git clone https://github.com/AStoyan0ff/ASWallet-Vol.2.git
+cd ASWallet-Vol.2
 ```
 
-Application will start on:
-
-```text
-http://localhost:8080
+```powershell
+$env:MAIL_PASSWORD = "your-smtp-password"
+mvn spring-boot:run
 ```
+
+Open: **http://localhost:8080**
+
+Main class: `STARTER.ASWalletApplication`
 
 ---
 
 ## For Examiners / Reviewers
 
-Quick checklist to run and test the project locally.
+### Main flow (5 min)
 
-### Prerequisites
+1. Register → Login → Wallet (€0.00)
+2. Bank Details → add card → €50 bonus
+3. Deposit → Withdraw → Transfer (confirm flow)
+4. History → Export PDF
+5. Settings → Profile → Contact Us
+6. Admin: `/admin` — status, role, mailbox, login activity
 
-* **Java 21**
-* **Maven**
-* **MySQL** running on `localhost:3306`
-* **`MAIL_PASSWORD`** - provided separately by the author (not in GitHub)
+### Test card
 
-### Step 1 — Clone
+`4111 1111 1111 1111` · any future expiry · CVC `123`
 
-```bash
-git clone https://github.com/AStoyan0ff/ASWallet.git
-```
+### Default admin
 
-### Step 2 — Database
-
-Make sure MySQL is running and update credentials in `src/main/resources/application.properties` if needed:
-
-```properties
-spring.datasource.url = jdbc:mysql://localhost:3306/as_wallet?createDatabaseIfNotExist=true
-spring.datasource.username = your-mysql-username
-spring.datasource.password = your-mysql-password
-```
-
-The database `as_wallet` is created automatically on first startup (`ddl-auto=update`).
-
-### Step 3 - Environment variables
-
-**PowerShell (before start):**
-
-```powershell
-$env:MAIL_PASSWORD = "smtp-password-from-author"
-mvn spring-boot:run
-```
-
-**IntelliJ IDEA:** Run → Edit Configurations → Environment variables → `MAIL_PASSWORD=...`
-
-| Variable | Required for startup? | Required for emails? |
-|----------|----------------------|----------------------|
-| `MAIL_PASSWORD` | No | **Yes** |
-| `ADMIN_PASSWORD` | No (defaults to `admin123`) | No |
-
-Without `MAIL_PASSWORD` the app **still starts**, but registration / reset / transaction emails will **not** be sent.
-
-### Step 4 - Open the app
-
-```text
-http://localhost:8080
-```
-
-### Step 5 - Test the main flow
-
-1. **Register** a new user at `/register` (no bank card on this step)
-2. **Login** and open `/wallet` — balance should be **€0.00**
-3. Open **Bank Details** and add a bank card (test number: `4111 1111 1111 1111`, any future expiry, CVC `123`)
-4. Confirm **€50.00 welcome bonus** on wallet and in **Transaction History** (status **COMPLETED**)
-5. Test **Deposit** (amount + CVC), **Withdraw**, and **Transfer** (Review Transfer → Confirm Transfer) to another user who also has a card
-6. Optional: check inbox for registration and transaction emails
-
-### Step 6 — Test email notifications
-
-1. Register with a **real email address** you can open
-2. Check inbox for **ASWallet - Successful registration**
-3. Add bank card → welcome bonus email (if mail is configured)
-4. Optional: deposit / withdraw / transfer — each action sends a notification email
-5. Optional: **Forgot password** — check for reset link email
-
-### Step 7 — Test Spring Advanced features (optional)
-
-1. **Profile** — `/profile` (view), `/profile/edit` (update name, phone, avatar URL)
-2. **Admin** — login as `admin`, open `/admin`, set a test user to **Inactive**, confirm login is blocked
-3. **History** — `/transactions/history`, check **Account Status** column for From/To users
-4. **Transfer confirm** — `/transactions/transfer` → Review Transfer → confirm on `/transactions/transfer/confirm`
-
-### Default admin login
-
-| Field | Value |
-|-------|-------|
-| Username | `admin` |
-| Password | `admin123` (unless `ADMIN_PASSWORD` is set) |
-
-After login, open **Admin Panel** from the wallet page (`/admin`). Admin can view users, change **account status** (Active/Inactive), or remove non-admin users. Admin receives a default bank card on bootstrap and the welcome bonus when that card is first saved.
+| Field    | Value                            |
+|----------|----------------------------------|
+| Username | `admin`                          |
+| Password | `admin123` (or `ADMIN_PASSWORD`) |
 
 ### Troubleshooting
 
-| Problem | Likely cause |
-|---------|----------------|
-| App does not start | MySQL not running or wrong DB password in `application.properties` |
-| No emails received | `MAIL_PASSWORD` not set or invalid |
-| SMTP error on send | Wrong ABV mail password or SMTP blocked |
-| Deposit / Withdraw blocked | No bank card — add one in Bank Details |
-| Transfer fails | Receiver has no registered bank card |
-| Login says account inactive | Admin set user status to `INACTIVE` — reactivate from Admin Panel |
-
-For email testing, contact the author for the current `MAIL_PASSWORD`.
+| Issue                | Fix                             |
+|----------------------|---------------------------------|
+| DB connection failed | Start MySQL; check credentials  |
+| No emails            | Set `MAIL_PASSWORD`             |
+| Transfer blocked     | Receiver needs bank card        |
+| Inactive login       | Admin reactivates from `/admin` |
 
 ---
 
-## Default Administrator Account
+## Spring Advanced Assignment
 
-Created automatically on first startup if missing:
+Official brief: `src/main/resources/Spring-Advanced`
 
-| Field | Value |
-|-------|-------|
-| Username | `admin` |
-| Email | `aswallet.noreply@abv.bg` |
-| Password | `admin123` (or value of `ADMIN_PASSWORD` if set) |
+### Main app — requirement checklist
 
-Only the `admin` username has `ADMIN` role. All other registered users receive `USER` role.
+| Requirement                      | Status         |
+|----------------------------------|----------------|
+| ≥ 3 domain entities              | ✅              |
+| ≥ 10 web pages (≥ 9 dynamic)     | ✅ 31 templates |
+| ≥ 6 valid domain functionalities | ✅              |
+| Spring Security + 2 roles        | ✅              |
+| Admin manages roles              | ✅              |
+| View/edit own profile            | ✅              |
+| UUID PKs                         | ✅              |
+| Entity relationships             | ✅              |
+| Scheduling (cron + non-cron)     | ✅              |
+| Caching                          | ✅              |
+| Validation + error handling      | ✅              |
+| PDF export (bonus)               | ✅              |
+| REST microservice + Feign        | ⏳ Planned      |
+| 70% test coverage                | ⏳ Planned      |
+| Separate MS database             | ⏳ Planned      |
+
+### Valid domain functionalities (main app)
+
+| # | Action                  | Result                     |
+|---|-------------------------|----------------------------|
+| 1 | Register bank card      | Card + bonus + transaction |
+| 2 | Deposit                 | Balance ↑                  |
+| 3 | Withdraw                | Balance ↓                  |
+| 4 | Confirm transfer        | Balances updated           |
+| 5 | Cancel pending transfer | Refund + status change     |
+| 6 | Send mailbox message    | Message persisted          |
+| 7 | Export PDF              | Filtered download          |
 
 ---
 
 ## Version
 
-Current release: **2.0.1** (`pom.xml` + `app.version` in `application.properties`).
-
-The version is shown in a fixed footer on every page (`fragments/app-footer.html`, injected via `AppModelAdvice`).
+**2.0.1** — `pom.xml` · `app.version` · footer on all pages.
 
 ---
 
-## Future Improvements
+## Planned Work
 
-* Edit / replace bank card after registration
-* OTP / 2FA
-* Transaction filters and export (PDF/CSV)
-* **Desktop dashboard redesign** (deferred) — see [docs/planned/desktop-dashboard-variant.md](docs/planned/desktop-dashboard-variant.md)
+| Item                                 | Notes                |
+|--------------------------------------|----------------------|
+| **REST microservice + Feign Client** | Separate app, own DB |
+| **70% automated test coverage**      | Both apps            |
+| Edit / replace bank card             | UX improvement       |
+| OTP / 2FA                            | Security enhancement |
+| Desktop dashboard redesign           | Future UI variant    |
 
 ---
-
-## Learning Goals
-
-This project was created to practice:
-
-* Spring Boot
-* Spring Security
-* JPA & Hibernate
-* Database Design
-* MVC Architecture
-* Clean Code Principles
-* Exception Handling
-* Financial Transaction Logic
-* Spring Application Events
-* Role-based Authorization
-* Form validation and secure handling of payment-related data
 
 ## Author
 
-Developed by AStoyanoff®
+Developed by **AStoyanoff®**

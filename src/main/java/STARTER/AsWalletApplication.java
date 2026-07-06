@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AsWalletApplication {
+public class ASWalletApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AsWalletApplication.class, args);
+        SpringApplication.run(ASWalletApplication.class, args);
     }
 }

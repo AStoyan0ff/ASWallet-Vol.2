@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/AsWalletApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/AsWalletApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="247" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AStoyan0ff&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AStoyan0ff/ASWallet-Vol.2.git&quot;,
+    &quot;accountId&quot;: &quot;d0e53207-3442-4d8e-aa91-442bb0e268a7&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0000000000000087" />
+      <entry key="MS500" value="1.0015430494372333" />
+      <entry key="S2" value="1.198196034152571" />
+      <entry key="S5" value="1.523405238881581" />
+      <entry key="S10" value="1.7237803235725127" />
+      <entry key="S30" value="1.9656054249403745" />
+      <entry key="S60" value="2.2080327433399" />
+      <entry key="M2" value="2.483830306990089" />
+      <entry key="M5" value="2.763188988786342" />
+      <entry key="M10" value="3.2331071058274556" />
+      <entry key="M15" value="4.211296300995405" />
+      <entry key="M30" value="8.689671325282557" />
+      <entry key="H1" value="19.494122609619943" />
+      <entry key="H2" value="36.402673267288094" />
+      <entry key="H4" value="56.33952413563678" />
+      <entry key="D1" value="190.81492684594966" />
+      <entry key="W1" value="392.5382484644798" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="4.493079907545236E-120" />
+      <entry key="S60" value="2.1196886345747186E-60" />
+      <entry key="M2" value="1.4559150506038202E-30" />
+      <entry key="M5" value="1.1621292018900214E-12" />
+      <entry key="M10" value="1.0780209795708099E-6" />
+      <entry key="M15" value="1.0513674063630172E-4" />
+      <entry key="M30" value="0.010291903907435139" />
+      <entry key="H1" value="0.11010913027028343" />
+      <entry key="H2" value="0.4604253409487805" />
+      <entry key="H4" value="1.1940277233821452" />
+      <entry key="D1" value="17.494811472474474" />
+      <entry key="W1" value="51.332991977289005" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9138314502294084" />
+      <entry key="MS500" value="0.9836508892023976" />
+      <entry key="S2" value="1.1926730426929428" />
+      <entry key="S5" value="1.5205174191256992" />
+      <entry key="S10" value="1.7221270451097574" />
+      <entry key="S30" value="1.9649375908592128" />
+      <entry key="S60" value="2.207610062753792" />
+      <entry key="M2" value="2.483564752103021" />
+      <entry key="M5" value="2.7630537227580207" />
+      <entry key="M10" value="3.232835902721305" />
+      <entry key="M15" value="4.210827708147552" />
+      <entry key="M30" value="8.69875159487081" />
+      <entry key="H1" value="19.602525393086726" />
+      <entry key="H2" value="36.861331325339776" />
+      <entry key="H4" value="57.531993911637734" />
+      <entry key="D1" value="208.30824427117676" />
+      <entry key="W1" value="443.8707400108384" />
+    </decayedShown>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3CuCxwreDDxkvF7XLwxyLlkdycE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ASAWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AsWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AsWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ASWallet-Vol.2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JAVA&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ASWallet\src\main\resources\static\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\ASWallet" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ASAWalletApplication">
+    <configuration name="ASAWalletApplication" type="Application" factoryName="Application" temporary="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="MAIL_PASSWORD" value="a01307808" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="STARTER.ASWalletApplication" />
+      <module name="ASWallet-Vol.2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="STARTER.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ASWalletApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="MAIL_PASSWORD" value="a01307808" />
+      </envs>
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="ASWallet-Vol.2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="STARTER.ASWalletApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ASAWalletApplication" />
+      <item itemvalue="Spring Boot.ASWalletApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ASAWalletApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="" />
+      <created>1777226318138</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777226318138</updated>
+      <workItem from="1777226321377" duration="5844000" />
+      <workItem from="1777232204867" duration="11605000" />
+      <workItem from="1777304510053" duration="7983000" />
+      <workItem from="1777318378773" duration="4173000" />
+      <workItem from="1777323701560" duration="323000" />
+      <workItem from="1777324050485" duration="165000" />
+      <workItem from="1777324405806" duration="416000" />
+      <workItem from="1777396029815" duration="209000" />
+      <workItem from="1777489110758" duration="1577000" />
+      <workItem from="1777557278981" duration="14000" />
+      <workItem from="1778516472614" duration="316000" />
+      <workItem from="1778523351209" duration="881000" />
+      <workItem from="1778759393407" duration="195000" />
+      <workItem from="1778870774612" duration="2594000" />
+      <workItem from="1778874712271" duration="1196000" />
+      <workItem from="1779037113389" duration="7000" />
+      <workItem from="1779124894691" duration="1303000" />
+      <workItem from="1779127507599" duration="4632000" />
+      <workItem from="1779443214675" duration="5997000" />
+      <workItem from="1779461533146" duration="10669000" />
+      <workItem from="1779529619223" duration="3834000" />
+      <workItem from="1779562756164" duration="1429000" />
+      <workItem from="1779569732340" duration="13000" />
+      <workItem from="1779572116009" duration="801000" />
+      <workItem from="1779642672305" duration="1670000" />
+      <workItem from="1779733551278" duration="43000" />
+      <workItem from="1779808826896" duration="2769000" />
+      <workItem from="1779813494898" duration="13000" />
+      <workItem from="1779815196577" duration="2497000" />
+      <workItem from="1779908462713" duration="1362000" />
+      <workItem from="1779995962748" duration="7090000" />
+      <workItem from="1780004955377" duration="445000" />
+      <workItem from="1780052615886" duration="1851000" />
+      <workItem from="1780246272488" duration="1806000" />
+      <workItem from="1780248106185" duration="14581000" />
+      <workItem from="1780263022923" duration="7439000" />
+      <workItem from="1780307728510" duration="11938000" />
+      <workItem from="1780323070152" duration="8092000" />
+      <workItem from="1780334001196" duration="25000" />
+      <workItem from="1780568818294" duration="1578000" />
+      <workItem from="1780598352222" duration="114000" />
+      <workItem from="1780598679472" duration="2013000" />
+      <workItem from="1780655375346" duration="1999000" />
+      <workItem from="1780661310679" duration="2241000" />
+      <workItem from="1780854790547" duration="3817000" />
+      <workItem from="1780932931574" duration="15000" />
+      <workItem from="1780934537907" duration="6763000" />
+      <workItem from="1780942426561" duration="1341000" />
+      <workItem from="1781022738679" duration="13216000" />
+      <workItem from="1781094735068" duration="19304000" />
+      <workItem from="1781175573766" duration="15019000" />
+      <workItem from="1781217153235" duration="11753000" />
+      <workItem from="1781464573154" duration="7870000" />
+      <workItem from="1781537866262" duration="8554000" />
+      <workItem from="1781631209748" duration="30014000" />
+      <workItem from="1781698679838" duration="19864000" />
+      <workItem from="1781774898416" duration="3287000" />
+      <workItem from="1781779179384" duration="16000" />
+      <workItem from="1781787740951" duration="966000" />
+      <workItem from="1781976609738" duration="61000" />
+      <workItem from="1781980024474" duration="721000" />
+      <workItem from="1782068908912" duration="16548000" />
+      <workItem from="1782136389081" duration="11693000" />
+      <workItem from="1782155269667" duration="13000" />
+      <workItem from="1782156648492" duration="430000" />
+      <workItem from="1782389556513" duration="36941000" />
+      <workItem from="1782493369040" duration="7098000" />
+      <workItem from="1782578997967" duration="17816000" />
+      <workItem from="1782671072746" duration="19558000" />
+      <workItem from="1782735006036" duration="10115000" />
+      <workItem from="1782814983217" duration="38292000" />
+      <workItem from="1782910188890" duration="1250000" />
+      <workItem from="1783000830200" duration="618000" />
+      <workItem from="1783006686098" duration="19151000" />
+      <workItem from="1783102383352" duration="8443000" />
+      <workItem from="1783160460717" duration="550000" />
+      <workItem from="1783161027098" duration="36569000" />
+      <workItem from="1783250371244" duration="6692000" />
+      <workItem from="1783262210756" duration="11406000" />
+      <workItem from="1783289905863" duration="24000" />
+      <workItem from="1783294486440" duration="38000" />
+      <workItem from="1783343188467" duration="4237000" />
+      <workItem from="1783363537462" duration="1817000" />
+      <workItem from="1783365379308" duration="4893000" />
+      <workItem from="1783370899601" duration="181000" />
+      <workItem from="1783371144435" duration="1208000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
