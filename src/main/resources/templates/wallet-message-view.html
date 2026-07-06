@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- Advanced — user mailbox message view (read-only) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Message - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-wallet-message-view">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/mailbox.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form wallet-panel--message-view wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/messages}">Back to inbox</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Message</h2>
+
+        <article class="mailbox-message-view auth-stagger">
+            <p class="mailbox-message-meta">
+                <span class="mailbox-message-label"
+                      th:text="${message.fromAdmin} ? 'From' : 'To'"></span>
+                <span class="type-chip"
+                      th:if="${message.fromAdmin}"
+                      th:classappend="${message.senderDisplayName == 'SUPER ADMIN'} ? ' type-chip--super-admin' : ' type-chip--admin'"
+                      th:text="${message.senderDisplayName}"></span>
+                <span class="type-chip type-chip--admin"
+                      th:if="${!message.fromAdmin}"
+                      th:classappend="${message.adminRecipientDisplayName == 'SUPER ADMIN'} ? ' type-chip--super-admin' : ' type-chip--admin'"
+                      th:text="${message.adminRecipientDisplayName}"></span>
+            </p>
+            <p class="mailbox-message-meta">
+                <span class="mailbox-message-label">Date</span>
+                <span th:text="${message.createdAt}"></span>
+            </p>
+            <div class="mailbox-message-body" th:text="${message.body}"></div>
+        </article>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

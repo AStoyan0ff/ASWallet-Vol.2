@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Advanced profile edit (/profile/edit) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Edit Profile - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-edit-details">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/editDetails.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form user-profile-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="user-profile-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Edit Profile</h2>
+            <p class="wallet-form-hint">Update your name, phone, and avatar</p>
+        </header>
+
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <form class="auth-form user-profile-edit-form"
+              th:action="@{/profile/edit}"
+              th:object="${profileEditRequest}"
+              method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <div class="auth-field-group auth-stagger user-profile-avatar-preview-wrap">
+                <span class="user-profile-avatar-label">Avatar</span>
+                <div class="user-profile-avatar-preview">
+                    <img id="avatarPreview"
+                         th:src="${currentAvatarSrc}"
+                         alt="Avatar preview"
+                         class="user-profile-avatar">
+                </div>
+                <div class="user-profile-avatar-file-wrap">
+                    <input id="avatarFile"
+                           class="user-profile-avatar-file"
+                           type="file"
+                           name="avatarFile"
+                           accept="image/jpeg,image/png,image/webp">
+                    <label for="avatarFile" class="user-profile-avatar-choose-btn">Choose File</label>
+                </div>
+                <p class="wallet-form-hint user-profile-avatar-hint">JPG, PNG or WebP, max 2 MB. Leave empty to keep the default avatar.</p>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name" maxlength="50">
+                <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" th:field="*{lastName}" placeholder="Last name" maxlength="50">
+                <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="phoneNumber">Phone</label>
+                <input id="phoneNumber" type="tel" th:field="*{phoneNumber}" placeholder="e.g. +359888123456" maxlength="20">
+                <div class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <button type="submit" class="auth-submit">Save Profile</button>
+            </div>
+        </form>
+    </section>
+</main>
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/profile-edit.js}"></script>
+</body>
+</html>

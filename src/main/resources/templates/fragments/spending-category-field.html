@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div class="auth-field-group auth-stagger" th:fragment="field(disabled)">
+    <label for="spendingCategory">Spending Category</label>
+
+    <select id="spendingCategory" th:field="*{spendingCategory}" required th:disabled="${disabled}">
+        <option value="" disabled selected hidden>Select category</option>
+
+        <option th:each="category : ${T(STARTER.Enums.SpendingCategory).values()}"
+                th:value="${category}"
+                th:text="${category.label}">
+        </option>
+    </select>
+
+    <div class="error" th:if="${#fields.hasErrors('spendingCategory')}" th:errors="*{spendingCategory}"></div>
+</div>
+</body>
+</html>

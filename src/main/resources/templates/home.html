@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-home">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/2.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+<main class="home-landing reveal-item">
+    <section class="home-center-panel home-center-panel--materialize reveal-child">
+        <p class="home-landing-subtitle auth-stagger">Simple, secure money management in one place.</p>
+
+        <div class="home-landing-actions auth-stagger">
+            <a class="home-bank-card home-bank-card--login" th:href="@{/login}">
+                <span class="home-bank-card__texture" aria-hidden="true"></span>
+                <span class="home-bank-card__shine" aria-hidden="true"></span>
+                <span class="home-bank-card__stripe" aria-hidden="true"></span>
+
+                <img class="home-bank-card__chip-img"
+                     th:src="@{/images/emv-chip.png}"
+                     alt=""
+                     aria-hidden="true">
+                <img class="home-bank-card__contactless-img"
+                     th:src="@{/images/noContact.png}"
+                     alt=""
+                     aria-hidden="true">
+
+                <span class="home-bank-card-number" aria-hidden="true">5445 **** **** 1001</span>
+
+                <span class="home-bank-card-meta" aria-hidden="true">
+                    <span>Member Access</span>
+                </span>
+
+                <span class="home-bank-card-footer">
+                    <span class="home-bank-card-action">Login</span>
+                </span>
+            </a>
+            <a class="home-bank-card home-bank-card--register" th:href="@{/register}">
+                <span class="home-bank-card__texture" aria-hidden="true"></span>
+                <span class="home-bank-card__shine" aria-hidden="true"></span>
+                <span class="home-bank-card__stripe" aria-hidden="true"></span>
+
+                <img class="home-bank-card__chip-img"
+                     th:src="@{/images/emv-chip.png}"
+                     alt=""
+                     aria-hidden="true">
+                <img class="home-bank-card__contactless-img"
+                     th:src="@{/images/noContact.png}"
+                     alt=""
+                     aria-hidden="true">
+
+                <span class="home-bank-card-number" aria-hidden="true">5646 **** **** 2002</span>
+
+                <span class="home-bank-card-meta" aria-hidden="true">
+                    <span>New Account</span>
+                </span>
+
+                <span class="home-bank-card-footer">
+                    <span class="home-bank-card-action">Register</span>
+                </span>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

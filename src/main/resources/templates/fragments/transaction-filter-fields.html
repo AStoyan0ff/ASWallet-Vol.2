@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<!-- Advanced — shared transaction filter fields -->
+<th:block th:fragment="grid">
+    <div class="tx-filter-columns">
+        <div class="tx-filter-col tx-filter-col--left">
+
+            <div class="tx-filter-field">
+                <label for="type">Type</label>
+                <select id="type" th:field="*{type}">
+                    <option value="">All types</option>
+
+                    <option th:each="transactionType : ${T(STARTER.Enums.TransactionType).values()}"
+                            th:value="${transactionType}"
+                            th:text="${transactionType}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="tx-filter-field">
+                <label for="status">Status</label>
+                <select id="status" th:field="*{status}">
+                    <option value="">All statuses</option>
+
+                    <option th:each="transactionStatus : ${T(STARTER.Enums.TransactionStatus).values()}"
+                            th:value="${transactionStatus}"
+                            th:text="${transactionStatus}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="tx-filter-field">
+                <label for="spendingCategory">Spending Category</label>
+                <select id="spendingCategory" th:field="*{spendingCategory}">
+                    <option value="">All categories</option>
+
+                    <option th:each="category : ${T(STARTER.Enums.SpendingCategory).values()}"
+                            th:value="${category}"
+                            th:text="${category.label}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tx-filter-col tx-filter-col--right">
+            <div class="tx-filter-field">
+                <label for="dateFrom">Date from</label>
+                <input id="dateFrom" type="date" th:field="*{dateFrom}">
+            </div>
+
+            <div class="tx-filter-field">
+                <label for="dateTo">Date to</label>
+                <input id="dateTo" type="date" th:field="*{dateTo}">
+            </div>
+
+            <div class="tx-filter-field">
+                <label for="amount">Amount</label>
+                <input id="amount" type="number" step="0.01" min="0" th:field="*{amount}" placeholder="0.00">
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

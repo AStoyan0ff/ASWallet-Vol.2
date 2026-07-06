@@ -1,0 +1,158 @@
+﻿.body-home {
+    color: #fef2d6;
+    background: #060606;
+    position: relative;
+}
+
+.home-bg-media {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.home-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.home-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.62), rgba(12, 8, 4, 0.58));
+}
+
+.home-shell {
+    width: min(1080px, 92%);
+    margin: 42px auto;
+}
+
+.home-landing {
+    min-height: 95vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 24px;
+}
+
+.home-center-panel {
+    text-align: center;
+    width: min(620px, 96%);
+    border-radius: 22px;
+    padding: 28px 22px;
+}
+
+.auth-panel,
+.wallet-panel,
+.pwd-card,
+.del-card,
+.bank-card-panel {
+    background: var(--surface-bg);
+    border: var(--surface-border);
+    border-radius: var(--surface-radius);
+    box-shadow: var(--surface-shadow);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-home .home-center-panel {
+    background: rgba(8, 7, 6, 0.14);
+    border: none;
+    border-radius: var(--surface-radius);
+    box-shadow: none;
+    backdrop-filter: blur(10px) saturate(110%);
+    -webkit-backdrop-filter: blur(10px) saturate(110%);
+}
+
+/* Unified surface — fields & containers (not buttons) */
+.wallet-card-notice,
+.withdraw-no-card,
+.deposit-flow-end,
+.transfer-confirm-summary,
+.tx-filter-form,
+.tx-table-wrap,
+.tx-empty,
+.body-transaction-history .tx-pending-refresh-hint,
+.tx-export-preview > summary.tx-export-count,
+.tx-export-count--empty,
+.tx-export-preview-list,
+.bank-card-saved,
+.withdraw-limit-summary,
+.del-warning,
+.pwd-requirements,
+.admin-manage-summary,
+.body-admin .admin-send-message-panel,
+.user-profile-details-list,
+.mailbox-item,
+.mailbox-message-view,
+.mailbox-thread-item,
+.settings-section-box,
+.pref-card,
+.body-wallet .wallet-balance-box,
+.body-auth .error,
+.body-wallet .error,
+.body-auth .success,
+.body-wallet .success,
+.body-wallet-settings .wallet-settings-panel,
+.settings-alert,
+.bank-details-list {
+    border: var(--surface-border);
+    border-radius: var(--surface-radius);
+    background: var(--surface-bg);
+    box-shadow: var(--surface-shadow);
+}
+
+.body-auth .auth-form input,
+.body-wallet .auth-form input,
+.pwd-field input,
+.del-field input,
+.bank-card-field input,
+.admin-mailbox-input,
+.admin-status-select,
+.tx-filter-form .tx-filter-field input {
+    border: var(--surface-border);
+    border-radius: var(--surface-radius);
+    background: var(--surface-bg);
+    box-shadow: var(--surface-shadow);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-auth .auth-form select,
+.body-wallet .auth-form select,
+.tx-filter-form .tx-filter-field select,
+.body-admin .admin-send-message-form select.admin-mailbox-input,
+.body-wallet-send-message .admin-send-message-form select.admin-mailbox-input {
+    border: var(--surface-border);
+    border-radius: var(--surface-radius);
+    box-shadow: var(--surface-shadow);
+    background-color: var(--surface-input-bg);
+}
+
+.body-admin .admin-send-message-form .admin-mailbox-textarea,
+.body-wallet-send-message .admin-mailbox-textarea,
+.body-admin-send-message .admin-mailbox-textarea,
+.body-admin .admin-mailbox-textarea {
+    border: var(--surface-border);
+    border-radius: var(--surface-radius);
+    box-shadow: var(--surface-shadow);
+    background: var(--surface-bg);
+}
+
+/* Page-level flash alerts — centered in panel */
+.success.auth-stagger,
+.error.auth-stagger,
+.settings-alert,
+.bank-card-alert,
+.pwd-alert,
+.del-alert {
+    text-align: center;
+    text-wrap: balance;
+}
+
+.auth-field-group .error {
+    text-align: left;
+}

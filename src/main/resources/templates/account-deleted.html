@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Account Deleted ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-delete-account">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/res-pass.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing wallet-landing--left reveal-item">
+    <section class="del-card del-card--success del-card--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/}">Back to home</a>
+        </div>
+
+        <header class="del-card-header auth-stagger">
+            <h1 class="del-card-title">Account Deleted</h1>
+            <p class="del-card-subtitle">We're sorry to see you go</p>
+        </header>
+
+        <div class="success del-alert auth-stagger" th:if="${successMessage}" th:text="${successMessage}">
+            Your account has been deleted successfully.
+        </div>
+
+        <p class="del-success-note auth-stagger">
+            Your wallet and personal data have been removed from ASWallet.
+        </p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

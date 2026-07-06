@@ -1,0 +1,500 @@
+﻿.body-home .home-bg-image {
+    object-position: center center;
+}
+
+.body-home .home-bg-overlay {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(12, 8, 4, 0.55)
+    );
+}
+
+.home-landing-title {
+    margin: 0 0 8px;
+    font-size: clamp(2rem, 4.3vw, 3rem);
+    color: #ffb74d;
+    text-shadow: 0 0 14px rgba(255, 143, 0, 0.34);
+}
+
+.home-landing-subtitle {
+    margin: 0 0 20px;
+    color: #ffe7c8;
+    font-size: 1.03rem;
+}
+
+.home-landing-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    width: min(440px, 100%);
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+/* Advanced — home landing bank-card action links */
+.body-home .home-bank-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 1.586 / 1;
+    padding: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(201, 168, 92, 0.42);
+    text-decoration: none;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+
+    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 14px 32px rgba(0, 0, 0, 0.38);
+}
+
+.home-bank-card__texture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.22;
+    background: repeating-linear-gradient(
+            115deg,
+            rgba(255, 255, 255, 0.03) 0 1px,
+            transparent 1px 4px
+    ),
+    radial-gradient(circle at 82% 18%, rgba(255, 204, 128, 0.06), transparent 42%);
+    pointer-events: none;
+}
+
+.home-bank-card__shine {
+    position: absolute;
+    z-index: 4;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+            circle,
+            rgba(255, 236, 190, 0.38) 0%,
+            rgba(255, 183, 77, 0.12) 42%,
+            rgba(255, 167, 38, 0) 72%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.body-home .home-bank-card.is-shine-active .home-bank-card__shine {
+    opacity: 1;
+}
+
+.home-bank-card__stripe {
+    position: absolute;
+    top: 22%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 18%;
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(20, 16, 12, 0.72) 50%,
+            rgba(0, 0, 0, 0.55) 100%
+    );
+    opacity: 0.42;
+    pointer-events: none;
+}
+
+.body-home .home-bank-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+            125deg,
+            rgba(255, 255, 255, 0.09) 0%,
+            rgba(255, 255, 255, 0) 34%,
+            rgba(255, 255, 255, 0.03) 58%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+}
+
+.body-home .home-bank-card::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    right: -22%;
+    z-index: 1;
+    width: 72%;
+    height: 145%;
+    background: radial-gradient(circle, rgba(255, 183, 77, 0.03), transparent 68%);
+    pointer-events: none;
+}
+
+.body-home .home-bank-card--login {
+    background: linear-gradient(152deg, #0a0a0a 0%, #050505 40%, #010101 72%, #060606 100%);
+}
+
+.body-home .home-bank-card--register {
+    background: linear-gradient(152deg, #080808 0%, #040404 40%, #000000 72%, #050505 100%);
+    border-color: rgba(201, 168, 92, 0.32);
+}
+
+.body-home .home-bank-card:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(-4deg);
+    border-color: rgba(255, 204, 128, 0.62);
+    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.14),
+    0 0 24px rgba(255, 143, 0, 0.16),
+    0 18px 38px rgba(0, 0, 0, 0.42);
+}
+
+.body-home .home-bank-card--register:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(4deg);
+    border-color: rgba(255, 204, 128, 0.58);
+    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.12),
+    0 0 22px rgba(255, 143, 0, 0.14),
+    0 18px 38px rgba(0, 0, 0, 0.42);
+}
+
+.home-bank-card__chip-img {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    z-index: 3;
+    width: 34px;
+    height: auto;
+    border-radius: 5px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+
+.home-bank-card__contactless-img {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 3;
+    width: 28px;
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(32%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(0.95) contrast(1.05) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+
+.body-home .home-bank-card-number {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: 44%;
+    z-index: 3;
+    transform: translateY(-50%);
+    font-size: clamp(0.7rem, 2.5vw, 0.84rem);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #d4af37;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55),
+    0 0 14px rgba(212, 175, 55, 0.32);
+}
+
+.home-bank-card-meta {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: 58%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.home-bank-card-meta > span {
+    font-size: clamp(0.68rem, 2.2vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4af37;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(212, 175, 55, 0.28);
+}
+
+.body-home .home-bank-card-footer {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.body-home .home-bank-card-action {
+    font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ef6c00;
+    text-shadow: 0 1px 10px rgba(239, 108, 0, 0.4);
+}
+
+@media (max-width: 420px) {
+    .home-landing-actions {
+        grid-template-columns: 1fr;
+        width: min(290px, 100%);
+    }
+
+    .body-home .home-bank-card:hover,
+    .body-home .home-bank-card--register:hover {
+        transform: translateY(-4px);
+    }
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 143, 0, 0.35);
+    background: rgba(12, 12, 12, 0.78);
+    border-radius: 16px;
+    padding: 10px 14px;
+    backdrop-filter: blur(3px);
+    position: sticky;
+    top: 10px;
+    z-index: 20;
+    transition: padding 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.home-nav.is-scrolled {
+    padding: 7px 11px;
+    border-color: rgba(255, 143, 0, 0.5);
+    background: rgba(10, 10, 10, 0.9);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+    transform: translateY(-1px);
+}
+
+.home-brand {
+    text-decoration: none;
+    color: #ff9f1c;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    transition: transform 0.25s ease, letter-spacing 0.25s ease;
+}
+
+.home-nav.is-scrolled .home-brand {
+    transform: scale(0.97);
+    letter-spacing: 0.01em;
+}
+
+.home-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.home-nav-links a {
+    text-decoration: none;
+    color: #ffd39b;
+    padding: 7px 11px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.home-nav-links a:hover {
+    color: #ffb74d;
+    border-color: rgba(255, 143, 0, 0.38);
+    background: rgba(255, 143, 0, 0.08);
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 22px;
+}
+
+.home-card {
+    background: linear-gradient(165deg, rgba(255, 153, 0, 0.1), rgba(0, 0, 0, 0.6));
+    border: 1px solid rgba(255, 143, 0, 0.42);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+}
+
+.home-title {
+    color: #ff9f1c;
+    font-size: 2.3rem;
+    margin-bottom: 8px;
+}
+
+.home-subtitle {
+    color: #ffdcb3;
+    margin-bottom: 20px;
+}
+
+.home-pill {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #1a1a1a;
+    background: linear-gradient(130deg, #ffb74d, #ff8f00);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 6px 13px;
+}
+
+.wallet-greeting {
+    margin: 0 0 6px;
+    color: #ffdcb3;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.wallet-greeting .wallet-username {
+    color: #ffb74d;
+    font-weight: 700;
+}
+
+.home-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.home-btn {
+    position: relative;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 800;
+    padding: 12px 24px;
+    min-width: 160px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    z-index: 1;
+}
+
+.home-btn:hover {
+    transform: translateY(-1px);
+}
+
+.home-btn::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: 14px;
+    opacity: 0.45;
+    filter: blur(8px);
+    animation: homePulse 2.8s ease-in-out infinite;
+}
+
+.home-btn-login {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: #161616;
+    box-shadow: 0 8px 22px rgba(255, 143, 0, 0.33);
+}
+
+.home-btn-login::after {
+    background: radial-gradient(circle, rgba(255, 176, 64, 0.75), rgba(255, 143, 0, 0.06) 65%);
+}
+
+.home-btn-register {
+    background: #101010;
+    color: #ffa726;
+    border: 1px solid rgba(255, 167, 38, 0.58);
+    box-shadow: 0 8px 20px rgba(255, 143, 0, 0.2);
+}
+
+.home-btn-register::after {
+    background: radial-gradient(circle, rgba(255, 143, 0, 0.52), rgba(255, 111, 0, 0.05) 65%);
+}
+
+.home-stat {
+    border-radius: 16px;
+    border: 1px solid rgba(255, 143, 0, 0.3);
+    background: rgba(255, 143, 0, 0.08);
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+.home-stat strong {
+    color: #ffb74d;
+    display: block;
+    margin-bottom: 4px;
+}
+
+@keyframes homePulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.99);
+    }
+    50% {
+        opacity: 0.75;
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 780px) {
+    .home-center-panel {
+        padding: 24px 16px;
+    }
+
+    .home-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-item,
+    .reveal-item .reveal-child,
+    .home-btn::after {
+        animation: none;
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
+
+    .body-auth .auth-panel--materialize.reveal-child,
+    .body-wallet .wallet-panel--materialize.reveal-child,
+    .body-wallet .del-card--materialize.reveal-child,
+    .body-wallet .pwd-card--materialize.reveal-child,
+    .body-wallet .bank-card-panel--materialize.reveal-child,
+    .body-home .home-center-panel--materialize.reveal-child,
+    .body-auth .auth-stagger,
+    .body-wallet .auth-stagger,
+    .body-home .auth-stagger {
+        transition: none;
+        transform: none;
+        filter: none;
+        opacity: 1;
+    }
+
+    .body-auth .auth-panel--materialize::after,
+    .body-wallet .wallet-panel--materialize::after,
+    .body-wallet .del-card--materialize::after,
+    .body-wallet .pwd-card--materialize::after,
+    .body-wallet .bank-card-panel--materialize::after,
+    .body-home .home-center-panel--materialize::after {
+        animation: none;
+        opacity: 0;
+    }
+
+    .home-nav,
+    .home-brand {
+        transition: none;
+        transform: none;
+    }
+
+    .body-home .home-bank-card:hover,
+    .body-home .home-bank-card--register:hover {
+        transform: none;
+    }
+}
+

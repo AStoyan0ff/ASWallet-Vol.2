@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Confirm Transfer - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/transfer.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Confirm Transfer</h2>
+        <p class="wallet-form-hint auth-stagger">Review the details before sending. The transfer will be processed shortly after confirmation.</p>
+
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div class="transfer-confirm-summary auth-stagger">
+            <dl class="transfer-confirm-list">
+                <div class="transfer-confirm-row">
+                    <dt>Receiver</dt>
+                    <dd th:text="${transferMoneyDTO.receiverUsername}"></dd>
+                </div>
+                <div class="transfer-confirm-row">
+                    <dt>Amount</dt>
+                    <dd>
+                        <span th:text="${transferMoneyDTO.amount}"></span>
+                        <span th:text="${wallet.currency}"></span>
+                    </dd>
+                </div>
+                <div class="transfer-confirm-row" th:if="${transferMoneyDTO.spendingCategory != null}">
+                    <dt>Spending Category</dt>
+                    <dd th:text="${transferMoneyDTO.spendingCategory.label}"></dd>
+                </div>
+                <div class="transfer-confirm-row">
+                    <dt>Current balance</dt>
+                    <dd>
+                        <span th:text="${wallet.balance}"></span>
+                        <span th:text="${wallet.currency}"></span>
+                    </dd>
+                </div>
+                <div class="transfer-confirm-row transfer-confirm-row--highlight">
+                    <dt>Balance after submit</dt>
+                    <dd>
+                        <span th:text="${balanceAfter}"></span>
+                        <span th:text="${wallet.currency}"></span>
+                    </dd>
+                </div>
+                <div class="transfer-confirm-row">
+                    <dt>Status after submit</dt>
+                    <dd><span class="status-chip status-chip--pending">PENDING</span></dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="transfer-confirm-actions auth-stagger">
+            <form th:action="@{/transactions/transfer/confirm}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="auth-submit">Submit Transfer</button>
+            </form>
+            <a class="wallet-btn wallet-btn-outline transfer-confirm-edit" th:href="@{/transactions/transfer}">Edit</a>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Edit Daily Limit - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-daily-limit">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/daily-limit.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form user-profile-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="user-profile-header daily-limit-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Daily Limit</h2>
+            <p class="wallet-form-hint">Choose your max draw amount per day </p>
+        </header>
+
+        <form class="auth-form daily-limit-edit-form" th:action="@{/wallet/daily-limit/edit}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <div class="auth-field-group auth-stagger daily-limit-stepper-group">
+                <div class="daily-limit-picker-card">
+                    <p class="daily-limit-picker-label">Daily withdraw limit</p>
+
+                    <div class="daily-limit-stepper"
+                         th:attr="data-min=${withdrawLimitMin}, data-max=${withdrawLimitMax}, data-step=${withdrawLimitStep}">
+
+                        <button type="button"
+                                class="daily-limit-stepper-btn daily-limit-stepper-btn--up"
+                                aria-label="Increase limit">
+                            <span class="daily-limit-stepper-glyph" aria-hidden="true">▲</span>
+                        </button>
+
+                        <div class="daily-limit-value-wrap">
+                            <span class="daily-limit-value-glow" aria-hidden="true"></span>
+                            <p class="daily-limit-value" id="dailyWithdrawLimitValue"
+                               th:text="${'€ ' + #numbers.formatDecimal(dailyLimitEditRequest.dailyWithdrawLimit, 1, 'NONE', 0, 'POINT')}">
+                                € 500
+                            </p>
+                        </div>
+
+                        <input type="hidden" id="dailyWithdrawLimit" name="dailyWithdrawLimit"
+                               th:value="${dailyLimitEditRequest.dailyWithdrawLimit}">
+
+                        <button type="button"
+                                class="daily-limit-stepper-btn daily-limit-stepper-btn--down"
+                                aria-label="Decrease limit">
+                            <span class="daily-limit-stepper-glyph" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+
+                    <p class="daily-limit-range-hint"
+                       th:text="${'€ ' + withdrawLimitMin + ' - € ' + withdrawLimitMax + ' - step € ' + withdrawLimitStep}">
+                        € 50 * € 500 * step € 50
+                    </p>
+                </div>
+            </div>
+
+            <div class="auth-field-group auth-stagger daily-limit-submit-wrap">
+                <button type="submit" class="auth-submit daily-limit-submit">Save Daily Limit</button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/daily-limit-edit.js}"></script>
+</body>
+</html>

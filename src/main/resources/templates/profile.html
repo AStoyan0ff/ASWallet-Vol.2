@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- Advanced profile view (/profile) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Profile - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-user-details">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/userDetails.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form user-profile-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="user-profile-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Profile</h2>
+            <p class="wallet-form-hint">View your profile details</p>
+        </header>
+
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+        <div class="user-profile-avatar-wrap auth-stagger">
+            <img th:src="${profile.avatarImageSrc}"
+                 alt="Profile avatar"
+                 class="user-profile-avatar">
+        </div>
+
+        <dl class="user-profile-details-list auth-stagger">
+            <div class="user-profile-details-item">
+                <dt>First Name</dt>
+                <dd th:text="${profile.firstName != null and !#strings.isEmpty(profile.firstName) ? profile.firstName : '-'}"></dd>
+            </div>
+            <div class="user-profile-details-item">
+                <dt>Last Name</dt>
+                <dd th:text="${profile.lastName != null and !#strings.isEmpty(profile.lastName) ? profile.lastName : '-'}"></dd>
+            </div>
+            <div class="user-profile-details-item">
+                <dt>Phone</dt>
+                <dd th:text="${profile.phone != null and !#strings.isEmpty(profile.phone) ? profile.phone : '-'}"></dd>
+            </div>
+            <div class="user-profile-details-item">
+                <dt>Username</dt>
+                <dd th:text="${profile.username}"></dd>
+            </div>
+            <div class="user-profile-details-item">
+                <dt>Email</dt>
+                <dd th:text="${profile.email}"></dd>
+            </div>
+            <div class="user-profile-details-item">
+                <!-- Advanced — read-only account status -->
+                <dt>Account Status</dt>
+                <dd>
+                    <span class="account-status account-status--active"
+                          th:if="${profile.accountStatus.name() == 'ACTIVE'}">🟢 Active</span>
+                    <span class="account-status account-status--inactive"
+                          th:if="${profile.accountStatus.name() == 'INACTIVE'}">🔴 Inactive</span>
+                </dd>
+            </div>
+        </dl>
+    </section>
+</main>
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

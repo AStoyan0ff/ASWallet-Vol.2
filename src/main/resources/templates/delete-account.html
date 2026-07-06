@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Delete Account ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-delete-account">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/delete-account.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="del-card del-card--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <div class="del-card-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18"></path>
+                <path d="M8 6V4h8v2"></path>
+                <path d="M10 11v6"></path>
+                <path d="M14 11v6"></path>
+                <path d="M5 6l1 14h12l1-14"></path>
+            </svg>
+        </div>
+
+        <header class="del-card-header auth-stagger">
+            <h1 class="del-card-title">Delete Account</h1>
+            <p class="del-card-subtitle">This action cannot be undone</p>
+        </header>
+
+        <p class="del-warning auth-stagger">
+            All wallet data and transaction history will be permanently removed.
+        </p>
+
+        <div class="error del-alert auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <form class="del-form" th:action="@{/wallet/delete-account}" th:object="${deleteAccountRequest}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="auth-stagger">
+                <label class="del-label" for="password">Current Password</label>
+                <div class="del-field password-field-wrap">
+                <span class="del-field-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                        <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                    </svg>
+                </span>
+                    <input id="password" type="password" th:field="*{password}" placeholder="Enter current password"
+                           required>
+                    <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>
+                </div>
+                <div class="error del-field-error" th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}"></div>
+            </div>
+
+            <div class="auth-stagger">
+                <button type="submit" class="del-submit">Delete My Account</button>
+            </div>
+        </form>
+
+        <p class="del-footer auth-stagger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 3l7 4v5c0 4.5-3.1 8.7-7 9.8C8.1 20.7 5 16.5 5 12V7l7-4z"></path>
+            </svg>
+            Your security is our priority
+        </p>
+    </section>
+</main>
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/password-toggle.js}"></script>
+</body>
+</html>

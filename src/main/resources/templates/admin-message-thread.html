@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Advanced — admin thread with user -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Message Thread - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-admin body-admin-message-thread">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/mailbox.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--wide wallet-panel--admin wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/admin/messages/inbox}">Back to inbox</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Message Thread</h2>
+        <p class="wallet-greeting auth-stagger">
+            Conversation with <span class="wallet-username" th:text="${threadUsername}"></span>
+        </p>
+
+        <div class="mailbox-thread auth-stagger" th:if="${!#lists.isEmpty(thread)}">
+            <article class="mailbox-thread-item"
+                     th:each="item : ${thread}"
+                     th:classappend="${item.fromAdmin} ? ' mailbox-thread-item--admin' : ' mailbox-thread-item--user'">
+                <div class="mailbox-thread-item-head">
+                    <span class="type-chip"
+                          th:if="${item.fromAdmin}"
+                          th:classappend="${item.senderDisplayName == 'SUPER ADMIN'} ? ' type-chip--super-admin' : ' type-chip--admin'"
+                          th:text="${item.senderDisplayName}">
+                    </span>
+                    <span class="mailbox-thread-user-label" th:if="${!item.fromAdmin}"
+                          th:text="|${item.senderUsername} (User)|"></span>
+                    <span class="mailbox-item-date" th:text="${item.createdAt}"></span>
+                </div>
+                <div class="mailbox-message-body" th:text="${item.body}"></div>
+            </article>
+        </div>
+
+        <p class="tx-empty auth-stagger" th:if="${#lists.isEmpty(thread)}">No messages in this thread.</p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

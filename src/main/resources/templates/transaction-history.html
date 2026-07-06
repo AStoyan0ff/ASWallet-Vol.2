@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- Advanced transaction history -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Transactions ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-transaction-history">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/4.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--wide wallet-panel--history wallet-panel--materialize reveal-child"
+             th:attr="data-tx-auto-refresh=${hasPendingTransfers} ? 'true' : null, data-tx-refresh-seconds=12">
+        <div class="form-panel-top form-panel-top--split auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+            <form th:if="${!#lists.isEmpty(transactions)}"
+                  class="tx-clear-history-form"
+                  th:action="@{/transactions/history/clear}"
+                  method="post"
+                  onsubmit="return confirm('Are you sure you want to clear your entire transaction history? This cannot be undone.');">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="home-pill tx-clear-history-btn">Clear History</button>
+            </form>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Transaction History</h2>
+
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <p class="tx-pending-refresh-hint auth-stagger" th:if="${hasPendingTransfers}">
+            A transfer is being processed. This page refreshes automatically every 12 seconds.
+        </p>
+
+        <div class="tx-table-wrap auth-stagger" th:if="${!#lists.isEmpty(transactions)}">
+            <table class="tx-table">
+                <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                    <th>Spending Category</th>
+                    <th>Date</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Account Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="t : ${transactions}">
+                    <td><span class="type-chip" th:text="${t.type}"></span></td>
+                    <td>
+                        <span class="status-chip"
+                              th:classappend="' status-chip--' + ${#strings.toLowerCase(t.status.name())}"
+                              th:text="${t.status}"></span>
+                    </td>
+                    <td th:text="${t.amount}"></td>
+                    <td class="tx-category-cell"
+                        th:text="${t.description}"
+                        th:attr="title=${t.description}"></td>
+                    <td th:text="${t.createdAt}"></td>
+                    <td th:text="${t.senderUsername} ?: '****'"></td>
+                    <td th:text="${t.receiverUsername} ?: '****'"></td>
+                    <!-- Advanced: sender and receiver account status -->
+                    <td class="tx-account-status-cell">
+
+                        <div th:if="${t.senderUsername != null}" class="tx-account-status-row">
+                            <span class="tx-account-status-label">From</span>
+                            <span th:if="${t.senderAccountStatus != null and t.senderAccountStatus.name() == 'ACTIVE'}"
+                                  class="status-chip status-chip--active">Active</span>
+                            <span th:if="${t.senderAccountStatus != null and t.senderAccountStatus.name() == 'INACTIVE'}"
+                                  class="status-chip status-chip--inactive">Inactive</span>
+                        </div>
+
+                        <div th:if="${t.receiverUsername != null}" class="tx-account-status-row">
+                            <span class="tx-account-status-label">To</span>
+                            <span th:if="${t.receiverAccountStatus != null and t.receiverAccountStatus.name() == 'ACTIVE'}"
+                                  class="status-chip status-chip--active">Active</span>
+                            <span th:if="${t.receiverAccountStatus != null and t.receiverAccountStatus.name() == 'INACTIVE'}"
+                                  class="status-chip status-chip--inactive">Inactive</span>
+                        </div>
+
+                        <span th:if="${t.senderUsername == null and t.receiverUsername == null}" class="admin-muted">-</span>
+                    </td>
+                    <!-- Advanced: flow chips + pending spinner; Cancel only for pending sender -->
+                    <td class="tx-history-actions-cell">
+                        <div th:if="${t.status.name() == 'PENDING' and t.type.name() == 'TRANSFER' and t.senderUsername == currentUsername}"
+                             class="tx-history-action-wrap">
+                            <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
+                            <form th:action="@{/transactions/{id}/cancel(id=${t.id})}"
+                                  method="post"
+                                  class="tx-cancel-pending-form"
+                                  onsubmit="return confirm('Cancel this pending transfer? The amount will return to your wallet.');">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button type="submit" class="wallet-btn wallet-btn-danger tx-cancel-pending-btn">Cancel</button>
+                            </form>
+                        </div>
+
+                        <div th:if="${t.status.name() == 'PENDING' and t.type.name() == 'TRANSFER' and t.receiverUsername == currentUsername and t.senderUsername != currentUsername}"
+                             class="tx-history-action-wrap">
+                            <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
+                            <span class="tx-flow-chip tx-flow-chip--incoming">Incoming</span>
+                        </div>
+
+                        <div th:if="${t.status.name() == 'PENDING' and !(t.type.name() == 'TRANSFER' and (t.senderUsername == currentUsername or (t.receiverUsername == currentUsername and t.senderUsername != currentUsername)))}"
+                             class="tx-history-action-wrap">
+                            <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
+                            <span class="tx-flow-chip tx-flow-chip--pending">In progress</span>
+                        </div>
+
+                        <span th:if="${t.status.name() == 'FAILED'}"
+                              class="tx-flow-chip tx-flow-chip--negative">Not completed</span>
+
+                        <span th:if="${t.status.name() == 'CANCELLED'}"
+                              class="tx-flow-chip tx-flow-chip--negative">Reversed</span>
+
+                        <span th:if="${t.status.name() == 'COMPLETED' and t.type.name() == 'DEPOSIT'}"
+                              class="tx-flow-chip tx-flow-chip--in">Credited</span>
+
+                        <span th:if="${t.status.name() == 'COMPLETED' and t.type.name() == 'WITHDRAW'}"
+                              class="tx-flow-chip tx-flow-chip--out">Debited</span>
+
+                        <span th:if="${t.status.name() == 'COMPLETED' and t.type.name() == 'TRANSFER' and t.senderUsername == currentUsername}"
+                              class="tx-flow-chip tx-flow-chip--out">You sent</span>
+
+                        <span th:if="${t.status.name() == 'COMPLETED' and t.type.name() == 'TRANSFER' and t.receiverUsername == currentUsername and t.senderUsername != currentUsername}"
+                              class="tx-flow-chip tx-flow-chip--in">You received</span>
+
+                        <span th:if="${t.status.name() == 'COMPLETED' and t.type.name() == 'TRANSFER' and t.senderUsername != currentUsername and t.receiverUsername != currentUsername}"
+                              class="tx-flow-chip tx-flow-chip--neutral">Settled</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="tx-empty auth-stagger" th:if="${#lists.isEmpty(transactions)}">No transactions yet.</p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:if="${hasPendingTransfers}" th:src="@{/js/transaction-history.js}"></script>
+</body>
+</html>

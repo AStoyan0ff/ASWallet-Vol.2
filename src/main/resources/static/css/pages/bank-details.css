@@ -1,0 +1,561 @@
+﻿.body-bank-details {
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+html:has(.body-bank-details) {
+    overflow-x: hidden;
+}
+
+.body-bank-details .home-bg-image {
+    object-position: center center;
+}
+
+.body-bank-details .home-bg-overlay {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.38),
+        rgba(12, 8, 4, 0.55)
+    );
+}
+
+.body-bank-details .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 16px 24px 28px;
+    box-sizing: border-box;
+}
+
+.body-bank-details .bank-card-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(520px, 94vw);
+    margin: 0 auto;
+    padding: 22px 28px 28px;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.body-bank-details .form-panel-top {
+    margin: 0 0 14px;
+}
+
+.body-bank-details .bank-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.body-bank-details .bank-card-header {
+    text-align: center;
+}
+
+.bank-card-title {
+    margin: 0 0 4px;
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffb74d;
+    text-shadow: 0 0 16px rgba(255, 143, 0, 0.35);
+}
+
+.bank-card-subtitle {
+    margin: 0;
+    color: #f5f5f5;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.bank-card-alert {
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+}
+
+/* —— ASW Bank card (black / gold, like /home) —— */
+
+.asw-bank-card-scene {
+    width: 100%;
+    perspective: 1000px;
+}
+
+.asw-bank-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.586 / 1;
+    min-height: 200px;
+    border-radius: 16px;
+    border: 1px solid rgba(201, 168, 92, 0.42);
+    overflow: hidden;
+    background: linear-gradient(152deg, #121212 0%, #080808 40%, #030303 72%, #0a0a0a 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 235, 200, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+        0 14px 32px rgba(0, 0, 0, 0.38);
+}
+
+.asw-bank-card-scene--edit .asw-bank-card {
+    aspect-ratio: auto;
+    min-height: 460px;
+    display: flex;
+    flex-direction: column;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__network {
+    display: none;
+}
+
+.asw-bank-card-scene--view .asw-bank-card {
+    aspect-ratio: auto;
+    min-height: 228px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__number {
+    top: 36%;
+    font-size: clamp(0.74rem, 2.4vw, 0.92rem);
+}
+
+.asw-bank-card-scene--view .asw-bank-card__holder {
+    top: 48%;
+    right: 96px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__expiry {
+    top: 48%;
+}
+
+.asw-bank-card__account {
+    position: absolute;
+    left: 16px;
+    right: 72px;
+    bottom: 14px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+}
+
+.asw-bank-card__account-row {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.asw-bank-card__account-row small {
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 204, 128, 0.55);
+}
+
+.asw-bank-card__account-row span {
+    font-size: clamp(0.58rem, 1.9vw, 0.68rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 236, 200, 0.86);
+    word-break: break-word;
+}
+
+.asw-bank-card__texture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.28;
+    background:
+        repeating-linear-gradient(
+            115deg,
+            rgba(255, 255, 255, 0.03) 0 1px,
+            transparent 1px 4px
+        ),
+        radial-gradient(circle at 82% 18%, rgba(255, 204, 128, 0.06), transparent 42%);
+    pointer-events: none;
+}
+
+.asw-bank-card__shine {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 34%,
+        rgba(255, 255, 255, 0.04) 58%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+}
+
+.asw-bank-card__chip {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    z-index: 3;
+    width: 38px;
+    height: auto;
+    border-radius: 5px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+
+.asw-bank-card__contactless {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 3;
+    width: 30px;
+    height: auto;
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(32%)
+        sepia(93%)
+        saturate(1352%)
+        hue-rotate(87deg)
+        brightness(0.95)
+        contrast(1.05)
+        drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+}
+
+.asw-bank-card__brand {
+    position: absolute;
+    top: 14px;
+    left: 64px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-align: left;
+    pointer-events: none;
+}
+
+.asw-bank-card__brand-name {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #d4af37;
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.28);
+}
+
+.asw-bank-card__brand-tag {
+    font-size: 0.48rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 236, 200, 0.55);
+}
+
+.asw-bank-card__network {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.asw-bank-card__network span {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    opacity: 0.9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.asw-bank-card__network span:first-child {
+    background: rgba(255, 152, 0, 0.9);
+    margin-right: -7px;
+    position: relative;
+    z-index: 1;
+}
+
+.asw-bank-card__network span:last-child {
+    background: rgba(255, 193, 7, 0.8);
+}
+
+.asw-bank-card__number {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 42%;
+    z-index: 3;
+    margin: 0;
+    transform: translateY(-50%);
+    font-size: clamp(0.72rem, 2.4vw, 0.9rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #d4af37;
+    font-variant-numeric: tabular-nums;
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.55),
+        0 0 14px rgba(212, 175, 55, 0.32);
+    pointer-events: none;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__number,
+.asw-bank-card-scene--edit .asw-bank-card__holder,
+.asw-bank-card-scene--edit .asw-bank-card__expiry {
+    display: none;
+}
+
+.asw-bank-card__holder {
+    position: absolute;
+    left: 16px;
+    right: 80px;
+    top: 54%;
+    z-index: 3;
+    margin: 0;
+    transform: translateY(-50%);
+    font-size: clamp(0.62rem, 2vw, 0.74rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 236, 200, 0.88);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+.asw-bank-card__expiry {
+    position: absolute;
+    right: 16px;
+    top: 54%;
+    z-index: 3;
+    margin: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    pointer-events: none;
+}
+
+.asw-bank-card__expiry small {
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 204, 128, 0.55);
+}
+
+.asw-bank-card__expiry span {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #d4af37;
+}
+
+/* —— Semi-transparent form overlay on card —— */
+
+.asw-bank-card__form-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 10px 14px 12px;
+    border: none;
+    border-radius: 0 0 16px 16px;
+    background: linear-gradient(
+        180deg,
+        rgba(6, 6, 6, 0.55) 0%,
+        rgba(8, 8, 8, 0.82) 28%,
+        rgba(10, 10, 10, 0.92) 100%
+    );
+    backdrop-filter: blur(4px);
+    box-sizing: border-box;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__form-overlay {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    flex: 1 1 auto;
+    margin-top: 72px;
+    padding: 12px 14px 14px;
+    border-radius: 0 0 16px 16px;
+    background: transparent;
+    backdrop-filter: none;
+}
+
+.asw-bank-card__field {
+    margin: 0;
+}
+
+.asw-bank-card__form-overlay .bank-card-label {
+    margin: 0 0 3px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 220, 179, 0.82);
+}
+
+.asw-bank-card__form-overlay .bank-card-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    border: 1px solid rgba(201, 168, 92, 0.28);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.38);
+    color: #fff8ef;
+    font-size: 0.8rem;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__form-overlay .bank-card-field input {
+    background: rgba(0, 0, 0, 0.32);
+    border-color: rgba(201, 168, 92, 0.32);
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__form-overlay .bank-card-field input:focus {
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.asw-bank-card__form-overlay .bank-card-field input::placeholder {
+    color: rgba(255, 236, 200, 0.35);
+}
+
+.asw-bank-card__form-overlay .bank-card-field input:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.65);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.18);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.asw-bank-card__form-overlay .bank-card-field.password-field-wrap input {
+    padding-right: 40px;
+}
+
+.asw-bank-card__form-overlay .bank-card-expiry-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.asw-bank-card__form-overlay .bank-card-expiry-col .bank-card-label {
+    margin-top: 0;
+}
+
+.asw-bank-card__form-overlay .bank-card-field-error {
+    margin-top: 2px;
+    font-size: 0.68rem;
+}
+
+.asw-bank-card__form-overlay .bank-card-note {
+    margin: 0;
+    font-size: 0.62rem;
+    color: rgba(184, 164, 138, 0.88);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.asw-bank-card__form-overlay .bank-card-submit {
+    width: 100%;
+    margin: 2px 0 0;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a1208;
+    background: linear-gradient(180deg, #ffc46b, #ef6c00);
+    box-shadow: 0 6px 18px rgba(255, 152, 0, 0.28);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.asw-bank-card__form-overlay .bank-card-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(255, 152, 0, 0.34);
+}
+
+/* —— Account details below card —— */
+
+.bank-details-list {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(8, 8, 8, 0.55);
+    border: 1px solid rgba(201, 168, 92, 0.18);
+}
+
+.bank-details-list--compact .bank-details-item {
+    padding: 8px 0;
+}
+
+.bank-details-item {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8px 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--surface-border-color);
+}
+
+.bank-details-item:last-child {
+    border-bottom: none;
+}
+
+.bank-details-item dt {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #b8a48a;
+}
+
+.bank-details-item dd {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffecb3;
+    text-align: right;
+    word-break: break-word;
+}
+
+@media (max-width: 420px) {
+    .body-bank-details .bank-card-panel {
+        padding: 18px 16px 22px;
+    }
+
+    .asw-bank-card-scene--edit .asw-bank-card {
+        min-height: 480px;
+    }
+
+    .asw-bank-card-scene--edit .asw-bank-card__form-overlay {
+        margin-top: 68px;
+    }
+
+    .asw-bank-card__brand {
+        left: 58px;
+    }
+
+    .asw-bank-card-scene--view .asw-bank-card {
+        min-height: 240px;
+    }
+
+    .asw-bank-card__account {
+        right: 64px;
+    }
+
+    .asw-bank-card__brand-name {
+        font-size: 0.7rem;
+    }
+}

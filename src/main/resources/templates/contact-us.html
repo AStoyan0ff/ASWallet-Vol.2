@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Contact Us - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-contact-us">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/contactUs.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form contact-us-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="contact-us-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Contact Us</h2>
+            <p class="wallet-form-hint">Reach the ASWallet team</p>
+        </header>
+
+        <div class="contact-us-about auth-stagger">
+            <h3 class="contact-us-about__title">About Us:</h3>
+            <p class="contact-us-about__text">We're a modern digital wallet designed to simplify your everyday money
+                management. Whether you're depositing funds, transferring money, or tracking your balance, our goal is
+                to provide a fast, secure, and easy-to-use experience!
+            </p>
+        </div>
+
+        <form class="auth-form contact-us-form" action="#" method="get" novalidate>
+            <div class="auth-field-group auth-stagger">
+                <label for="contactEmail">✉️ Email</label>
+                <input id="contactEmail"
+                       type="email"
+                       name="email"
+                       value="aswallet.noreply@abv.bg"
+                       readonly
+                       aria-readonly="true">
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="contactPhone">📞 Phone</label>
+                <input id="contactPhone"
+                       type="tel"
+                       name="phone"
+                       value="+359896662272"
+                       readonly
+                       aria-readonly="true">
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="contactAddress">📍 Address</label>
+                <input id="contactAddress"
+                       type="text"
+                       name="address"
+                       value="2700, Blagoevgrad, Bulgaria"
+                       readonly
+                       aria-readonly="true">
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

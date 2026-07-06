@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Advanced — admin inbox (user replies) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Message Inbox - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-admin body-admin-message-inbox">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/mailbox.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--wide wallet-panel--admin wallet-panel--materialize reveal-child">
+        <div class="form-panel-top form-panel-top--split auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+            <form th:if="${!#lists.isEmpty(replies)}"
+                  class="mailbox-delete-form mailbox-delete-form--top"
+                  th:action="@{/admin/messages/inbox/delete}"
+                  method="post"
+                  onsubmit="return confirm('Delete all message threads with users? This cannot be undone.');">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="home-pill mailbox-delete-btn">Delete Messages</button>
+            </form>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Message Inbox</h2>
+
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div class="mailbox-list auth-stagger" th:if="${!#lists.isEmpty(replies)}">
+            <a class="mailbox-item"
+               th:each="reply : ${replies}"
+               th:href="@{/admin/messages/users/{username}/thread(username=${reply.senderUsername})}"
+               th:classappend="${!reply.readByAdmin} ? ' mailbox-item--unread' : ''">
+                <div class="mailbox-item-top">
+                    <span class="mailbox-item-from">From user: <span th:text="${reply.senderUsername}"></span></span>
+                    <span class="mailbox-item-date" th:text="${reply.createdAt}"></span>
+                </div>
+                <p class="mailbox-item-preview" th:text="${reply.preview}"></p>
+                <span class="mailbox-item-badge" th:if="${!reply.readByAdmin}">New</span>
+            </a>
+        </div>
+
+        <p class="tx-empty auth-stagger" th:if="${#lists.isEmpty(replies)}">No user replies yet.</p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

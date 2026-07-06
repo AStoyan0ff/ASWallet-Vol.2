@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Advanced: admin user manage (/admin/users/{id}/manage) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Manage User - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-admin body-admin-user-manage">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/5.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form wallet-panel--admin-manage wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/admin}">Back to admin</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Manage User</h2>
+        <p class="wallet-greeting auth-stagger">
+            Account: <span class="wallet-username" th:text="${user.username}"></span>
+        </p>
+
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div class="admin-manage-summary auth-stagger">
+            <div class="admin-manage-avatar-wrap">
+                <img class="admin-manage-avatar"
+                     th:src="${user.avatarImageSrc}"
+                     alt="User avatar"
+                     width="72"
+                     height="72">
+            </div>
+            <p><span class="admin-manage-label">Email</span> <span th:text="${user.email}"></span></p>
+            <p><span class="admin-manage-label">Phone</span>
+                <span th:text="${user.phone != null and !#strings.isEmpty(user.phone)} ? ${user.phone} : 'Not provided'"></span>
+            </p>
+            <p><span class="admin-manage-label">Balance</span>
+                <span th:text="|${user.balance} ${user.currency}|"></span>
+            </p>
+            <p><span class="admin-manage-label">Role</span>
+                <span class="type-chip"
+                      th:classappend="${user.primaryAdminAccount} ? ' type-chip--super-admin' : (${user.role.name() == 'ADMIN'} ? ' type-chip--admin' : '')"
+                      th:text="${user.roleDisplay}"></span>
+            </p>
+            <p>
+                <span class="admin-manage-label">Registered</span> <span th:text="${user.createdAt}"></span>
+            </p>
+        </div>
+
+        <h3 class="pref-section-title auth-stagger">Account Status</h3>
+        <form class="admin-manage-form auth-stagger"
+              th:action="@{/admin/users/{id}/status(id=${user.id})}"
+              method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <label class="admin-field-label" for="status">Status</label>
+            <select id="status" name="status" class="admin-status-select">
+                <option value="ACTIVE" th:selected="${user.accountStatus.name() == 'ACTIVE'}">Active</option>
+                <option value="INACTIVE" th:selected="${user.accountStatus.name() == 'INACTIVE'}">Inactive</option>
+            </select>
+
+            <button type="submit" class="wallet-btn admin-action-btn admin-action-btn--update admin-manage-submit">
+                Update status
+            </button>
+        </form>
+
+        <h3 class="pref-section-title auth-stagger" th:if="${isPrimaryAdmin}">Role</h3>
+        <form th:if="${isPrimaryAdmin}"
+              class="admin-manage-form auth-stagger"
+              th:action="@{/admin/users/{id}/role(id=${user.id})}"
+              method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <label class="admin-field-label" for="role">Role</label>
+            <select id="role" name="role" class="admin-status-select">
+                <option value="USER" th:selected="${user.role.name() == 'USER'}">User</option>
+                <option value="ADMIN" th:selected="${user.role.name() == 'ADMIN'}">Support Admin</option>
+            </select>
+
+            <button type="submit" class="wallet-btn admin-action-btn admin-action-btn--role admin-manage-submit">
+                Update role
+            </button>
+        </form>
+
+        <p class="admin-muted admin-manage-role-restricted auth-stagger" th:if="${!isPrimaryAdmin}">
+            Role changes are restricted to the super admin.
+        </p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

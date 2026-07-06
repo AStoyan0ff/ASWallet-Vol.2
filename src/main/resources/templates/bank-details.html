@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="${savedBankCard != null} ? 'View Bank Details ASWallet' : 'Bank Details ASWallet'">Bank Details
+        ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-bank-details">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/bank-details.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="bank-card-panel bank-card-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+        </div>
+
+        <div class="bank-card-body auth-stagger">
+            <header class="bank-card-header">
+                <h1 class="bank-card-title" th:text="${savedBankCard != null} ? 'View Bank Details' : 'Bank Details'">
+                    Bank Details</h1>
+                <p class="bank-card-subtitle" th:if="${savedBankCard}">Your registered ASW Bank card</p>
+                <p class="bank-card-subtitle" th:unless="${savedBankCard}">Add a bank card to receive €50.00 welcome
+                    bonus</p>
+            </header>
+
+            <div class="success bank-card-alert" th:if="${successMessage}" th:text="${successMessage}"></div>
+            <div class="error bank-card-alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+            <div class="asw-bank-card-scene"
+                 th:classappend="${savedBankCard != null} ? ' asw-bank-card-scene--view' : ' asw-bank-card-scene--edit'">
+                <article class="asw-bank-card" aria-label="ASW Bank card">
+                    <span class="asw-bank-card__texture" aria-hidden="true"></span>
+                    <span class="asw-bank-card__shine" aria-hidden="true"></span>
+
+                    <img class="asw-bank-card__chip"
+                         th:src="@{/images/emv-chip.png}"
+                         alt=""
+                         aria-hidden="true">
+                    <img class="asw-bank-card__contactless"
+                         th:src="@{/images/noContact.png}"
+                         alt=""
+                         aria-hidden="true">
+
+                    <div class="asw-bank-card__brand" aria-hidden="true">
+                        <span class="asw-bank-card__brand-name">ASW Bank</span>
+                        <span class="asw-bank-card__brand-tag">Debit Card</span>
+                    </div>
+
+                    <span class="asw-bank-card__network" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                    </span>
+
+                    <p class="asw-bank-card__number"
+                       id="cardPreviewNumber"
+                       th:if="${savedBankCard}"
+                       th:text="${savedBankCard.maskedCardNumber}">**** **** **** 0000</p>
+                    <p class="asw-bank-card__number"
+                       id="cardPreviewNumber"
+                       th:unless="${savedBankCard}">**** **** **** ****</p>
+
+                    <p class="asw-bank-card__holder"
+                       id="cardPreviewHolder"
+                       th:if="${savedBankCard}"
+                       th:text="${savedBankCard.cardholderName}">CARDHOLDER NAME</p>
+                    <p class="asw-bank-card__holder"
+                       id="cardPreviewHolder"
+                       th:unless="${savedBankCard}">CARDHOLDER NAME</p>
+
+                    <p class="asw-bank-card__expiry">
+                        <small>Valid thru</small>
+                        <span id="cardPreviewExpiry"
+                              th:if="${savedBankCard}"
+                              th:text="${savedBankCard.expiryMonth + '/' + savedBankCard.expiryYear}">MM/YY</span>
+                        <span id="cardPreviewExpiry" th:unless="${savedBankCard}">MM/YY</span>
+                    </p>
+
+                    <div class="asw-bank-card__account" th:if="${savedBankCard}">
+                        <p class="asw-bank-card__account-row">
+                            <small>Username</small>
+                            <span th:text="${user.username}">username</span>
+                        </p>
+                        <p class="asw-bank-card__account-row">
+                            <small>Registered</small>
+                            <span th:text="${user.registeredAt}">2026-01-01</span>
+                        </p>
+                    </div>
+
+                    <form class="asw-bank-card__form-overlay bank-card-form"
+                          th:unless="${savedBankCard}"
+                          th:action="@{/wallet/bank-details}"
+                          th:object="${bankCardRequest}"
+                          method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+                        <div class="asw-bank-card__field bank-card-form-row">
+                            <label class="bank-card-label" for="cardNumber">Card number</label>
+                            <div class="bank-card-field">
+                                <input id="cardNumber" type="text" th:field="*{cardNumber}"
+                                       placeholder="1234 5678 9012 3456"
+                                       inputmode="numeric" autocomplete="cc-number"
+                                       maxlength="19" required>
+                            </div>
+                            <div class="error bank-card-field-error" th:if="${#fields.hasErrors('cardNumber')}"
+                                 th:errors="*{cardNumber}"></div>
+                        </div>
+
+                        <div class="asw-bank-card__field bank-card-form-row">
+                            <label class="bank-card-label" for="cardholderName">Cardholder name</label>
+                            <div class="bank-card-field">
+                                <input id="cardholderName" type="text" th:field="*{cardholderName}"
+                                       placeholder="Name on card" autocomplete="cc-name"
+                                       minlength="2" maxlength="80" required>
+                            </div>
+                            <div class="error bank-card-field-error" th:if="${#fields.hasErrors('cardholderName')}"
+                                 th:errors="*{cardholderName}"></div>
+                        </div>
+
+                        <div class="asw-bank-card__field bank-card-form-row">
+                            <div class="bank-card-expiry-row">
+                                <div class="bank-card-expiry-col">
+                                    <label class="bank-card-label" for="expiryMonth">Month</label>
+                                    <div class="bank-card-field">
+                                        <input id="expiryMonth" type="text" th:field="*{expiryMonth}" placeholder="MM"
+                                               inputmode="numeric" maxlength="2" required>
+                                    </div>
+                                    <div class="error bank-card-field-error" th:if="${#fields.hasErrors('expiryMonth')}"
+                                         th:errors="*{expiryMonth}"></div>
+                                </div>
+                                <div class="bank-card-expiry-col">
+                                    <label class="bank-card-label" for="expiryYear">Year</label>
+                                    <div class="bank-card-field">
+                                        <input id="expiryYear" type="text" th:field="*{expiryYear}" placeholder="YY"
+                                               inputmode="numeric" maxlength="2" required>
+                                    </div>
+                                    <div class="error bank-card-field-error" th:if="${#fields.hasErrors('expiryYear')}"
+                                         th:errors="*{expiryYear}"></div>
+                                </div>
+                            </div>
+                            <div class="error bank-card-field-error" th:if="${#fields.hasErrors('cardExpiryInFuture')}"
+                                 th:errors="*{cardExpiryInFuture}"></div>
+                        </div>
+
+                        <div class="asw-bank-card__field bank-card-form-row">
+                            <label class="bank-card-label" for="cardCvc">Card CVC</label>
+                            <div class="bank-card-field password-field-wrap">
+                                <input id="cardCvc" type="password" th:field="*{cardCvc}"
+                                       placeholder="123" inputmode="numeric" autocomplete="cc-csc"
+                                       maxlength="3" required>
+                                <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>
+                            </div>
+                            <div class="error bank-card-field-error" th:if="${#fields.hasErrors('cardCvc')}"
+                                 th:errors="*{cardCvc}"></div>
+                        </div>
+
+                        <p class="bank-card-note">CVC is used to verify your card. It is not stored.</p>
+
+                        <div class="bank-card-form-row bank-card-form-row--submit">
+                            <button type="submit" class="bank-card-submit">Save Bank Card</button>
+                        </div>
+                    </form>
+                </article>
+            </div>
+
+            <dl class="bank-details-list bank-details-list--compact" th:unless="${savedBankCard}">
+                <div class="bank-details-item">
+                    <dt>Username</dt>
+                    <dd th:text="${user.username}"></dd>
+                </div>
+                <div class="bank-details-item">
+                    <dt>Registered</dt>
+                    <dd th:text="${user.registeredAt}"></dd>
+                </div>
+            </dl>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/password-toggle.js}"></script>
+<script th:src="@{/js/bank-details.js}"></script>
+</body>
+</html>

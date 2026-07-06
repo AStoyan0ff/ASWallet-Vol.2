@@ -1,0 +1,551 @@
+﻿.body-auth {
+    color: #fef2d6;
+    background: #060606;
+    position: relative;
+}
+
+.auth-landing {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-panel {
+    width: min(460px, 96%);
+    border-radius: 22px;
+    padding: 32px 28px;
+}
+
+.auth-back {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #ffd39b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.auth-back:hover {
+    color: #ffb74d;
+}
+
+.auth-title {
+    margin: 12px 0 22px;
+    font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+    color: #ffb74d;
+    text-shadow: 0 0 14px rgba(255, 143, 0, 0.34);
+}
+
+.body-auth .auth-form label,
+.body-wallet .auth-form label {
+    color: #ffdcb3;
+}
+
+.body-auth .auth-form input,
+.body-wallet .auth-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    font-size: 0.96rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: #fff8e8;
+}
+
+.body-auth .auth-form select,
+.body-wallet .auth-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 36px 11px 12px;
+    font-size: 0.96rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    color-scheme: dark;
+    appearance: none;
+    -webkit-appearance: none;
+    color: #ffb74d;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #ffb74d 50%),
+        linear-gradient(135deg, #ffb74d 50%, transparent 50%);
+    background-position:
+        calc(100% - 18px) calc(50% + 2px),
+        calc(100% - 13px) calc(50% + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+.body-auth .auth-form select option,
+.body-wallet .auth-form select option {
+    color: #ffb74d;
+    background-color: #0a0a0a;
+}
+
+.body-auth .auth-form select option:checked,
+.body-wallet .auth-form select option:checked,
+.body-auth .auth-form select option:hover,
+.body-wallet .auth-form select option:hover {
+    color: #ffc46b;
+    background-color: #1a1208;
+}
+
+.body-auth .auth-form select:invalid,
+.body-wallet .auth-form select:invalid {
+    color: #c9a85c;
+}
+
+.body-auth .auth-form input::placeholder,
+.body-wallet .auth-form input::placeholder {
+    color: rgba(255, 220, 179, 0.45);
+}
+
+.body-auth .auth-form input:focus,
+.body-wallet .auth-form input:focus,
+.body-auth .auth-form select:focus,
+.body-wallet .auth-form select:focus {
+    border-color: #ff8f00;
+    box-shadow: 0 0 0 3px rgba(255, 143, 0, 0.2);
+}
+
+.body-auth .auth-submit {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a140e;
+    background: linear-gradient(135deg, #ffb74d 0%, #f5a623 100%);
+    border: 1px solid rgba(255, 183, 77, 0.45);
+    box-shadow: 0 0 14px rgba(255, 143, 0, 0.2);
+}
+
+.body-auth .auth-submit:hover {
+    filter: none;
+    background: linear-gradient(135deg, #ffc46b 0%, #ffb74d 100%);
+    box-shadow: 0 0 16px rgba(255, 143, 0, 0.28);
+}
+
+.body-wallet .auth-submit {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: #161616;
+    box-shadow: 0 8px 22px rgba(255, 143, 0, 0.33);
+}
+
+.body-wallet .auth-submit:hover {
+    filter: brightness(1.05);
+}
+
+.body-auth .error,
+.body-wallet .error {
+    color: #ffb74d;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+}
+
+.body-auth .success,
+.body-wallet .success {
+    color: #81c784;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+}
+
+.auth-footer-note {
+    margin-top: 22px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #c9b8a0;
+    font-size: 0.88rem;
+}
+
+.auth-link {
+    color: #ffa726;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    color: #ffb74d;
+    text-decoration: underline;
+}
+
+.auth-field-group {
+    margin-bottom: 0;
+}
+
+.auth-field-group .error {
+    margin-top: 6px;
+}
+
+.password-field-wrap {
+    position: relative;
+}
+
+.password-field-wrap input {
+    padding-right: 44px;
+}
+
+.pwd-field.password-field-wrap input {
+    padding-right: 44px;
+}
+
+.del-field.password-field-wrap input {
+    padding-right: 44px;
+}
+
+.password-visibility-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(255, 220, 179, 0.55);
+    box-shadow: none;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.password-visibility-toggle:hover {
+    transform: translateY(-50%);
+    color: #ff8f00;
+    background: rgba(255, 143, 0, 0.12);
+}
+
+.password-visibility-toggle:focus-visible {
+    outline: 2px solid #ff8f00;
+    outline-offset: 2px;
+}
+
+.password-visibility-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+.password-visibility-toggle .password-eye-off {
+    display: none;
+}
+
+.password-visibility-toggle.is-visible .password-eye-on {
+    display: none;
+}
+
+.password-visibility-toggle.is-visible .password-eye-off {
+    display: block;
+}
+
+.auth-footer-note--inline {
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+@property --auth-stagger-delay {
+    syntax: "<time>";
+    initial-value: 0ms;
+    inherits: false;
+}
+
+.body-auth .auth-panel--materialize,
+.body-wallet .wallet-panel--materialize,
+.body-wallet .del-card--materialize,
+.body-wallet .pwd-card--materialize,
+.body-wallet .bank-card-panel--materialize,
+.body-home .home-center-panel--materialize {
+    position: relative;
+    overflow: visible;
+    isolation: isolate;
+}
+
+.body-auth .auth-panel--materialize.reveal-child,
+.body-wallet .wallet-panel--materialize.reveal-child,
+.body-wallet .del-card--materialize.reveal-child,
+.body-wallet .pwd-card--materialize.reveal-child,
+.body-wallet .bank-card-panel--materialize.reveal-child,
+.body-home .home-center-panel--materialize.reveal-child {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+    filter: blur(10px);
+    background: rgba(10, 8, 6, 0.28);
+    backdrop-filter: blur(6px) saturate(105%);
+    -webkit-backdrop-filter: blur(6px) saturate(105%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition:
+        opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.62s ease,
+        background 0.62s ease,
+        backdrop-filter 0.62s ease,
+        box-shadow 0.62s ease;
+}
+
+.body-auth .reveal-item.is-visible .auth-panel--materialize.reveal-child,
+.body-wallet .reveal-item.is-visible .wallet-panel--materialize.reveal-child,
+.body-wallet .reveal-item.is-visible .del-card--materialize.reveal-child,
+.body-wallet .reveal-item.is-visible .pwd-card--materialize.reveal-child,
+.body-wallet .reveal-item.is-visible .bank-card-panel--materialize.reveal-child {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    background: var(--surface-bg);
+    border: var(--surface-border);
+    box-shadow: var(--surface-shadow);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: panelBoxGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+.body-home .reveal-item.is-visible .home-center-panel--materialize.reveal-child {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    background: rgba(8, 7, 6, 0.14);
+    border: none;
+    box-shadow: none;
+    backdrop-filter: blur(10px) saturate(110%);
+    -webkit-backdrop-filter: blur(10px) saturate(110%);
+}
+
+.body-auth .auth-stagger,
+.body-wallet .auth-stagger,
+.body-home .auth-stagger {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+        opacity 0.48s ease,
+        transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--auth-stagger-delay, 0ms);
+}
+
+.body-auth .reveal-item.is-visible .auth-stagger,
+.body-wallet .reveal-item.is-visible .auth-stagger,
+.body-home .reveal-item.is-visible .auth-stagger {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.body-auth .auth-panel--materialize::before,
+.body-wallet .wallet-panel--materialize::before,
+.body-wallet .del-card--materialize::before,
+.body-wallet .pwd-card--materialize::before,
+.body-wallet .bank-card-panel--materialize::before,
+.body-home .home-center-panel--materialize::before {
+    content: none;
+    display: none;
+}
+
+.body-auth .auth-panel--materialize::after,
+.body-wallet .wallet-panel--materialize::after,
+.body-wallet .del-card--materialize::after,
+.body-wallet .pwd-card--materialize::after,
+.body-wallet .bank-card-panel--materialize::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 26px;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0;
+    border: 1px solid rgba(255, 167, 38, 0.17);
+}
+
+.body-auth .reveal-item.is-visible .auth-panel--materialize::after,
+.body-wallet .reveal-item.is-visible .wallet-panel--materialize::after,
+.body-wallet .reveal-item.is-visible .del-card--materialize::after,
+.body-wallet .reveal-item.is-visible .pwd-card--materialize::after,
+.body-wallet .reveal-item.is-visible .bank-card-panel--materialize::after {
+    animation:
+        authNeonPulseOnce 1.2s ease-out 1.45s 1 forwards,
+        panelAmbientGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+.body-home .home-center-panel--materialize::after {
+    content: none;
+    display: none;
+}
+
+@keyframes authNeonPulseOnce {
+    0% {
+        opacity: 0;
+        transform: scale(0.995);
+        box-shadow: 0 0 0 0 rgba(255, 143, 0, 0);
+    }
+    35% {
+        opacity: 0.36;
+        transform: scale(1);
+        box-shadow:
+            0 0 22px rgba(255, 143, 0, 0.21),
+            0 0 44px rgba(255, 111, 0, 0.1),
+            inset 0 0 16px rgba(255, 143, 0, 0.028);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.005);
+        box-shadow: 0 0 0 0 rgba(255, 143, 0, 0);
+    }
+}
+
+@keyframes panelAmbientGlow {
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.998);
+        box-shadow: 0 0 0 0 rgba(255, 143, 0, 0);
+    }
+    50% {
+        opacity: 0.25;
+        transform: scale(1.003);
+        box-shadow:
+            0 0 20px rgba(255, 143, 0, 0.18),
+            0 0 40px rgba(255, 111, 0, 0.08),
+            inset 0 0 14px rgba(255, 143, 0, 0.028);
+    }
+}
+
+@keyframes panelBoxGlow {
+    0%,
+    100% {
+        box-shadow: var(--glass-shadow);
+    }
+    50% {
+        box-shadow:
+            var(--glass-shadow),
+            0 0 22px rgba(255, 143, 0, 0.14),
+            0 0 44px rgba(255, 111, 0, 0.06);
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-panel {
+        padding: 26px 20px;
+    }
+}
+
+.body-auth-register {
+    overflow-x: hidden;
+}
+
+.body-auth-register .auth-panel--materialize::after,
+.body-wallet .wallet-panel--materialize::after {
+    inset: 0;
+    border-radius: 22px;
+}
+
+.body-delete-account .del-card--materialize::after {
+    inset: 0;
+    border-radius: 14px;
+}
+
+.body-delete-account .del-card--materialize:not(.del-card--success)::after {
+    border-color: rgba(198, 40, 40, 0.19);
+}
+
+.body-delete-account .reveal-item.is-visible .del-card--materialize:not(.del-card--success).reveal-child {
+    animation: deletePanelBoxGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+.body-delete-account .reveal-item.is-visible .del-card--materialize:not(.del-card--success)::after {
+    animation:
+        deleteNeonPulseOnce 1.2s ease-out 1.45s 1 forwards,
+        deletePanelAmbientGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+@keyframes deleteNeonPulseOnce {
+    0% {
+        opacity: 0;
+        transform: scale(0.995);
+        box-shadow: 0 0 0 0 rgba(198, 40, 40, 0);
+    }
+    35% {
+        opacity: 0.36;
+        transform: scale(1);
+        box-shadow:
+            0 0 22px rgba(198, 40, 40, 0.21),
+            0 0 44px rgba(183, 28, 28, 0.1),
+            inset 0 0 16px rgba(198, 40, 40, 0.032);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.005);
+        box-shadow: 0 0 0 0 rgba(198, 40, 40, 0);
+    }
+}
+
+@keyframes deletePanelAmbientGlow {
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.998);
+        box-shadow: 0 0 0 0 rgba(198, 40, 40, 0);
+    }
+    50% {
+        opacity: 0.25;
+        transform: scale(1.003);
+        box-shadow:
+            0 0 20px rgba(198, 40, 40, 0.18),
+            0 0 40px rgba(183, 28, 28, 0.08),
+            inset 0 0 14px rgba(198, 40, 40, 0.032);
+    }
+}
+
+@keyframes deletePanelBoxGlow {
+    0%,
+    100% {
+        box-shadow: var(--glass-shadow);
+    }
+    50% {
+        box-shadow:
+            var(--glass-shadow),
+            0 0 22px rgba(198, 40, 40, 0.14),
+            0 0 44px rgba(183, 28, 28, 0.064);
+    }
+}
+
+.body-auth-forgot-password .auth-panel--materialize::after {
+    inset: 0;
+    border-radius: 22px;
+    border-color: rgba(198, 40, 40, 0.19);
+}
+
+.body-auth-forgot-password .reveal-item.is-visible .auth-panel--materialize.reveal-child {
+    animation: deletePanelBoxGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+.body-auth-forgot-password .reveal-item.is-visible .auth-panel--materialize::after {
+    animation:
+        deleteNeonPulseOnce 1.2s ease-out 1.45s 1 forwards,
+        deletePanelAmbientGlow 2.8s ease-in-out 2.4s infinite;
+}
+
+.body-change-password .pwd-card--materialize::after {
+    inset: 0;
+    border-radius: 14px;
+}
+
+.body-bank-details .bank-card-panel--materialize::after {
+    inset: 0;
+    border-radius: 14px;
+}
+
+.body-auth-register .auth-register-note {
+    margin: 0 0 12px;
+    text-align: center;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #b8a48a;
+}

@@ -1,0 +1,505 @@
+﻿/* Advanced — wallet settings preferences UI (/wallet/settings) */
+.wallet-settings-panel {
+    width: min(920px, 97vw);
+    padding: 14px 18px 16px;
+    text-align: left;
+    overflow: hidden;
+}
+
+html:has(.body-wallet-settings) {
+    overflow: hidden;
+}
+
+.body-wallet-settings {
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+}
+
+.body-wallet-settings .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    min-height: 0;
+    padding: 10px 16px 28px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.body-wallet-settings .form-panel-top {
+    margin-bottom: 10px;
+}
+
+.body-wallet-settings .form-panel-top--split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.body-wallet-settings .form-panel-top--split .pref-save-status {
+    margin: 0;
+    min-height: 1.25rem;
+    text-align: right;
+    flex: 1 1 auto;
+}
+
+.settings-page-head {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.settings-page-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffcc80;
+    text-shadow: 0 0 20px rgba(255, 152, 0, 0.32);
+}
+
+.settings-page-subtitle {
+    margin: 6px 0 0;
+    font-size: 0.84rem;
+    color: #c9a07a;
+}
+
+.settings-alert {
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.settings-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.settings-sections-form {
+    display: contents;
+}
+
+.settings-section-box {
+    min-width: 0;
+    padding: 10px 12px 8px;
+}
+
+.settings-section-label {
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffb74d;
+}
+
+.body-wallet-settings .pref-section-title {
+    display: none;
+}
+
+.body-wallet-settings .pref-list {
+    gap: 0;
+}
+
+.body-wallet-settings .pref-list + .pref-section-title,
+.body-wallet-settings .pref-form + .pref-section-title {
+    margin-top: 0;
+}
+
+.body-wallet-settings .pref-card {
+    gap: 10px;
+    padding: 8px 2px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid var(--surface-border-color);
+}
+
+.body-wallet-settings .pref-list > .pref-card:last-child {
+    border-bottom: none;
+    padding-bottom: 2px;
+}
+
+.body-wallet-settings .pref-card-icon {
+    width: 22px;
+    height: 22px;
+    color: #ff9800;
+}
+
+.body-wallet-settings .pref-card-title {
+    font-size: 0.9rem;
+    margin: 0 0 1px;
+    color: #ffe0b2;
+}
+
+.body-wallet-settings .pref-card-desc {
+    font-size: 0.72rem;
+    line-height: 1.25;
+}
+
+.body-wallet-settings .pref-toggle {
+    width: 42px;
+    height: 24px;
+}
+
+.body-wallet-settings .pref-section-title:first-of-type {
+    margin-top: 0;
+}
+
+.body-wallet-settings .home-bg-image {
+    object-position: center center;
+}
+
+.body-wallet-settings .home-bg-overlay {
+    background: linear-gradient(
+        rgba(20, 10, 2, 0.4),
+        rgba(18, 10, 4, 0.58)
+    );
+}
+
+.body-wallet-settings .form-pill-link {
+    border-color: rgba(255, 152, 0, 0.32);
+}
+
+.body-wallet-settings .form-pill-link:hover {
+    border-color: rgba(255, 183, 77, 0.55);
+    color: #ffcc80;
+}
+
+.body-wallet-settings .pref-chevron {
+    color: #ffb74d;
+}
+
+.body-wallet-settings .pref-card--link:hover {
+    background: rgba(255, 152, 0, 0.07);
+}
+
+.body-wallet-settings .pref-toggle-track {
+    border-color: rgba(255, 152, 0, 0.28);
+}
+
+.body-wallet-settings .pref-toggle--on .pref-toggle-track,
+.body-wallet-settings .pref-toggle:has(input[type="checkbox"]:checked) .pref-toggle-track {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+    border-color: rgba(255, 204, 128, 0.5);
+    box-shadow: 0 0 12px rgba(255, 152, 0, 0.32);
+}
+
+@media (max-width: 820px) {
+    .wallet-settings-panel {
+        width: min(680px, 98vw);
+        padding: 10px 12px 12px;
+    }
+
+    .settings-sections-grid {
+        gap: 8px;
+    }
+
+    .settings-page-head {
+        margin-bottom: 8px;
+    }
+
+    .settings-page-title {
+        font-size: 1.2rem;
+    }
+
+    .settings-page-subtitle {
+        font-size: 0.74rem;
+    }
+
+    .body-wallet-settings .wallet-landing {
+        padding: 8px 10px 24px;
+    }
+
+    .body-wallet-settings .pref-card {
+        padding: 6px 0;
+        gap: 8px;
+    }
+
+    .body-wallet-settings .pref-card-title {
+        font-size: 0.82rem;
+    }
+
+    .body-wallet-settings .pref-card-desc {
+        font-size: 0.66rem;
+    }
+
+    .settings-section-box {
+        padding: 8px 10px 6px;
+    }
+}
+
+.pref-title {
+    margin: 8px 0 18px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c9a85c;
+    text-shadow: 0 0 18px rgba(201, 168, 92, 0.25);
+}
+
+.pref-group-title {
+    margin: 22px 0 12px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a8894a;
+}
+
+.pref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pref-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+}
+
+.pref-card-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    color: #c9a85c;
+}
+
+.pref-card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.pref-card-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.pref-card-title {
+    margin: 0 0 3px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #f5e6c8;
+    line-height: 1.25;
+}
+
+.pref-card-desc {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #9a8b74;
+    line-height: 1.35;
+}
+
+.pref-toggle-wrap {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 42px;
+}
+
+.pref-toggle-state {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-align: center;
+    user-select: none;
+}
+
+.pref-toggle-state--on {
+    color: #ffb74d;
+}
+
+.pref-toggle-state--off {
+    color: rgba(154, 139, 116, 0.9);
+}
+
+.body-wallet-settings .pref-toggle-state--on {
+    text-shadow: 0 0 10px rgba(255, 183, 77, 0.25);
+}
+
+.pref-toggle {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 26px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.body-wallet-settings .pref-toggle {
+    margin-bottom: 0;
+    font-weight: inherit;
+    color: inherit;
+}
+
+/* Advanced — reset global input styles inside toggles */
+.pref-toggle input[type="hidden"] {
+    display: none;
+}
+
+.pref-toggle input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    width: 48px;
+    height: 26px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.pref-toggle input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.pref-toggle-track {
+    position: relative;
+    display: block;
+    width: 48px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba(40, 34, 28, 0.95);
+    border: 1px solid rgba(201, 168, 92, 0.35);
+    transition: background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    pointer-events: none;
+}
+
+.pref-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #d8c8a0, #8a7348);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s ease;
+    transform: translateX(0);
+}
+
+.pref-toggle--on .pref-toggle-track,
+.pref-toggle:has(input[type="checkbox"]:checked) .pref-toggle-track {
+    background: linear-gradient(135deg, #c9a85c, #a8894a);
+    border-color: rgba(255, 220, 150, 0.55);
+    box-shadow: 0 0 14px rgba(201, 168, 92, 0.35);
+}
+
+.pref-toggle--on .pref-toggle-thumb,
+.pref-toggle:has(input[type="checkbox"]:checked) .pref-toggle-thumb {
+    transform: translateX(22px);
+    background: linear-gradient(180deg, #fff8e8, #f5e6c8);
+}
+
+.pref-toggle input[type="checkbox"]:focus-visible + .pref-toggle-track {
+    outline: 2px solid rgba(201, 168, 92, 0.75);
+    outline-offset: 2px;
+}
+
+.pref-save-wrap {
+    margin-top: 22px;
+}
+
+.pref-save-status {
+    margin: -8px 0 14px;
+    min-height: 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #8bc98a;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.pref-save-status--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pref-save-status--error {
+    color: #ef9a9a;
+}
+
+.pref-card--link {
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pref-card--link:hover {
+    border-color: rgba(201, 168, 92, 0.62);
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 10px 24px rgba(0, 0, 0, 0.32);
+}
+
+.pref-card--danger .pref-card-title {
+    color: #ef5350;
+}
+
+.pref-card--danger .pref-card-desc {
+    color: #e57373;
+}
+
+.pref-card--danger .pref-card-icon {
+    color: #ef5350;
+}
+
+.pref-card--danger .pref-chevron {
+    color: #ef5350;
+}
+
+.pref-card--link.pref-card--danger:hover {
+    transform: translateY(-1px);
+}
+
+.pref-chevron {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #c9a85c;
+    font-weight: 300;
+    padding-left: 4px;
+}
+
+.body-bank-details .bank-card-note {
+    margin: 6px 0 0;
+    font-size: 0.72rem;
+}
+
+@media (max-width: 720px) {
+    .body-bank-details .wallet-landing {
+        padding: 12px 14px 24px;
+    }
+
+    .body-bank-details .bank-card-panel {
+        padding: 18px 22px 24px;
+    }
+
+    .body-bank-details .form-panel-top {
+        margin-bottom: 10px;
+    }
+}

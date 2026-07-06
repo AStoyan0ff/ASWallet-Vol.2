@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Advanced — transaction export (/wallet/export) -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Export Transaction - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-export-file">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/export-file.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form wallet-panel--export wallet-panel--materialize reveal-child">
+        <div class="form-panel-top form-panel-top--split auth-stagger">
+            <a class="home-pill form-pill-link export-nav-pill" th:href="@{/wallet/settings}">Back to settings</a>
+            <a class="home-pill form-pill-link export-nav-pill export-nav-pill--clear" th:href="@{/wallet/export}">Clear</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Export Transaction</h2>
+        <p class="wallet-form-hint auth-stagger">Download your transactions as PDF</p>
+
+        <form class="tx-filter-form tx-export-form auth-stagger"
+              th:action="@{/wallet/export}"
+              method="get"
+              th:object="${filter}">
+            <div th:replace="~{fragments/transaction-filter-fields :: grid}"></div>
+
+            <details class="tx-export-preview auth-stagger" th:if="${matchCount > 0}">
+                <summary class="tx-export-count">
+                    <span th:text="${matchCount} + ' transaction(s) match your filters'"></span>
+                    <span class="tx-export-count-hint">Click to see which ones</span>
+                </summary>
+
+                <ul class="tx-export-preview-list">
+                    <li class="tx-export-preview-item" th:each="t : ${transactions}">
+                        <span class="type-chip tx-export-preview-type" th:text="${t.type}"></span>
+                        <span class="tx-export-preview-amount" th:text="${t.amount}"></span>
+                        <span class="tx-export-preview-desc" th:text="${t.description} ?: '-'"></span>
+                        <span class="tx-export-preview-date" th:text="${t.createdAt}"></span>
+                    </li>
+                </ul>
+            </details>
+
+            <p class="tx-export-count tx-export-count--empty auth-stagger"
+               th:if="${matchCount == 0}">
+               No transactions match your filters
+            </p>
+
+            <div class="tx-filter-actions tx-export-actions">
+                <button type="submit"
+                    class="wallet-btn wallet-btn-outline tx-export-action-btn"
+                    th:formaction="@{/wallet/export/pdf}"
+                    formmethod="get">Export PDF
+                </button>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

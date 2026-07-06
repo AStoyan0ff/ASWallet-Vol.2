@@ -1,0 +1,372 @@
+﻿/*Advanced*/
+.body-user-details .home-bg-image {
+    object-position: center center;
+}
+
+.body-user-details .home-bg-overlay {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.38),
+        rgba(12, 8, 4, 0.55)
+    );
+}
+
+/* Advanced — edit profile background (/profile/edit) */
+.body-edit-details .home-bg-image {
+    object-position: center center;
+}
+
+.body-edit-details .home-bg-overlay {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.38),
+        rgba(12, 8, 4, 0.55)
+    );
+}
+
+/* Advanced — daily limit edit background (/wallet/daily-limit/edit) */
+.body-daily-limit .home-bg-image {
+    object-position: center center;
+}
+
+.body-daily-limit .home-bg-overlay {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.38),
+        rgba(12, 8, 4, 0.55)
+    );
+}
+
+.user-profile-panel {
+    width: min(460px, 96%);
+}
+
+.user-profile-header {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.user-profile-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 22px;
+}
+
+.user-profile-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 167, 38, 0.55);
+    box-shadow: 0 0 22px rgba(255, 143, 0, 0.28);
+}
+
+.user-profile-avatar--placeholder {
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffb74d;
+    background: radial-gradient(circle at 35% 30%, rgba(255, 143, 0, 0.22), rgba(10, 8, 6, 0.88) 72%);
+}
+
+.user-profile-details-list {
+    margin: 0;
+    padding: 16px 18px;
+}
+
+.user-profile-details-item {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8px 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--surface-border-color);
+}
+
+.user-profile-details-item:last-child {
+    border-bottom: none;
+}
+
+.user-profile-details-item dt {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #ffdcb3;
+}
+
+.user-profile-details-item dd {
+    margin: 0;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: #ffe7c8;
+    text-align: right;
+    word-break: break-word;
+}
+
+.user-profile-actions {
+    margin-top: 20px;
+}
+
+.user-profile-edit-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.user-profile-edit-btn:hover {
+    transform: translateY(-1px);
+    color: #ffb74d;
+    border-color: rgba(255, 183, 77, 0.75);
+    box-shadow: 0 10px 24px rgba(255, 143, 0, 0.22);
+}
+
+.user-profile-edit-form {
+    margin-top: 4px;
+}
+
+.user-profile-avatar-preview-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.user-profile-avatar-preview-wrap label {
+    width: auto;
+    text-align: center;
+}
+
+.user-profile-avatar-label {
+    width: 100%;
+    text-align: center;
+    color: #ffdcb3;
+    font-weight: 600;
+}
+
+.user-profile-avatar-preview {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 10px;
+}
+
+.user-profile-avatar-file-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.user-profile-avatar-file {
+    display: none;
+}
+
+.user-profile-avatar-choose-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border: 1px solid rgba(255, 183, 77, 0.55);
+    border-radius: 999px;
+    background: rgba(12, 12, 12, 0.85);
+    color: #ffb74d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-profile-avatar-choose-btn:hover {
+    border-color: rgba(255, 183, 77, 0.85);
+    color: #ffe0b2;
+    box-shadow: 0 6px 16px rgba(255, 143, 0, 0.18);
+}
+
+.user-profile-avatar-hint {
+    margin: 8px 0 0;
+    max-width: 280px;
+}
+
+.daily-limit-stepper-group {
+    text-align: center;
+}
+
+.body-daily-limit .user-profile-panel {
+    width: min(420px, 96%);
+}
+
+.daily-limit-header {
+    margin-bottom: 4px;
+}
+
+.daily-limit-picker-card {
+    position: relative;
+    margin-top: 6px;
+    padding: 22px 18px 18px;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255, 167, 38, 0.14), transparent 58%),
+        linear-gradient(165deg, rgba(24, 16, 8, 0.92), rgba(10, 8, 6, 0.96));
+    border: 1px solid rgba(201, 168, 92, 0.34);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 204, 128, 0.08),
+        0 14px 34px rgba(0, 0, 0, 0.34);
+    overflow: hidden;
+}
+
+.daily-limit-picker-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255, 183, 77, 0.07) 50%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.daily-limit-picker-label {
+    position: relative;
+    margin: 0 0 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c9a07a;
+}
+
+.daily-limit-stepper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.daily-limit-stepper-btn {
+    position: relative;
+    z-index: 1;
+    width: 58px;
+    height: 48px;
+    border: 1px solid rgba(255, 167, 38, 0.5);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255, 152, 0, 0.22), rgba(22, 14, 8, 0.9));
+    color: #ffcc80;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.daily-limit-stepper-glyph {
+    display: block;
+    font-size: 1rem;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255, 167, 38, 0.45);
+}
+
+.daily-limit-stepper-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: rgba(255, 204, 128, 0.85);
+    color: #ffe0b2;
+    box-shadow: 0 10px 22px rgba(255, 143, 0, 0.22);
+}
+
+.daily-limit-stepper-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.daily-limit-stepper-btn:disabled {
+    opacity: 0.32;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.daily-limit-value-wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 11rem;
+    min-height: 4.6rem;
+    padding: 10px 18px;
+    border-radius: 16px;
+    background: rgba(8, 6, 4, 0.55);
+    border: 1px solid rgba(255, 167, 38, 0.28);
+    box-shadow: inset 0 0 24px rgba(255, 143, 0, 0.08);
+}
+
+.daily-limit-value-glow {
+    position: absolute;
+    inset: 18% 12%;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 167, 38, 0.28), transparent 72%);
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+.daily-limit-value {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: clamp(1.75rem, 5vw, 2.1rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #ffcc80;
+    text-shadow: 0 0 18px rgba(255, 143, 0, 0.35);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.daily-limit-value--pulse {
+    animation: daily-limit-value-pulse 0.28s ease;
+}
+
+@keyframes daily-limit-value-pulse {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.06);
+        color: #ffe0b2;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.daily-limit-range-hint {
+    position: relative;
+    margin: 16px 0 0;
+    font-size: 0.82rem;
+    color: #b8956e;
+    letter-spacing: 0.03em;
+}
+
+.daily-limit-submit-wrap {
+    margin-top: 20px;
+}
+
+.daily-limit-submit {
+    letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .daily-limit-value--pulse {
+        animation: none;
+    }
+
+    .daily-limit-stepper-btn:hover:not(:disabled) {
+        transform: none;
+    }
+}
+
