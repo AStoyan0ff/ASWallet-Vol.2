@@ -48,11 +48,12 @@
 13. [Complete Project Structure](#complete-project-structure)
 14. [Configuration](#configuration)
 15. [Getting Started](#getting-started)
-16. [For Examiners / Reviewers](#for-examiners--reviewers)
-17. [Spring Advanced Assignment](#spring-advanced-assignment)
-18. [Version](#version)
-19. [Planned Work](#planned-work)
-20. [Author](#author)
+16. [Testing & Coverage](#testing--coverage)
+17. [For Examiners / Reviewers](#for-examiners--reviewers)
+18. [Spring Advanced Assignment](#spring-advanced-assignment)
+19. [Version](#version)
+20. [Planned Work](#planned-work)
+21. [Author](#author)
 
 ---
 
@@ -346,7 +347,7 @@ public interface AsWalletMicroserviceClient {
 | Password storage | BCrypt (`BCryptPasswordEncoder`)                            |
 | Session          | HTTP session + `JSESSIONID`                                 |
 | CSRF             | Enabled on all POST forms                                   |
-| Roles            | `ROLE_USER`, `ROLE_ADMIN`                                   |
+| Roles            | `ROLE_USER`, `ROLE_ADMIN` (UI labels: SUPER / SUPPORT ADMIN) |
 | Authorization    | `SecurityConfig` — public paths, `/admin/**` → ADMIN        |
 | Account lock     | `INACTIVE` → login blocked                                  |
 | Reset tokens     | SHA-256 hash, single-use, expiry                            |
@@ -472,7 +473,7 @@ ASWallet-Vol.2/
     │   │   │   └── WithdrawDailyLimitBackfillConfig.java
     │   │   ├── Controllers/              (13 controllers)
     │   │   ├── Services/
-    │   │   │   ├── Interface/              (13 interfaces)
+    │   │   │   ├── Interface/            (13 interfaces)
     │   │   │   └── Impl/                 (16 implementations)
     │   │   ├── Repositories/             (8 repositories)
     │   │   ├── Models/                   (9 entities)
@@ -495,7 +496,11 @@ ASWallet-Vol.2/
     │           └── images/                 # 20 assets
     └── test/
         └── java/STARTER/
-            └── AsWalletApplicationTests.java
+            ├── ASWalletApplicationTests.java          # optional smoke (needs MySQL)
+            ├── Controllers/                           # 11 @WebMvcTest classes
+            ├── GlobalExceptionHandler/
+            │   └── GlobalExceptionHandlerTest.java
+            └── Services/Impl/                         # 10 service unit test classes
 ```
 
 ### Planned addition (microservice)
@@ -579,6 +584,85 @@ Main class: `STARTER.ASWalletApplication`
 
 ---
 
+## Testing & Coverage
+
+Automated tests for the **main application** use JUnit 5, Mockito, AssertJ, and Spring Boot `@WebMvcTest` (with `spring-security-test`).
+
+### Summary
+
+| Metric | Value |
+|--------|-------|
+| Test classes | **20** (+ optional `ASWalletApplicationTests`) |
+| Test methods | **~244** |
+| Line coverage (JaCoCo) | **~77%** (target 70% ✅ for main app) |
+| Microservice coverage | ⏳ planned when MS is added |
+
+### Run tests
+
+```powershell
+# All tests except contextLoads (no live MySQL required for the suite)
+mvn test "-Dtest=!ASWalletApplicationTests"
+
+# Single class
+mvn test "-Dtest=WalletControllerWebMvcTest"
+```
+
+### JaCoCo report
+
+```powershell
+mvn org.jacoco:jacoco-maven-plugin:0.8.13:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.13:report "-Dtest=!ASWalletApplicationTests"
+```
+
+Open: `target/site/jacoco/index.html`
+
+### Unit tests (`Services/Impl`)
+
+| Test class | Focus |
+|------------|-------|
+| `TransactionServiceImplTest` | deposit, withdraw, transfer, welcome bonus |
+| `UserServiceImplTest` | register, password, delete account |
+| `WalletServiceImplTest` | wallet CRUD / balance |
+| `BankCardServiceImplTest` | card save, IBAN, welcome bonus |
+| `PasswordResetServiceImplTest` | forgot / reset token flow |
+| `PendingTransferProcessingServiceTest` | async transfer processing |
+| `AdminServiceImplTest` | admin user management |
+| `AdminMailboxServiceImplTest` | admin ↔ user messaging |
+| `UserProfileDetailsServiceImplTest` | profile, settings, account status |
+| `WithdrawDailyLimitServiceImplTest` | daily limit rules |
+
+### WebMvc tests (`Controllers`)
+
+| Test class | Controller |
+|------------|------------|
+| `UserControllerWebMvcTest` | login, register |
+| `PasswordResetControllerWebMvcTest` | forgot / reset password |
+| `ProfileControllerWebMvcTest` | profile view / edit |
+| `WalletControllerWebMvcTest` | wallet, bank card, settings, delete account |
+| `WalletMailboxControllerWebMvcTest` | user mailbox |
+| `AdminControllerWebMvcTest` | admin dashboard, users, roles |
+| `AdminMailboxControllerWebMvcTest` | admin mailbox |
+| `TransactionControllerDepositWebMvcTest` | deposit |
+| `TransactionControllerWithdrawWebMvcTest` | withdraw |
+| `TransactionControllerTransferWebMvcTest` | transfer + confirm |
+
+### Other
+
+| Test class | Focus |
+|------------|-------|
+| `GlobalExceptionHandlerTest` | centralized error handling |
+
+### Controllers without MockMvc yet
+
+`HomeController`, `ContactUsController`, `DailyLimitController`, `TransactionHistoryController`, `TransactionExportController` — low priority; main app coverage target is already met.
+
+### Test dependencies (`pom.xml`)
+
+- `spring-boot-starter-webmvc-test`
+- `spring-security-test` / `spring-boot-starter-security-test`
+- `mockito-junit-jupiter`, `assertj-core`
+
+---
+
 ## For Examiners / Reviewers
 
 ### Main flow (5 min)
@@ -633,7 +717,8 @@ Official brief: `src/main/resources/Spring-Advanced`
 | Validation + error handling      | ✅              |
 | PDF export (bonus)               | ✅              |
 | REST microservice + Feign        | ⏳ Planned      |
-| 70% test coverage                | ⏳ Planned      |
+| 70% test coverage (main app)     | ✅ ~77% JaCoCo  |
+| 70% test coverage (microservice) | ⏳ Planned      |
 | Separate MS database             | ⏳ Planned      |
 
 ### Valid domain functionalities (main app)
@@ -661,7 +746,7 @@ Official brief: `src/main/resources/Spring-Advanced`
 | Item                                 | Notes                |
 |--------------------------------------|----------------------|
 | **REST microservice + Feign Client** | Separate app, own DB |
-| **70% automated test coverage**      | Both apps            |
+| **70% test coverage (microservice)** | Main app done (~77%) |
 | Edit / replace bank card             | UX improvement       |
 | OTP / 2FA                            | Security enhancement |
 | Desktop dashboard redesign           | Future UI variant    |
