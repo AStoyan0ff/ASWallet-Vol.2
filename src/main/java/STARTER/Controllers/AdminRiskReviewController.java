@@ -1,0 +1,82 @@
+package STARTER.Controllers;
+
+import STARTER.Services.Interface.AdminRiskReviewService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
+import java.util.UUID;
+
+@Controller
+@RequestMapping("/admin/risk-reviews")
+public class AdminRiskReviewController {
+
+    private final AdminRiskReviewService adminRiskReviewService;
+
+    public AdminRiskReviewController(AdminRiskReviewService adminRiskReviewService) {
+        this.adminRiskReviewService = adminRiskReviewService;
+    }
+
+    @GetMapping
+    public String listPendingReviews(Model model, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            model.addAttribute("assessments", adminRiskReviewService.listPendingReviews());
+        } catch (RuntimeException ex) {
+            model.addAttribute("assessments", java.util.List.of());
+            model.addAttribute("errorMessage", ex.getMessage());
+        }
+
+        model.addAttribute("currentUsername", principal.getName());
+        return "admin-risk-reviews";
+    }
+
+    @PostMapping("/{id}/approve")
+    public String approve(
+            @PathVariable UUID id,
+            Principal principal,
+            RedirectAttributes redirectAttributes) {
+
+        return review(id, principal, redirectAttributes, true);
+    }
+
+    @PostMapping("/{id}/reject")
+    public String reject(
+            @PathVariable UUID id,
+            Principal principal,
+            RedirectAttributes redirectAttributes) {
+
+        return review(id, principal, redirectAttributes, false);
+    }
+
+    private String review(
+            UUID id,
+            Principal principal,
+            RedirectAttributes redirectAttributes,
+            boolean approve) {
+
+        try {
+            if (approve) {
+                adminRiskReviewService.approve(id, principal.getName());
+                redirectAttributes.addFlashAttribute(
+                        "successMessage",
+                        "Risk assessment approved successfully."
+                );
+            } else {
+                adminRiskReviewService.reject(id, principal.getName());
+                redirectAttributes.addFlashAttribute(
+                        "successMessage",
+                        "Risk assessment rejected successfully."
+                );
+            }
+        } catch (RuntimeException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+        }
+
+        return "redirect:/admin/risk-reviews";
+    }
+}

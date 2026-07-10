@@ -2,7 +2,9 @@ package STARTER.Services.Impl;
 
 import STARTER.CustomException.*;
 import STARTER.DTOs.*;
+import STARTER.Clients.Dto.RiskAssessmentClientResponse;
 import STARTER.Enums.AccountStatus;
+import STARTER.Enums.RiskDecision;
 import STARTER.Enums.SpendingCategory;
 import STARTER.Enums.TransactionStatus;
 import STARTER.Enums.TransactionType;
@@ -10,6 +12,7 @@ import STARTER.Events.TransactionCompletedEvent;
 import STARTER.Models.*;
 import STARTER.Repositories.*;
 import STARTER.Services.Interface.WithdrawDailyLimitService;
+import STARTER.Services.Interface.TransferRiskAssessmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +33,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +49,7 @@ class TransactionServiceImplTest {
     @Mock private ApplicationCacheEviction cacheEviction;
     @Mock private TransferRefundSupport transferRefundSupport;
     @Mock private WithdrawDailyLimitService withdrawDailyLimitService;
+    @Mock private TransferRiskAssessmentService transferRiskAssessmentService;
 
     @InjectMocks
     private TransactionServiceImpl transactionService;
@@ -67,6 +72,17 @@ class TransactionServiceImplTest {
         wallet.setUser(user);
         wallet.setBalance(new BigDecimal("100.00"));
         wallet.setCurrency("EUR");
+
+        lenient().when(transferRiskAssessmentService.assessTransfer(
+                any(), any(), any(), any(), any(), anyBoolean()
+        )).thenReturn(allowedRiskResponse());
+    }
+
+    private RiskAssessmentClientResponse allowedRiskResponse() {
+        RiskAssessmentClientResponse response = new RiskAssessmentClientResponse();
+        response.setDecision(RiskDecision.ALLOW);
+        response.setRiskScore(0);
+        return response;
     }
 
     // --- DEPOSIT ---
@@ -227,6 +243,41 @@ class TransactionServiceImplTest {
         assertThat(txCaptor.getValue().getType()).isEqualTo(TransactionType.TRANSFER);
 
         verify(cacheEviction).evictTransactionHistoryForWallets(wallet, receiverWallet);
+    }
+
+    @Test
+    void transfer_blockedByRisk_doesNotDeductBalanceOrSaveTransaction() {
+        User receiverUser = new User();
+        receiverUser.setId(UUID.randomUUID());
+        receiverUser.setUsername("Georgi");
+
+        Wallet receiverWallet = new Wallet();
+        receiverWallet.setId(UUID.randomUUID());
+        receiverWallet.setUser(receiverUser);
+        receiverWallet.setBalance(new BigDecimal("10.00"));
+
+        BankCard receiverCard = new BankCard();
+        receiverCard.setLastFourDigits("4242");
+
+        when(walletRepository.findByUser_Id(userId)).thenReturn(Optional.of(wallet));
+        when(userRepository.findByUsername("Georgi")).thenReturn(Optional.of(receiverUser));
+        when(walletRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverWallet));
+        when(bankCardRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverCard));
+        when(transferRiskAssessmentService.assessTransfer(
+                any(), any(), any(), any(), any(), anyBoolean()
+        )).thenThrow(new TransferBlockedByRiskException("Transfer blocked by risk assessment."));
+
+        TransferMoneyDTO dto = new TransferMoneyDTO();
+        dto.setReceiverUsername("Georgi");
+        dto.setAmount(new BigDecimal("30.00"));
+        dto.setSpendingCategory(SpendingCategory.SHOPPING);
+
+        assertThrows(TransferBlockedByRiskException.class,
+                () -> transactionService.transfer(userId, dto));
+
+        assertThat(wallet.getBalance()).isEqualByComparingTo("100.00");
+        verify(walletRepository, never()).save(any());
+        verify(transactionRepository, never()).save(any());
     }
 
     @Test

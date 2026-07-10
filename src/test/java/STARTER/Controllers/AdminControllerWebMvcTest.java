@@ -5,6 +5,7 @@ import STARTER.DTOs.LoginActivityViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
 import STARTER.Services.Interface.AdminMailboxService;
+import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.AdminService;
 import STARTER.Services.Interface.LoginActivityService;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,6 +47,9 @@ class AdminControllerWebMvcTest {
     @MockitoBean
     private LoginActivityService loginActivityService;
 
+    @MockitoBean
+    private AdminRiskReviewService adminRiskReviewService;
+
     private UUID targetUserId;
     private AdminUserViewDTO manageableUser;
 
@@ -63,6 +67,8 @@ class AdminControllerWebMvcTest {
                 .roleDisplay("USER")
                 .accountStatus(AccountStatus.ACTIVE)
                 .build();
+
+        when(adminRiskReviewService.countPendingReviews()).thenReturn(0L);
     }
 
     @Test

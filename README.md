@@ -26,7 +26,7 @@
   ASWallet-Vol.2 is a full-stack personal wallet platform. Users register, manage a digital wallet,
   link a bank card, receive a welcome bonus, and perform deposits, withdrawals, and transfers.
   The system includes profile management, admin tooling, messaging, scheduling, caching,
-  PDF export, and a planned REST microservice integrated via OpenFeign.
+  PDF export, and a REST risk-assessment microservice integrated via OpenFeign.
 </p>
 
 ---
@@ -38,7 +38,7 @@
 3. [Tech Stack](#tech-stack)
 4. [Domain Model](#domain-model)
 5. [Application Features](#application-features)
-6. [REST Microservice (planned)](#rest-microservice-planned)
+6. [REST Microservice](#rest-microservice)
 7. [Web Pages & Routes](#web-pages--routes)
 8. [Security](#security)
 9. [Scheduling & Caching](#scheduling--caching)
@@ -64,10 +64,9 @@ ASWallet-Vol.2 is designed as a **two-application system** (per Spring Advanced 
 | Application                       | Port (default) | Role                                                         |
 |-----------------------------------|----------------|--------------------------------------------------------------|
 | **ASWallet-Vol.2 Main**           | `8080`         | Thymeleaf UI, wallet logic, security, MySQL `as_wallet`      |
-| **REST Microservice** *(planned)* | `8081`         | REST API, separate DB, consumed by Main via **Feign Client** |
+| **REST Microservice** | `8081`         | Transfer risk assessment API, separate DB `as_wallet_svc`, consumed via **Feign** |
 
-The **main application** (this repository) is ready for local demo and defense.
-The **microservice module** will be added as a separate Spring Boot app with its own database.
+The **main application** (this repository) integrates with the sibling project **`ASWallet-Vol.2-svc`**.
 
 ---
 
@@ -90,13 +89,13 @@ The **microservice module** will be added as a separate Spring Boot app with its
 │         │                  ├── @Scheduled jobs                          │
 │         │                  └── Application Events → Email (SMTP)        │
 │         │                                                               │
-│         └── Feign Client (planned) ───────────────────────────────┐     │
+│         └── Feign Client (RiskAssessmentClient) ──────────────────┐     │
 └───────────────────────────────────────────────────────────────────│─────┘
                                                                     │ REST
                                                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│              REST Microservice (:8081) — planned                        │
-│  REST Controllers → Services → JPA → MySQL (separate database)           │
+│         ASWallet-Vol.2-svc — Risk Microservice (:8081)                  │
+│  POST assess · GET pending · PATCH review → JPA → MySQL as_wallet_svc   │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -129,19 +128,23 @@ Cross-cutting  →  Security, Events, Scheduling, Cache, ExceptionHandler
 | Scheduling  | `@EnableScheduling`, cron + fixed delay                   |
 | Caching     | `@EnableCaching`, `ConcurrentMapCacheManager`             |
 | PDF         | OpenPDF 2.0.3                                             |
+| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5 (risk MS)      |
 | Frontend    | HTML5, modular CSS, vanilla JavaScript                    |
 | Build       | Maven                                                     |
 | Utilities   | Lombok                                                    |
 
-### Microservice (planned)
+### Microservice (`ASWallet-Vol.2-svc`)
 
 | Layer       | Technology                                         |
 |-------------|----------------------------------------------------|
-| Framework   | Spring Boot 4.0.6 (separate module)                |
+| Framework   | Spring Boot 4.0.6 (separate app)                   |
 | API         | Spring Web (REST)                                  |
-| Integration | **Spring Cloud OpenFeign** (in main app)           |
-| Database    | MySQL (separate schema)                            |
-| Testing     | Unit, integration, API tests (70% coverage target) |
+| Integration | **Spring Cloud OpenFeign** + **feign-hc5** (PATCH) |
+| Database    | MySQL `as_wallet_svc`                              |
+| Entity      | `TransferRiskAssessment`                           |
+| Testing     | Unit + WebMvc tests                                |
+
+See the microservice README: `../ASWallet-Vol.2-svc/README.md` (sibling folder).
 
 ---
 
@@ -242,41 +245,60 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 
 ---
 
-## REST Microservice (planned)
+## REST Microservice
 
-> Required by the **Spring Advanced** assignment. Not yet in this repository.
+> Implemented in sibling project **`ASWallet-Vol.2-svc`** (separate repo folder, port `8081`, database `as_wallet_svc`).
 
-### Planned layout
+### Layout
 
 ```
-ASWallet-Vol.2/                    (monorepo or multi-module — TBD)
-├── main/                          ← current application (this codebase)
-└── aswallet-microservice/         ← separate Spring Boot app
-    ├── src/main/java/...
-    ├── src/main/resources/application.properties   (port 8081, own DB)
+D:\Projects\
+├── ASWallet-Vol.2/              ← this repository (main app :8080)
+└── ASWallet-Vol.2-svc/          ← risk microservice (:8081)
+    ├── src/main/java/SVC/...
+    ├── src/main/resources/application.properties
     └── pom.xml
 ```
 
-### Integration (main app)
+### Feign client (main app)
 
 ```java
+@FeignClient(name = "aswallet-risk-service", url = "${app.risk-service.base-url}")
+public interface RiskAssessmentClient {
 
-@FeignClient(name = "aswallet-microservice", url = "${app.microservice.base-url}")
-public interface AsWalletMicroserviceClient {
-    // ≥ 1 GET + ≥ 2 POST/PUT/DELETE used by main app
+    @PostMapping("/api/risk-assessments")
+    RiskAssessmentClientResponse createAssessment(@RequestBody RiskAssessmentCreateRequest request);
+
+    @GetMapping("/api/risk-assessments")
+    List<RiskAssessmentClientResponse> listAssessments(@RequestParam("status") String status);
+
+    @PatchMapping("/api/risk-assessments/{id}/review")
+    RiskAssessmentClientResponse reviewAssessment(
+            @PathVariable("id") UUID id,
+            @RequestBody RiskAssessmentReviewRequest request);
 }
 ```
 
-### Planned requirements
+Requires **`feign-hc5`** on the classpath so `PATCH` works (`spring.cloud.openfeign.httpclient.hc5.enabled=true`).
 
-| Requirement                       | Plan                                             |
-|-----------------------------------|--------------------------------------------------|
-| Separate Spring Boot app          | Own `main`, port `8081`                          |
-| Separate database                 | e.g. `as_wallet_svc`                             |
-| ≥ 1 domain entity in microservice | TBD (e.g. fraud check / audit service)           |
-| ≥ 2 valid functionalities in MS   | Triggered from main UI → Feign → MS state change |
-| Feign in main app                 | Spring Cloud OpenFeign + client interface        |
-| 70% test coverage                 | Unit + integration + API in both apps            |
+### Integration flow
+
+1. User confirms transfer → `TransactionServiceImpl.transfer()` → `TransferRiskAssessmentService` → Feign **POST**
+2. `ALLOW` / `REVIEW` → transfer saved as `PENDING`; `BLOCK` → exception, no transfer
+3. Admin opens `/admin/risk-reviews` → Feign **GET** `?status=PENDING`
+4. Admin **Approve** / **Reject** → Feign **PATCH** `/review`
+
+### Spring Advanced checklist (microservice)
+
+| Requirement                       | Status |
+|-----------------------------------|--------|
+| Separate Spring Boot app          | ✅ port `8081` |
+| Separate database                 | ✅ `as_wallet_svc` |
+| ≥ 1 domain entity in microservice | ✅ `TransferRiskAssessment` |
+| ≥ 2 MS functionalities from UI    | ✅ assess on transfer + admin review |
+| Feign in main app                 | ✅ `RiskAssessmentClient` |
+| ≥ 1 GET + ≥ 2 POST/PATCH from main | ✅ GET list + POST assess + PATCH review |
+| 70% test coverage (microservice)  | ✅ unit + WebMvc tests |
 
 ---
 
@@ -327,6 +349,9 @@ public interface AsWalletMicroserviceClient {
 | GET/POST | `/admin/messages/send`                    | `admin-send-message.html`   |
 | GET      | `/admin/messages/inbox`                   | `admin-message-inbox.html`  |
 | GET      | `/admin/messages/users/{username}/thread` | `admin-message-thread.html` |
+| GET      | `/admin/risk-reviews`                     | `admin-risk-reviews.html`   |
+| POST     | `/admin/risk-reviews/{id}/approve`        | redirect                    |
+| POST     | `/admin/risk-reviews/{id}/reject`         | redirect                    |
 
 ### Thymeleaf fragments
 
@@ -503,19 +528,21 @@ ASWallet-Vol.2/
             └── Services/Impl/                         # 10 service unit test classes
 ```
 
-### Planned addition (microservice)
+### Microservice sibling project
 
 ```
-aswallet-microservice/                       # separate module — to be added
+ASWallet-Vol.2-svc/                          # separate folder (sibling to this repo)
 ├── pom.xml
-└── src/main/java/.../
-    ├── *Application.java
-    ├── controller/
-    ├── model/
-    ├── repository/
-    ├── service/
-    └── dto/
+└── src/main/java/SVC/
+    ├── ASWalletSvcApplication.java
+    ├── Controllers/RiskAssessmentController.java
+    ├── Models/TransferRiskAssessment.java
+    ├── Services/RiskScoringService.java
+    ├── Services/RiskAssessmentService.java
+    └── ...
 ```
+
+See `../ASWallet-Vol.2-svc/README.md` for API and scoring details.
 
 ---
 
@@ -552,8 +579,11 @@ app.transfer.process.cron=0 */1 * * * *
 app.withdraw.daily-limit.min=50
 app.withdraw.daily-limit.max=500
 app.withdraw.day-timezone=Europe/Sofia
-# Microservice (planned)
-# app.microservice.base-url=http://localhost:8081
+# Risk microservice (ASWallet-Vol.2-svc)
+app.risk-service.enabled=true
+app.risk-service.base-url=http://localhost:8081
+app.risk-service.fail-open=true
+spring.cloud.openfeign.httpclient.hc5.enabled=true
 ```
 
 ---
@@ -582,6 +612,19 @@ Open: **http://localhost:8080**
 
 Main class: `STARTER.ASWalletApplication`
 
+### Run risk microservice (required for transfer risk checks)
+
+Clone or open sibling project **`ASWallet-Vol.2-svc`**, create DB `as_wallet_svc`, then:
+
+```powershell
+cd ..\ASWallet-Vol.2-svc
+$env:DB_PASSWORD = "your_mysql_password"
+mvn spring-boot:run
+```
+
+Microservice: **http://localhost:8081**  
+If the microservice is down and `app.risk-service.fail-open=true`, transfers still work (risk check skipped).
+
 ---
 
 ## Testing & Coverage
@@ -595,7 +638,7 @@ Automated tests for the **main application** use JUnit 5, Mockito, AssertJ, and 
 | Test classes | **20** (+ optional `ASWalletApplicationTests`) |
 | Test methods | **~244** |
 | Line coverage (JaCoCo) | **~77%** (target 70% ✅ for main app) |
-| Microservice coverage | ⏳ planned when MS is added |
+| Microservice coverage | ✅ see `ASWallet-Vol.2-svc` (unit + WebMvc) |
 
 ### Run tests
 
@@ -716,10 +759,10 @@ Official brief: `src/main/resources/Spring-Advanced`
 | Caching                          | ✅              |
 | Validation + error handling      | ✅              |
 | PDF export (bonus)               | ✅              |
-| REST microservice + Feign        | ⏳ Planned      |
+| REST microservice + Feign        | ✅              |
 | 70% test coverage (main app)     | ✅ ~77% JaCoCo  |
-| 70% test coverage (microservice) | ⏳ Planned      |
-| Separate MS database             | ⏳ Planned      |
+| 70% test coverage (microservice) | ✅              |
+| Separate MS database             | ✅ `as_wallet_svc` |
 
 ### Valid domain functionalities (main app)
 
@@ -728,10 +771,21 @@ Official brief: `src/main/resources/Spring-Advanced`
 | 1 | Register bank card      | Card + bonus + transaction |
 | 2 | Deposit                 | Balance ↑                  |
 | 3 | Withdraw                | Balance ↓                  |
-| 4 | Confirm transfer        | Balances updated           |
+| 4 | Confirm transfer        | Balances updated; risk assessed via Feign |
 | 5 | Cancel pending transfer | Refund + status change     |
 | 6 | Send mailbox message    | Message persisted          |
 | 7 | Export PDF              | Filtered download          |
+| 8 | Admin risk review       | Approve/reject flagged transfer (Feign PATCH) |
+
+### Valid domain functionalities (microservice via main UI)
+
+| # | Action (UI)              | Feign | MS state change        |
+|---|--------------------------|-------|------------------------|
+| 1 | Confirm transfer         | POST  | New risk assessment    |
+| 2 | Admin approve risk review | PATCH | Assessment → APPROVED |
+| 3 | Admin reject risk review  | PATCH | Assessment → REJECTED  |
+
+Reading pending reviews (GET) supports the admin page but is read-only until approve/reject.
 
 ---
 
@@ -745,8 +799,8 @@ Official brief: `src/main/resources/Spring-Advanced`
 
 | Item                                 | Notes                |
 |--------------------------------------|----------------------|
-| **REST microservice + Feign Client** | Separate app, own DB |
-| **70% test coverage (microservice)** | Main app done (~77%) |
+| `transactionRef` link to main-app tx | Optional audit improvement |
+| Admin risk history (all assessments) | Optional audit page  |
 | Edit / replace bank card             | UX improvement       |
 | OTP / 2FA                            | Security enhancement |
 | Desktop dashboard redesign           | Future UI variant    |

@@ -53,6 +53,19 @@
                           th:if="${adminInboxUnreadCount > 0}"
                           th:text="${adminInboxUnreadCount}"></span>
                 </a>
+                <a class="wallet-quick-action wallet-quick-action--login-activity wallet-quick-action--badge"
+                   th:href="@{/admin/risk-reviews}">
+                    <span class="wallet-quick-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 3l7 4v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V7l7-4z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </span>
+                    <span class="wallet-quick-action-label">Risk Reviews</span>
+                    <span class="wallet-quick-action-badge"
+                          th:if="${pendingRiskReviewCount > 0}"
+                          th:text="${pendingRiskReviewCount}"></span>
+                </a>
                 <button type="button"
                         id="adminManageTool"
                         class="wallet-quick-action wallet-quick-action--admin-manage admin-tool-action"

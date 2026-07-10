@@ -22,6 +22,7 @@ import STARTER.Repositories.UserRepository;
 import STARTER.Repositories.WalletRepository;
 import STARTER.Events.TransactionCompletedEvent;
 import STARTER.Services.Interface.TransactionService;
+import STARTER.Services.Interface.TransferRiskAssessmentService;
 import STARTER.Services.Interface.WithdrawDailyLimitService;
 import STARTER.Configuration.CacheConfig;
 import STARTER.Specifications.TransactionSpecifications;
@@ -60,6 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final ApplicationCacheEviction cacheEviction;
     private final TransferRefundSupport transferRefundSupport;
     private final WithdrawDailyLimitService withdrawDailyLimitService;
+    private final TransferRiskAssessmentService transferRiskAssessmentService;
 
     public TransactionServiceImpl(
             TransactionRepository transactionRepository,
@@ -71,7 +73,8 @@ public class TransactionServiceImpl implements TransactionService {
             PendingTransferProcessingService pendingTransferProcessingService,
             ApplicationCacheEviction cacheEviction,
             TransferRefundSupport transferRefundSupport,
-            WithdrawDailyLimitService withdrawDailyLimitService
+            WithdrawDailyLimitService withdrawDailyLimitService,
+            TransferRiskAssessmentService transferRiskAssessmentService
     ) {
         this.transactionRepository = transactionRepository;
         this.walletRepository = walletRepository;
@@ -83,6 +86,7 @@ public class TransactionServiceImpl implements TransactionService {
         this.cacheEviction = cacheEviction;
         this.transferRefundSupport = transferRefundSupport;
         this.withdrawDailyLimitService = withdrawDailyLimitService;
+        this.transferRiskAssessmentService = transferRiskAssessmentService;
     }
 
     @Override
@@ -111,6 +115,15 @@ public class TransactionServiceImpl implements TransactionService {
         if (senderWallet.getBalance().compareTo(transferMoneyDTO.getAmount()) < 0) {
             throw new InsufficientBalanceException("Insufficient balance");
         }
+
+        transferRiskAssessmentService.assessTransfer(
+                senderWallet.getUser(),
+                senderWallet,
+                receiverUser,
+                receiverWallet,
+                transferMoneyDTO,
+                true
+        );
 
         senderWallet.setBalance(senderWallet.getBalance().subtract(transferMoneyDTO.getAmount()));
 

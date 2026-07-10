@@ -49,4 +49,34 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
             @Param("startOfDay") LocalDateTime startOfDay,
             @Param("endOfDay") LocalDateTime endOfDay
     );
+
+    @Query(
+            """
+                SELECT COUNT(t)
+                FROM Transaction t
+                WHERE t.senderWallet.id = :senderWalletId
+                    AND t.type = STARTER.Enums.TransactionType.TRANSFER
+                    AND t.createdAt >= :startOfDay
+                    AND t.createdAt < :endOfDay
+            """
+    )
+    long countTransfersBetween(
+            @Param("senderWalletId") UUID senderWalletId,
+            @Param("startOfDay") LocalDateTime startOfDay,
+            @Param("endOfDay") LocalDateTime endOfDay
+    );
+
+    @Query(
+            """
+                SELECT COUNT(t) > 0
+                FROM Transaction t
+                WHERE t.senderWallet.id = :senderWalletId
+                    AND t.receiverWallet.id = :receiverWalletId
+                    AND t.type = STARTER.Enums.TransactionType.TRANSFER
+            """
+    )
+    boolean existsTransferBetweenSenderAndReceiver(
+            @Param("senderWalletId") UUID senderWalletId,
+            @Param("receiverWalletId") UUID receiverWalletId
+    );
 }

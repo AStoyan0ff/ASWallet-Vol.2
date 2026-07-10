@@ -235,7 +235,7 @@
 }
 
 .admin-tools-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 8px;
 }
 
@@ -1305,5 +1305,182 @@
 .body-admin-login-activity .login-activity-table td:nth-child(3) {
     color: rgba(201, 168, 92, 0.95);
     white-space: nowrap;
+}
+
+.risk-reasons-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.82rem;
+    color: rgba(255, 236, 179, 0.9);
+}
+
+.risk-review-actions {
+    min-width: 9rem;
+}
+
+.risk-review-form {
+    margin: 0 0 0.45rem;
+}
+
+.risk-review-form:last-child {
+    margin-bottom: 0;
+}
+
+.risk-review-form .wallet-btn {
+    width: 100%;
+    min-height: 2rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.78rem;
+}
+
+/* Advanced — admin risk reviews (/admin/risk-reviews) */
+.body-admin-risk-reviews .wallet-landing {
+    align-items: safe center;
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+.wallet-panel--admin-risk-reviews {
+    width: min(1180px, 98%);
+    padding: 28px 34px 34px;
+    text-align: left;
+}
+
+.body-admin-risk-reviews .wallet-title.wallet-title--center,
+.body-admin-risk-reviews .wallet-greeting,
+.body-admin-risk-reviews .login-activity-hint,
+.body-admin-risk-reviews .success,
+.body-admin-risk-reviews .error,
+.body-admin-risk-reviews .tx-empty {
+    text-align: center;
+}
+
+.risk-reviews-table-wrap {
+    width: 100%;
+    max-height: clamp(280px, 58vh, 640px);
+    overflow: auto;
+    margin-top: 6px;
+    padding-right: 4px;
+    border-radius: 14px;
+    border: 1px solid rgba(201, 168, 92, 0.32);
+    background: linear-gradient(160deg, rgba(16, 13, 10, 0.96), rgba(8, 7, 6, 0.92));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 8px 18px rgba(0, 0, 0, 0.22);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 167, 38, 0.45) rgba(10, 10, 10, 0.6);
+}
+
+.risk-reviews-table {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.risk-reviews-table th,
+.risk-reviews-table td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(201, 168, 92, 0.18);
+    color: #ffecb3;
+}
+
+.risk-reviews-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: rgba(12, 10, 8, 0.98);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 183, 77, 0.92);
+    border-bottom: 1px solid rgba(255, 167, 38, 0.28);
+}
+
+.risk-reviews-table tbody tr:hover td {
+    background: rgba(255, 167, 38, 0.05);
+}
+
+.risk-reviews-table td:nth-child(1),
+.risk-reviews-table td:nth-child(2) {
+    color: #ffb74d;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.risk-reviews-table td:nth-child(3),
+.risk-reviews-table td:nth-child(6) {
+    white-space: nowrap;
+}
+
+.risk-reviews-table td:nth-child(7) {
+    min-width: 280px;
+    max-width: 360px;
+}
+
+.risk-score-chip,
+.risk-level-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.4rem;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.risk-score-chip {
+    background: rgba(255, 167, 38, 0.16);
+    border: 1px solid rgba(255, 167, 38, 0.34);
+    color: #ffe082;
+}
+
+.risk-level-chip--low {
+    background: rgba(102, 187, 106, 0.14);
+    border: 1px solid rgba(102, 187, 106, 0.34);
+    color: #b9f6ca;
+}
+
+.risk-level-chip--medium {
+    background: rgba(255, 167, 38, 0.14);
+    border: 1px solid rgba(255, 167, 38, 0.34);
+    color: #ffe082;
+}
+
+.risk-level-chip--high {
+    background: rgba(229, 115, 115, 0.14);
+    border: 1px solid rgba(229, 115, 115, 0.34);
+    color: #ffcdd2;
+}
+
+.risk-review-actions {
+    min-width: 11.5rem;
+}
+
+.risk-review-actions-row {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+}
+
+.risk-review-actions-row .risk-review-form {
+    flex: 1 1 0;
+    margin: 0;
+}
+
+.risk-review-actions-row .wallet-btn {
+    min-width: 5.2rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .wallet-panel--admin-risk-reviews {
+        width: min(98%, 98vw);
+        padding: 24px 18px 28px;
+    }
 }
 

@@ -4,6 +4,7 @@ import STARTER.DTOs.AdminUserViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
 import STARTER.Services.Interface.AdminMailboxService;
+import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.AdminService;
 import STARTER.Services.Interface.LoginActivityService;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ public class AdminController {
     private final AdminService adminService;
     private final AdminMailboxService adminMailboxService;
     private final LoginActivityService loginActivityService;
+    private final AdminRiskReviewService adminRiskReviewService;
 
     @Value("${app.admin.username:admin}")
     private String primaryAdminUsername;
@@ -33,13 +35,15 @@ public class AdminController {
 
             AdminService adminService,
             AdminMailboxService adminMailboxService,
-            LoginActivityService loginActivityService
+            LoginActivityService loginActivityService,
+            AdminRiskReviewService adminRiskReviewService
 
     ) {
 
         this.adminService = adminService;
         this.adminMailboxService = adminMailboxService;
         this.loginActivityService = loginActivityService;
+        this.adminRiskReviewService = adminRiskReviewService;
     }
 
     @GetMapping
@@ -47,6 +51,7 @@ public class AdminController {
 
         model.addAttribute("users", adminService.getAllUsers());
         model.addAttribute("adminInboxUnreadCount", adminMailboxService.countUnreadForAdminInbox());
+        model.addAttribute("pendingRiskReviewCount", adminRiskReviewService.countPendingReviews());
         addAdminContext(model, principal);
 
         return "admin";

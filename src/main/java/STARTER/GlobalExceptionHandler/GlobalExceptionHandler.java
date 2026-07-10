@@ -75,7 +75,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             NotTransferMoneyYourselfException.class,
             SenderNotFoundException.class,
-            ReceiverNotFoundException.class
+            ReceiverNotFoundException.class,
+            TransferBlockedByRiskException.class
     })
     public String handleTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
