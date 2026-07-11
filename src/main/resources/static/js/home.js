@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initAuthMaterialize(isMaterializePage, reducedMotion);
     initHomeBankCards(reducedMotion);
+    initHomeTicker(reducedMotion);
 
     if (!revealItems.length) {
         return;
@@ -117,4 +118,19 @@ function initHomeBankCards(reducedMotion) {
             card.classList.remove("is-shine-active");
         });
     });
+}
+
+function initHomeTicker(reducedMotion) {
+
+    const ticker = document.querySelector(".body-home .home-ticker");
+
+    if (!ticker) {
+        return;
+    }
+
+    const track = ticker.querySelector(".home-ticker__track");
+
+    if (reducedMotion && track) {
+        track.style.transform = "none";
+    }
 }

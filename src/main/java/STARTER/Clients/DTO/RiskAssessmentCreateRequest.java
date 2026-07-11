@@ -1,4 +1,4 @@
-package STARTER.Clients.Dto;
+package STARTER.Clients.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

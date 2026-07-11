@@ -239,22 +239,12 @@
     gap: 8px;
 }
 
-.admin-tools-grid .wallet-quick-action {
-    min-height: 62px;
-    padding: 8px 4px;
-    gap: 5px;
-    border-radius: 10px;
-}
-
-.admin-tools-grid .wallet-quick-action-icon {
-    width: 22px;
-    height: 22px;
-}
-
-.admin-tools-grid .wallet-quick-action-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.01em;
-    line-height: 1.15;
+.admin-tools-grid .admin-tool-action.is-disabled {
+    transform: none;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 2px 0 rgba(0, 0, 0, 0.16),
+        0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 640px) {
@@ -311,7 +301,6 @@
 }
 
 .admin-tool-action {
-    border: none;
     font: inherit;
     cursor: pointer;
     color: inherit;
@@ -569,6 +558,12 @@
     color: #ffecb3;
     background: rgba(255, 167, 38, 0.16);
     border: 1px solid rgba(255, 167, 38, 0.4);
+}
+
+.status-chip--pending_risk_review {
+    color: #ffe082;
+    background: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 213, 79, 0.45);
 }
 
 .status-chip--failed,
@@ -1309,40 +1304,29 @@
 
 .risk-reasons-list {
     margin: 0;
-    padding-left: 1.1rem;
-    font-size: 0.82rem;
-    color: rgba(255, 236, 179, 0.9);
+    padding-left: 1.15rem;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: rgba(255, 236, 179, 0.92);
 }
 
-.risk-review-actions {
-    min-width: 9rem;
-}
-
-.risk-review-form {
-    margin: 0 0 0.45rem;
-}
-
-.risk-review-form:last-child {
-    margin-bottom: 0;
-}
-
-.risk-review-form .wallet-btn {
-    width: 100%;
-    min-height: 2rem;
-    padding: 0.35rem 0.6rem;
-    font-size: 0.78rem;
+.risk-reasons-list li + li {
+    margin-top: 0.35rem;
 }
 
 /* Advanced — admin risk reviews (/admin/risk-reviews) */
 .body-admin-risk-reviews .wallet-landing {
-    align-items: safe center;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
+    padding: 24px clamp(10px, 2vw, 28px) 32px;
 }
 
 .wallet-panel--admin-risk-reviews {
-    width: min(1180px, 98%);
-    padding: 28px 34px 34px;
+    width: min(1520px, 99vw);
+    max-width: 99vw;
+    margin-inline: auto;
+    padding: 32px clamp(22px, 3vw, 44px) 40px;
     text-align: left;
 }
 
@@ -1355,12 +1339,47 @@
     text-align: center;
 }
 
+.body-admin-risk-reviews .form-panel-top {
+    display: flex;
+    align-items: center;
+}
+
+.body-admin-risk-reviews .login-activity-hint {
+    max-width: 52rem;
+    margin-inline: auto;
+}
+
+.body-admin-risk-reviews .risk-reviews-clear-form {
+    margin: 0;
+}
+
+.body-admin-risk-reviews .risk-reviews-clear-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 148px;
+    padding: 8px 18px;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid rgba(229, 115, 115, 0.45);
+    background: rgba(198, 40, 40, 0.18);
+    color: #ffcdd2;
+}
+
+.body-admin-risk-reviews .risk-reviews-clear-btn:hover {
+    background: rgba(198, 40, 40, 0.28);
+    color: #fff;
+}
+
 .risk-reviews-table-wrap {
     width: 100%;
-    max-height: clamp(280px, 58vh, 640px);
+    max-height: clamp(340px, 68vh, 760px);
     overflow: auto;
-    margin-top: 6px;
-    padding-right: 4px;
+    margin-top: 10px;
+    padding: 2px 6px 2px 2px;
     border-radius: 14px;
     border: 1px solid rgba(201, 168, 92, 0.32);
     background: linear-gradient(160deg, rgba(16, 13, 10, 0.96), rgba(8, 7, 6, 0.92));
@@ -1371,20 +1390,47 @@
     scrollbar-color: rgba(255, 167, 38, 0.45) rgba(10, 10, 10, 0.6);
 }
 
+.risk-reviews-table-wrap::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.risk-reviews-table-wrap::-webkit-scrollbar-track {
+    background: rgba(10, 10, 10, 0.55);
+    border-radius: 999px;
+}
+
+.risk-reviews-table-wrap::-webkit-scrollbar-thumb {
+    background: rgba(255, 167, 38, 0.42);
+    border-radius: 999px;
+}
+
 .risk-reviews-table {
     width: 100%;
-    min-width: 980px;
+    min-width: 1360px;
+    table-layout: fixed;
     border-collapse: collapse;
     background: transparent;
 }
 
+.risk-col-user { width: 8.5%; }
+.risk-col-amount { width: 7%; }
+.risk-col-score { width: 6%; }
+.risk-col-level { width: 8%; }
+.risk-col-transaction { width: 17%; }
+.risk-col-created { width: 11%; }
+.risk-col-reasons { width: 33.5%; }
+.risk-col-actions { width: 9%; }
+
 .risk-reviews-table th,
 .risk-reviews-table td {
-    padding: 14px 16px;
+    padding: 16px 18px;
     text-align: left;
     vertical-align: top;
     border-bottom: 1px solid rgba(201, 168, 92, 0.18);
     color: #ffecb3;
+    font-size: 0.9rem;
+    line-height: 1.45;
 }
 
 .risk-reviews-table thead th {
@@ -1392,11 +1438,21 @@
     top: 0;
     z-index: 1;
     background: rgba(12, 10, 8, 0.98);
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(255, 183, 77, 0.92);
     border-bottom: 1px solid rgba(255, 167, 38, 0.28);
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.body-admin-risk-reviews .risk-reviews-table tbody tr td {
+    background: transparent;
+}
+
+.body-admin-risk-reviews .risk-reviews-table tbody tr:nth-child(even) td {
+    background: transparent;
 }
 
 .risk-reviews-table tbody tr:hover td {
@@ -1407,17 +1463,21 @@
 .risk-reviews-table td:nth-child(2) {
     color: #ffb74d;
     font-weight: 600;
-    white-space: nowrap;
 }
 
-.risk-reviews-table td:nth-child(3),
-.risk-reviews-table td:nth-child(6) {
+.risk-reviews-table td:nth-child(3) {
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
 
 .risk-reviews-table td:nth-child(7) {
-    min-width: 280px;
-    max-width: 360px;
+    white-space: nowrap;
+    font-size: 0.84rem;
+    color: rgba(255, 236, 179, 0.88);
+}
+
+.risk-reviews-table td:nth-child(8) {
+    word-break: break-word;
 }
 
 .risk-score-chip,
@@ -1425,12 +1485,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 2.4rem;
-    padding: 0.28rem 0.55rem;
+    min-width: 2.6rem;
+    padding: 0.32rem 0.65rem;
     border-radius: 999px;
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 0.04em;
+    white-space: nowrap;
 }
 
 .risk-score-chip {
@@ -1458,29 +1519,55 @@
 }
 
 .risk-review-actions {
-    min-width: 11.5rem;
+    min-width: 7.5rem;
 }
 
 .risk-review-actions-row {
     display: flex;
-    gap: 0.45rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: stretch;
 }
 
 .risk-review-actions-row .risk-review-form {
-    flex: 1 1 0;
+    flex: 0 0 auto;
     margin: 0;
+    width: 100%;
 }
 
 .risk-review-actions-row .wallet-btn {
-    min-width: 5.2rem;
+    width: 100%;
+    min-width: 0;
+    min-height: 1.65rem;
+    padding: 0.28rem 0.5rem;
+    font-size: 0.72rem;
     white-space: nowrap;
+}
+
+.risk-transaction-ref {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: rgba(255, 236, 179, 0.86);
+    word-break: break-all;
+}
+
+@media (max-width: 1100px) {
+    .wallet-panel--admin-risk-reviews {
+        width: 99vw;
+        padding: 28px 16px 32px;
+    }
+
+    .risk-reviews-table th,
+    .risk-reviews-table td {
+        padding: 14px 14px;
+        font-size: 0.86rem;
+    }
 }
 
 @media (max-width: 900px) {
     .wallet-panel--admin-risk-reviews {
-        width: min(98%, 98vw);
-        padding: 24px 18px 28px;
+        padding: 24px 14px 28px;
     }
 }
 

@@ -15,6 +15,17 @@ import java.util.UUID;
 public abstract class BaseClass {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @PrePersist
+    private void basePrePersist() {
+        if (id == null) {
+            id = UUID.randomUUID();
+        }
+        onPrePersist();
+    }
+
+    protected void onPrePersist() {
+        // Override in entities that need extra initialization before insert.
+    }
 }

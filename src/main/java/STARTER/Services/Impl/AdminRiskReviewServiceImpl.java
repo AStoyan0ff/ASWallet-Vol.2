@@ -1,7 +1,7 @@
 package STARTER.Services.Impl;
 
-import STARTER.Clients.Dto.RiskAssessmentClientResponse;
-import STARTER.Clients.Dto.RiskAssessmentReviewRequest;
+import STARTER.Clients.DTO.RiskAssessmentClientResponse;
+import STARTER.Clients.DTO.RiskAssessmentReviewRequest;
 import STARTER.Clients.RiskAssessmentClient;
 import STARTER.CustomException.RiskReviewServiceException;
 import STARTER.DTOs.AdminRiskAssessmentViewDTO;
@@ -22,13 +22,16 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
     private static final Logger logger = LoggerFactory.getLogger(AdminRiskReviewServiceImpl.class);
 
     private final RiskAssessmentClient riskAssessmentClient;
+    private final PendingTransferProcessingService pendingTransferProcessingService;
     private final boolean enabled;
 
     public AdminRiskReviewServiceImpl(
             RiskAssessmentClient riskAssessmentClient,
+            PendingTransferProcessingService pendingTransferProcessingService,
             @Value("${app.risk-service.enabled:true}") boolean enabled
     ) {
         this.riskAssessmentClient = riskAssessmentClient;
+        this.pendingTransferProcessingService = pendingTransferProcessingService;
         this.enabled = enabled;
     }
 
@@ -59,6 +62,7 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
 
         try {
             return riskAssessmentClient.listAssessments(AssessmentStatus.PENDING.name()).size();
+
         } catch (Exception ex) {
             logger.debug("Could not count pending risk reviews: {}", ex.getMessage());
             return 0;
@@ -67,18 +71,101 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
 
     @Override
     public void approve(UUID assessmentId, String reviewedBy) {
-        review(assessmentId, reviewedBy, AssessmentStatus.APPROVED);
+        reviewWithWalletAction(assessmentId, reviewedBy, AssessmentStatus.APPROVED, true);
     }
 
     @Override
     public void reject(UUID assessmentId, String reviewedBy) {
-        review(assessmentId, reviewedBy, AssessmentStatus.REJECTED);
+        reviewWithWalletAction(assessmentId, reviewedBy, AssessmentStatus.REJECTED, false);
     }
 
-    private void review(UUID assessmentId, String reviewedBy, AssessmentStatus status) {
+    @Override
+    public int deleteAllPendingReviews() {
+
         if (!enabled) {
             throw new RiskReviewServiceException("Risk assessment service is disabled.");
         }
+
+        List<RiskAssessmentClientResponse> pending = loadPendingAssessments();
+
+        for (RiskAssessmentClientResponse assessment : pending) {
+            applyWalletAction(assessment.getTransactionRef(), false);
+        }
+
+        try {
+            riskAssessmentClient.deleteAssessments(AssessmentStatus.PENDING.name());
+            logger.info("Deleted {} pending risk assessment(s)", pending.size());
+            return pending.size();
+
+        } catch (Exception ex) {
+            logger.warn("Failed to delete pending risk reviews", ex);
+            throw new RiskReviewServiceException("Could not delete pending risk reviews.");
+        }
+    }
+
+    private List<RiskAssessmentClientResponse> loadPendingAssessments() {
+
+        try {
+            return riskAssessmentClient.listAssessments(AssessmentStatus.PENDING.name());
+
+        } catch (Exception ex) {
+            logger.warn("Failed to load pending risk reviews for deletion", ex);
+            throw new RiskReviewServiceException(
+                    "Cannot load pending risk reviews. Make sure the microservice is running on port 8081."
+            );
+        }
+    }
+
+    private void reviewWithWalletAction(
+            UUID assessmentId,
+            String reviewedBy,
+            AssessmentStatus status,
+            boolean approveTransfer
+    ) {
+
+        if (!enabled) {
+            throw new RiskReviewServiceException("Risk assessment service is disabled.");
+        }
+
+        RiskAssessmentClientResponse assessment = loadAssessment(assessmentId);
+        boolean walletUpdated = applyWalletAction(assessment.getTransactionRef(), approveTransfer);
+        patchAssessment(assessmentId, reviewedBy, status);
+
+        if (!walletUpdated && assessment.getTransactionRef() != null) {
+            logger.warn(
+                    "Risk assessment {} updated but linked transfer {} was not found in wallet.",
+                    assessmentId,
+                    assessment.getTransactionRef()
+            );
+        }
+    }
+
+    private RiskAssessmentClientResponse loadAssessment(UUID assessmentId) {
+
+        try {
+            return riskAssessmentClient.getAssessment(assessmentId);
+
+        } catch (Exception ex) {
+            logger.warn("Failed to load risk assessment {}", assessmentId, ex);
+            throw new RiskReviewServiceException("Risk assessment not found.");
+        }
+    }
+
+    private boolean applyWalletAction(UUID transactionRef, boolean approveTransfer) {
+
+        if (transactionRef == null) {
+            logger.warn("Risk assessment has no transactionRef; only microservice status will be updated.");
+            return false;
+        }
+
+        if (approveTransfer) {
+            return pendingTransferProcessingService.approveRiskHeldTransfer(transactionRef);
+        }
+
+        return pendingTransferProcessingService.rejectRiskHeldTransfer(transactionRef);
+    }
+
+    private void patchAssessment(UUID assessmentId, String reviewedBy, AssessmentStatus status) {
 
         RiskAssessmentReviewRequest request = new RiskAssessmentReviewRequest();
         request.setStatus(status);
@@ -87,6 +174,7 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
         try {
             riskAssessmentClient.reviewAssessment(assessmentId, request);
             logger.info("Risk assessment {} marked as {} by {}", assessmentId, status, reviewedBy);
+
         } catch (Exception ex) {
             logger.warn("Failed to review risk assessment {}", assessmentId, ex);
             throw new RiskReviewServiceException(
@@ -96,8 +184,10 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
     }
 
     private AdminRiskAssessmentViewDTO toView(RiskAssessmentClientResponse response) {
+
         return AdminRiskAssessmentViewDTO.builder()
                 .id(response.getId())
+                .transactionRef(response.getTransactionRef())
                 .senderUsername(response.getSenderUsername())
                 .receiverUsername(response.getReceiverUsername())
                 .amount(response.getAmount())

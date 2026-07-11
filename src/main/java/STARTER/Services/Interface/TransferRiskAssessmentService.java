@@ -1,15 +1,16 @@
 package STARTER.Services.Interface;
 
-import STARTER.Clients.Dto.RiskAssessmentClientResponse;
+import STARTER.Clients.DTO.RiskAssessmentClientResponse;
 import STARTER.DTOs.TransferMoneyDTO;
 import STARTER.Models.User;
 import STARTER.Models.Wallet;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.UUID;
+
 public interface TransferRiskAssessmentService {
 
     RiskAssessmentClientResponse assessTransfer(
+            UUID transactionRef,
             User senderUser,
             Wallet senderWallet,
             User receiverUser,

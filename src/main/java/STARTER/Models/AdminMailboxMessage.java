@@ -47,9 +47,8 @@ public class AdminMailboxMessage extends BaseClass {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @PrePersist
-    public void prePersist() {
-
+    @Override
+    protected void onPrePersist() {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
         }

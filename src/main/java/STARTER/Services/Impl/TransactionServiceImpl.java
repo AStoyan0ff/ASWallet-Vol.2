@@ -1,41 +1,26 @@
 package STARTER.Services.Impl;
 
-import STARTER.DTOs.DepositMoneyDTO;
-import STARTER.DTOs.TransactionHistoryFilter;
-import STARTER.DTOs.TransactionViewDTO;
-import STARTER.DTOs.TransferMoneyDTO;
-import STARTER.DTOs.WithdrawMoneyDTO;
-import STARTER.Enums.SpendingCategory;
-import STARTER.Enums.TransactionStatus;
-import STARTER.Enums.AccountStatus;
-import STARTER.Enums.TransactionType;
+import STARTER.Clients.DTO.RiskAssessmentClientResponse;
+import STARTER.Configuration.CacheConfig;
 import STARTER.CustomException.*;
-import STARTER.Models.BankCard;
-import STARTER.Models.Transaction;
-import STARTER.Models.User;
-import STARTER.Models.UserProfileDetails;
-import STARTER.Models.Wallet;
-import STARTER.Repositories.BankCardRepository;
-import STARTER.Repositories.TransactionRepository;
-import STARTER.Repositories.UserProfileDetailsRepository;
-import STARTER.Repositories.UserRepository;
-import STARTER.Repositories.WalletRepository;
+import STARTER.DTOs.*;
+import STARTER.Enums.*;
 import STARTER.Events.TransactionCompletedEvent;
+import STARTER.Models.*;
+import STARTER.Repositories.*;
 import STARTER.Services.Interface.TransactionService;
 import STARTER.Services.Interface.TransferRiskAssessmentService;
 import STARTER.Services.Interface.WithdrawDailyLimitService;
-import STARTER.Configuration.CacheConfig;
 import STARTER.Specifications.TransactionSpecifications;
 import STARTER.Utils.DateTimeDisplay;
-
-import org.springframework.context.ApplicationEventPublisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -116,7 +101,10 @@ public class TransactionServiceImpl implements TransactionService {
             throw new InsufficientBalanceException("Insufficient balance");
         }
 
-        transferRiskAssessmentService.assessTransfer(
+        UUID transactionId = UUID.randomUUID();
+
+        RiskAssessmentClientResponse riskResponse = transferRiskAssessmentService.assessTransfer(
+                transactionId,
                 senderWallet.getUser(),
                 senderWallet,
                 receiverUser,
@@ -133,10 +121,13 @@ public class TransactionServiceImpl implements TransactionService {
         );
 
         Transaction transaction = new Transaction();
+        transaction.setId(transactionId);
         transaction.setAmount(transferMoneyDTO.getAmount());
         transaction.setDescription(description);
         transaction.setType(TransactionType.TRANSFER);
-        transaction.setStatus(TransactionStatus.PENDING);
+        transaction.setStatus(riskResponse.getDecision() == RiskDecision.REVIEW
+                ? TransactionStatus.PENDING_RISK_REVIEW
+                : TransactionStatus.PENDING);
         transaction.setSenderWallet(senderWallet);
         transaction.setReceiverWallet(receiverWallet);
 
@@ -171,7 +162,8 @@ public class TransactionServiceImpl implements TransactionService {
                 new PendingTransferNotFoundException("Pending transfer not found."));
 
         if (transaction.getType() != TransactionType.TRANSFER ||
-            transaction.getStatus() != TransactionStatus.PENDING) {
+            (transaction.getStatus() != TransactionStatus.PENDING &&
+             transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW)) {
                 throw new CannotCancelTransferException("Only pending transfers can be cancelled.");
         }
 
@@ -342,11 +334,12 @@ public class TransactionServiceImpl implements TransactionService {
 
         for (Transaction transaction : transactions) {
 
-            if (transaction.getStatus() == TransactionStatus.PENDING &&
-                transaction.getType() == TransactionType.TRANSFER &&
-                transaction.getSenderWallet() != null &&
-                wallet.getId().equals(transaction.getSenderWallet().getId())) {
-                    transferRefundSupport.refundSenderAndSetStatus(transaction, TransactionStatus.CANCELLED);
+            if ((transaction.getStatus() == TransactionStatus.PENDING ||
+                 transaction.getStatus() == TransactionStatus.PENDING_RISK_REVIEW) &&
+                 transaction.getType() == TransactionType.TRANSFER &&
+                 transaction.getSenderWallet() != null &&
+                 wallet.getId().equals(transaction.getSenderWallet().getId())) {
+                     transferRefundSupport.refundSenderAndSetStatus(transaction, TransactionStatus.CANCELLED);
             }
         }
 

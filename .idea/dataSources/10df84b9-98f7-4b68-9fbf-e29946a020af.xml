@@ -1015,7 +1015,7 @@
     <schema id="323" parent="1" name="as_wallet">
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-07.17:10:50</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-07-10.16:53:14</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="324" parent="1" name="my_bookshelf_app">
@@ -1304,7 +1304,7 @@
     <column id="384" parent="333" name="status">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>enum(&apos;CANCELLED&apos;, &apos;COMPLETED&apos;, &apos;FAILED&apos;, &apos;PENDING&apos;)|0e</StoredType>
+      <StoredType>varchar(32)|0s</StoredType>
     </column>
     <column id="385" parent="333" name="type">
       <NotNull>1</NotNull>

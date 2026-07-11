@@ -1,7 +1,7 @@
 package STARTER.Services.Impl;
 
-import STARTER.Clients.Dto.RiskAssessmentCreateRequest;
-import STARTER.Clients.Dto.RiskAssessmentClientResponse;
+import STARTER.Clients.DTO.RiskAssessmentClientResponse;
+import STARTER.Clients.DTO.RiskAssessmentCreateRequest;
 import STARTER.Clients.RiskAssessmentClient;
 import STARTER.CustomException.TransferBlockedByRiskException;
 import STARTER.DTOs.TransferMoneyDTO;
@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,6 +61,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
 
     @Override
     public RiskAssessmentClientResponse assessTransfer(
+            UUID transactionRef,
             User senderUser,
             Wallet senderWallet,
             User receiverUser,
@@ -72,6 +74,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         }
 
         RiskAssessmentCreateRequest request = buildRequest(
+                transactionRef,
                 senderUser,
                 senderWallet,
                 receiverUser,
@@ -110,8 +113,9 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         if (response.getDecision() == RiskDecision.REVIEW) {
 
             logger.info(
-                    "Transfer flagged for manual review: assessmentId={}, score={}, reasons={}",
+                    "Transfer flagged for manual review: assessmentId={}, transactionRef={}, score={}, reasons={}",
                     response.getId(),
+                    response.getTransactionRef(),
                     response.getRiskScore(),
                     response.getReasons()
             );
@@ -119,6 +123,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
     }
 
     private RiskAssessmentCreateRequest buildRequest(
+            UUID transactionRef,
             User senderUser,
             Wallet senderWallet,
             User receiverUser,
@@ -154,6 +159,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         );
 
         RiskAssessmentCreateRequest request = new RiskAssessmentCreateRequest();
+        request.setTransactionRef(transactionRef);
         request.setSenderUsername(senderUser.getUsername());
         request.setReceiverUsername(receiverUser.getUsername());
         request.setAmount(transferMoneyDTO.getAmount());

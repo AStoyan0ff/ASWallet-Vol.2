@@ -2,7 +2,6 @@ package STARTER.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +30,8 @@ public class LoginActivity extends BaseClass {
     @Column(name = "logged_in_at", nullable = false)
     private LocalDateTime loggedInAt;
 
-    @PrePersist
-    public void prePersist() {
+    @Override
+    protected void onPrePersist() {
         if (loggedInAt == null) {
             loggedInAt = LocalDateTime.now();
         }

@@ -68,7 +68,7 @@ class AdminRiskReviewControllerWebMvcTest {
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/risk-reviews"))
-                .andExpect(flash().attribute("successMessage", "Risk assessment approved successfully."));
+                .andExpect(flash().attribute("successMessage", "Risk assessment approved."));
 
         verify(adminRiskReviewService).approve(eq(id), eq("admin"));
     }
@@ -82,9 +82,26 @@ class AdminRiskReviewControllerWebMvcTest {
                         .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/admin/risk-reviews"))
-                .andExpect(flash().attribute("successMessage", "Risk assessment rejected successfully."));
+                .andExpect(flash().attribute("successMessage", "Risk assessment rejected."));
 
         verify(adminRiskReviewService).reject(eq(id), eq("admin"));
+    }
+
+    @Test
+    void clear_redirectsWithSuccessMessage() throws Exception {
+        when(adminRiskReviewService.deleteAllPendingReviews()).thenReturn(2);
+
+        mockMvc.perform(post("/admin/risk-reviews/clear")
+                        .with(user("admin").roles("ADMIN"))
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/risk-reviews"))
+                .andExpect(flash().attribute(
+                        "successMessage",
+                        "Deleted 2 pending risk review(s). Funds returned to senders."
+                ));
+
+        verify(adminRiskReviewService).deleteAllPendingReviews();
     }
 
     @Test

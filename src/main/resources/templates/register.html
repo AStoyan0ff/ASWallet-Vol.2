@@ -1,1 +1,80 @@
-<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org" lang="en"><head>    <title>Register - ASWallet</title>    <link rel="stylesheet" th:href="@{/css/style.css}"></head><body class="body-auth body-auth-register"><div class="home-bg-media" aria-hidden="true">    <img class="home-bg-image" th:src="@{/images/log-reg.png}" alt="">    <div class="home-bg-overlay"></div></div><main class="auth-landing reveal-item">    <section class="auth-panel auth-panel--materialize reveal-child">        <div class="form-panel-top auth-stagger">            <a class="home-pill form-pill-link" th:href="@{/}">Back to home</a>        </div>        <h2 class="auth-title auth-title--center auth-stagger">Create your account</h2>        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>        <form class="auth-form" th:action="@{/register}" th:object="${userDTO}" method="post">            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">            <div class="auth-field-group auth-stagger">                <label for="username">Username</label>                <input id="username" type="text" th:field="*{username}" placeholder="e.g. john_doe" required>                <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>            </div>            <div class="auth-field-group auth-stagger">                <label for="email">Email</label>                <input id="email" type="email" th:field="*{email}" placeholder="you@mail.com" required>                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>            </div>            <div class="auth-field-group auth-stagger">                <label for="password">Password</label>                <div class="password-field-wrap">                    <input id="password" type="password" th:field="*{password}" placeholder="Min 8 chars, upper, lower, digit" required>                    <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>                </div>                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>            </div>            <div class="auth-field-group auth-stagger">                <label for="confirmPassword">Confirm Password</label>                <div class="password-field-wrap">                    <input id="confirmPassword" type="password" th:field="*{confirmPassword}" placeholder="Type it again" required>                    <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>                </div>                <div class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>                <div class="error" th:if="${#fields.hasErrors('passwordConfirmMatching')}" th:errors="*{passwordConfirmMatching}"></div>            </div>            <div class="auth-field-group auth-stagger">                <p class="wallet-form-hint auth-register-note">After registration, add a bank card in Bank Details to receive a €50.00 welcome bonus.</p>                <button type="submit" class="auth-submit">Register</button>            </div>        </form>        <p class="auth-footer-note auth-stagger">            Already have an account?            <a class="auth-link" th:href="@{/login}">Login here</a>        </p>    </section></main><footer th:replace="~{fragments/app-footer :: footer}"></footer><script th:src="@{/js/home.js}"></script><script th:src="@{/js/password-toggle.js}"></script></body></html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Register - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-auth body-auth-register">
+
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/log-reg.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="auth-landing reveal-item">
+    <section class="auth-panel auth-panel--materialize reveal-child">
+
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/}">Back to home</a>
+        </div>
+
+        <h2 class="auth-title auth-title--center auth-stagger">Create your account</h2>
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <form class="auth-form" th:action="@{/register}" th:object="${userDTO}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            <div class="auth-field-group auth-stagger">
+                <label for="username">Username</label>
+                <input id="username" type="text" th:field="*{username}" placeholder="e.g. john_doe" required>
+                <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="email">Email</label>
+                <input id="email" type="email" th:field="*{email}" placeholder="you@mail.com" required>
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="password">Password</label>
+
+                <div class="password-field-wrap">
+                    <input id="password" type="password" th:field="*{password}" placeholder="Min 8 chars, upper, lower, digit" required>
+                    <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>
+                </div>
+
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <label for="confirmPassword">Confirm Password</label>
+
+                <div class="password-field-wrap">
+                    <input id="confirmPassword" type="password" th:field="*{confirmPassword}" placeholder="Type it again" required>
+                    <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>
+                </div>
+
+                <div class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+                <div class="error" th:if="${#fields.hasErrors('passwordConfirmMatching')}" th:errors="*{passwordConfirmMatching}"></div>
+            </div>
+
+            <div class="auth-field-group auth-stagger">
+                <p class="wallet-form-hint auth-register-note">After registration, add a bank card in Bank Details to receive a €50.00 welcome bonus.</p>
+                <button type="submit" class="auth-submit">Register</button>
+            </div>
+        </form>
+
+        <p class="auth-footer-note auth-stagger">
+            Already have an account?
+            <a class="auth-link" th:href="@{/login}">Login here</a>
+        </p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/password-toggle.js}"></script>
+</body>
+</html>

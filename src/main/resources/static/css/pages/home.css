@@ -9,6 +9,103 @@
     );
 }
 
+.body-home .home-landing {
+    min-height: 100vh;
+    padding: 24px 24px 16px;
+}
+
+.body-home .home-ticker {
+    --home-ticker-height: 42px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    height: var(--home-ticker-height);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    background: linear-gradient(
+            180deg,
+            rgba(8, 6, 4, 0.52) 0%,
+            rgba(12, 9, 6, 0.38) 100%
+    );
+    border-bottom: 1px solid rgba(255, 204, 128, 0.22);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 235, 200, 0.14),
+            0 6px 22px rgba(0, 0, 0, 0.22),
+            0 0 28px rgba(255, 167, 38, 0.06);
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+}
+
+.body-home .home-ticker__viewport {
+    width: min(920px, 100%);
+    margin: 0 auto;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 10%,
+            #000 90%,
+            transparent 100%
+    );
+    mask-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            #000 10%,
+            #000 90%,
+            transparent 100%
+    );
+}
+
+.body-home .home-ticker__track {
+    display: flex;
+    width: max-content;
+    animation: homeTickerScroll 36s linear infinite;
+}
+
+.body-home .home-ticker__content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-right: 18px;
+    white-space: nowrap;
+}
+
+.body-home .home-ticker__message {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #ffe7c8;
+    text-shadow:
+            0 0 12px rgba(255, 183, 77, 0.28),
+            0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.body-home .home-ticker__sep {
+    font-size: 0.42rem;
+    color: rgba(255, 204, 128, 0.72);
+    text-shadow: 0 0 8px rgba(255, 167, 38, 0.35);
+}
+
+.body-home .home-ticker:hover .home-ticker__track {
+    animation-play-state: paused;
+}
+
+@keyframes homeTickerScroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.body-home .home-center-panel {
+    margin-top: 0;
+}
+
 .home-landing-title {
     margin: 0 0 8px;
     font-size: clamp(2rem, 4.3vw, 3rem);
@@ -38,30 +135,51 @@
     aspect-ratio: 1.586 / 1;
     padding: 0;
     border-radius: 16px;
-    border: 1px solid rgba(201, 168, 92, 0.42);
+    border: 1px solid rgba(255, 235, 200, 0.28);
     text-decoration: none;
     overflow: hidden;
     transform-style: preserve-3d;
-    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.28s ease,
-    box-shadow 0.28s ease;
+    transition: border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+        0 10px 28px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(16px) saturate(135%);
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+}
 
-    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
-    0 14px 32px rgba(0, 0, 0, 0.38);
+.body-home .home-bank-card:not(:hover) {
+    transform: translateY(0) rotateY(0deg);
+    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+}
+
+@keyframes homeBankCardSpin360 {
+    from {
+        transform: translateY(0) rotateY(0deg);
+    }
+    to {
+        transform: translateY(-5px) rotateY(360deg);
+    }
 }
 
 .home-bank-card__texture {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.22;
-    background: repeating-linear-gradient(
+    opacity: 0.32;
+    background:
+        repeating-linear-gradient(
             115deg,
-            rgba(255, 255, 255, 0.03) 0 1px,
-            transparent 1px 4px
-    ),
-    radial-gradient(circle at 82% 18%, rgba(255, 204, 128, 0.06), transparent 42%);
+            rgba(255, 255, 255, 0.04) 0 1px,
+            transparent 1px 5px
+        ),
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.08), transparent 38%),
+        radial-gradient(circle at 82% 88%, rgba(255, 183, 77, 0.05), transparent 42%);
     pointer-events: none;
 }
 
@@ -96,11 +214,11 @@
     height: 18%;
     background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.55) 0%,
-            rgba(20, 16, 12, 0.72) 50%,
-            rgba(0, 0, 0, 0.55) 100%
+            rgba(0, 0, 0, 0.22) 0%,
+            rgba(255, 255, 255, 0.03) 50%,
+            rgba(0, 0, 0, 0.16) 100%
     );
-    opacity: 0.42;
+    opacity: 0.62;
     pointer-events: none;
 }
 
@@ -111,10 +229,10 @@
     z-index: 2;
     background: linear-gradient(
             125deg,
-            rgba(255, 255, 255, 0.09) 0%,
-            rgba(255, 255, 255, 0) 34%,
-            rgba(255, 255, 255, 0.03) 58%,
-            rgba(255, 255, 255, 0) 100%
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.02) 28%,
+            rgba(0, 0, 0, 0.08) 52%,
+            rgba(255, 255, 255, 0.03) 100%
     );
     pointer-events: none;
 }
@@ -127,33 +245,38 @@
     z-index: 1;
     width: 72%;
     height: 145%;
-    background: radial-gradient(circle, rgba(255, 183, 77, 0.03), transparent 68%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 68%);
     pointer-events: none;
 }
 
 .body-home .home-bank-card--login {
-    background: linear-gradient(152deg, #0a0a0a 0%, #050505 40%, #010101 72%, #060606 100%);
+    background: linear-gradient(
+            145deg,
+            rgba(14, 10, 6, 0.62) 0%,
+            rgba(255, 183, 77, 0.05) 34%,
+            rgba(4, 3, 2, 0.72) 100%
+    );
 }
 
 .body-home .home-bank-card--register {
-    background: linear-gradient(152deg, #080808 0%, #040404 40%, #000000 72%, #050505 100%);
-    border-color: rgba(201, 168, 92, 0.32);
+    background: linear-gradient(
+            145deg,
+            rgba(12, 9, 6, 0.6) 0%,
+            rgba(255, 167, 38, 0.04) 34%,
+            rgba(3, 2, 2, 0.74) 100%
+    );
+    border-color: rgba(255, 235, 200, 0.2);
 }
 
-.body-home .home-bank-card:hover {
-    transform: translateY(-5px) rotateX(5deg) rotateY(-4deg);
-    border-color: rgba(255, 204, 128, 0.62);
-    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.14),
-    0 0 24px rgba(255, 143, 0, 0.16),
-    0 18px 38px rgba(0, 0, 0, 0.42);
-}
-
+.body-home .home-bank-card:hover,
 .body-home .home-bank-card--register:hover {
-    transform: translateY(-5px) rotateX(5deg) rotateY(4deg);
-    border-color: rgba(255, 204, 128, 0.58);
-    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.12),
-    0 0 22px rgba(255, 143, 0, 0.14),
-    0 18px 38px rgba(0, 0, 0, 0.42);
+    animation: homeBankCardSpin360 0.85s ease-in-out forwards;
+    border-color: rgba(255, 235, 200, 0.48);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+        0 0 24px rgba(255, 204, 128, 0.18),
+        0 16px 36px rgba(0, 0, 0, 0.24);
 }
 
 .home-bank-card__chip-img {
@@ -187,7 +310,7 @@
     font-size: clamp(0.7rem, 2.5vw, 0.84rem);
     font-weight: 700;
     letter-spacing: 0.16em;
-    color: #d4af37;
+    color: #000;
     font-variant-numeric: tabular-nums;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55),
     0 0 14px rgba(212, 175, 55, 0.32);
@@ -212,7 +335,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #d4af37;
+    color: #000;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45),
     0 0 14px rgba(212, 175, 55, 0.28);
 }
@@ -234,7 +357,7 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: center;
-    color: #ef6c00;
+    color: #000;
     text-shadow: 0 1px 10px rgba(239, 108, 0, 0.4);
 }
 
@@ -246,6 +369,7 @@
 
     .body-home .home-bank-card:hover,
     .body-home .home-bank-card--register:hover {
+        animation: none;
         transform: translateY(-4px);
     }
 }
@@ -494,7 +618,16 @@
 
     .body-home .home-bank-card:hover,
     .body-home .home-bank-card--register:hover {
+        animation: none;
         transform: none;
+    }
+
+    .body-home .home-ticker__track {
+        animation: none;
+    }
+
+    .body-home .home-ticker__content + .home-ticker__content {
+        display: none;
     }
 }
 

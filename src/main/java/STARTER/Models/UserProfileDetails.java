@@ -57,9 +57,8 @@ public class UserProfileDetails extends BaseClass {
     @Column(name = "daily_withdraw_limit")
     private BigDecimal dailyWithdrawLimit;
 
-    @PrePersist
-    public void prePersist() {
-
+    @Override
+    protected void onPrePersist() {
         if (this.accountStatus == null) {
             this.accountStatus = AccountStatus.ACTIVE;
         }

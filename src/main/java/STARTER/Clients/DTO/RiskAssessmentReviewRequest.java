@@ -1,4 +1,4 @@
-package STARTER.Clients.Dto;
+package STARTER.Clients.DTO;
 
 import STARTER.Enums.AssessmentStatus;
 import lombok.Getter;

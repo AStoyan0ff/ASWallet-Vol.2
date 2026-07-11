@@ -53,6 +53,34 @@ public class AdminRiskReviewController {
         return review(id, principal, redirectAttributes, false);
     }
 
+    @PostMapping("/clear")
+    public String clearAll(
+            Principal principal,
+            RedirectAttributes redirectAttributes) {
+
+        try {
+            int deleted = adminRiskReviewService.deleteAllPendingReviews();
+
+            if (deleted == 0) {
+                redirectAttributes.addFlashAttribute(
+                        "successMessage",
+                        "No pending risk reviews to delete."
+                );
+
+            } else {
+                redirectAttributes.addFlashAttribute(
+                        "successMessage",
+                        "Deleted " + deleted + " pending risk review(s). Funds returned to senders."
+                );
+            }
+
+        } catch (RuntimeException ex) {
+            redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+        }
+
+        return "redirect:/admin/risk-reviews";
+    }
+
     private String review(
             UUID id,
             Principal principal,
@@ -60,19 +88,22 @@ public class AdminRiskReviewController {
             boolean approve) {
 
         try {
+
             if (approve) {
                 adminRiskReviewService.approve(id, principal.getName());
                 redirectAttributes.addFlashAttribute(
                         "successMessage",
-                        "Risk assessment approved successfully."
+                        "Risk assessment approved."
                 );
+
             } else {
                 adminRiskReviewService.reject(id, principal.getName());
                 redirectAttributes.addFlashAttribute(
                         "successMessage",
-                        "Risk assessment rejected successfully."
+                        "Risk assessment rejected."
                 );
             }
+
         } catch (RuntimeException ex) {
             redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         }

@@ -32,13 +32,16 @@ public class TransactionHistoryController {
 
     @GetMapping("/transactions/history")
     public String history(Model model, Principal principal) {
+
         UUID userId = userService.findByUsername(principal.getName()).getId();
         List<TransactionViewDTO> transactions = transactionService.getUserTransactions(userId);
 
         model.addAttribute("transactions", transactions.stream().limit(5).toList());
         model.addAttribute("currentUsername", principal.getName());
-        model.addAttribute("hasPendingTransfers", transactions.stream()
-                .anyMatch(t -> t.getStatus() == TransactionStatus.PENDING));
+        model.addAttribute("hasPendingTransfers", transactions
+                .stream()
+                .anyMatch(t -> t.getStatus() == TransactionStatus.PENDING ||
+                t.getStatus() == TransactionStatus.PENDING_RISK_REVIEW));
 
         return "transaction-history";
     }

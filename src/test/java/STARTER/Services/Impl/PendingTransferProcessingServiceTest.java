@@ -222,6 +222,61 @@ class PendingTransferProcessingServiceTest {
         verify(transferRefundSupport, never()).refundSenderAndSetStatus(any(), any());
     }
 
+    @Test
+    void approveRiskHeldTransfer_success_creditsReceiverAndCompletesTransaction() {
+
+        pendingTransfer.setStatus(TransactionStatus.PENDING_RISK_REVIEW);
+        when(transactionRepository.findById(pendingTransfer.getId())).thenReturn(Optional.of(pendingTransfer));
+
+        pendingTransferProcessingService.approveRiskHeldTransfer(pendingTransfer.getId());
+
+        assertThat(receiverWallet.getBalance()).isEqualByComparingTo("40.00");
+        assertThat(pendingTransfer.getStatus()).isEqualTo(TransactionStatus.COMPLETED);
+        verify(walletRepository).save(receiverWallet);
+        verify(eventPublisher).publishEvent(any(TransactionCompletedEvent.class));
+    }
+
+    @Test
+    void rejectRiskHeldTransfer_success_refundsSenderAndMarksCancelled() {
+
+        pendingTransfer.setStatus(TransactionStatus.PENDING_RISK_REVIEW);
+        when(transactionRepository.findById(pendingTransfer.getId())).thenReturn(Optional.of(pendingTransfer));
+
+        pendingTransferProcessingService.rejectRiskHeldTransfer(pendingTransfer.getId());
+
+        verify(transferRefundSupport).refundSenderAndSetStatus(pendingTransfer, TransactionStatus.CANCELLED);
+        verify(walletRepository, never()).save(receiverWallet);
+    }
+
+    @Test
+    void rejectRiskHeldTransfer_missingTransaction_doesNotThrow() {
+
+        UUID missingId = UUID.randomUUID();
+        when(transactionRepository.findById(missingId)).thenReturn(Optional.empty());
+
+        boolean updated = pendingTransferProcessingService.rejectRiskHeldTransfer(missingId);
+
+        assertThat(updated).isFalse();
+        verify(transferRefundSupport, never()).refundSenderAndSetStatus(any(), any());
+    }
+
+    @Test
+    void processReadyPendingTransfers_ignoresRiskReviewTransfers() {
+
+        Transaction riskHeld = buildPendingTransfer(new BigDecimal("20.00"));
+        riskHeld.setStatus(TransactionStatus.PENDING_RISK_REVIEW);
+
+        when(transactionRepository.findByStatusAndTypeAndCreatedAtBefore(
+                eq(TransactionStatus.PENDING),
+                eq(TransactionType.TRANSFER),
+                any(LocalDateTime.class)
+        )).thenReturn(List.of());
+
+        pendingTransferProcessingService.processReadyPendingTransfers();
+
+        verify(transactionRepository, never()).findById(riskHeld.getId());
+    }
+
     private Transaction buildPendingTransfer(BigDecimal amount) {
 
         User sender = new User();

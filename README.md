@@ -186,7 +186,7 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 | `UserRole`          | `USER`, `ADMIN`                                           |
 | `AccountStatus`     | `ACTIVE`, `INACTIVE`                                      |
 | `TransactionType`   | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                         |
-| `TransactionStatus` | `COMPLETED`, `PENDING`, `FAILED`, `CANCELLED`             |
+| `TransactionStatus` | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED`             |
 | `SpendingCategory`  | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT` |
 
 ---
@@ -209,7 +209,9 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Deposit (card + CVC)
 - Withdraw (card; daily limit for non-admin users)
 - Transfer by receiver username (2-step confirm; receiver needs card)
-- Pending transfers: scheduler processes → `COMPLETED` / `FAILED`; stale auto-cancel; user cancel
+- **Risk-aware transfers:** on confirm, main app calls microservice via Feign; `BLOCK` stops transfer before creation; `REVIEW` saves as `PENDING_RISK_REVIEW` (held until admin action); `ALLOW` saves as `PENDING` and auto-completes via scheduler (~5 s)
+- Pending transfers: scheduler processes `PENDING` only → `COMPLETED` / `FAILED`; `PENDING_RISK_REVIEW` is skipped by scheduler until admin approve/reject
+- Stale auto-cancel and user cancel apply to both `PENDING` and `PENDING_RISK_REVIEW`
 - Transaction history, clear history, spending category per operation
 
 ### Bank card
@@ -232,6 +234,7 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Delete non-admin users
 - Per-user manage page
 - Login activity audit
+- **Risk reviews** (`/admin/risk-reviews`): list pending assessments from microservice; **Approve** completes held transfer; **Reject** refunds sender and cancels; **Delete all reviews** rejects each linked transfer and bulk-deletes pending assessments in MS
 - Mailbox: send to users, inbox, threads
 
 ### User mailbox
@@ -272,10 +275,16 @@ public interface RiskAssessmentClient {
     @GetMapping("/api/risk-assessments")
     List<RiskAssessmentClientResponse> listAssessments(@RequestParam("status") String status);
 
+    @GetMapping("/api/risk-assessments/{id}")
+    RiskAssessmentClientResponse getAssessment(@PathVariable("id") UUID id);
+
     @PatchMapping("/api/risk-assessments/{id}/review")
     RiskAssessmentClientResponse reviewAssessment(
             @PathVariable("id") UUID id,
             @RequestBody RiskAssessmentReviewRequest request);
+
+    @DeleteMapping("/api/risk-assessments")
+    void deleteAssessments(@RequestParam("status") String status);
 }
 ```
 
@@ -283,10 +292,17 @@ Requires **`feign-hc5`** on the classpath so `PATCH` works (`spring.cloud.openfe
 
 ### Integration flow
 
-1. User confirms transfer → `TransactionServiceImpl.transfer()` → `TransferRiskAssessmentService` → Feign **POST**
-2. `ALLOW` / `REVIEW` → transfer saved as `PENDING`; `BLOCK` → exception, no transfer
-3. Admin opens `/admin/risk-reviews` → Feign **GET** `?status=PENDING`
-4. Admin **Approve** / **Reject** → Feign **PATCH** `/review`
+1. User confirms transfer → main app pre-generates transaction UUID → `TransferRiskAssessmentService` → Feign **POST** (includes `transactionRef`)
+2. Microservice returns decision:
+   - **`ALLOW`** → transfer saved as `PENDING`; scheduler completes after processing delay
+   - **`REVIEW`** → transfer saved as `PENDING_RISK_REVIEW`; funds debited from sender; scheduler **does not** auto-complete
+   - **`BLOCK`** (score ≥ 70) → `TransferBlockedByRiskException`; no transfer created
+3. Admin opens `/admin/risk-reviews` → Feign **GET** `?status=PENDING` (badge on admin dashboard)
+4. Admin **Approve** → wallet completes transfer (`COMPLETED`) → Feign **PATCH** `/review` → `APPROVED`
+5. Admin **Reject** → wallet refunds sender (`CANCELLED`) → Feign **PATCH** `/review` → `REJECTED`
+6. Admin **Delete all reviews** → reject/refund each linked transfer → Feign **DELETE** `?status=PENDING`
+
+Orphaned assessments (MS record exists but wallet transaction missing, e.g. after a failed save) are handled gracefully: MS status still updates; wallet action is skipped with a warning log.
 
 ### Spring Advanced checklist (microservice)
 
@@ -297,7 +313,7 @@ Requires **`feign-hc5`** on the classpath so `PATCH` works (`spring.cloud.openfe
 | ≥ 1 domain entity in microservice | ✅ `TransferRiskAssessment` |
 | ≥ 2 MS functionalities from UI    | ✅ assess on transfer + admin review |
 | Feign in main app                 | ✅ `RiskAssessmentClient` |
-| ≥ 1 GET + ≥ 2 POST/PATCH from main | ✅ GET list + POST assess + PATCH review |
+| ≥ 1 GET + ≥ 2 POST/PATCH/DELETE from main | ✅ GET list + POST assess + PATCH review + DELETE clear |
 | 70% test coverage (microservice)  | ✅ unit + WebMvc tests |
 
 ---
@@ -352,6 +368,7 @@ Requires **`feign-hc5`** on the classpath so `PATCH` works (`spring.cloud.openfe
 | GET      | `/admin/risk-reviews`                     | `admin-risk-reviews.html`   |
 | POST     | `/admin/risk-reviews/{id}/approve`        | redirect                    |
 | POST     | `/admin/risk-reviews/{id}/reject`         | redirect                    |
+| POST     | `/admin/risk-reviews/clear`               | redirect (delete all pending) |
 
 ### Thymeleaf fragments
 
@@ -438,12 +455,12 @@ SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD` environment variable.
 | `base/layout-panels.css`     | Panels, backgrounds, shared layout     |
 | `pages/home.css`             | Landing, bank-card login/register      |
 | `pages/auth.css`             | Auth forms, materialize animations     |
-| `pages/wallet.css`           | Dashboard, balance card, quick actions |
+| `pages/wallet.css`           | Dashboard, balance card, quick actions (incl. elevated tile style) |
 | `pages/transactions.css`     | Deposit, withdraw, transfer, history   |
 | `pages/bank-details.css`     | Bank card add/view                     |
 | `pages/profile.css`          | Profile, daily limit                   |
 | `pages/settings.css`         | Settings hub, toggles                  |
-| `pages/admin.css`            | Admin panel, mailbox, login activity   |
+| `pages/admin.css`            | Admin panel, risk reviews, mailbox     |
 | `pages/account-security.css` | Password, delete account               |
 | `pages/contact-us.css`       | Contact page                           |
 
@@ -635,7 +652,7 @@ Automated tests for the **main application** use JUnit 5, Mockito, AssertJ, and 
 
 | Metric | Value |
 |--------|-------|
-| Test classes | **20** (+ optional `ASWalletApplicationTests`) |
+| Test classes | **23** (+ optional `ASWalletApplicationTests`) |
 | Test methods | **~244** |
 | Line coverage (JaCoCo) | **~77%** (target 70% ✅ for main app) |
 | Microservice coverage | ✅ see `ASWallet-Vol.2-svc` (unit + WebMvc) |
@@ -667,7 +684,8 @@ Open: `target/site/jacoco/index.html`
 | `WalletServiceImplTest` | wallet CRUD / balance |
 | `BankCardServiceImplTest` | card save, IBAN, welcome bonus |
 | `PasswordResetServiceImplTest` | forgot / reset token flow |
-| `PendingTransferProcessingServiceTest` | async transfer processing |
+| `PendingTransferProcessingServiceTest` | async transfer processing, risk-held approve/reject |
+| `AdminRiskReviewServiceImplTest` | admin risk review approve/reject/clear |
 | `AdminServiceImplTest` | admin user management |
 | `AdminMailboxServiceImplTest` | admin ↔ user messaging |
 | `UserProfileDetailsServiceImplTest` | profile, settings, account status |
@@ -683,6 +701,7 @@ Open: `target/site/jacoco/index.html`
 | `WalletControllerWebMvcTest` | wallet, bank card, settings, delete account |
 | `WalletMailboxControllerWebMvcTest` | user mailbox |
 | `AdminControllerWebMvcTest` | admin dashboard, users, roles |
+| `AdminRiskReviewControllerWebMvcTest` | admin risk reviews |
 | `AdminMailboxControllerWebMvcTest` | admin mailbox |
 | `TransactionControllerDepositWebMvcTest` | deposit |
 | `TransactionControllerWithdrawWebMvcTest` | withdraw |
@@ -715,7 +734,7 @@ Open: `target/site/jacoco/index.html`
 3. Deposit → Withdraw → Transfer (confirm flow)
 4. History → Export PDF
 5. Settings → Profile → Contact Us
-6. Admin: `/admin` — status, role, mailbox, login activity
+6. Admin: `/admin` — status, role, mailbox, login activity, **risk reviews**
 
 ### Test card
 
@@ -734,8 +753,19 @@ Open: `target/site/jacoco/index.html`
 |----------------------|---------------------------------|
 | DB connection failed | Start MySQL; check credentials  |
 | No emails            | Set `MAIL_PASSWORD`             |
-| Transfer blocked     | Receiver needs bank card        |
+| Transfer blocked     | Receiver needs bank card; or risk score ≥ 70 (microservice `BLOCK`) |
+| Risk review stuck    | Start microservice on `:8081`; admin approves/rejects at `/admin/risk-reviews` |
+| `Data truncated for column 'status'` | Run migration below if upgrading an existing DB |
 | Inactive login       | Admin reactivates from `/admin` |
+
+### Database migration (existing installs)
+
+If `transactions.status` was created as MySQL `ENUM`, add the new status value:
+
+```sql
+USE as_wallet;
+ALTER TABLE transactions MODIFY COLUMN status VARCHAR(32) NOT NULL;
+```
 
 ---
 
@@ -775,17 +805,44 @@ Official brief: `src/main/resources/Spring-Advanced`
 | 5 | Cancel pending transfer | Refund + status change     |
 | 6 | Send mailbox message    | Message persisted          |
 | 7 | Export PDF              | Filtered download          |
-| 8 | Admin risk review       | Approve/reject flagged transfer (Feign PATCH) |
+| 8 | Admin risk review       | Approve/reject/clear flagged transfer (Feign PATCH/DELETE) |
 
 ### Valid domain functionalities (microservice via main UI)
 
 | # | Action (UI)              | Feign | MS state change        |
 |---|--------------------------|-------|------------------------|
 | 1 | Confirm transfer         | POST  | New risk assessment    |
-| 2 | Admin approve risk review | PATCH | Assessment → APPROVED |
-| 3 | Admin reject risk review  | PATCH | Assessment → REJECTED  |
+| 2 | Admin approve risk review | PATCH | Assessment → APPROVED; wallet transfer → COMPLETED |
+| 3 | Admin reject risk review  | PATCH | Assessment → REJECTED; wallet transfer → CANCELLED + refund |
+| 4 | Admin delete all reviews  | DELETE | All pending assessments removed; linked transfers rejected |
 
-Reading pending reviews (GET) supports the admin page but is read-only until approve/reject.
+Reading pending reviews (GET) supports the admin page but is read-only until approve/reject/clear.
+
+---
+
+## Recent changes (v2.0.1)
+
+### Risk review — end-to-end wallet integration
+
+- New transaction status **`PENDING_RISK_REVIEW`** for transfers flagged by the microservice (`REVIEW` decision)
+- Transfer confirm pre-generates UUID and sends **`transactionRef`** to the microservice for linking
+- **`Transaction`** implements `Persistable<UUID>`; status column mapped as `varchar(32)` for enum extensibility
+- **`PendingTransferProcessingService`**: `approveRiskHeldTransfer` / `rejectRiskHeldTransfer`; scheduler ignores risk-held transfers
+- **`AdminRiskReviewServiceImpl`**: approve/reject/clear with wallet side-effects + Feign PATCH/DELETE
+- **`AdminRiskReviewController`**: `POST /admin/risk-reviews/clear` (delete all pending)
+- Feign client extended: **`getAssessment`**, **`deleteAssessments`**
+- Transaction history shows **Risk review** badge for `PENDING_RISK_REVIEW` transfers
+
+### Admin & wallet UI
+
+- **`/admin/risk-reviews`**: wider panel, uniform table rows, compact Approve/Reject, **Delete all reviews** button
+- **Admin Tools** (`/admin`): borderless elevated tile buttons (`wallet-quick-actions-grid--elevated`)
+- **Quick Actions** & **More Actions** (`/wallet`): same elevated tile style as Admin Tools
+
+### Tests
+
+- `AdminRiskReviewServiceImplTest`, `AdminRiskReviewControllerWebMvcTest`
+- Updated `TransactionServiceImplTest`, `PendingTransferProcessingServiceTest` for risk-held flow
 
 ---
 
@@ -799,7 +856,6 @@ Reading pending reviews (GET) supports the admin page but is read-only until app
 
 | Item                                 | Notes                |
 |--------------------------------------|----------------------|
-| `transactionRef` link to main-app tx | Optional audit improvement |
 | Admin risk history (all assessments) | Optional audit page  |
 | Edit / replace bank card             | UX improvement       |
 | OTP / 2FA                            | Security enhancement |

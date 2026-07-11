@@ -40,8 +40,8 @@ public class User extends BaseClass {
     @OneToOne(mappedBy = "user")
     private UserProfileDetails profileDetails;
 
-    @PrePersist
-    public void prePersist() {
+    @Override
+    protected void onPrePersist() {
         this.createdAt = LocalDateTime.now();
 
         if (this.role == null) {

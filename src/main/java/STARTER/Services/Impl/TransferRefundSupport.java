@@ -19,7 +19,9 @@ public class TransferRefundSupport {
     }
 
     public void refundSenderAndSetStatus(Transaction transaction, TransactionStatus status) {
-        if (transaction.getStatus() != TransactionStatus.PENDING) {
+
+        if (transaction.getStatus() != TransactionStatus.PENDING &&
+            transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW) {
             return;
         }
 

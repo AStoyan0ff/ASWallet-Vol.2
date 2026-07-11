@@ -12,6 +12,7 @@ import java.util.UUID;
 public class AdminRiskAssessmentViewDTO {
 
     private UUID id;
+    private UUID transactionRef;
     private String senderUsername;
     private String receiverUsername;
     private BigDecimal amount;

@@ -3,10 +3,14 @@ package STARTER.Models;
 import STARTER.Enums.TransactionStatus;
 import STARTER.Enums.TransactionType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.domain.Persistable;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -14,7 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Table( name = "transactions")
-public class Transaction extends BaseClass {
+public class Transaction extends BaseClass implements Persistable<UUID> {
+
+    @Transient
+    private boolean newEntity = true;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -25,7 +32,7 @@ public class Transaction extends BaseClass {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32, columnDefinition = "varchar(32)")
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
@@ -41,12 +48,23 @@ public class Transaction extends BaseClass {
     @JoinColumn(name = "receiver_wallet_id")
     private Wallet receiverWallet;
 
-    @PrePersist
-    public void prePersist() {
-         this.createdAt = LocalDateTime.now();
+    @Override
+    public boolean isNew() {
+        return newEntity;
+    }
 
-         if (this.status == null) {
-             this.status = TransactionStatus.COMPLETED;
-         }
+    @PostPersist
+    @PostLoad
+    private void markNotNew() {
+        this.newEntity = false;
+    }
+
+    @Override
+    protected void onPrePersist() {
+        this.createdAt = LocalDateTime.now();
+
+        if (this.status == null) {
+            this.status = TransactionStatus.COMPLETED;
+        }
     }
 }

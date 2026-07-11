@@ -9,13 +9,13 @@ import STARTER.Models.User;
 import STARTER.Models.Wallet;
 import STARTER.Repositories.TransactionRepository;
 import STARTER.Repositories.WalletRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -125,6 +125,111 @@ public class PendingTransferProcessingService {
             return;
         }
 
+        completeTransfer(transaction);
+
+        logger.info("Pending transfer completed: txId={}, sender={}, receiver={}, amount={}", transactionId,
+                transaction.getSenderWallet().getUser().getUsername(),
+                transaction.getReceiverWallet().getUser().getUsername(),
+                transaction.getAmount()
+        );
+    }
+
+    @Transactional
+    public void cancelPendingTransfer(UUID transactionId) {
+        Transaction transaction = findCancellableTransfer(transactionId);
+
+        if (transaction == null) {
+            return;
+        }
+
+        abortPendingTransfer(transaction, TransactionStatus.CANCELLED);
+
+        logger.info("Pending transfer cancelled: txId={}, sender={}",
+                transactionId,
+                transaction.getSenderWallet().getUser().getUsername());
+    }
+
+    @Transactional
+    public boolean approveRiskHeldTransfer(UUID transactionId) {
+        Transaction transaction = findRiskHeldTransfer(transactionId);
+
+        if (transaction == null) {
+            logger.warn("Risk-held transfer {} not found or already processed", transactionId);
+            return false;
+        }
+
+        completeTransfer(transaction);
+
+        logger.info("Risk-held transfer approved and completed: txId={}, sender={}, receiver={}, amount={}",
+                transactionId,
+                transaction.getSenderWallet().getUser().getUsername(),
+                transaction.getReceiverWallet().getUser().getUsername(),
+                transaction.getAmount());
+        return true;
+    }
+
+    @Transactional
+    public boolean rejectRiskHeldTransfer(UUID transactionId) {
+        Transaction transaction = findRiskHeldTransfer(transactionId);
+
+        if (transaction == null) {
+            logger.warn("Risk-held transfer {} not found or already processed", transactionId);
+            return false;
+        }
+
+        abortPendingTransfer(transaction, TransactionStatus.CANCELLED);
+
+        logger.info("Risk-held transfer rejected and refunded: txId={}, sender={}",
+                transactionId,
+                transaction.getSenderWallet().getUser().getUsername());
+        return true;
+    }
+
+    private Transaction findPendingTransfer(UUID transactionId) {
+
+        return findTransferByStatus(transactionId, TransactionStatus.PENDING);
+    }
+
+    private Transaction findRiskHeldTransfer(UUID transactionId) {
+
+        return transactionRepository.findById(transactionId)
+                .filter(transaction -> transaction.getType() == TransactionType.TRANSFER)
+                .filter(transaction -> transaction.getStatus() == TransactionStatus.PENDING_RISK_REVIEW)
+                .orElse(null);
+    }
+
+    private Transaction findCancellableTransfer(UUID transactionId) {
+
+        Transaction transaction = transactionRepository.findById(transactionId).orElseThrow(() ->
+                new PendingTransferNotFoundException("Pending transfer not found."));
+
+        if (transaction.getType() != TransactionType.TRANSFER) {
+            return null;
+        }
+
+        if (transaction.getStatus() != TransactionStatus.PENDING
+                && transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW) {
+            return null;
+        }
+
+        return transaction;
+    }
+
+    private Transaction findTransferByStatus(UUID transactionId, TransactionStatus status) {
+
+        Transaction transaction = transactionRepository.findById(transactionId).orElseThrow(() ->
+                new PendingTransferNotFoundException("Pending transfer not found."));
+
+        if (transaction.getType() != TransactionType.TRANSFER ||
+            transaction.getStatus() != status) {
+                return null;
+        }
+
+        return transaction;
+    }
+
+    private void completeTransfer(Transaction transaction) {
+
         Wallet receiverWallet = transaction.getReceiverWallet();
         Wallet senderWallet = transaction.getSenderWallet();
 
@@ -141,41 +246,6 @@ public class PendingTransferProcessingService {
                 transaction.getDescription(),
                 transaction.getSenderWallet().getUser(),
                 receiverWallet.getUser());
-
-        logger.info("Pending transfer completed: txId={}, sender={}, receiver={}, amount={}", transactionId,
-
-                senderWallet.getUser().getUsername(),
-                receiverWallet.getUser().getUsername(),
-                transaction.getAmount()
-        );
-    }
-
-    @Transactional
-    public void cancelPendingTransfer(UUID transactionId) {
-        Transaction transaction = findPendingTransfer(transactionId);
-
-        if (transaction == null) {
-            return;
-        }
-
-        abortPendingTransfer(transaction, TransactionStatus.CANCELLED);
-
-        logger.info("Pending transfer cancelled: txId={}, sender={}",
-                transactionId,
-                transaction.getSenderWallet().getUser().getUsername());
-    }
-
-    private Transaction findPendingTransfer(UUID transactionId) {
-
-        Transaction transaction = transactionRepository.findById(transactionId).orElseThrow(() ->
-                new PendingTransferNotFoundException("Pending transfer not found."));
-
-        if (transaction.getType() != TransactionType.TRANSFER ||
-            transaction.getStatus() != TransactionStatus.PENDING) {
-                return null;
-        }
-
-        return transaction;
     }
 
     private void abortPendingTransfer(Transaction transaction, TransactionStatus status) {

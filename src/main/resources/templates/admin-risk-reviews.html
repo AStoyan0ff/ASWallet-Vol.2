@@ -11,9 +11,18 @@
 </div>
 
 <main class="wallet-landing reveal-item">
-    <section class="wallet-panel wallet-panel--admin wallet-panel--admin-risk-reviews wallet-panel--materialize reveal-child">
-        <div class="form-panel-top auth-stagger">
+    <section class="wallet-panel wallet-panel--admin wallet-panel--wide wallet-panel--admin-risk-reviews wallet-panel--materialize reveal-child">
+        <div class="form-panel-top form-panel-top--split auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/admin}">Back to admin</a>
+
+            <form th:if="${!#lists.isEmpty(assessments)}"
+                  th:action="@{/admin/risk-reviews/clear}"
+                  method="post"
+                  class="risk-reviews-clear-form"
+                  onsubmit="return confirm('Delete all pending risk reviews? Linked transfers will be cancelled and funds returned to senders.');">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="home-pill risk-reviews-clear-btn">Delete all reviews</button>
+            </form>
         </div>
 
         <h2 class="wallet-title wallet-title--center auth-stagger">Pending Risk Reviews</h2>
@@ -29,6 +38,17 @@
 
         <div class="risk-reviews-table-wrap auth-stagger" th:if="${!#lists.isEmpty(assessments)}">
             <table class="risk-reviews-table">
+                <colgroup>
+                    <col class="risk-col-user">
+                    <col class="risk-col-user">
+                    <col class="risk-col-amount">
+                    <col class="risk-col-score">
+                    <col class="risk-col-level">
+                    <col class="risk-col-transaction">
+                    <col class="risk-col-created">
+                    <col class="risk-col-reasons">
+                    <col class="risk-col-actions">
+                </colgroup>
                 <thead>
                 <tr>
                     <th>From</th>
@@ -36,6 +56,7 @@
                     <th>Amount</th>
                     <th>Score</th>
                     <th>Level</th>
+                    <th>Transaction</th>
                     <th>Created</th>
                     <th>Reasons</th>
                     <th>Actions</th>
@@ -54,6 +75,7 @@
                               th:classappend="| risk-level-chip--${#strings.toLowerCase(item.riskLevel)}|"
                               th:text="${item.riskLevel}"></span>
                     </td>
+                    <td class="risk-transaction-ref" th:text="${item.transactionRef} ?: '-'"></td>
                     <td th:text="${item.createdAt}"></td>
                     <td>
                         <ul class="risk-reasons-list" th:if="${item.reasons != null}">

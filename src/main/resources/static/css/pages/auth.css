@@ -294,6 +294,15 @@
         box-shadow 0.62s ease;
 }
 
+.body-auth-login .auth-panel--materialize.reveal-child,
+.body-auth-register .auth-panel--materialize.reveal-child,
+.body-home .home-center-panel--materialize.reveal-child {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+}
+
 .body-auth .reveal-item.is-visible .auth-panel--materialize.reveal-child,
 .body-wallet .reveal-item.is-visible .wallet-panel--materialize.reveal-child,
 .body-wallet .reveal-item.is-visible .del-card--materialize.reveal-child,
@@ -314,11 +323,41 @@
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
-    background: rgba(8, 7, 6, 0.14);
+    background: transparent;
     border: none;
     box-shadow: none;
-    backdrop-filter: blur(10px) saturate(110%);
-    -webkit-backdrop-filter: blur(10px) saturate(110%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-auth-login .auth-panel,
+.body-auth-register .auth-panel,
+.body-auth-login .auth-panel--materialize.reveal-child,
+.body-auth-register .auth-panel--materialize.reveal-child {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-auth-login .reveal-item.is-visible .auth-panel--materialize.reveal-child,
+.body-auth-register .reveal-item.is-visible .auth-panel--materialize.reveal-child {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    animation: none;
+}
+
+.body-auth-login .reveal-item.is-visible .auth-panel--materialize::after,
+.body-auth-register .reveal-item.is-visible .auth-panel--materialize::after {
+    opacity: 0;
+    animation: none;
 }
 
 .body-auth .auth-stagger,

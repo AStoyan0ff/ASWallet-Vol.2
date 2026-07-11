@@ -89,9 +89,14 @@
                     </td>
                     <!-- Advanced: flow chips + pending spinner; Cancel only for pending sender -->
                     <td class="tx-history-actions-cell">
-                        <div th:if="${t.status.name() == 'PENDING' and t.type.name() == 'TRANSFER' and t.senderUsername == currentUsername}"
+                        <div th:if="${(t.status.name() == 'PENDING' or t.status.name() == 'PENDING_RISK_REVIEW') and t.type.name() == 'TRANSFER' and t.senderUsername == currentUsername}"
                              class="tx-history-action-wrap">
-                            <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
+                            <span class="tx-pending-spinner"
+                                  th:if="${t.status.name() == 'PENDING'}"
+                                  title="Processing"
+                                  aria-hidden="true">⏳</span>
+                            <span class="tx-flow-chip tx-flow-chip--pending"
+                                  th:if="${t.status.name() == 'PENDING_RISK_REVIEW'}">Risk review</span>
                             <form th:action="@{/transactions/{id}/cancel(id=${t.id})}"
                                   method="post"
                                   class="tx-cancel-pending-form"
@@ -101,13 +106,18 @@
                             </form>
                         </div>
 
-                        <div th:if="${t.status.name() == 'PENDING' and t.type.name() == 'TRANSFER' and t.receiverUsername == currentUsername and t.senderUsername != currentUsername}"
+                        <div th:if="${(t.status.name() == 'PENDING' or t.status.name() == 'PENDING_RISK_REVIEW') and t.type.name() == 'TRANSFER' and t.receiverUsername == currentUsername and t.senderUsername != currentUsername}"
                              class="tx-history-action-wrap">
-                            <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
+                            <span class="tx-pending-spinner"
+                                  th:if="${t.status.name() == 'PENDING'}"
+                                  title="Processing"
+                                  aria-hidden="true">⏳</span>
+                            <span class="tx-flow-chip tx-flow-chip--pending"
+                                  th:if="${t.status.name() == 'PENDING_RISK_REVIEW'}">Risk review</span>
                             <span class="tx-flow-chip tx-flow-chip--incoming">Incoming</span>
                         </div>
 
-                        <div th:if="${t.status.name() == 'PENDING' and !(t.type.name() == 'TRANSFER' and (t.senderUsername == currentUsername or (t.receiverUsername == currentUsername and t.senderUsername != currentUsername)))}"
+                        <div th:if="${(t.status.name() == 'PENDING' or t.status.name() == 'PENDING_RISK_REVIEW') and !(t.type.name() == 'TRANSFER' and (t.senderUsername == currentUsername or (t.receiverUsername == currentUsername and t.senderUsername != currentUsername)))}"
                              class="tx-history-action-wrap">
                             <span class="tx-pending-spinner" title="Processing" aria-hidden="true">⏳</span>
                             <span class="tx-flow-chip tx-flow-chip--pending">In progress</span>

@@ -1,18 +1,14 @@
 package STARTER.Services.Impl;
 
+import STARTER.Clients.DTO.RiskAssessmentClientResponse;
 import STARTER.CustomException.*;
 import STARTER.DTOs.*;
-import STARTER.Clients.Dto.RiskAssessmentClientResponse;
-import STARTER.Enums.AccountStatus;
-import STARTER.Enums.RiskDecision;
-import STARTER.Enums.SpendingCategory;
-import STARTER.Enums.TransactionStatus;
-import STARTER.Enums.TransactionType;
+import STARTER.Enums.*;
 import STARTER.Events.TransactionCompletedEvent;
 import STARTER.Models.*;
 import STARTER.Repositories.*;
-import STARTER.Services.Interface.WithdrawDailyLimitService;
 import STARTER.Services.Interface.TransferRiskAssessmentService;
+import STARTER.Services.Interface.WithdrawDailyLimitService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,7 +70,7 @@ class TransactionServiceImplTest {
         wallet.setCurrency("EUR");
 
         lenient().when(transferRiskAssessmentService.assessTransfer(
-                any(), any(), any(), any(), any(), anyBoolean()
+                any(UUID.class), any(), any(), any(), any(), any(), anyBoolean()
         )).thenReturn(allowedRiskResponse());
     }
 
@@ -82,6 +78,13 @@ class TransactionServiceImplTest {
         RiskAssessmentClientResponse response = new RiskAssessmentClientResponse();
         response.setDecision(RiskDecision.ALLOW);
         response.setRiskScore(0);
+        return response;
+    }
+
+    private RiskAssessmentClientResponse reviewRiskResponse() {
+        RiskAssessmentClientResponse response = new RiskAssessmentClientResponse();
+        response.setDecision(RiskDecision.REVIEW);
+        response.setRiskScore(50);
         return response;
     }
 
@@ -246,7 +249,8 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void transfer_blockedByRisk_doesNotDeductBalanceOrSaveTransaction() {
+    void transfer_reviewDecision_setsPendingRiskReviewStatus() {
+
         User receiverUser = new User();
         receiverUser.setId(UUID.randomUUID());
         receiverUser.setUsername("Georgi");
@@ -264,7 +268,80 @@ class TransactionServiceImplTest {
         when(walletRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverWallet));
         when(bankCardRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverCard));
         when(transferRiskAssessmentService.assessTransfer(
+                any(UUID.class), any(), any(), any(), any(), any(), anyBoolean()
+        )).thenReturn(reviewRiskResponse());
+
+        TransferMoneyDTO dto = new TransferMoneyDTO();
+        dto.setReceiverUsername("Georgi");
+        dto.setAmount(new BigDecimal("30.00"));
+        dto.setSpendingCategory(SpendingCategory.SHOPPING);
+
+        transactionService.transfer(userId, dto);
+
+        ArgumentCaptor<Transaction> txCaptor = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionRepository).save(txCaptor.capture());
+        assertThat(txCaptor.getValue().getStatus()).isEqualTo(TransactionStatus.PENDING_RISK_REVIEW);
+    }
+
+    @Test
+    void transfer_success_usesSameIdForTransactionAndRiskAssessment() {
+
+        User receiverUser = new User();
+        receiverUser.setId(UUID.randomUUID());
+        receiverUser.setUsername("Georgi");
+
+        Wallet receiverWallet = new Wallet();
+        receiverWallet.setId(UUID.randomUUID());
+        receiverWallet.setUser(receiverUser);
+        receiverWallet.setBalance(new BigDecimal("10.00"));
+
+        BankCard receiverCard = new BankCard();
+        receiverCard.setLastFourDigits("4242");
+
+        when(walletRepository.findByUser_Id(userId)).thenReturn(Optional.of(wallet));
+        when(userRepository.findByUsername("Georgi")).thenReturn(Optional.of(receiverUser));
+        when(walletRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverWallet));
+        when(bankCardRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverCard));
+
+        TransferMoneyDTO dto = new TransferMoneyDTO();
+        dto.setReceiverUsername("Georgi");
+        dto.setAmount(new BigDecimal("30.00"));
+        dto.setSpendingCategory(SpendingCategory.SHOPPING);
+
+        transactionService.transfer(userId, dto);
+
+        ArgumentCaptor<UUID> transactionRefCaptor = ArgumentCaptor.forClass(UUID.class);
+        verify(transferRiskAssessmentService).assessTransfer(
+                transactionRefCaptor.capture(),
                 any(), any(), any(), any(), any(), anyBoolean()
+        );
+
+        ArgumentCaptor<Transaction> txCaptor = ArgumentCaptor.forClass(Transaction.class);
+        verify(transactionRepository).save(txCaptor.capture());
+        assertThat(txCaptor.getValue().getId()).isEqualTo(transactionRefCaptor.getValue());
+    }
+
+    @Test
+    void transfer_blockedByRisk_doesNotDeductBalanceOrSaveTransaction() {
+
+        User receiverUser = new User();
+        receiverUser.setId(UUID.randomUUID());
+        receiverUser.setUsername("Georgi");
+
+        Wallet receiverWallet = new Wallet();
+        receiverWallet.setId(UUID.randomUUID());
+        receiverWallet.setUser(receiverUser);
+        receiverWallet.setBalance(new BigDecimal("10.00"));
+
+        BankCard receiverCard = new BankCard();
+        receiverCard.setLastFourDigits("4242");
+
+        when(walletRepository.findByUser_Id(userId)).thenReturn(Optional.of(wallet));
+        when(userRepository.findByUsername("Georgi")).thenReturn(Optional.of(receiverUser));
+        when(walletRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverWallet));
+        when(bankCardRepository.findByUser_Id(receiverUser.getId())).thenReturn(Optional.of(receiverCard));
+        when(transferRiskAssessmentService.assessTransfer(
+                any(UUID.class), any(), any(), any(), any(), any(), anyBoolean()
         )).thenThrow(new TransferBlockedByRiskException("Transfer blocked by risk assessment."));
 
         TransferMoneyDTO dto = new TransferMoneyDTO();
