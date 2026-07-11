@@ -5,46 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/Dto/RiskAssessmentClientResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/DTO/RiskAssessmentClientResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/Dto/RiskAssessmentCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/DTO/RiskAssessmentCreateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/Dto/RiskAssessmentReviewRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/DTO/RiskAssessmentReviewRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminRiskReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminRiskReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionHistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionHistoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/DTOs/AdminRiskAssessmentViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/DTOs/AdminRiskAssessmentViewDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Enums/TransactionStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Enums/TransactionStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/AdminMailboxMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/AdminMailboxMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/BaseClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/BaseClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Models/UserProfileDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Models/UserProfileDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/AdminRiskReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/AdminRiskReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransactionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransactionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRefundSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRefundSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/AdminRiskReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/AdminRiskReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/TransferRiskAssessmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/TransferRiskAssessmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/base/layout-panels.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/base/layout-panels.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminRiskReviewControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminRiskReviewControllerWebMvcTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/PendingTransferProcessingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/PendingTransferProcessingServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/TransactionServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/TransactionServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/2.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -458,7 +419,7 @@
       <workItem from="1783371144435" duration="3210000" />
       <workItem from="1783420678378" duration="30891000" />
       <workItem from="1783623635496" duration="613000" />
-      <workItem from="1783686098135" duration="39206000" />
+      <workItem from="1783686098135" duration="40574000" />
     </task>
     <servers />
   </component>
