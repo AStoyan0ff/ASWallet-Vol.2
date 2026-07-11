@@ -4,8 +4,10 @@
 
 .body-home .home-bg-overlay {
     background: linear-gradient(
-            rgba(0, 0, 0, 0.35),
-            rgba(12, 8, 4, 0.55)
+            180deg,
+            rgba(255, 252, 245, 0.18) 0%,
+            rgba(255, 255, 255, 0.08) 42%,
+            rgba(247, 243, 234, 0.22) 100%
     );
 }
 
@@ -27,14 +29,13 @@
     padding: 0 12px;
     background: linear-gradient(
             180deg,
-            rgba(8, 6, 4, 0.52) 0%,
-            rgba(12, 9, 6, 0.38) 100%
+            rgba(255, 255, 255, 0.92) 0%,
+            rgba(255, 252, 245, 0.86) 100%
     );
-    border-bottom: 1px solid rgba(255, 204, 128, 0.22);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.32);
     box-shadow:
-            inset 0 1px 0 rgba(255, 235, 200, 0.14),
-            0 6px 22px rgba(0, 0, 0, 0.22),
-            0 0 28px rgba(255, 167, 38, 0.06);
+            inset 0 1px 0 rgba(255, 255, 255, 0.95),
+            0 4px 18px rgba(180, 140, 60, 0.1);
     backdrop-filter: blur(14px) saturate(125%);
     -webkit-backdrop-filter: blur(14px) saturate(125%);
 }
@@ -77,16 +78,14 @@
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: #ffe7c8;
-    text-shadow:
-            0 0 12px rgba(255, 183, 77, 0.28),
-            0 1px 2px rgba(0, 0, 0, 0.45);
+    color: #8a6d3b;
+    text-shadow: none;
 }
 
 .body-home .home-ticker__sep {
     font-size: 0.42rem;
-    color: rgba(255, 204, 128, 0.72);
-    text-shadow: 0 0 8px rgba(255, 167, 38, 0.35);
+    color: rgba(196, 147, 26, 0.62);
+    text-shadow: none;
 }
 
 .body-home .home-ticker:hover .home-ticker__track {
@@ -125,7 +124,6 @@
     gap: 16px;
     width: min(440px, 100%);
     margin: 0 auto;
-    perspective: 1000px;
 }
 
 /* Advanced — home landing bank-card action links */
@@ -135,51 +133,35 @@
     aspect-ratio: 1.586 / 1;
     padding: 0;
     border-radius: 16px;
-    border: 1px solid rgba(255, 235, 200, 0.28);
+    border: 1px solid rgba(212, 175, 55, 0.42);
     text-decoration: none;
     overflow: hidden;
-    transform-style: preserve-3d;
-    transition: border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    background 0.28s ease;
+    transition:
+            transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.28s ease,
+            box-shadow 0.28s ease,
+            background 0.28s ease;
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.14),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.18),
-        0 10px 28px rgba(0, 0, 0, 0.32);
-    backdrop-filter: blur(16px) saturate(135%);
-    -webkit-backdrop-filter: blur(16px) saturate(135%);
-}
-
-.body-home .home-bank-card:not(:hover) {
-    transform: translateY(0) rotateY(0deg);
-    transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.28s ease,
-    box-shadow 0.28s ease,
-    background 0.28s ease;
-}
-
-@keyframes homeBankCardSpin360 {
-    from {
-        transform: translateY(0) rotateY(0deg);
-    }
-    to {
-        transform: translateY(-5px) rotateY(360deg);
-    }
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        0 10px 28px rgba(180, 140, 60, 0.12),
+        0 4px 14px rgba(0, 0, 0, 0.06);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .home-bank-card__texture {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.32;
+    opacity: 0.45;
     background:
         repeating-linear-gradient(
             115deg,
-            rgba(255, 255, 255, 0.04) 0 1px,
+            rgba(212, 175, 55, 0.04) 0 1px,
             transparent 1px 5px
         ),
-        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.08), transparent 38%),
-        radial-gradient(circle at 82% 88%, rgba(255, 183, 77, 0.05), transparent 42%);
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.65), transparent 38%),
+        radial-gradient(circle at 82% 88%, rgba(255, 183, 77, 0.08), transparent 42%);
     pointer-events: none;
 }
 
@@ -214,11 +196,11 @@
     height: 18%;
     background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.22) 0%,
-            rgba(255, 255, 255, 0.03) 50%,
-            rgba(0, 0, 0, 0.16) 100%
+            rgba(212, 175, 55, 0.08) 0%,
+            rgba(255, 255, 255, 0.35) 50%,
+            rgba(212, 175, 55, 0.06) 100%
     );
-    opacity: 0.62;
+    opacity: 0.75;
     pointer-events: none;
 }
 
@@ -229,10 +211,10 @@
     z-index: 2;
     background: linear-gradient(
             125deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.02) 28%,
-            rgba(0, 0, 0, 0.08) 52%,
-            rgba(255, 255, 255, 0.03) 100%
+            rgba(255, 255, 255, 0.55) 0%,
+            rgba(255, 255, 255, 0.08) 28%,
+            rgba(212, 175, 55, 0.04) 52%,
+            rgba(255, 255, 255, 0.12) 100%
     );
     pointer-events: none;
 }
@@ -245,38 +227,37 @@
     z-index: 1;
     width: 72%;
     height: 145%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.06), transparent 68%);
+    background: radial-gradient(circle, rgba(255, 236, 190, 0.35), transparent 68%);
     pointer-events: none;
 }
 
 .body-home .home-bank-card--login {
     background: linear-gradient(
             145deg,
-            rgba(14, 10, 6, 0.62) 0%,
-            rgba(255, 183, 77, 0.05) 34%,
-            rgba(4, 3, 2, 0.72) 100%
+            #fffef9 0%,
+            #fff6e3 34%,
+            #ffffff 100%
     );
 }
 
 .body-home .home-bank-card--register {
     background: linear-gradient(
             145deg,
-            rgba(12, 9, 6, 0.6) 0%,
-            rgba(255, 167, 38, 0.04) 34%,
-            rgba(3, 2, 2, 0.74) 100%
+            #fffdf8 0%,
+            #fff2d6 34%,
+            #ffffff 100%
     );
-    border-color: rgba(255, 235, 200, 0.2);
+    border-color: rgba(212, 175, 55, 0.38);
 }
 
 .body-home .home-bank-card:hover,
 .body-home .home-bank-card--register:hover {
-    animation: homeBankCardSpin360 0.85s ease-in-out forwards;
-    border-color: rgba(255, 235, 200, 0.48);
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.62);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-        0 0 24px rgba(255, 204, 128, 0.18),
-        0 16px 36px rgba(0, 0, 0, 0.24);
+        inset 0 1px 0 rgba(255, 255, 255, 0.98),
+        0 0 20px rgba(255, 204, 128, 0.22),
+        0 16px 32px rgba(180, 140, 60, 0.16);
 }
 
 .home-bank-card__chip-img {
@@ -297,7 +278,7 @@
     z-index: 3;
     width: 28px;
     height: auto;
-    filter: brightness(0) saturate(100%) invert(32%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(0.95) contrast(1.05) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+    filter: brightness(0) saturate(100%) invert(58%) sepia(48%) saturate(620%) hue-rotate(6deg) brightness(0.92) contrast(0.95) drop-shadow(0 2px 4px rgba(180, 140, 60, 0.2));
 }
 
 .body-home .home-bank-card-number {
@@ -312,8 +293,7 @@
     letter-spacing: 0.16em;
     color: #000;
     font-variant-numeric: tabular-nums;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55),
-    0 0 14px rgba(212, 175, 55, 0.32);
+    text-shadow: none;
 }
 
 .home-bank-card-meta {
@@ -335,9 +315,9 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #000;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45),
-    0 0 14px rgba(212, 175, 55, 0.28);
+    /*color: #000;*/
+    color: #6b5c45;
+    text-shadow: none;
 }
 
 .body-home .home-bank-card-footer {
@@ -357,20 +337,18 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: center;
-    color: #000;
-    text-shadow: 0 1px 10px rgba(239, 108, 0, 0.4);
+    color: #a67c00;
+    text-shadow: none;
+}
+
+.body-home .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
 }
 
 @media (max-width: 420px) {
     .home-landing-actions {
         grid-template-columns: 1fr;
         width: min(290px, 100%);
-    }
-
-    .body-home .home-bank-card:hover,
-    .body-home .home-bank-card--register:hover {
-        animation: none;
-        transform: translateY(-4px);
     }
 }
 
@@ -618,7 +596,6 @@
 
     .body-home .home-bank-card:hover,
     .body-home .home-bank-card--register:hover {
-        animation: none;
         transform: none;
     }
 

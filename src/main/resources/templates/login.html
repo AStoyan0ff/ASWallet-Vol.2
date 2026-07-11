@@ -5,57 +5,87 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="body-auth body-auth-login">
+<body class="body-auth body-auth-login body-auth-light-card">
 
 <div class="home-bg-media" aria-hidden="true">
-    <img class="home-bg-image" th:src="@{/images/log-reg.png}" alt="">
+    <img class="home-bg-image" th:src="@{/images/reg-log.png}" alt="">
     <div class="home-bg-overlay"></div>
 </div>
 
 <main class="auth-landing reveal-item">
-    <section class="auth-panel auth-panel--materialize reveal-child">
+    <section class="auth-login-card reveal-child">
+        <a class="auth-login-back" th:href="@{/}" aria-label="Back to home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 12H5"/>
+                <path d="M12 19l-7-7 7-7"/>
+            </svg>
+            <span class="auth-login-back__label">Back to home</span>
+        </a>
 
-        <div class="form-panel-top auth-stagger">
-            <a class="home-pill form-pill-link" th:href="@{/}">Back to home</a>
-        </div>
+        <header class="auth-login-card__header auth-stagger">
+            <div class="auth-login-logo">
+                <img class="auth-login-logo__img" th:src="@{/images/aswallet-logo.png}" alt="ASWallet">
+            </div>
+            <h1 class="auth-login-card__title">Welcome Back</h1>
+            <p class="auth-login-card__subtitle">Simple. Secure. Smart.</p>
+            <div class="auth-login-divider" aria-hidden="true">
+                <span class="auth-login-divider__line"></span>
+                <span class="auth-login-divider__gem"></span>
+                <span class="auth-login-divider__line"></span>
+            </div>
+        </header>
 
-        <h2 class="auth-title auth-title--center auth-stagger">Login</h2>
         <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
         <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
-        <form class="auth-form" th:action="@{/login}" th:object="${loginDTO}" method="post">
+        <form class="auth-login-form" th:action="@{/login}" th:object="${loginDTO}" method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-            <div class="auth-field-group auth-stagger">
-                <label for="username">Username</label>
-                <input id="username" type="text" th:field="*{username}" placeholder="e.g. john_doe" required>
+            <div class="auth-login-field auth-stagger">
+                <label class="auth-login-label" for="username">Username</label>
+                <div class="auth-login-input-wrap">
+                    <span class="auth-login-input-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                        </svg>
+                    </span>
+                    <input id="username" type="text" th:field="*{username}" placeholder="Username" required>
+                </div>
                 <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
             </div>
 
-            <div class="auth-field-group auth-stagger">
-                <label for="password">Password</label>
-
-                <div class="password-field-wrap">
-                    <input id="password" type="password" th:field="*{password}" placeholder="Enter password" required>
+            <div class="auth-login-field auth-stagger">
+                <label class="auth-login-label" for="password">Password</label>
+                <div class="auth-login-input-wrap password-field-wrap">
+                    <span class="auth-login-input-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="5" y="11" width="14" height="10" rx="2"/>
+                            <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+                        </svg>
+                    </span>
+                    <input id="password" type="password" th:field="*{password}" placeholder="Password" required>
                     <button type="button" th:replace="~{fragments/password-visibility-toggle :: toggle}"></button>
                 </div>
-
                 <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-
-                <p class="auth-footer-note auth-footer-note--inline">
-                    <a class="auth-link" th:href="@{/forgot-password}">Forgot password?</a>
-                </p>
             </div>
 
-            <div class="auth-field-group auth-stagger">
-                <button type="submit" class="auth-submit">Login</button>
+            <div class="auth-login-actions auth-stagger">
+                <a class="auth-login-forgot" th:href="@{/forgot-password}">Forgot password?</a>
+            </div>
+
+            <div class="auth-login-field auth-stagger">
+                <button type="submit" class="auth-login-submit">Login</button>
             </div>
         </form>
 
-        <p class="auth-footer-note auth-stagger">
-            No account yet?
-            <a class="auth-link" th:href="@{/register}">Register now</a>
-        </p>
+        <div class="auth-login-or auth-stagger" aria-hidden="true">
+            <span class="auth-login-or__line"></span>
+            <span class="auth-login-or__text">OR</span>
+            <span class="auth-login-or__line"></span>
+        </div>
+
+        <a class="auth-login-register auth-stagger" th:href="@{/register}">Create new account</a>
     </section>
 </main>
 
