@@ -108,6 +108,32 @@ class AdminControllerWebMvcTest {
     }
 
     @Test
+    void clearLoginActivity_redirectsWithSuccessMessage() throws Exception {
+        when(loginActivityService.clearAll()).thenReturn(5);
+
+        mockMvc.perform(post("/admin/login-activity/clear")
+                        .with(csrf())
+                        .with(user("admin").roles("ADMIN")))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/login-activity"))
+                .andExpect(flash().attribute("successMessage", "Cleared 5 login activity record(s)."));
+
+        verify(loginActivityService).clearAll();
+    }
+
+    @Test
+    void clearLoginActivity_whenEmpty_redirectsWithNoRecordsMessage() throws Exception {
+        when(loginActivityService.clearAll()).thenReturn(0);
+
+        mockMvc.perform(post("/admin/login-activity/clear")
+                        .with(csrf())
+                        .with(user("admin").roles("ADMIN")))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/admin/login-activity"))
+                .andExpect(flash().attribute("successMessage", "No login activity to clear."));
+    }
+
+    @Test
     void getManageUser_returnsViewWithUser() throws Exception {
         when(adminService.getManageableUser("admin", targetUserId)).thenReturn(manageableUser);
 

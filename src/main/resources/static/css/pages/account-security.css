@@ -1,4 +1,18 @@
-﻿.body-change-password .wallet-landing {
+﻿.body-change-password {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-change-password .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-change-password .wallet-landing {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -245,17 +259,13 @@
     width: 100%;
     margin-top: 4px;
     padding: 11px 20px;
-    border: 0;
     border-radius: 10px;
-    background: linear-gradient(135deg, #ffb74d, #f57c00);
-    color: #161616;
     font-size: 0.95rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-family: inherit;
     cursor: pointer;
-    box-shadow: 0 10px 26px rgba(255, 143, 0, 0.35);
     transition: filter 0.2s ease, transform 0.2s ease;
 }
 
@@ -265,8 +275,7 @@
 }
 
 .pwd-submit:hover {
-    filter: brightness(1.05);
-    transform: translateY(-1px);
+    /* metallic — see base/buttons.css */
 }
 
 .pwd-footer {
@@ -446,23 +455,18 @@
     width: 100%;
     margin-top: 6px;
     padding: 11px 20px;
-    border: 0;
     border-radius: 10px;
-    background: linear-gradient(135deg, #ef5350, #c62828);
-    color: #fff;
     font-size: 0.95rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-family: inherit;
     cursor: pointer;
-    box-shadow: 0 10px 26px rgba(198, 40, 40, 0.35);
     transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .del-submit:hover {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
+    /* metallic — see base/buttons.css */
 }
 
 .del-footer {
@@ -513,5 +517,616 @@
 @media (max-width: 720px) {
     .del-card {
         margin-top: 36px;
+    }
+}
+
+/* /wallet/change-password — white panel + cream inset fields */
+.body-change-password .pwd-card.pwd-card--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-change-password .reveal-item.is-visible .pwd-card.pwd-card--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-change-password .pwd-card.pwd-card--materialize::after {
+    display: none;
+}
+
+.body-change-password .pwd-card-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-change-password .pwd-card-subtitle {
+    color: #888;
+    text-shadow:
+            0 2px 3px rgba(255,255,255,.2),
+            0 6px 10px rgba(0,0,0,.25),
+            0 14px 22px rgba(0,0,0,.18);
+}
+
+.body-change-password .pwd-label {
+    color: #5c4f3a;
+}
+
+.body-change-password .pwd-field-icon {
+    color: #9a9080;
+}
+
+.body-change-password .pwd-field input {
+    color: #2c2418;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-change-password .pwd-field input::placeholder {
+    color: #b0a595;
+}
+
+.body-change-password .pwd-field input:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-change-password .password-visibility-toggle {
+    color: #9a9080;
+}
+
+.body-change-password .password-visibility-toggle:hover {
+    color: #c4931a;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.body-change-password .pwd-alert.success {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.45);
+    border: 1px solid rgba(129, 199, 132, 0.55);
+}
+
+.body-change-password .pwd-alert.error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+}
+
+.body-change-password .pwd-field-error {
+    color: #8b3a2a;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-change-password .pwd-strength {
+    margin-bottom: 0;
+    padding: 12px 14px 8px;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-change-password .pwd-strength-title {
+    color: #5c4f3a;
+}
+
+.body-change-password .pwd-strength-label {
+    color: #c4931a;
+}
+
+.body-change-password .pwd-strength-label.is-strong {
+    color: #1b5e20;
+}
+
+.body-change-password .pwd-strength-seg {
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.body-change-password .pwd-strength-seg.is-filled {
+    background: linear-gradient(90deg, #2e7d32, #43a047);
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.35);
+}
+
+.body-change-password .pwd-requirements {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding: 4px 14px 12px;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-top: 1px solid rgba(158, 142, 118, 0.24);
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(180deg, #e8e0d4 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-change-password .pwd-requirements li {
+    color: #7a6e5c;
+}
+
+.body-change-password .pwd-requirements li.is-met {
+    color: #2e7d32;
+}
+
+.body-change-password .pwd-req-icon {
+    border-color: rgba(158, 142, 118, 0.35);
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.body-change-password .pwd-footer {
+    color: #8a7d6a;
+}
+
+.body-change-password .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+/* /wallet/change-password — black-to-gold metallic panel */
+.body-change-password.body-change-password-gold-panel .pwd-card.pwd-card--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-change-password.body-change-password-gold-panel .reveal-item.is-visible .pwd-card.pwd-card--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-card-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-card-subtitle {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-footer {
+    color: rgba(255, 244, 225, 0.78);
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-alert.success,
+.body-change-password.body-change-password-gold-panel .success.pwd-alert {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 2px 8px rgba(0, 0, 0, 0.18);
+    font-weight: 600;
+}
+
+.body-change-password.body-change-password-gold-panel .pwd-alert.error,
+.body-change-password.body-change-password-gold-panel .error.pwd-alert {
+    color: #7f1a1a;
+    background: linear-gradient(180deg, #fff5f5 0%, #ffcdd2 100%);
+    border: 1px solid rgba(198, 40, 40, 0.55);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 2px 8px rgba(0, 0, 0, 0.14);
+    font-weight: 600;
+}
+
+.body-change-password.body-change-password-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-change-password .reveal-item.is-visible .pwd-card.pwd-card--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-change-password.body-change-password-gold-panel .reveal-item.is-visible .pwd-card.pwd-card--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /wallet/delete-account — light page + white panel + cream field */
+.body-delete-account.body-delete-account-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-delete-account.body-delete-account-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-delete-account.body-delete-account-light .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.body-delete-account.body-delete-account-light .del-card {
+    margin: 0 auto;
+}
+
+.body-delete-account.body-delete-account-light .del-card--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-delete-account.body-delete-account-light .reveal-item.is-visible .del-card--materialize:not(.del-card--success).reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-delete-account.body-delete-account-light .del-card--materialize::after {
+    display: none;
+}
+
+.body-delete-account-light .del-card-badge {
+    color: #2a0808;
+    background: var(--btn-red-bg);
+    border: 1px solid var(--btn-red-border);
+    box-shadow:
+            inset 0 1px 0 var(--btn-red-inset),
+            0 4px 12px rgba(100, 20, 20, 0.22);
+}
+
+.body-delete-account-light .del-card-title {
+    color: #8b3a2a;
+    text-shadow: none;
+}
+
+.body-delete-account-light .del-card-subtitle {
+    color: #7a6e5c;
+}
+
+.body-delete-account-light .del-warning {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    border-radius: 10px;
+}
+
+.body-delete-account-light .del-alert.error,
+.body-delete-account-light .error.del-alert {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-delete-account-light .del-label {
+    color: #5c4f3a;
+}
+
+.body-delete-account-light .del-field-icon {
+    color: #9a9080;
+}
+
+.body-delete-account-light .del-field input {
+    color: #2c2418;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-delete-account-light .del-field input::placeholder {
+    color: #b0a595;
+}
+
+.body-delete-account-light .del-field input:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-delete-account-light .password-visibility-toggle {
+    color: #9a9080;
+}
+
+.body-delete-account-light .password-visibility-toggle:hover {
+    color: #c4931a;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.body-delete-account-light .del-field-error {
+    color: #8b3a2a;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-delete-account-light .del-footer {
+    color: #8a7d6a;
+}
+
+.body-delete-account-light .del-footer svg {
+    color: #c62828;
+}
+
+.body-delete-account-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /wallet/delete-account — black-to-gold metallic panel */
+.body-delete-account.body-delete-account-gold-panel .del-card--materialize.reveal-child:not(.del-card--success) {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-delete-account.body-delete-account-gold-panel .reveal-item.is-visible .del-card--materialize.reveal-child:not(.del-card--success) {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-card-title {
+    color: #ffab91;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-card-subtitle {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-warning {
+    color: #7f1a1a;
+    font-weight: 700;
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-footer {
+    color: rgba(255, 244, 225, 0.78);
+}
+
+.body-delete-account.body-delete-account-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-delete-account.body-delete-account-light .reveal-item.is-visible .del-card--materialize:not(.del-card--success).reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-delete-account.body-delete-account-gold-panel .reveal-item.is-visible .del-card--materialize.reveal-child:not(.del-card--success) {
+        border-radius: 24px;
+    }
+}
+
+@media (max-width: 720px) {
+    .body-delete-account.body-delete-account-light .del-card {
+        margin-top: 0;
+    }
+}
+
+/* /account-deleted — light page + white panel (success state) */
+.body-delete-account.body-delete-account-light .del-card--success.del-card--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-delete-account.body-delete-account-light .reveal-item.is-visible .del-card--success.del-card--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-delete-account.body-delete-account-light .del-card--success.del-card--materialize::after {
+    display: none;
+}
+
+.body-delete-account-light .del-card--success .del-card-title {
+    color: #1b5e20;
+    text-shadow: none;
+}
+
+.body-delete-account-light .del-card--success .del-card-subtitle {
+    color: #7a6e5c;
+}
+
+.body-delete-account-light .del-alert.success,
+.body-delete-account-light .success.del-alert {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 2px 8px rgba(0, 0, 0, 0.08);
+    font-weight: 600;
+}
+
+.body-delete-account-light .del-success-note {
+    color: #5c4f3a;
+}
+
+/* /account-deleted — black-to-gold metallic panel (success) */
+.body-delete-account.body-delete-account-gold-panel .del-card--success.del-card--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-delete-account.body-delete-account-gold-panel .reveal-item.is-visible .del-card--success.del-card--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-card--success .del-card-title {
+    color: #c8e6c9;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-card--success .del-card-subtitle {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-delete-account.body-delete-account-gold-panel .del-success-note {
+    color: rgba(255, 244, 225, 0.88);
+}
+
+.body-delete-account.body-delete-account-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-delete-account.body-delete-account-light .reveal-item.is-visible .del-card--success.del-card--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-delete-account.body-delete-account-gold-panel .reveal-item.is-visible .del-card--success.del-card--materialize.reveal-child {
+        border-radius: 24px;
     }
 }

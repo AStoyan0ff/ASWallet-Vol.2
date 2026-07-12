@@ -1,0 +1,256 @@
+/* ASWallet — global metallic button system (gold primary, red danger) */
+
+.btn-metal-gold,
+.btn-primary,
+.form-pill-link,
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn),
+.auth-submit,
+.pwd-submit,
+.auth-login-submit,
+.body-auth-gold-glass .auth-glass-submit,
+.body-auth-silver-glass .auth-glass-submit,
+.body-auth-light-card .auth-login-submit,
+.bank-card-submit,
+.wallet-btn-primary,
+.wallet-btn-outline,
+.wallet-btn-muted,
+.wallet-btn-settings,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled),
+.wallet-dashboard-pill,
+.admin-action-btn--update,
+.admin-action-btn--role,
+.admin-action-btn--manage,
+.home-btn-login,
+.home-btn-register,
+.user-profile-avatar-choose-btn,
+.tx-export-action-btn,
+.tx-filter-btn:not(.tx-filter-clear),
+.auth-glass-submit,
+.wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove),
+.wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) {
+    border: 1px solid var(--btn-gold-border);
+    background: var(--btn-gold-bg);
+    color: var(--btn-gold-text);
+    box-shadow:
+            inset 0 1px 0 var(--btn-gold-inset),
+            0 3px 0 var(--btn-gold-shadow),
+            0 6px 14px rgba(0, 0, 0, 0.18);
+    filter: none;
+}
+
+.btn-metal-gold:hover,
+.btn-primary:hover,
+.form-pill-link:hover,
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):hover,
+.auth-submit:hover:not(:disabled),
+.pwd-submit:hover,
+.auth-login-submit:hover,
+.body-auth-gold-glass .auth-glass-submit:hover,
+.body-auth-silver-glass .auth-glass-submit:hover,
+.body-auth-light-card .auth-login-submit:hover,
+.bank-card-submit:hover,
+.wallet-btn-primary:hover,
+.wallet-btn-outline:hover,
+.wallet-btn-muted:hover,
+.wallet-btn-settings:hover,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):hover,
+.wallet-dashboard-pill:hover,
+.admin-action-btn--update:hover,
+.admin-action-btn--role:hover,
+.admin-action-btn--manage:hover,
+.home-btn-login:hover,
+.home-btn-register:hover,
+.user-profile-avatar-choose-btn:hover,
+.tx-export-action-btn:hover,
+.tx-filter-btn:not(.tx-filter-clear):hover,
+.auth-glass-submit:hover,
+.wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover,
+.wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover {
+    background: var(--btn-gold-bg-hover);
+    border-color: var(--btn-gold-border-hover);
+    color: var(--btn-gold-text);
+    transform: translateY(-2px);
+    box-shadow:
+            inset 0 1px 0 var(--btn-gold-inset-hover),
+            0 4px 0 var(--btn-gold-shadow-hover),
+            0 10px 18px rgba(0, 0, 0, 0.22);
+    filter: none;
+}
+
+.btn-metal-gold:active,
+.btn-primary:active,
+.form-pill-link:active,
+.auth-submit:active:not(:disabled),
+.pwd-submit:active,
+.auth-login-submit:active,
+.body-auth-gold-glass .auth-glass-submit:active,
+.body-auth-silver-glass .auth-glass-submit:active,
+.body-auth-light-card .auth-login-submit:active,
+.bank-card-submit:active,
+.wallet-btn-primary:active,
+.wallet-btn-outline:active,
+.wallet-btn-muted:active,
+.wallet-btn-settings:active,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):active,
+.admin-action-btn--update:active,
+.admin-action-btn--role:active,
+.admin-action-btn--manage:active,
+.home-btn-login:active,
+.home-btn-register:active,
+.user-profile-avatar-choose-btn:active,
+.tx-export-action-btn:active,
+.tx-filter-btn:not(.tx-filter-clear):active,
+.auth-glass-submit:active,
+.wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):active,
+.wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):active {
+    transform: translateY(0);
+    box-shadow:
+            inset 0 2px 4px rgba(0, 0, 0, 0.22),
+            0 2px 0 var(--btn-gold-shadow-hover);
+}
+
+.tx-filter-clear,
+.btn-metal-red,
+.wallet-btn-danger,
+.wallet-logout-tile,
+.del-submit,
+.mailbox-delete-btn,
+.tx-clear-history-btn,
+.risk-reviews-clear-btn,
+.login-activity-clear-btn,
+.export-nav-pill--clear,
+.wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder) {
+    border: 1px solid var(--btn-red-border);
+    background: var(--btn-red-bg);
+    color: var(--btn-red-text);
+    box-shadow:
+            inset 0 1px 0 var(--btn-red-inset),
+            0 3px 0 var(--btn-red-shadow),
+            0 6px 14px rgba(0, 0, 0, 0.18);
+    filter: none;
+}
+
+.tx-filter-clear:hover,
+.btn-metal-red:hover,
+.wallet-btn-danger:hover,
+.wallet-logout-tile:hover,
+.del-submit:hover,
+.mailbox-delete-btn:hover,
+.tx-clear-history-btn:hover,
+.risk-reviews-clear-btn:hover,
+.login-activity-clear-btn:hover,
+.export-nav-pill--clear:hover,
+.wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder):hover {
+    background: var(--btn-red-bg-hover);
+    border-color: var(--btn-red-border-hover);
+    color: var(--btn-red-text);
+    transform: translateY(-2px);
+    box-shadow:
+            inset 0 1px 0 var(--btn-red-inset-hover),
+            0 4px 0 var(--btn-red-shadow-hover),
+            0 10px 18px rgba(0, 0, 0, 0.22);
+    filter: none;
+}
+
+.tx-filter-clear:active,
+.btn-metal-red:active,
+.wallet-btn-danger:active,
+.wallet-logout-tile:active,
+.del-submit:active,
+.mailbox-delete-btn:active,
+.tx-clear-history-btn:active,
+.risk-reviews-clear-btn:active,
+.login-activity-clear-btn:active,
+.export-nav-pill--clear:active,
+.wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder):active {
+    transform: translateY(0);
+    box-shadow:
+            inset 0 2px 4px rgba(0, 0, 0, 0.22),
+            0 2px 0 var(--btn-red-shadow-hover);
+}
+
+/* Unified text on gold buttons */
+.form-pill-link,
+.auth-submit,
+.pwd-submit,
+.auth-login-submit,
+.bank-card-submit,
+.wallet-btn-primary,
+.wallet-btn-outline,
+.wallet-btn-muted,
+.wallet-btn-settings,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled),
+.wallet-dashboard-pill,
+.admin-action-btn--update,
+.admin-action-btn--role,
+.admin-action-btn--manage,
+.home-btn-login,
+.home-btn-register,
+.user-profile-avatar-choose-btn,
+.tx-export-action-btn,
+.tx-filter-btn:not(.tx-filter-clear),
+.auth-glass-submit,
+.wallet-quick-action-label {
+    text-shadow: 0 1px 0 var(--btn-gold-text-shadow);
+}
+
+.del-submit,
+.mailbox-delete-btn,
+.tx-clear-history-btn,
+.risk-reviews-clear-btn,
+.login-activity-clear-btn,
+.export-nav-pill--clear,
+.wallet-btn-danger,
+.wallet-logout-tile .wallet-quick-action-label {
+    text-shadow: 0 1px 0 var(--btn-red-text-shadow);
+}
+
+/* Icons on metallic quick actions */
+.wallet-quick-action:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.wallet-quick-action--deposit .wallet-quick-action-icon,
+.wallet-quick-action--withdraw .wallet-quick-action-icon,
+.wallet-quick-action--transfer .wallet-quick-action-icon,
+.wallet-quick-action--settings .wallet-quick-action-icon,
+.wallet-quick-action--history .wallet-quick-action-icon,
+.wallet-quick-action--send .wallet-quick-action-icon,
+.wallet-quick-action--inbox .wallet-quick-action-icon,
+.wallet-quick-action--bank .wallet-quick-action-icon,
+.wallet-quick-action--users .wallet-quick-action-icon,
+.wallet-quick-action--login-activity .wallet-quick-action-icon,
+.wallet-quick-action--admin .wallet-quick-action-icon,
+.wallet-quick-action--admin-manage .wallet-quick-action-icon {
+    color: var(--btn-gold-text);
+    filter: none;
+}
+
+.wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.wallet-logout-tile .wallet-quick-action-icon {
+    color: var(--btn-red-text);
+    filter: none;
+}
+
+.wallet-quick-action-badge {
+    border: 2px solid #fff8e8;
+}
+
+.wallet-btn-disabled,
+.auth-submit:disabled,
+button:disabled,
+.admin-tool-action.is-disabled,
+.wallet-quick-action--placeholder {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(0.35);
+}
+
+/* User routes — unified light-darkened page overlay (admin .body-admin excluded) */
+body:not(.body-admin) .home-bg-overlay {
+    background: var(--user-bg-overlay);
+}
+
+/* Admin routes — unified light-darkened page overlay */
+body.body-admin .home-bg-overlay,
+.body-wallet.body-admin .home-bg-overlay {
+    background: var(--user-bg-overlay);
+}

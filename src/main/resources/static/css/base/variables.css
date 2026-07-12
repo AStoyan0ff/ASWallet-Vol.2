@@ -20,5 +20,35 @@
     --surface-radius: 12px;
     --surface-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 18px rgba(0, 0, 0, 0.22);
     --surface-input-bg: rgba(8, 7, 6, 0.96);
+
+    --user-bg-overlay: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+
+    /* Metallic buttons — gold (primary) & red (danger) */
+    --btn-gold-text: #1a1208;
+    --btn-gold-border: rgba(255, 214, 140, 0.35);
+    --btn-gold-border-hover: rgba(255, 224, 160, 0.5);
+    --btn-gold-inset: rgba(255, 236, 190, 0.35);
+    --btn-gold-inset-hover: rgba(255, 243, 210, 0.4);
+    --btn-gold-shadow: rgba(120, 80, 0, 0.28);
+    --btn-gold-shadow-hover: rgba(120, 80, 0, 0.22);
+    --btn-gold-text-shadow: rgba(255, 236, 190, 0.35);
+    --btn-gold-bg: linear-gradient(145deg, #e8b86d 0%, #d4a04a 28%, #c4931a 55%, #a67c00 100%);
+    --btn-gold-bg-hover: linear-gradient(145deg, #f0c882 0%, #ddb056 28%, #cf9f1f 55%, #b88900 100%);
+
+    --btn-red-text: #2a0808;
+    --btn-red-border: rgba(255, 180, 170, 0.35);
+    --btn-red-border-hover: rgba(255, 200, 190, 0.5);
+    --btn-red-inset: rgba(255, 210, 205, 0.35);
+    --btn-red-inset-hover: rgba(255, 225, 220, 0.4);
+    --btn-red-shadow: rgba(100, 20, 20, 0.28);
+    --btn-red-shadow-hover: rgba(100, 20, 20, 0.22);
+    --btn-red-text-shadow: rgba(255, 210, 205, 0.35);
+    --btn-red-bg: linear-gradient(145deg, #f08888 0%, #e53935 28%, #c62828 55%, #9a1515 100%);
+    --btn-red-bg-hover: linear-gradient(145deg, #f59898 0%, #ef5350 28%, #d32f2f 55%, #b71c1c 100%);
 }
 

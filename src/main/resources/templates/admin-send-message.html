@@ -5,7 +5,7 @@
     <title>Send Message - ASWallet</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body class="body-wallet body-admin body-admin-send-message">
+<body class="body-wallet body-admin body-admin-send-message body-admin-send-message-wallet-panel">
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/mailbox.png}" alt="">
     <div class="home-bg-overlay"></div>
@@ -55,7 +55,7 @@
 
             <div class="admin-send-message-actions">
                 <button type="submit" class="wallet-btn admin-action-btn admin-action-btn--update">Send</button>
-                <a class="wallet-btn wallet-btn-muted" th:href="@{/wallet}">Cancel</a>
+                <a class="wallet-btn wallet-btn-danger" th:href="@{/wallet}">Cancel</a>
             </div>
         </form>
     </section>

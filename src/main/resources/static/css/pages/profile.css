@@ -1,25 +1,59 @@
-﻿/*Advanced*/
+﻿/* Advanced — profile view (/profile) */
+.body-user-details {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
 .body-user-details .home-bg-image {
     object-position: center center;
 }
 
 .body-user-details .home-bg-overlay {
     background: linear-gradient(
-        rgba(0, 0, 0, 0.38),
-        rgba(12, 8, 4, 0.55)
+        180deg,
+        rgba(255, 252, 245, 0.14) 0%,
+        rgba(0, 0, 0, 0.04) 45%,
+        rgba(228, 218, 200, 0.28) 100%
     );
 }
 
-/* Advanced — edit profile background (/profile/edit) */
+.body-user-details .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+/* Advanced — edit profile (/profile/edit) */
+.body-edit-details {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
 .body-edit-details .home-bg-image {
     object-position: center center;
 }
 
 .body-edit-details .home-bg-overlay {
     background: linear-gradient(
-        rgba(0, 0, 0, 0.38),
-        rgba(12, 8, 4, 0.55)
+        180deg,
+        rgba(255, 252, 245, 0.14) 0%,
+        rgba(0, 0, 0, 0.04) 45%,
+        rgba(228, 218, 200, 0.28) 100%
     );
+}
+
+.body-edit-details .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    overflow: visible;
 }
 
 /* Advanced — daily limit edit background (/wallet/daily-limit/edit) */
@@ -171,10 +205,7 @@
     align-items: center;
     justify-content: center;
     padding: 8px 18px;
-    border: 1px solid rgba(255, 183, 77, 0.55);
     border-radius: 999px;
-    background: rgba(12, 12, 12, 0.85);
-    color: #ffb74d;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -182,9 +213,7 @@
 }
 
 .user-profile-avatar-choose-btn:hover {
-    border-color: rgba(255, 183, 77, 0.85);
-    color: #ffe0b2;
-    box-shadow: 0 6px 16px rgba(255, 143, 0, 0.18);
+    /* metallic — see base/buttons.css */
 }
 
 .user-profile-avatar-hint {
@@ -370,3 +399,593 @@
     }
 }
 
+/* /profile — white panel + cream inset detail fields */
+.body-user-details .user-profile-panel.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-user-details .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        14px 0 36px rgba(0, 0, 0, 0.3),
+        6px 18px 44px rgba(0, 0, 0, 0.34),
+        0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-user-details .user-profile-panel.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-user-details .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-user-details .wallet-form-hint {
+    color: #888;
+    text-shadow:
+            0 1px 0 rgba(255,255,255,.25),
+            0 3px 6px rgba(0,0,0,.35),
+            0 8px 20px rgba(0,0,0,.25);
+}
+
+.body-user-details .success {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.45);
+    border: 1px solid rgba(129, 199, 132, 0.55);
+}
+
+.body-user-details .user-profile-avatar {
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 8px 22px rgba(212, 175, 55, 0.22);
+}
+
+.body-user-details .user-profile-avatar--placeholder {
+    color: #c4931a;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(0, 0, 0, 0.05),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-user-details .user-profile-details-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.body-user-details .user-profile-details-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 0 12px;
+    margin: 0 0 12px;
+    border-bottom: 1px solid rgba(158, 142, 118, 0.38);
+}
+
+.body-user-details .user-profile-details-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.body-user-details .user-profile-details-item dt {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #8a7340;
+}
+
+.body-user-details .user-profile-details-item dd {
+    margin: 0;
+    padding: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: #2c2418;
+    text-align: left;
+    word-break: break-word;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.body-user-details .account-status--active {
+    color: #2e7d32;
+}
+
+.body-user-details .account-status--inactive {
+    color: #c62828;
+}
+
+.body-user-details .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+/* /profile — black-to-gold metallic panel */
+.body-user-details.body-user-details-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-user-details.body-user-details-gold-panel .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-user-details.body-user-details-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-user-details.body-user-details-gold-panel .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-user-details.body-user-details-gold-panel .user-profile-details-item {
+    border-bottom-color: rgba(60, 45, 12, 0.28);
+}
+
+.body-user-details.body-user-details-gold-panel .user-profile-details-item dt {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-user-details.body-user-details-gold-panel .user-profile-details-item dd {
+    color: #1a1208;
+}
+
+.body-user-details.body-user-details-gold-panel .user-profile-details-item:nth-child(1) dd,
+.body-user-details.body-user-details-gold-panel .user-profile-details-item:nth-child(2) dd {
+    background: linear-gradient(145deg, #fff8e8 0%, #ffe082 38%, #d4af37 72%, #a67c00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    text-shadow: none;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.28));
+}
+
+.body-user-details.body-user-details-gold-panel .account-status--active {
+    color: #1b5e20;
+}
+
+.body-user-details.body-user-details-gold-panel .account-status--inactive {
+    color: #b71c1c;
+}
+
+.body-user-details.body-user-details-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+/* /profile/edit — white panel + cream inset inputs */
+.body-edit-details .user-profile-panel.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-edit-details .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        14px 0 36px rgba(0, 0, 0, 0.3),
+        6px 18px 44px rgba(0, 0, 0, 0.34),
+        0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-edit-details .user-profile-panel.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-edit-details .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-edit-details .wallet-form-hint {
+    color: #7a6e5c;
+}
+
+.body-edit-details .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+}
+
+.body-edit-details .auth-field-group label,
+.body-edit-details .user-profile-avatar-label {
+    color: #5c4f3a;
+    font-weight: 600;
+    font-size: 0.82rem;
+}
+
+.body-edit-details .auth-field-group {
+    margin-bottom: 10px;
+}
+
+.body-edit-details .auth-form input {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+    color: #2c2418;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(0, 0, 0, 0.05),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-edit-details .auth-form input::placeholder {
+    color: #b0a595;
+}
+
+.body-edit-details .auth-form input:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(0, 0, 0, 0.05),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+        0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-edit-details .user-profile-avatar {
+    border-color: rgba(212, 175, 55, 0.55);
+    box-shadow: 0 8px 22px rgba(212, 175, 55, 0.22);
+}
+
+.body-edit-details .user-profile-avatar-choose-btn {
+    /* metallic — see base/buttons.css */
+}
+
+.body-edit-details .user-profile-avatar-choose-btn:hover {
+    /* metallic — see base/buttons.css */
+}
+
+.body-edit-details .auth-field-group .error {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-edit-details .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+/* /profile/edit — black-to-gold metallic panel */
+.body-edit-details.body-edit-details-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-edit-details.body-edit-details-gold-panel .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-edit-details.body-edit-details-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-edit-details.body-edit-details-gold-panel .wallet-form-hint,
+.body-edit-details.body-edit-details-gold-panel .user-profile-avatar-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-edit-details.body-edit-details-gold-panel .auth-field-group label,
+.body-edit-details.body-edit-details-gold-panel .user-profile-avatar-label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-edit-details.body-edit-details-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-user-details .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child,
+    .body-edit-details .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child,
+    .body-daily-limit-light .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /wallet/daily-limit/edit — light page + white panel + cream picker */
+.body-daily-limit.body-daily-limit-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-daily-limit.body-daily-limit-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-daily-limit.body-daily-limit-light .wallet-landing {
+    padding: 16px 20px;
+    overflow: visible;
+}
+
+.body-daily-limit.body-daily-limit-light .user-profile-panel.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-daily-limit.body-daily-limit-light .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-daily-limit.body-daily-limit-light .user-profile-panel.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-daily-limit-light .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-daily-limit-light .wallet-form-hint {
+    color: #7a6e5c;
+}
+
+.body-daily-limit-light .daily-limit-picker-card {
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-daily-limit-light .daily-limit-picker-card::before {
+    background: linear-gradient(
+            120deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.35) 50%,
+            transparent 70%
+    );
+}
+
+.body-daily-limit-light .daily-limit-picker-label {
+    color: #8a7340;
+}
+
+.body-daily-limit-light .daily-limit-stepper-btn {
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background: linear-gradient(180deg, #f5efe6 0%, #e8dfd2 100%);
+    color: #8a7340;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.65),
+            0 4px 10px rgba(100, 75, 30, 0.12);
+}
+
+.body-daily-limit-light .daily-limit-stepper-glyph {
+    text-shadow: none;
+}
+
+.body-daily-limit-light .daily-limit-stepper-btn:hover:not(:disabled) {
+    border-color: rgba(212, 175, 55, 0.75);
+    color: #a67c00;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.75),
+            0 6px 14px rgba(100, 75, 30, 0.16);
+}
+
+.body-daily-limit-light .daily-limit-value-wrap {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    box-shadow:
+            inset 0 2px 6px rgba(0, 0, 0, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.body-daily-limit-light .daily-limit-value-glow {
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.22), transparent 72%);
+}
+
+.body-daily-limit-light .daily-limit-value {
+    color: #a67c00;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.body-daily-limit-light .daily-limit-value--pulse {
+    animation-name: daily-limit-value-pulse-light;
+}
+
+@keyframes daily-limit-value-pulse-light {
+    0% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.06);
+        color: #c4931a;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.body-daily-limit-light .daily-limit-range-hint {
+    color: #7a6e5c;
+}
+
+.body-daily-limit-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /wallet/daily-limit/edit — black-to-gold metallic panel */
+.body-daily-limit.body-daily-limit-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .reveal-item.is-visible .user-profile-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-range-hint {
+    color: #4a3820;
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-submit-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-submit {
+    width: 50%;
+    margin-top: 0;
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .body-daily-limit-light .daily-limit-value--pulse {
+        animation: none;
+    }
+}

@@ -67,6 +67,23 @@ public class AdminController {
         return "admin-login-activity";
     }
 
+    @PostMapping("/login-activity/clear")
+    public String clearLoginActivity(Principal principal, RedirectAttributes redirectAttributes) {
+        int deleted = loginActivityService.clearAll();
+
+        if (deleted == 0) {
+            redirectAttributes.addFlashAttribute("successMessage", "No login activity to clear.");
+
+        } else {
+            redirectAttributes.addFlashAttribute(
+                    "successMessage",
+                    "Cleared " + deleted + " login activity record(s)."
+            );
+        }
+
+        return "redirect:/admin/login-activity";
+    }
+
     // Advanced — manage user status and role
     @GetMapping("/users/{id}/manage")
     public String manageUserPage(

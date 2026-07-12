@@ -1015,7 +1015,7 @@
     <schema id="323" parent="1" name="as_wallet">
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2026-07-10.16:53:14</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2026-07-12.20:33:29</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="324" parent="1" name="my_bookshelf_app">

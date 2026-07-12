@@ -5,7 +5,7 @@
     <title>Login Activity - ASWallet</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body class="body-wallet body-admin body-admin-login-activity">
+<body class="body-wallet body-admin body-admin-login-activity body-admin-login-activity-wallet-panel">
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/5.png}" alt="">
     <div class="home-bg-overlay"></div>
@@ -13,13 +13,24 @@
 
 <main class="wallet-landing reveal-item">
     <section class="wallet-panel wallet-panel--admin wallet-panel--materialize reveal-child">
-        <div class="form-panel-top auth-stagger">
+        <div class="form-panel-top form-panel-top--split auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+
+            <form th:action="@{/admin/login-activity/clear}"
+                  method="post"
+                  class="login-activity-clear-form"
+                  onsubmit="return confirm('Clear all login activity records? This cannot be undone.');">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit" class="home-pill login-activity-clear-btn">Clear</button>
+            </form>
         </div>
 
         <h2 class="wallet-title wallet-title--center auth-stagger">Login Activity</h2>
         <p class="wallet-greeting auth-stagger">Last 10 successful sign-ins across the system</p>
         <p class="login-activity-hint auth-stagger">Sign in from another device using your PC LAN address (e.g. http://192.168.x.x:8080) to record real client IPs.</p>
+
+        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
         <div class="login-activity-wrap auth-stagger" th:if="${!#lists.isEmpty(loginActivities)}">
             <table class="login-activity-table">

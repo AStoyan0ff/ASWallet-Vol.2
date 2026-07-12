@@ -6,9 +6,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="body-wallet body-wallet-page">
+<body class="body-wallet body-wallet-page body-wallet-white-panel body-wallet-light-page">
 <div class="home-bg-media" aria-hidden="true">
-    <img class="home-bg-image" th:src="@{/images/wallet.png}" alt="">
+    <img class="home-bg-image" th:src="@{/images/walletLight.png}" alt="">
     <div class="home-bg-overlay"></div>
 </div>
 
@@ -17,7 +17,7 @@
         <span class="home-pill wallet-dashboard-pill auth-stagger">Dashboard</span>
         <p class="wallet-greeting auth-stagger">Hello, <span class="wallet-username"
                                                              th:text="${wallet.username}"></span></p>
-        <h2 class="wallet-title auth-stagger">Your Wallet</h2>
+        <h2 class="wallet-title auth-stagger">YOUR WALLET</h2>
 
         <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
         <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
@@ -39,13 +39,13 @@
             <div class="wallet-bank-card__face">
                 <span class="wallet-bank-card__contactless" aria-hidden="true">
                     <img class="wallet-bank-card__contactless-img"
-                         th:src="@{/images/noContact.png}"
+                         th:src="@{/images/logos/noContact.png}"
                          alt="">
                 </span>
 
                 <span class="wallet-bank-card__chip" aria-hidden="true">
                     <img class="wallet-bank-card__chip-img"
-                         th:src="@{/images/emv-chip.png}"
+                         th:src="@{/images/logos/emv-chip.png}"
                          alt="">
                 </span>
 
@@ -94,7 +94,7 @@
                             <path d="M5 12l7 7 7-7"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Deposit</span>
+                    <span class="wallet-quick-action-label">DEPOSIT</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--withdraw" th:href="@{/transactions/withdraw}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
@@ -103,7 +103,7 @@
                             <path d="M5 12l7-7 7 7"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Withdraw</span>
+                    <span class="wallet-quick-action-label">WITHDRAW</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--transfer" th:href="@{/transactions/transfer}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
@@ -114,7 +114,7 @@
                             <path d="M10 20l-4-3 4-3"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Transfer</span>
+                    <span class="wallet-quick-action-label">TRANSFER</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--settings" th:href="@{/wallet/settings}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
@@ -123,7 +123,7 @@
                             <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Settings</span>
+                    <span class="wallet-quick-action-label">SETTINGS</span>
                 </a>
             </div>
         </section>
@@ -139,7 +139,7 @@
                             <path d="M12 8v5l3 2"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">History</span>
+                    <span class="wallet-quick-action-label">HISTORY</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--send"
                    th:unless="${isAdmin}"
@@ -150,7 +150,7 @@
                             <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Send Message</span>
+                    <span class="wallet-quick-action-label">SEND MESSAGE</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--bank"
                    th:if="${isAdmin}"
@@ -162,7 +162,7 @@
                         </svg>
                     </span>
                     <span class="wallet-quick-action-label"
-                          th:text="${savedBankCard != null} ? 'View Bank Details' : 'Add Bank Card'">Bank Details</span>
+                          th:text="${savedBankCard != null} ? 'VIEW BANK DETAILS' : 'ADD BANK CARD'">BANK DETAILS</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--inbox wallet-quick-action--badge"
                    th:unless="${isAdmin}"
@@ -173,7 +173,7 @@
                             <path d="M3 7l9 6 9-6"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Message Inbox</span>
+                    <span class="wallet-quick-action-label">MESSAGE INBOX</span>
                     <span class="wallet-quick-action-badge"
                           th:if="${unreadMessageCount > 0}"
                           th:text="${unreadMessageCount}"></span>
@@ -188,7 +188,7 @@
                             <path d="M12 15.5V18"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Login Activity</span>
+                    <span class="wallet-quick-action-label">LOGIN ACTIVITY</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--bank"
                    th:unless="${isAdmin}"
@@ -200,7 +200,7 @@
                         </svg>
                     </span>
                     <span class="wallet-quick-action-label"
-                          th:text="${savedBankCard != null} ? 'View Bank Details' : 'Add Bank Card'">Bank Details</span>
+                          th:text="${savedBankCard != null} ? 'VIEW BANK DETAILS' : 'ADD BANK CARD'">Bank Details</span>
                 </a>
                 <a class="wallet-quick-action wallet-quick-action--admin"
                    th:if="${isAdmin}"
@@ -210,7 +210,7 @@
                             <path d="M12 3l7 4v6c0 4.4-3 7.5-7 8-4-.5-7-3.6-7-8V7l7-4z"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">Admin Panel</span>
+                    <span class="wallet-quick-action-label">ADMIN PANEL</span>
                 </a>
             </div>
         </section>
@@ -225,7 +225,7 @@
                         <path d="M21 12H9"/>
                     </svg>
                 </span>
-                <span class="wallet-quick-action-label">Logout</span>
+                <span class="wallet-quick-action-label">LOGOUT</span>
             </button>
         </form>
     </section>

@@ -1,16 +1,58 @@
+.body-contact-us {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
 .body-contact-us .home-bg-image {
     object-position: center center;
 }
 
 .body-contact-us .home-bg-overlay {
     background: linear-gradient(
-            rgba(0, 0, 0, 0.38),
-            rgba(12, 8, 4, 0.55)
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
     );
+}
+
+.body-contact-us .wallet-landing {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 28px 24px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.body-contact-us .contact-us-panel.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-contact-us .reveal-item.is-visible .contact-us-panel.wallet-panel--materialize.reveal-child {
+    background: #fff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-contact-us .contact-us-panel.wallet-panel--materialize::after {
+    display: none;
 }
 
 .contact-us-panel {
     width: min(520px, 96%);
+    padding: 22px 22px 20px;
 }
 
 .contact-us-header {
@@ -18,49 +60,192 @@
     margin-bottom: 6px;
 }
 
+.body-contact-us .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-contact-us .wallet-form-hint {
+    color: #333;
+    text-shadow:
+            0 1px 0 rgba(255,255,255,.25),
+            0 3px 6px rgba(0,0,0,.35),
+            0 8px 20px rgba(0,0,0,.25);
+}
+
 .contact-us-about {
     margin: 14px 0 20px;
-    padding: 16px 18px;
+    padding: 14px 16px;
     text-align: center;
-    border-radius: 14px;
-    border: 1px solid rgba(201, 168, 92, 0.28);
-    background: rgba(8, 7, 6, 0.38);
-    box-shadow: inset 0 1px 0 rgba(255, 235, 200, 0.06),
-    0 8px 22px rgba(0, 0, 0, 0.22);
+    border-radius: 12px;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
 }
 
 .contact-us-about__title {
     margin: 0 0 8px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #10b981;
+    color: #2e7d32;
+    text-shadow:
+            0 1px 0 rgba(255,255,255,.25),
+            0 3px 6px rgba(0,0,0,.35),
+            0 8px 20px rgba(0,0,0,.25);
 }
 
 .contact-us-about__text {
     margin: 0 auto;
-    max-width: 55ch;
-    font-size: 0.92rem;
+    max-width: 60ch;
+    font-size: 1.0rem;
     line-height: 1.6;
-    color: #2e7d32;
-
+    color: #1a2e32;
+    text-shadow:
+            0 1px 0 rgba(255,255,255,.25),
+            0 3px 6px rgba(0,0,0,.35),
+            0 8px 20px rgba(0,0,0,.25);
 }
 
 .contact-us-form {
     display: grid;
-    gap: 14px;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.body-contact-us .contact-us-form .auth-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 0 12px;
+    margin: 0 0 12px;
+    border-bottom: 1px solid rgba(158, 142, 118, 0.38);
+}
+
+.body-contact-us .contact-us-form .auth-field-group:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.body-contact-us .contact-us-form label {
+    color: #8a7340;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+}
+
+.body-contact-us .contact-us-form input {
+    padding: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: #2c2418;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
 .contact-us-form input[readonly] {
     cursor: default;
-    color: #ff8f00;
-    background: rgba(10, 8, 6, 0.55);
-    border-color: rgba(201, 168, 92, 0.22);
+    color: #2c2418;
+    opacity: 1;
 }
 
 .contact-us-form input[readonly]:focus {
     outline: none;
-    border-color: rgba(201, 168, 92, 0.35);
-    box-shadow: 0 0 0 2px rgba(255, 143, 0, 0.12);
+    border: none;
+    box-shadow: none;
+}
+
+.body-contact-us .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+/* /wallet/contact-us — black-to-gold metallic panel */
+.body-contact-us.body-contact-us-gold-panel .contact-us-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-contact-us.body-contact-us-gold-panel .reveal-item.is-visible .contact-us-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-contact-us.body-contact-us-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-contact-us.body-contact-us-gold-panel .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-contact-us.body-contact-us-gold-panel .contact-us-form label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-contact-us.body-contact-us-gold-panel .contact-us-form input,
+.body-contact-us.body-contact-us-gold-panel .contact-us-form input[readonly] {
+    color: #1a1208;
+}
+
+.body-contact-us.body-contact-us-gold-panel .contact-us-form .auth-field-group {
+    border-bottom-color: rgba(60, 45, 12, 0.28);
+}
+
+.body-contact-us.body-contact-us-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-contact-us .reveal-item.is-visible .contact-us-panel.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-contact-us.body-contact-us-gold-panel .reveal-item.is-visible .contact-us-panel.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
 }

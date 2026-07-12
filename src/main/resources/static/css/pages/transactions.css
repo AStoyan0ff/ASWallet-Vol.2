@@ -15,19 +15,12 @@
     font-family: inherit;
     font-size: 0.85rem;
     font-weight: 800;
-    color: #fff;
-    background: linear-gradient(135deg, #e53935, #c62828);
-    border: 1px solid #b71c1c;
     border-radius: 999px;
-    box-shadow: 0 6px 16px rgba(229, 57, 53, 0.35);
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .body-transaction-history .tx-clear-history-btn:hover {
-    transform: translateY(-1px);
-    background: linear-gradient(135deg, #ef5350, #d32f2f);
-    border-color: #c62828;
-    color: #fff;
+    /* metallic red — see base/buttons.css */
 }
 
 .withdraw-limit-summary {
@@ -392,6 +385,273 @@
 @media (max-width: 520px) {
     .tx-filter-clear {
         margin-left: 0;
+    }
+}
+
+/* /transactions/history — light page + white panel */
+.body-transaction-history.body-transaction-history-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-transaction-history.body-transaction-history-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-transaction-history.body-transaction-history-light .wallet-landing {
+    align-items: safe center;
+    padding: 16px 20px 28px;
+    overflow: visible;
+}
+
+.body-transaction-history.body-transaction-history-light .wallet-panel--history.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-transaction-history.body-transaction-history-light .reveal-item.is-visible .wallet-panel--history.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-transaction-history.body-transaction-history-light .wallet-panel--history.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-transaction-history-light .wallet-panel--history {
+    width: min(1400px, 99%);
+    padding: 22px 28px 26px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-transaction-history-light .wallet-panel--history .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-transaction-history-light .wallet-panel--history > .success {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.45);
+    border: 1px solid rgba(129, 199, 132, 0.55);
+    box-shadow: none;
+}
+
+.body-transaction-history-light .wallet-panel--history > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-transaction-history-light .tx-pending-refresh-hint {
+    color: #7a6e5c;
+    background: rgba(255, 243, 224, 0.65);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.body-transaction-history-light .tx-table-wrap {
+    margin-bottom: 22px;
+    border: 1px solid rgba(158, 142, 118, 0.38);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table th,
+.body-transaction-history.body-transaction-history-light .tx-table td,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table th,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table td {
+    color: #1f1a14;
+    border-bottom-color: rgba(158, 142, 118, 0.28);
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table th,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table th {
+    background: linear-gradient(180deg, #e8e0d4 0%, #ede6db 100%);
+    color: #6b5a38;
+    font-weight: 700;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table td,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table td {
+    font-weight: 600;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table tbody tr:nth-child(even) td,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table tbody tr:nth-child(even) td {
+    background: rgba(244, 238, 228, 0.55);
+    color: #1f1a14;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table tbody tr:hover td,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table tbody tr:hover td {
+    background: rgba(212, 175, 55, 0.1);
+    color: #1f1a14;
+}
+
+.body-transaction-history-light .tx-account-status-label {
+    color: #8a7340;
+}
+
+.body-transaction-history-light .tx-empty {
+    color: #7a6e5c;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-transaction-history-light .status-chip--completed,
+.body-transaction-history-light .status-chip--active {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.55);
+    border-color: rgba(129, 199, 132, 0.45);
+}
+
+.body-transaction-history-light .status-chip--pending {
+    color: #a67c00;
+    background: rgba(255, 224, 178, 0.65);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.body-transaction-history-light .status-chip--pending_risk_review {
+    color: #b8860b;
+    background: rgba(255, 236, 179, 0.65);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.body-transaction-history-light .status-chip--failed,
+.body-transaction-history-light .status-chip--cancelled,
+.body-transaction-history-light .status-chip--inactive {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border-color: rgba(239, 154, 154, 0.45);
+}
+
+.body-transaction-history-light .tx-flow-chip--in {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.55);
+    border-color: rgba(129, 199, 132, 0.45);
+}
+
+.body-transaction-history-light .tx-flow-chip--out,
+.body-transaction-history-light .tx-flow-chip--incoming,
+.body-transaction-history-light .tx-flow-chip--pending {
+    color: #a67c00;
+    background: rgba(255, 224, 178, 0.65);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.body-transaction-history-light .tx-flow-chip--negative {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border-color: rgba(239, 154, 154, 0.45);
+}
+
+.body-transaction-history-light .tx-flow-chip--neutral {
+    color: #1565c0;
+    background: rgba(187, 222, 251, 0.55);
+    border-color: rgba(100, 181, 246, 0.45);
+}
+
+.body-transaction-history-light .type-chip {
+    color: #2c2418;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+}
+
+.body-transaction-history-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /transactions/history — black-to-gold metallic panel */
+.body-transaction-history.body-transaction-history-gold-panel .wallet-panel--history.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .reveal-item.is-visible .wallet-panel--history.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .wallet-panel--history .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .tx-empty {
+    color: rgba(255, 244, 225, 0.88);
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .tx-account-status-label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-transaction-history.body-transaction-history-light .reveal-item.is-visible .wallet-panel--history.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-transaction-history.body-transaction-history-gold-panel .reveal-item.is-visible .wallet-panel--history.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
     }
 }
 

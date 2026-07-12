@@ -50,6 +50,21 @@ public class LoginActivityServiceImpl implements LoginActivityService {
                 .toList();
     }
 
+    @Override
+    @Transactional
+    public int clearAll() {
+        long count = loginActivityRepository.count();
+
+        if (count == 0) {
+            return 0;
+        }
+
+        loginActivityRepository.deleteAllInBatch();
+        logger.info("Cleared {} login activity record(s)", count);
+
+        return (int) count;
+    }
+
     private LoginActivityViewDTO mapToView(LoginActivity activity) {
         return LoginActivityViewDTO.builder()
                 .username(activity.getUsername())

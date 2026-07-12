@@ -4,9 +4,9 @@
     <title>Deposit ASWallet</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body class="body-wallet">
+<body class="body-wallet body-deposit-light body-deposit-gold-panel">
 <div class="home-bg-media" aria-hidden="true">
-    <img class="home-bg-image" th:src="@{/images/4.png}" alt="">
+    <img class="home-bg-image" th:src="@{/images/deposit.png}" alt="">
     <div class="home-bg-overlay"></div>
 </div>
 
@@ -15,8 +15,8 @@
         <div class="form-panel-top auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
         </div>
-        <h2 class="wallet-title wallet-title--center auth-stagger">Deposit</h2>
-        <p class="wallet-form-hint auth-stagger">ASWallet balance from your bank card</p>
+        <h2 class="wallet-title wallet-title--center auth-stagger">DEPOSIT</h2>
+        <p class="wallet-form-hint auth-stagger">Balance from your bank card</p>
 
         <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
@@ -39,7 +39,7 @@
                     <span th:text="${wallet.balance}"></span>
                     <span th:text="${wallet.currency}"></span>
                 </p>
-                <p class="deposit-flow-meta">Current balance <span th:text="${wallet.username}"></span></p>
+                <p class="deposit-flow-meta">Current balance: <span th:text="${wallet.username}"></span></p>
             </div>
         </div>
 

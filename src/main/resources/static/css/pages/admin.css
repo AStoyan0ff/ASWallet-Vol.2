@@ -1,8 +1,158 @@
 ﻿/* Advanced — transaction export page (/wallet/export) */
+.body-export-file {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-export-file .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
 .body-export-file .wallet-landing {
     align-items: safe center;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding: 28px 20px;
+    overflow: visible;
+}
+
+.body-export-file .wallet-panel--export.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-export-file .reveal-item.is-visible .wallet-panel--export.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-export-file .wallet-panel--export.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-export-file .wallet-panel--export {
+    padding: 22px 22px 20px;
+}
+
+.body-export-file .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-export-file .wallet-form-hint {
+    color: #888;
+    text-shadow:
+            0 2px 3px rgba(255,255,255,.2),
+            0 6px 10px rgba(0,0,0,.25),
+            0 14px 22px rgba(0,0,0,.18);
+}
+
+.body-export-file .tx-filter-form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.body-export-file .tx-filter-field label {
+    color: #5c4f3a;
+}
+
+.body-export-file .tx-filter-form .tx-filter-field input,
+.body-export-file .tx-filter-form .tx-filter-field select {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #2c2418;
+    color-scheme: light;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: var(--surface-radius);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-export-file .tx-filter-form .tx-filter-field select {
+    padding-right: 34px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #e8e0d4;
+    background-image:
+            linear-gradient(45deg, transparent 50%, #8a7340 50%),
+            linear-gradient(135deg, #8a7340 50%, transparent 50%),
+            linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    background-position:
+            calc(100% - 16px) calc(50% + 2px),
+            calc(100% - 11px) calc(50% + 2px),
+            0 0;
+    background-size: 5px 5px, 5px 5px, 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.body-export-file .tx-filter-form .tx-filter-field select option {
+    color: #2c2418;
+    background-color: #ffffff;
+}
+
+.body-export-file .tx-filter-form .tx-filter-field input::placeholder {
+    color: #b0a595;
+}
+
+.body-export-file .tx-filter-form .tx-filter-field input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: none;
+    opacity: 0.72;
+}
+
+.body-export-file .tx-filter-form .tx-filter-field select:focus,
+.body-export-file .tx-filter-form .tx-filter-field input:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-export-file .tx-filter-actions {
+    border-top: 1px solid rgba(158, 142, 118, 0.28);
+}
+
+.body-export-file .export-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto;
+    padding: 4px 9px;
+    margin-bottom: 0;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.body-export-file .export-nav-pill--clear {
+    /* metallic red — see base/buttons.css */
+}
+
+.body-export-file .export-nav-pill--clear:hover {
+    /* metallic red — see base/buttons.css */
 }
 
 .form-panel-top--split {
@@ -10,35 +160,230 @@
     gap: 12px;
 }
 
-.body-export-file .export-nav-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 148px;
-    padding: 8px 18px;
-    margin-bottom: 0;
-    font-size: 0.85rem;
-    font-weight: 800;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.body-export-file .export-nav-pill--clear {
-    color: #fff;
-    background: linear-gradient(135deg, #e53935, #c62828);
-    border: 1px solid #b71c1c;
-    box-shadow: 0 6px 16px rgba(229, 57, 53, 0.35);
-}
-
-.body-export-file .export-nav-pill--clear:hover {
-    color: #fff;
-    background: linear-gradient(135deg, #ef5350, #d32f2f);
-    border-color: #c62828;
-    transform: translateY(-1px);
-}
-
 .wallet-panel--export {
     width: min(560px, 96%);
+}
+
+.body-export-file .tx-export-count {
+    margin: 14px 0 0;
+    text-align: center;
+    color: #2c2418;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.body-export-file .tx-export-preview {
+    margin-top: 14px;
+}
+
+.body-export-file .tx-export-preview > summary.tx-export-count {
+    list-style: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.body-export-file .tx-export-preview > summary.tx-export-count::-webkit-details-marker {
+    display: none;
+}
+
+.body-export-file .tx-export-preview > summary.tx-export-count:hover {
+    border-color: rgba(212, 175, 55, 0.62);
+}
+
+.body-export-file .tx-export-preview[open] > summary.tx-export-count {
+    border-color: rgba(212, 175, 55, 0.75);
+    margin-bottom: 10px;
+}
+
+.body-export-file .tx-export-count-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.76rem;
+    color: #7a6e5c;
+    font-weight: 500;
+}
+
+.body-export-file .tx-export-count--empty {
+    padding: 10px 14px;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-export-file .tx-export-preview-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: #ffffff;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.55) #f2ebe0;
+}
+
+.body-export-file .tx-export-preview-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.body-export-file .tx-export-preview-list::-webkit-scrollbar-track {
+    background: #f2ebe0;
+    border-radius: 0 10px 10px 0;
+}
+
+.body-export-file .tx-export-preview-list::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.45);
+    border-radius: 999px;
+    border: 2px solid #f2ebe0;
+}
+
+.body-export-file .tx-export-preview-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(196, 147, 26, 0.65);
+}
+
+.body-export-file .tx-export-preview-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    gap: 8px 12px;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(158, 142, 118, 0.28);
+    color: #2c2418;
+    font-size: 0.82rem;
+}
+
+.body-export-file .tx-export-preview-item:last-child {
+    border-bottom: none;
+}
+
+.body-export-file .tx-export-preview-amount {
+    font-weight: 700;
+    color: #c4931a;
+    white-space: nowrap;
+}
+
+.body-export-file .tx-export-preview-desc {
+    color: #7a6e5c;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.body-export-file .tx-export-preview-date {
+    color: #9a9080;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.body-export-file .tx-export-actions {
+    margin-top: 16px;
+}
+
+.body-export-file .tx-export-action-btn {
+    width: 100%;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.body-export-file .tx-export-action-btn:hover {
+    /* metallic — see base/buttons.css */
+}
+
+.body-export-file .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+/* /wallet/export — black-to-gold metallic panel */
+.body-export-file.body-export-file-gold-panel .wallet-panel--export.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-export-file.body-export-file-gold-panel .reveal-item.is-visible .wallet-panel--export.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-export-file.body-export-file-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-export-file.body-export-file-gold-panel .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-export-file.body-export-file-gold-panel .tx-filter-field label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-export-file.body-export-file-gold-panel .tx-filter-actions {
+    border-top-color: rgba(60, 45, 12, 0.28);
+}
+
+.body-export-file.body-export-file-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-export-file .reveal-item.is-visible .wallet-panel--export.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-export-file.body-export-file-gold-panel .reveal-item.is-visible .wallet-panel--export.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
 }
 
 .tx-export-count {
@@ -313,11 +658,11 @@
 }
 
 .wallet-quick-action--admin-manage .wallet-quick-action-icon {
-    color: #748ffc;
+    /* metallic — see base/buttons.css */
 }
 
 .wallet-quick-action--admin-remove .wallet-quick-action-icon {
-    color: #ef5350;
+    /* metallic red — see base/buttons.css */
 }
 
 .admin-user-action-hint {
@@ -703,47 +1048,32 @@
     text-align: center;
 }
 
-/* Advanced - green update button in admin panel */
+/* Advanced - update button in admin panel */
 .admin-action-btn--update {
-    background: linear-gradient(135deg, #43a047, #2e7d32);
-    color: #fff;
-    border: 1px solid #1b5e20;
-    box-shadow: 0 8px 20px rgba(67, 160, 71, 0.28);
+    /* metallic — see base/buttons.css */
 }
 
 .admin-action-btn--update:hover {
-    background: linear-gradient(135deg, #4caf50, #388e3c);
-    color: #fff;
-    border-color: #2e7d32;
+    /* metallic — see base/buttons.css */
 }
 
 /* Advanced — role update button in admin panel */
 .admin-action-btn--role {
-    background: linear-gradient(135deg, #5c7cfa, #3b5bdb);
-    color: #fff;
-    border: 1px solid #364fc7;
-    box-shadow: 0 8px 20px rgba(59, 91, 219, 0.28);
+    /* metallic — see base/buttons.css */
 }
 
 .admin-action-btn--role:hover {
-    background: linear-gradient(135deg, #748ffc, #4c6ef5);
-    color: #fff;
-    border-color: #364fc7;
+    /* metallic — see base/buttons.css */
 }
 
 /* Advanced — manage user button on /admin */
 .admin-action-btn--manage {
-    background: linear-gradient(135deg, #5c7cfa, #3b5bdb);
-    color: #fff;
-    border: 1px solid #364fc7;
-    box-shadow: 0 8px 20px rgba(59, 91, 219, 0.28);
     text-decoration: none;
+    /* metallic — see base/buttons.css */
 }
 
 .admin-action-btn--manage:hover {
-    background: linear-gradient(135deg, #748ffc, #4c6ef5);
-    color: #fff;
-    border-color: #364fc7;
+    /* metallic — see base/buttons.css */
 }
 
 .admin-action-btn--full {
@@ -845,7 +1175,11 @@
 }
 
 .admin-manage-submit {
-    width: 100%;
+    width: 50%;
+    min-width: 148px;
+    max-width: 220px;
+    align-self: center;
+    margin-inline: auto;
 }
 
 .body-admin-user-manage .admin-manage-role-restricted {
@@ -864,6 +1198,11 @@
     text-align: center;
     color: #c9b8a0;
     font-size: 0.88rem;
+}
+
+.body-wallet-send-message .wallet-panel--admin-send-message .wallet-greeting {
+    text-align: center;
+    margin: 0 0 8px;
 }
 
 .body-admin .admin-send-message-form .admin-mailbox-input,
@@ -967,6 +1306,12 @@
     flex: 1 1 140px;
 }
 
+.body-admin .admin-send-message-actions .admin-action-btn,
+.body-wallet-send-message .admin-send-message-actions .admin-action-btn {
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
 .mailbox-delete-form {
     margin-top: 18px;
     text-align: center;
@@ -984,20 +1329,13 @@
     font-family: inherit;
     font-size: 0.85rem;
     font-weight: 800;
-    color: #fff;
-    background: linear-gradient(135deg, #e53935, #c62828);
-    border: 1px solid #b71c1c;
     border-radius: 999px;
-    box-shadow: 0 6px 16px rgba(229, 57, 53, 0.35);
     transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .body-wallet-messages .mailbox-delete-btn:hover,
 .body-admin-message-inbox .mailbox-delete-btn:hover {
-    transform: translateY(-1px);
-    background: linear-gradient(135deg, #ef5350, #d32f2f);
-    border-color: #c62828;
-    color: #fff;
+    /* metallic red — see base/buttons.css */
 }
 
 .body-wallet-messages .mailbox-list,
@@ -1364,14 +1702,10 @@
     font-weight: 800;
     text-align: center;
     box-sizing: border-box;
-    border: 1px solid rgba(229, 115, 115, 0.45);
-    background: rgba(198, 40, 40, 0.18);
-    color: #ffcdd2;
 }
 
 .body-admin-risk-reviews .risk-reviews-clear-btn:hover {
-    background: rgba(198, 40, 40, 0.28);
-    color: #fff;
+    /* metallic red — see base/buttons.css */
 }
 
 .risk-reviews-table-wrap {
@@ -1571,3 +1905,1886 @@
     }
 }
 
+/* /admin/risk-reviews — wallet-style B&W gradient panel */
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .wallet-landing {
+    overflow: visible;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .reveal-item.is-visible .wallet-panel--admin-risk-reviews.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews .wallet-greeting .wallet-username {
+    color: #ffb74d;
+}
+
+.body-admin-risk-reviews-wallet-panel .login-activity-hint {
+    color: rgba(255, 236, 190, 0.78);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews > .success {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 14px rgba(0, 0, 0, 0.28);
+    font-weight: 600;
+}
+
+.body-admin-risk-reviews-wallet-panel .wallet-panel--admin-risk-reviews > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap {
+    border: 1px solid rgba(158, 142, 118, 0.38);
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+    scrollbar-color: rgba(158, 142, 118, 0.55) rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap::-webkit-scrollbar-track {
+    background: rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap::-webkit-scrollbar-thumb {
+    background: rgba(158, 142, 118, 0.55);
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table th,
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td {
+    color: #1f1a14;
+    border-bottom-color: rgba(158, 142, 118, 0.28);
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table thead th {
+    background: linear-gradient(180deg, #e8e0d4 0%, #ede6db 100%);
+    color: #6b5a38;
+    border-bottom-color: rgba(158, 142, 118, 0.38);
+    box-shadow: none;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table tbody tr:nth-child(even) td {
+    background: rgba(244, 238, 228, 0.55);
+    color: #1f1a14;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table tbody tr:hover td {
+    background: rgba(212, 175, 55, 0.1);
+    color: #1f1a14;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(1),
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(2) {
+    color: #8a7340;
+}
+
+.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(7) {
+    color: #5c4f3a;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-transaction-ref {
+    color: #2c2418;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reasons-list {
+    color: #5c4f3a;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-score-chip {
+    color: #a67c00;
+    background: rgba(255, 224, 178, 0.65);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-level-chip--low {
+    color: #1b5e20;
+    background: rgba(200, 230, 201, 0.65);
+    border-color: rgba(129, 199, 132, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-level-chip--medium {
+    color: #a67c00;
+    background: rgba(255, 224, 178, 0.65);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-level-chip--high {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.65);
+    border-color: rgba(239, 154, 154, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .tx-empty {
+    color: #7a6e5c;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(158, 142, 118, 0.32);
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .reveal-item.is-visible .wallet-panel--admin-risk-reviews.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /wallet/messages/send — light page + white panel + cream form */
+.body-wallet-send-message.body-wallet-send-message-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-wallet-send-message.body-wallet-send-message-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-wallet-send-message.body-wallet-send-message-light .wallet-landing {
+    padding: 16px 20px;
+    overflow: visible;
+}
+
+.body-wallet-send-message.body-wallet-send-message-light .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-wallet-send-message.body-wallet-send-message-light .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-wallet-send-message.body-wallet-send-message-light .wallet-panel--admin-send-message.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message {
+    padding: 22px 22px 20px;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message .wallet-greeting {
+    color: #7a6e5c;
+    text-align: center;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message .wallet-greeting .wallet-username {
+    color: #a67c00;
+}
+
+.body-wallet-send-message-light .admin-send-message-hint {
+    color: #7a6e5c;
+    text-align: center;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message > .success {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.45);
+    border: 1px solid rgba(129, 199, 132, 0.55);
+    box-shadow: none;
+}
+
+.body-wallet-send-message-light .wallet-panel--admin-send-message > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-wallet-send-message-light .admin-field-label {
+    color: #5c4f3a;
+}
+
+.body-wallet-send-message-light .admin-send-message-form .admin-mailbox-input,
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input,
+.body-wallet-send-message-light .admin-mailbox-textarea {
+    color: #2c2418;
+    color-scheme: light;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: var(--surface-radius);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input {
+    background-color: #e8e0d4;
+    background-image:
+            linear-gradient(45deg, transparent 50%, #8a7340 50%),
+            linear-gradient(135deg, #8a7340 50%, transparent 50%),
+            linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    background-position:
+            calc(100% - 18px) calc(50% + 2px),
+            calc(100% - 13px) calc(50% + 2px),
+            0 0;
+    background-size: 5px 5px, 5px 5px, 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input:invalid {
+    color: #b0a595;
+}
+
+.body-wallet-send-message-light .admin-send-message-form .admin-mailbox-input:focus,
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input:focus,
+.body-wallet-send-message-light .admin-mailbox-textarea:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input option {
+    color: #2c2418;
+    background-color: #ffffff;
+}
+
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input option:checked,
+.body-wallet-send-message-light .admin-send-message-form select.admin-mailbox-input option:hover {
+    color: #c4931a;
+    background-color: rgba(212, 175, 55, 0.12);
+}
+
+.body-wallet-send-message-light .admin-send-message-form .error {
+    color: #8b3a2a;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-wallet-send-message-light .admin-mailbox-textarea {
+    scrollbar-color: rgba(166, 124, 0, 0.45) #e8e0d4;
+}
+
+.body-wallet-send-message-light .admin-mailbox-textarea::-webkit-scrollbar-track {
+    background: #e8e0d4;
+}
+
+.body-wallet-send-message-light .admin-mailbox-textarea::-webkit-scrollbar-thumb {
+    background: rgba(166, 124, 0, 0.45);
+    border-color: #e8e0d4;
+}
+
+.body-wallet-send-message-light .admin-mailbox-textarea::-webkit-scrollbar-thumb:hover {
+    background: rgba(166, 124, 0, 0.65);
+}
+
+.body-wallet-send-message-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /wallet/messages/send — black-to-gold metallic panel */
+.body-wallet-send-message.body-wallet-send-message-gold-panel .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .wallet-panel--admin-send-message .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .wallet-panel--admin-send-message .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .wallet-panel--admin-send-message .wallet-greeting .wallet-username {
+    color: #ffe082;
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .admin-send-message-hint {
+    color: rgba(255, 244, 225, 0.88);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .admin-field-label {
+    color: rgba(255, 244, 225, 0.92);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-wallet-send-message.body-wallet-send-message-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-wallet-send-message.body-wallet-send-message-light .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-wallet-send-message.body-wallet-send-message-gold-panel .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin/messages/send — wallet-style B&W gradient panel (page bg unchanged) */
+.body-admin-send-message.body-admin-send-message-wallet-panel .wallet-landing {
+    padding: 16px 20px;
+    overflow: visible;
+}
+
+.body-admin-send-message.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-send-message.body-admin-send-message-wallet-panel .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-send-message.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message {
+    padding: 22px 22px 20px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message .wallet-greeting .wallet-username {
+    color: #ffb74d;
+}
+
+.body-admin-send-message-wallet-panel .admin-send-message-hint {
+    color: rgba(255, 236, 190, 0.78);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message > .success {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 14px rgba(0, 0, 0, 0.28);
+    font-weight: 600;
+}
+
+.body-admin-send-message-wallet-panel .wallet-panel--admin-send-message > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-admin-send-message-wallet-panel .admin-field-label {
+    color: #5c4f3a;
+}
+
+.body-admin-send-message-wallet-panel .admin-send-message-form .admin-mailbox-input,
+.body-admin-send-message-wallet-panel .admin-send-message-form select.admin-mailbox-input,
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea {
+    color: #2c2418;
+    color-scheme: light;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: var(--surface-radius);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-admin-send-message-wallet-panel .admin-send-message-form .admin-mailbox-input:focus,
+.body-admin-send-message-wallet-panel .admin-send-message-form select.admin-mailbox-input:focus,
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-admin-send-message-wallet-panel .admin-send-message-form .error {
+    color: #8b3a2a;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea {
+    scrollbar-color: rgba(166, 124, 0, 0.45) #e8e0d4;
+}
+
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea::-webkit-scrollbar-track {
+    background: #e8e0d4;
+}
+
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea::-webkit-scrollbar-thumb {
+    background: rgba(166, 124, 0, 0.45);
+    border-color: #e8e0d4;
+}
+
+.body-admin-send-message-wallet-panel .admin-mailbox-textarea::-webkit-scrollbar-thumb:hover {
+    background: rgba(166, 124, 0, 0.65);
+}
+
+.body-admin-send-message.body-admin-send-message-wallet-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-admin-send-message.body-admin-send-message-wallet-panel .reveal-item.is-visible .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /wallet/messages — light page + white panel */
+.body-wallet-messages.body-wallet-messages-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-wallet-messages.body-wallet-messages-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-wallet-messages.body-wallet-messages-light .wallet-landing {
+    padding: 16px 20px 28px;
+    overflow: visible;
+}
+
+.body-wallet-messages.body-wallet-messages-light .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-wallet-messages.body-wallet-messages-light .reveal-item.is-visible .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-wallet-messages.body-wallet-messages-light .wallet-panel--messages.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-wallet-messages-light .wallet-panel--messages {
+    padding: 22px 28px 26px;
+}
+
+.body-wallet-messages-light .wallet-panel--messages .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-wallet-messages-light .wallet-panel--messages .wallet-form-hint {
+    color: #7a6e5c;
+}
+
+.body-wallet-messages-light .wallet-panel--messages .wallet-form-hint span {
+    color: #a67c00;
+    font-weight: 700;
+}
+
+.body-wallet-messages-light .wallet-panel--messages > .success {
+    color: #2e7d32;
+    background: rgba(200, 230, 201, 0.45);
+    border: 1px solid rgba(129, 199, 132, 0.55);
+    box-shadow: none;
+}
+
+.body-wallet-messages-light .wallet-panel--messages > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.45);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-wallet-messages-light .mailbox-item {
+    color: #2c2418;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 12px;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-wallet-messages-light .mailbox-item:hover {
+    border-color: rgba(212, 175, 55, 0.62);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38),
+            0 4px 12px rgba(100, 75, 30, 0.12);
+}
+
+.body-wallet-messages-light .mailbox-item--unread {
+    border-color: rgba(212, 175, 55, 0.65);
+    background: linear-gradient(180deg, #f0e8dc 0%, #f5efe6 100%);
+}
+
+.body-wallet-messages-light .mailbox-item-from {
+    color: #1f1a14;
+}
+
+.body-wallet-messages-light .mailbox-item-date {
+    color: #8a7340;
+}
+
+.body-wallet-messages-light .mailbox-item-preview {
+    color: #5c4f3a;
+}
+
+.body-wallet-messages-light .tx-empty {
+    color: #7a6e5c;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.body-wallet-messages-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /wallet/messages — black-to-gold metallic panel */
+.body-wallet-messages.body-wallet-messages-gold-panel .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .reveal-item.is-visible .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .wallet-panel--messages .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .wallet-panel--messages .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .wallet-panel--messages .wallet-form-hint span {
+    color: #ffe082;
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .tx-empty {
+    color: rgba(255, 244, 225, 0.88);
+}
+
+.body-wallet-messages.body-wallet-messages-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-wallet-messages.body-wallet-messages-light .reveal-item.is-visible .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-wallet-messages.body-wallet-messages-gold-panel .reveal-item.is-visible .wallet-panel--messages.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin/messages/inbox — wallet-style B&W gradient panel */
+.body-admin-message-inbox.body-admin-message-inbox-wallet-panel .wallet-landing {
+    padding: 16px 20px 28px;
+    overflow: visible;
+}
+
+.body-admin-message-inbox.body-admin-message-inbox-wallet-panel .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-message-inbox.body-admin-message-inbox-wallet-panel .reveal-item.is-visible .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-message-inbox.body-admin-message-inbox-wallet-panel .wallet-panel--wide.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-message-inbox-wallet-panel .wallet-panel--wide.wallet-panel--admin {
+    padding: 22px 28px 26px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-message-inbox-wallet-panel .wallet-panel--wide .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-message-inbox-wallet-panel .wallet-panel--wide > .success {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 14px rgba(0, 0, 0, 0.28);
+    font-weight: 600;
+}
+
+.body-admin-message-inbox-wallet-panel .wallet-panel--wide > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item {
+    color: #2c2418;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 12px;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item:hover {
+    border-color: rgba(212, 175, 55, 0.62);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38),
+            0 4px 12px rgba(100, 75, 30, 0.12);
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item--unread {
+    border-color: rgba(212, 175, 55, 0.65);
+    background: linear-gradient(180deg, #f0e8dc 0%, #f5efe6 100%);
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item-from {
+    color: #1f1a14;
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item-date {
+    color: #8a7340;
+}
+
+.body-admin-message-inbox-wallet-panel .mailbox-item-preview {
+    color: #5c4f3a;
+}
+
+.body-admin-message-inbox-wallet-panel .tx-empty {
+    color: #7a6e5c;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(158, 142, 118, 0.32);
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .body-admin-message-inbox.body-admin-message-inbox-wallet-panel .reveal-item.is-visible .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /wallet/messages/{id} — light page + white panel */
+.body-wallet-message-view.body-wallet-message-view-light {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-wallet-message-view.body-wallet-message-view-light .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-wallet-message-view.body-wallet-message-view-light .wallet-landing {
+    padding: 16px 20px 28px;
+    overflow: visible;
+}
+
+.body-wallet-message-view.body-wallet-message-view-light .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-wallet-message-view.body-wallet-message-view-light .reveal-item.is-visible .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    filter: none;
+    animation: none;
+}
+
+.body-wallet-message-view.body-wallet-message-view-light .wallet-panel--message-view.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-wallet-message-view-light .wallet-panel--message-view {
+    padding: 22px 22px 20px;
+}
+
+.body-wallet-message-view-light .wallet-panel--message-view .wallet-title {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-wallet-message-view-light .mailbox-message-view {
+    margin-top: 8px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 14px;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-wallet-message-view-light .mailbox-message-meta {
+    color: #1f1a14;
+}
+
+.body-wallet-message-view-light .mailbox-message-label {
+    color: #8a7340;
+}
+
+.body-wallet-message-view-light .mailbox-message-body {
+    border-top-color: rgba(158, 142, 118, 0.38);
+    color: #2c2418;
+}
+
+.body-wallet-message-view-light .type-chip,
+.body-wallet-message-view-light .type-chip--admin,
+.body-wallet-message-view-light .type-chip--super-admin {
+    color: #2c2418;
+    background: linear-gradient(180deg, #f0e8dc 0%, #e4dcd0 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+}
+
+.body-wallet-message-view-light .type-chip--super-admin {
+    color: #1f1a14;
+    background: linear-gradient(180deg, #f5e6b8 0%, #e8c96a 100%);
+    border-color: rgba(212, 175, 55, 0.55);
+}
+
+.body-wallet-message-view-light .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+    text-shadow: none;
+}
+
+/* /wallet/messages/{id} — black-to-gold metallic panel */
+.body-wallet-message-view.body-wallet-message-view-gold-panel .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-wallet-message-view.body-wallet-message-view-gold-panel .reveal-item.is-visible .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-wallet-message-view.body-wallet-message-view-gold-panel .wallet-panel--message-view .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-wallet-message-view.body-wallet-message-view-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.22) 45%,
+            rgba(12, 8, 4, 0.46) 100%
+    );
+}
+
+@media (max-width: 480px) {
+    .body-wallet-message-view.body-wallet-message-view-light .reveal-item.is-visible .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+
+    .body-wallet-message-view.body-wallet-message-view-gold-panel .reveal-item.is-visible .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin/login-activity — wallet-style B&W gradient panel (page bg unchanged) */
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .wallet-landing {
+    overflow: visible;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .wallet-panel--admin.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-login-activity-wallet-panel .wallet-panel--admin {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-login-activity-wallet-panel .wallet-panel--admin .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-login-activity-wallet-panel .wallet-panel--admin .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-login-activity-wallet-panel .login-activity-hint {
+    color: rgba(255, 236, 190, 0.78);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.body-admin-login-activity-wallet-panel .login-activity-wrap {
+    border: 1px solid rgba(158, 142, 118, 0.38);
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+    scrollbar-color: rgba(158, 142, 118, 0.55) rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-login-activity-wallet-panel .login-activity-wrap::-webkit-scrollbar-track {
+    background: rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-login-activity-wallet-panel .login-activity-wrap::-webkit-scrollbar-thumb {
+    background: rgba(158, 142, 118, 0.55);
+}
+
+.body-admin-login-activity-wallet-panel .login-activity-wrap::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 115, 64, 0.72);
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table th,
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table td {
+    color: #1f1a14;
+    border-bottom-color: rgba(158, 142, 118, 0.28);
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table thead th {
+    background: linear-gradient(180deg, #e8e0d4 0%, #ede6db 100%);
+    color: #6b5a38;
+    border-bottom-color: rgba(158, 142, 118, 0.38);
+    box-shadow: none;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table tbody tr:nth-child(even) td {
+    background: rgba(244, 238, 228, 0.55);
+    color: #1f1a14;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table tbody tr:hover td {
+    background: rgba(212, 175, 55, 0.1);
+    color: #1f1a14;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table td:nth-child(1) {
+    color: #8a7340;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table td:nth-child(2) {
+    color: #2c2418;
+}
+
+.body-admin-login-activity.body-admin-login-activity-wallet-panel .login-activity-table td:nth-child(3) {
+    color: #5c4f3a;
+}
+
+.body-admin-login-activity .login-activity-clear-form {
+    margin: 0;
+}
+
+.body-admin-login-activity .login-activity-clear-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
+    padding: 8px 18px;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.body-admin-login-activity-wallet-panel .tx-empty {
+    color: #7a6e5c;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(158, 142, 118, 0.32);
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .body-admin-login-activity.body-admin-login-activity-wallet-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin — wallet-style B&W gradient panel (page bg unchanged) */
+.body-admin.body-admin-wallet-panel .wallet-landing {
+    overflow: visible;
+}
+
+.body-admin.body-admin-wallet-panel .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin.body-admin-wallet-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin.body-admin-wallet-panel .wallet-panel--admin.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-wallet-panel .wallet-panel--admin {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-wallet-panel .wallet-panel--admin .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-wallet-panel .wallet-panel--admin .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-wallet-panel .wallet-panel--admin .wallet-greeting .wallet-username {
+    color: #ffb74d;
+}
+
+.body-admin-wallet-panel .wallet-panel--admin .wallet-quick-actions-title {
+    color: rgba(255, 236, 190, 0.92);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-wallet-panel .wallet-panel--admin > .success {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 14px rgba(0, 0, 0, 0.28);
+    font-weight: 600;
+}
+
+.body-admin-wallet-panel .wallet-panel--admin > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-admin-wallet-panel .admin-user-action-hint {
+    color: #d8d0c4;
+    font-weight: 600;
+    text-shadow:
+            0 1px 2px rgba(0, 0, 0, 0.68),
+            0 2px 8px rgba(43, 5, 5, 0.38);
+}
+
+.body-admin-wallet-panel .admin-user-list-scroll {
+    scrollbar-color: rgba(158, 142, 118, 0.55) rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-track {
+    background: rgba(244, 238, 228, 0.65);
+}
+
+.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-thumb {
+    background: rgba(158, 142, 118, 0.55);
+}
+
+.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 115, 64, 0.72);
+}
+
+.body-admin-wallet-panel .admin-user-card {
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+}
+
+.body-admin-wallet-panel .admin-user-card:hover:not(.admin-user-card--selected) {
+    border-color: rgba(212, 175, 55, 0.62);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38),
+            0 4px 12px rgba(100, 75, 30, 0.12);
+}
+
+.body-admin-wallet-panel .admin-user-card--selected {
+    border: 2px solid rgba(196, 147, 26, 0.88);
+    background: linear-gradient(180deg, #cfc0a4 0%, #c4b494 100%);
+    box-shadow:
+            inset 0 4px 12px rgba(0, 0, 0, 0.18),
+            inset 0 0 0 1px rgba(120, 85, 15, 0.24),
+            0 6px 18px rgba(100, 75, 30, 0.26);
+}
+
+.body-admin-wallet-panel .admin-user-card--selected:hover {
+    border-color: rgba(168, 120, 10, 0.92);
+    background: linear-gradient(180deg, #c7b696 0%, #bca888 100%);
+    box-shadow:
+            inset 0 4px 12px rgba(0, 0, 0, 0.2),
+            inset 0 0 0 1px rgba(100, 70, 10, 0.28),
+            0 6px 18px rgba(100, 75, 30, 0.28);
+}
+
+.body-admin-wallet-panel .admin-user-card__name {
+    color: #1f1a14;
+}
+
+.body-admin-wallet-panel .admin-user-card__email {
+    color: #5c4f3a;
+}
+
+.body-admin-wallet-panel .admin-user-card__balance {
+    color: #8a7340;
+}
+
+.body-admin-wallet-panel .admin-user-card__registered {
+    color: #7a6e5c;
+}
+
+.body-admin-wallet-panel .admin-muted {
+    color: #a67c00;
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .admin-user-card__meta-chip {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    min-height: 1.75rem;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .type-chip {
+    color: #0d3d12;
+    background: linear-gradient(180deg, #b9f6ca 0%, #66bb6a 52%, #43a047 100%);
+    border: 1.5px solid #2e7d32;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            0 2px 8px rgba(46, 125, 50, 0.28);
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .type-chip--super-admin {
+    color: #1a0f00;
+    background: linear-gradient(180deg, #ffe082 0%, #ffb300 48%, #f9a825 100%);
+    border: 1.5px solid #c4931a;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.65),
+            0 2px 10px rgba(212, 175, 55, 0.38);
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .type-chip--admin {
+    color: #ffffff;
+    background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
+    border: 1.5px solid #283593;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            0 2px 10px rgba(57, 73, 171, 0.32);
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .status-chip--active {
+    color: #ffffff;
+    background: linear-gradient(180deg, #81c784 0%, #43a047 52%, #2e7d32 100%);
+    border: 1.5px solid #1b5e20;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 2px 8px rgba(46, 125, 50, 0.32);
+}
+
+.body-admin-wallet-panel .admin-user-card__meta .status-chip--inactive {
+    color: #ffffff;
+    background: linear-gradient(180deg, #ef9a9a 0%, #e53935 52%, #c62828 100%);
+    border: 1.5px solid #b71c1c;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            0 2px 8px rgba(198, 40, 40, 0.28);
+}
+
+.body-admin-wallet-panel .tx-empty {
+    color: #7a6e5c;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(158, 142, 118, 0.32);
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .body-admin.body-admin-wallet-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin — trial: red → white → black metallic panel (remove body-admin-rwb-panel to revert) */
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(74, 8, 8, 0.94) 0%,
+            rgba(127, 26, 26, 0.88) 28%,
+            rgba(255, 255, 255, 0.94) 52%,
+            rgba(33, 33, 33, 0.9) 78%,
+            rgba(5, 5, 5, 0.96) 100%
+    );
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #2b0505 0%,
+            #4a0808 6%,
+            #5c0a0a 12%,
+            #6b1010 18%,
+            #7f1414 24%,
+            #8b1818 30%,
+            #991b1b 36%,
+            #b71c1c 42%,
+            #ffcdd2 50%,
+            #ffffff 54%,
+            #fafafa 58%,
+            #e0e0e0 64%,
+            #bdbdbd 70%,
+            #757575 76%,
+            #424242 84%,
+            #212121 92%,
+            #0a0a0a 97%,
+            #050505 100%
+    );
+    border: 1px solid rgba(127, 26, 26, 0.52);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(74, 8, 8, 0.28);
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.15),
+            0 2px 8px rgba(0, 0, 0, 0.55),
+            0 0 20px rgba(127, 26, 26, 0.35);
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin .wallet-greeting {
+    color: rgba(255, 244, 245, 0.92);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin .wallet-greeting .wallet-username {
+    color: #ef9a9a;
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin .wallet-quick-actions-title {
+    color: rgba(255, 248, 248, 0.94);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.body-admin.body-admin-wallet-panel.body-admin-rwb-panel .admin-user-action-hint {
+    color: #e8e2d8;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-shadow:
+            0 1px 2px rgba(0, 0, 0, 0.78),
+            0 2px 10px rgba(43, 5, 5, 0.48),
+            0 -1px 0 rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 480px) {
+    .body-admin.body-admin-wallet-panel.body-admin-rwb-panel .reveal-item.is-visible .wallet-panel--admin.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin/messages/users/{user}/thread — wallet-style B&W gradient panel (trial) */
+.body-admin-message-thread.body-admin-message-thread-wallet-panel .wallet-landing {
+    overflow: visible;
+}
+
+.body-admin-message-thread.body-admin-message-thread-wallet-panel .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-message-thread.body-admin-message-thread-wallet-panel .reveal-item.is-visible .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-message-thread.body-admin-message-thread-wallet-panel .wallet-panel--wide.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-message-thread-wallet-panel .wallet-panel--wide.wallet-panel--admin {
+    padding: 22px 28px 26px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-message-thread-wallet-panel .wallet-panel--wide .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-message-thread-wallet-panel .wallet-panel--wide .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+    text-align: center;
+}
+
+.body-admin-message-thread-wallet-panel .wallet-panel--wide .wallet-greeting .wallet-username {
+    color: #ffb74d;
+}
+
+.body-admin-message-thread-wallet-panel .mailbox-thread-item {
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 14px;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-admin-message-thread-wallet-panel .mailbox-thread-user-label {
+    color: #1f1a14;
+}
+
+.body-admin-message-thread-wallet-panel .mailbox-item-date {
+    color: #8a7340;
+}
+
+.body-admin-message-thread-wallet-panel .mailbox-message-body {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(158, 142, 118, 0.38);
+    color: #2c2418;
+}
+
+.body-admin-message-thread-wallet-panel .type-chip {
+    color: #2c2418;
+    background: linear-gradient(180deg, #f0e8dc 0%, #e4dcd0 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+}
+
+.body-admin-message-thread-wallet-panel .type-chip--super-admin {
+    color: #1f1a14;
+    background: linear-gradient(180deg, #f5e6b8 0%, #e8c96a 100%);
+    border-color: rgba(212, 175, 55, 0.55);
+}
+
+.body-admin-message-thread-wallet-panel .type-chip--admin {
+    color: #ffffff;
+    background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
+    border: 1px solid rgba(57, 73, 171, 0.55);
+}
+
+.body-admin-message-thread-wallet-panel .tx-empty {
+    color: #7a6e5c;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(158, 142, 118, 0.32);
+    border-radius: 12px;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .body-admin-message-thread.body-admin-message-thread-wallet-panel .reveal-item.is-visible .wallet-panel--wide.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}
+
+/* /admin/users/{id}/manage — wallet-style B&W gradient panel */
+.body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-landing {
+    overflow: visible;
+}
+
+.body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-user-manage.body-admin-user-manage-wallet-panel .reveal-item.is-visible .wallet-panel--admin-manage.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.18);
+    filter: none;
+    animation: none;
+}
+
+.body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage .wallet-greeting {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage .wallet-greeting .wallet-username {
+    color: #ffb74d;
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage > .success {
+    color: #1b5e20;
+    background: linear-gradient(180deg, #f1f8e9 0%, #c8e6c9 100%);
+    border: 1px solid rgba(76, 175, 80, 0.72);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 14px rgba(0, 0, 0, 0.28);
+    font-weight: 600;
+}
+
+.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage > .error {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.55);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow: none;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-summary {
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 14px;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-summary p {
+    color: #2c2418;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-label {
+    color: #8a7340;
+}
+
+.body-admin-user-manage-wallet-panel .pref-section-title {
+    color: rgba(255, 236, 190, 0.92);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-form + .pref-section-title {
+    color: #5c4f3a;
+    text-shadow: none;
+}
+
+.body-admin-user-manage-wallet-panel .admin-field-label {
+    color: #5c4f3a;
+}
+
+.body-admin-user-manage-wallet-panel .admin-status-select {
+    color: #2c2418;
+    color-scheme: light;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: var(--surface-radius);
+    background-color: #e8e0d4;
+    background-image:
+            linear-gradient(45deg, transparent 50%, #8a7340 50%),
+            linear-gradient(135deg, #8a7340 50%, transparent 50%),
+            linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    background-position:
+            calc(100% - 16px) calc(50% + 2px),
+            calc(100% - 11px) calc(50% + 2px),
+            0 0;
+    background-size: 5px 5px, 5px 5px, 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-admin-user-manage-wallet-panel .admin-status-select option {
+    color: #2c2418;
+    background-color: #ffffff;
+}
+
+.body-admin-user-manage-wallet-panel .admin-status-select option:checked,
+.body-admin-user-manage-wallet-panel .admin-status-select option:hover {
+    color: #c4931a;
+    background-color: rgba(212, 175, 55, 0.12);
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip {
+    color: #0d3d12;
+    background: linear-gradient(180deg, #b9f6ca 0%, #66bb6a 52%, #43a047 100%);
+    border: 1.5px solid #2e7d32;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip--super-admin {
+    color: #1a0f00;
+    background: linear-gradient(180deg, #ffe082 0%, #ffb300 48%, #f9a825 100%);
+    border: 1.5px solid #c4931a;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip--admin {
+    color: #ffffff;
+    background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
+    border: 1.5px solid #283593;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-role-restricted {
+    color: #7a6e5c;
+}
+
+.body-admin-user-manage-wallet-panel .admin-manage-submit.admin-action-btn {
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+    .body-admin-user-manage.body-admin-user-manage-wallet-panel .reveal-item.is-visible .wallet-panel--admin-manage.wallet-panel--materialize.reveal-child {
+        border-radius: 24px;
+    }
+}

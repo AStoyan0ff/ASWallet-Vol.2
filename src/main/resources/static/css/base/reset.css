@@ -79,14 +79,16 @@ p {
     justify-content: center;
 }
 
-.btn:hover, button:hover {
+.btn:hover, button:hover:not(:disabled):not(.password-visibility-toggle):not(.wallet-iban-toggle):not(.daily-limit-stepper-btn) {
     transform: translateY(-1px);
 }
 
-.btn-primary, button {
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    color: var(--white);
-    box-shadow: 0 8px 18px rgba(239, 108, 0, 0.28);
+.btn-primary {
+    color: var(--btn-gold-text);
+}
+
+button:not(.password-visibility-toggle):not(.wallet-iban-toggle):not(.daily-limit-stepper-btn) {
+    font-family: inherit;
 }
 
 .btn-secondary {
@@ -146,7 +148,11 @@ input:focus {
 }
 
 .wallet-currency {
-    color: #5f7f64;
+    color: #fff;
+    text-shadow:
+            0 2px 3px rgba(255,255,255,.2),
+            0 6px 10px rgba(0,0,0,.25),
+            0 14px 22px rgba(0,0,0,.18);
     font-weight: 600;
 }
 

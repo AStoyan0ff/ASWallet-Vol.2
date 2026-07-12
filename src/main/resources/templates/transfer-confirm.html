@@ -5,14 +5,14 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="body-wallet">
+<body class="body-wallet body-transfer-light body-transfer-gold-panel">
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/transfer.png}" alt="">
     <div class="home-bg-overlay"></div>
 </div>
 
 <main class="wallet-landing reveal-item">
-    <section class="wallet-panel wallet-panel--form wallet-panel--materialize reveal-child">
+    <section class="wallet-panel wallet-panel--form wallet-panel--transfer-confirm wallet-panel--materialize reveal-child">
         <div class="form-panel-top auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
         </div>
@@ -65,7 +65,7 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <button type="submit" class="auth-submit">Submit Transfer</button>
             </form>
-            <a class="wallet-btn wallet-btn-outline transfer-confirm-edit" th:href="@{/transactions/transfer}">Edit</a>
+            <a class="wallet-btn wallet-btn-danger transfer-confirm-edit" th:href="@{/transactions/transfer}">Edit</a>
         </div>
     </section>
 </main>
