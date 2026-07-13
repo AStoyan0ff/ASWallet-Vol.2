@@ -108,15 +108,15 @@ class AdminRiskReviewServiceImplTest {
     }
 
     @Test
-    void deleteAllPendingReviews_refundsEachTransferAndDeletesFromMicroservice() {
-        when(riskAssessmentClient.listAssessments(AssessmentStatus.PENDING.name()))
+    void deleteAllRiskReviews_refundsPendingTransfersAndDeletesFromMicroservice() {
+        when(riskAssessmentClient.listManualReviews())
                 .thenReturn(java.util.List.of(assessmentWithTransactionRef()));
 
-        int deleted = adminRiskReviewService.deleteAllPendingReviews();
+        int deleted = adminRiskReviewService.deleteAllRiskReviews();
 
         assertThat(deleted).isEqualTo(1);
         verify(pendingTransferProcessingService).rejectRiskHeldTransfer(transactionRef);
-        verify(riskAssessmentClient).deleteAssessments(AssessmentStatus.PENDING.name());
+        verify(riskAssessmentClient).deleteManualReviews();
     }
 
     private RiskAssessmentClientResponse assessmentWithTransactionRef() {
@@ -129,6 +129,7 @@ class AdminRiskReviewServiceImplTest {
         response.setAmount(new BigDecimal("200.00"));
         response.setRiskScore(50);
         response.setDecision(RiskDecision.REVIEW);
+        response.setStatus(AssessmentStatus.PENDING);
         return response;
     }
 }

@@ -14,10 +14,8 @@ public class TransactionCompletedEventListener {
     private final EmailService emailService;
     private final UserProfileDetailsService userProfileDetailsService;
 
-    public TransactionCompletedEventListener(
-            EmailService emailService,
-            UserProfileDetailsService userProfileDetailsService
-    ) {
+    public TransactionCompletedEventListener(EmailService emailService, UserProfileDetailsService userProfileDetailsService) {
+
         this.emailService = emailService;
         this.userProfileDetailsService = userProfileDetailsService;
     }
@@ -30,6 +28,7 @@ public class TransactionCompletedEventListener {
 
             case DEPOSIT -> {
                 if (isEmailEnabled(event.primaryUsername(), TransactionType.DEPOSIT)) {
+
                     emailService.sendDepositCompletedEmail(
                             event.primaryEmail(),
                             event.primaryUsername(),
@@ -40,6 +39,7 @@ public class TransactionCompletedEventListener {
             }
             case WITHDRAW -> {
                 if (isEmailEnabled(event.primaryUsername(), TransactionType.WITHDRAW)) {
+
                     emailService.sendWithdrawCompletedEmail(
                             event.primaryEmail(),
                             event.primaryUsername(),
@@ -50,6 +50,7 @@ public class TransactionCompletedEventListener {
             }
             case TRANSFER -> {
                 if (isEmailEnabled(event.primaryUsername(), TransactionType.TRANSFER)) {
+
                     emailService.sendTransferSentEmail(
                             event.primaryEmail(),
                             event.primaryUsername(),
@@ -58,8 +59,9 @@ public class TransactionCompletedEventListener {
                             event.description()
                     );
                 }
-                if (event.secondaryUsername() != null
-                        && isEmailEnabled(event.secondaryUsername(), TransactionType.TRANSFER)) {
+                if (event.secondaryUsername() != null &&
+                         isEmailEnabled(event.secondaryUsername(), TransactionType.TRANSFER)) {
+
                     emailService.sendTransferReceivedEmail(
                             event.secondaryEmail(),
                             event.secondaryUsername(),
@@ -72,7 +74,6 @@ public class TransactionCompletedEventListener {
         }
     }
 
-    // Advanced — respect notification preferences from /wallet/settings
     private boolean isEmailEnabled(String username, TransactionType type) {
 
         if (username == null || username.isBlank()) {

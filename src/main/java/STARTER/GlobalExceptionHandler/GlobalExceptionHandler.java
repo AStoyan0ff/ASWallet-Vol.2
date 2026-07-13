@@ -1,15 +1,15 @@
 package STARTER.GlobalExceptionHandler;
 
 import STARTER.CustomException.*;
+import STARTER.DTOs.ChangePasswordRequest;
+import STARTER.DTOs.ResetPasswordRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import STARTER.DTOs.ChangePasswordRequest;
-import STARTER.DTOs.ResetPasswordRequest;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.security.access.AccessDeniedException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -99,6 +99,7 @@ public class GlobalExceptionHandler {
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
         String uri = request.getRequestURI();
+
         if (uri != null && uri.contains("/admin/messages")) {
             return "redirect:/admin/messages/send";
         }
@@ -108,6 +109,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(WalletNotFoundException.class)
     public String handleWalletNotFound(WalletNotFoundException ex, RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/login";
     }
@@ -116,28 +118,31 @@ public class GlobalExceptionHandler {
     public String handleAccessDenied(AccessDeniedException ex,
                                      HttpServletRequest request,
                                      RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute(
                 "errorMessage",
                 "You do not have access to this page. If you were recently promoted to admin, refresh the page or log in again."
         );
+
         return "redirect:" + resolveFallbackRedirect(request);
     }
 
-    @ExceptionHandler({
+    @ExceptionHandler
+        ({
+
             CannotDeleteSelfException.class,
             CannotDeleteAdminException.class,
-            // Advanced — account status change restrictions
             CannotChangeSelfAccountStatusException.class,
             CannotChangeAdminAccountStatusException.class,
-            // Advanced — role change restrictions
             CannotChangeSelfRoleException.class,
             CannotChangeAdminRoleException.class,
-            // Advanced — admin mailbox
             CannotMessageAdminException.class
-    })
+        })
+
     public String handleAdminDeleteErrors(RuntimeException ex,
                                           HttpServletRequest request,
                                           RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:" + resolveAdminRedirect(request, ex);
     }
@@ -145,6 +150,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MailboxMessageNotFoundException.class)
     public String handleMailboxMessageNotFound(MailboxMessageNotFoundException ex,
                                                RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/wallet/messages";
     }
@@ -188,30 +194,31 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidCardDetailsException.class)
     public String handleInvalidCardDetails(InvalidCardDetailsException ex,
                                            RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/wallet/bank-details";
     }
 
-    // Advanced — invalid avatar upload on /profile/edit
     @ExceptionHandler(InvalidAvatarFileException.class)
     public String handleInvalidAvatarFile(InvalidAvatarFileException ex,
                                           RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
+        redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/profile/edit";
     }
 
     @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
     public String handleMaxUploadSize(org.springframework.web.multipart.MaxUploadSizeExceededException ex,
                                       RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Avatar file is too large. Maximum size is 2 MB.");
 
+        redirectAttributes.addFlashAttribute("errorMessage", "Avatar file is too large. Maximum size is 2 MB.");
         return "redirect:/profile/edit";
     }
 
     @ExceptionHandler(ReceiverBankCardNotFoundException.class)
     public String handleReceiverBankCardNotFound(ReceiverBankCardNotFoundException ex,
                                                  RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/transactions/transfer";
     }
@@ -220,8 +227,10 @@ public class GlobalExceptionHandler {
     public String handleUnexpected(RuntimeException ex,
                                    HttpServletRequest request,
                                    RedirectAttributes redirectAttributes) {
+
         logger.error("Unhandled exception on {} {}", request.getMethod(), request.getRequestURI(), ex);
         redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong. Please try again.");
+
         return "redirect:" + resolveFallbackRedirect(request);
     }
 
@@ -231,12 +240,15 @@ public class GlobalExceptionHandler {
         if (uri.contains("/register")) {
             return "/register";
         }
+
         if (uri.contains("/wallet/delete-account")) {
             return "/wallet/delete-account";
         }
+
         if (uri.contains("/wallet/change-password")) {
             return "/wallet/change-password";
         }
+
         if (uri.contains("/reset-password")) {
             return "/reset-password?token=" + request.getParameter("token");
         }
@@ -250,6 +262,7 @@ public class GlobalExceptionHandler {
         if (uri.contains("/transactions/withdraw")) {
             return "/transactions/withdraw";
         }
+
         if (uri.contains("/transactions/transfer/confirm") || uri.contains("/transactions/transfer")) {
             return "/transactions/transfer";
         }
@@ -261,14 +274,18 @@ public class GlobalExceptionHandler {
         String uri = request.getRequestURI();
 
         if (uri != null && uri.startsWith("/admin")) {
+
             if (uri.contains("/messages")) {
                 return "/admin/messages/send";
             }
+
             return "/admin";
         }
+
         if (uri.contains("/wallet/change-password")) {
             return "/wallet/change-password";
         }
+
         if (uri.contains("/transactions/transfer")) {
             return "/transactions/transfer";
         }
@@ -282,49 +299,63 @@ public class GlobalExceptionHandler {
         if (uri.contains("/register")) {
             return "/register";
         }
+
         if (uri.contains("/login")) {
             return "/login";
         }
+
         if (uri.contains("/forgot-password")) {
             return "/forgot-password";
         }
+
         if (uri.contains("/reset-password")) {
             return "/forgot-password";
         }
+
         if (uri.contains("/transactions/transfer")) {
             return "/transactions/transfer";
         }
+
         if (uri.contains("/transactions/deposit")) {
             return "/transactions/deposit";
         }
+
         if (uri.contains("/transactions/withdraw")) {
             return "/transactions/withdraw";
         }
+
         if (uri.contains("/wallet/change-password")) {
             return "/wallet/change-password";
         }
+
         if (uri.contains("/wallet/bank-details")) {
             return "/wallet/bank-details";
         }
+
         if (uri.contains("/wallet/delete-account")) {
             return "/wallet/delete-account";
         }
-        // Advanced — wallet settings
+
         if (uri.contains("/wallet/settings")) {
             return "/wallet/settings";
         }
+
         if (uri.contains("/wallet/export")) {
             return "/wallet/export";
         }
+
         if (uri.contains("/profile/edit")) {
             return "/profile/edit";
         }
+
         if (uri.contains("/profile")) {
             return "/profile";
         }
+
         if (uri.startsWith("/admin")) {
             return "/admin";
         }
+
         if (uri.startsWith("/wallet") || uri.startsWith("/transactions")) {
             return "/wallet";
         }

@@ -16,17 +16,29 @@ public interface RiskAssessmentClient {
     RiskAssessmentClientResponse createAssessment(@RequestBody RiskAssessmentCreateRequest request);
 
     @GetMapping("/api/risk-assessments")
-    List<RiskAssessmentClientResponse> listAssessments(@RequestParam("status") String status);
+    List<RiskAssessmentClientResponse> listAssessments(
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "decision", required = false) String decision
+    );
+
+    @GetMapping("/api/risk-assessments/manual-reviews")
+    List<RiskAssessmentClientResponse> listManualReviews();
 
     @GetMapping("/api/risk-assessments/{id}")
-    RiskAssessmentClientResponse getAssessment(@PathVariable("id") UUID id);
+    RiskAssessmentClientResponse getAssessment(@PathVariable() UUID id); // "id"
 
     @PatchMapping("/api/risk-assessments/{id}/review")
     RiskAssessmentClientResponse reviewAssessment(
-            @PathVariable("id") UUID id,
+            @PathVariable() UUID id, // "id"
             @RequestBody RiskAssessmentReviewRequest request
     );
 
     @DeleteMapping("/api/risk-assessments")
-    void deleteAssessments(@RequestParam("status") String status);
+    void deleteAssessments(
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "decision", required = false) String decision
+    );
+
+    @DeleteMapping("/api/risk-assessments/manual-reviews")
+    void deleteManualReviews();
 }

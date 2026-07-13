@@ -3,7 +3,7 @@
 .btn-metal-gold,
 .btn-primary,
 .form-pill-link,
-.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn),
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn),
 .auth-submit,
 .pwd-submit,
 .auth-login-submit,
@@ -41,7 +41,7 @@
 .btn-metal-gold:hover,
 .btn-primary:hover,
 .form-pill-link:hover,
-.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):hover,
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn):hover,
 .auth-submit:hover:not(:disabled),
 .pwd-submit:hover,
 .auth-login-submit:hover,
@@ -167,6 +167,47 @@
     box-shadow:
             inset 0 2px 4px rgba(0, 0, 0, 0.22),
             0 2px 0 var(--btn-red-shadow-hover);
+}
+
+.form-pill-link.tx-pagination-btn,
+.home-pill.form-pill-link.tx-pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 6.5rem;
+    padding: 4px 14px;
+    box-sizing: border-box;
+    border: 1px solid var(--btn-blue-border);
+    background: var(--btn-blue-bg);
+    color: var(--btn-blue-text);
+    box-shadow:
+            inset 0 1px 0 var(--btn-blue-inset),
+            0 3px 0 var(--btn-blue-shadow),
+            0 6px 14px rgba(0, 0, 0, 0.18);
+    filter: none;
+    text-shadow: 0 1px 0 var(--btn-blue-text-shadow);
+}
+
+.form-pill-link.tx-pagination-btn:hover,
+.home-pill.form-pill-link.tx-pagination-btn:hover {
+    background: var(--btn-blue-bg-hover);
+    border-color: var(--btn-blue-border-hover);
+    color: var(--btn-blue-text);
+    transform: translateY(-2px);
+    box-shadow:
+            inset 0 1px 0 var(--btn-blue-inset-hover),
+            0 4px 0 var(--btn-blue-shadow-hover),
+            0 10px 18px rgba(0, 0, 0, 0.22);
+    filter: none;
+}
+
+.form-pill-link.tx-pagination-btn:active,
+.home-pill.form-pill-link.tx-pagination-btn:active {
+    transform: translateY(0);
+    box-shadow:
+            inset 0 2px 4px rgba(0, 0, 0, 0.22),
+            0 2px 0 var(--btn-blue-shadow-hover);
 }
 
 /* Unified text on gold buttons */

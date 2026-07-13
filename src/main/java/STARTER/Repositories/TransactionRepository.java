@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -78,5 +79,18 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
     boolean existsTransferBetweenSenderAndReceiver(
             @Param("senderWalletId") UUID senderWalletId,
             @Param("receiverWalletId") UUID receiverWalletId
+    );
+
+    @Query(
+            """
+                SELECT COUNT(t) > 0
+                FROM Transaction t
+                WHERE (t.senderWallet.id = :walletId OR t.receiverWallet.id = :walletId)
+                    AND t.status IN :statuses
+            """
+    )
+    boolean existsByWalletInvolvedAndStatusIn(
+            @Param("walletId") UUID walletId,
+            @Param("statuses") Collection<TransactionStatus> statuses
     );
 }

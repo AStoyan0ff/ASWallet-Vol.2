@@ -5,6 +5,7 @@ import STARTER.DTOs.TransactionHistoryFilter;
 import STARTER.DTOs.TransactionViewDTO;
 import STARTER.DTOs.TransferMoneyDTO;
 import STARTER.DTOs.WithdrawMoneyDTO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +27,10 @@ public interface TransactionService {
     void cancelPendingTransfer(UUID transactionId, UUID userId);
 
     List<TransactionViewDTO> getUserTransactions(UUID userID);
+
+    Page<TransactionViewDTO> getUserTransactionsPage(UUID userId, int page, int size);
+
+    boolean hasPendingTransfers(UUID userId);
 
     // Advanced — filtered history shared by UI and exports
     List<TransactionViewDTO> getFilteredUserTransactions(UUID userId, TransactionHistoryFilter filter);

@@ -162,6 +162,36 @@
     margin-bottom: 22px;
 }
 
+.tx-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 0;
+}
+
+.body-transaction-history .home-pill.form-pill-link.tx-pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 6.5rem;
+    padding: 4px 14px;
+    margin-bottom: 0;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.tx-pagination-status {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(255, 236, 190, 0.9);
+    letter-spacing: 0.02em;
+}
+
 .body-transaction-history .tx-table tbody tr:last-child td {
     border-bottom: none;
 }
@@ -212,6 +242,11 @@
     .body-transaction-history .tx-table {
         min-width: 1080px;
     }
+
+    .body-transaction-history-light .tx-table-wrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
 }
 
 @media (min-width: 781px) {
@@ -222,7 +257,7 @@
     }
 
     .body-transaction-history .tx-table-wrap {
-        overflow-x: visible;
+        overflow: hidden;
     }
 
     .body-transaction-history .tx-table th,
@@ -477,6 +512,18 @@
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.55);
     box-shadow: none;
+    overflow: hidden;
+    padding-bottom: 6px;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table thead th:first-child,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table thead th:first-child {
+    border-top-left-radius: 13px;
+}
+
+.body-transaction-history.body-transaction-history-light .tx-table thead th:last-child,
+.body-wallet.body-transaction-history.body-transaction-history-light .tx-table thead th:last-child {
+    border-top-right-radius: 13px;
 }
 
 .body-transaction-history.body-transaction-history-light .tx-table th,
@@ -520,6 +567,10 @@
     background: transparent;
     border: none;
     box-shadow: none;
+}
+
+.body-transaction-history-light .tx-pagination-status {
+    color: #5c4f3a;
 }
 
 .body-transaction-history-light .status-chip--completed,

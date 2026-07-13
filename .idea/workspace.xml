@@ -5,22 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminRiskReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminRiskReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionHistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionHistoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/DTOs/AdminRiskAssessmentViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/DTOs/AdminRiskAssessmentViewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Events/TransactionCompletedEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Events/TransactionCompletedEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/AdminRiskReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/AdminRiskReviewServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransactionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransactionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/AdminRiskReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/AdminRiskReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/base/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/base/buttons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/base/variables.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/base/variables.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/aswallet-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/aswallet-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/emv-chip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/emv-chip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/my-card.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/my-card.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/noContact.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/noContact.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-message-inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-message-inbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/deposit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/deposit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-send-message.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-send-message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bank-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bank-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/deposit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/deposit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transfer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/withdraw.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/withdraw.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminRiskReviewControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminRiskReviewControllerWebMvcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/AdminRiskReviewServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/AdminRiskReviewServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/TransactionServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Services/Impl/TransactionServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +42,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="293" />
+    <option name="cachedIndexableFilesCount" value="295" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -138,84 +152,84 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ASAWalletApplication.executor": "Run",
-    "Application.AsWalletApplication.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JUnit.AdminControllerWebMvcTest.executor": "Coverage",
-    "JUnit.AdminMailboxControllerWebMvcTest.executor": "Coverage",
-    "JUnit.AdminMailboxServiceImplTest.executor": "Coverage",
-    "JUnit.AdminRiskReviewControllerWebMvcTest.executor": "Coverage",
-    "JUnit.AdminRiskReviewServiceImplTest.executor": "Coverage",
-    "JUnit.AdminServiceImplTest.executor": "Coverage",
-    "JUnit.BankCardServiceImplTest.executor": "Coverage",
-    "JUnit.GlobalExceptionHandlerTest.executor": "Coverage",
-    "JUnit.PasswordResetControllerWebMvcTest.executor": "Coverage",
-    "JUnit.PasswordResetServiceImplTest.executor": "Coverage",
-    "JUnit.PendingTransferProcessingServiceTest.executor": "Coverage",
-    "JUnit.ProfileControllerWebMvcTest.executor": "Coverage",
-    "JUnit.TransactionControllerDepositWebMvcTest.executor": "Coverage",
-    "JUnit.TransactionControllerTransferWebMvcTest.executor": "Coverage",
-    "JUnit.TransactionControllerWithdrawWebMvcTest.executor": "Coverage",
-    "JUnit.TransactionServiceImplTest.deposit_increaseBalance_andSavesCompletedTransaction.executor": "Run",
-    "JUnit.TransactionServiceImplTest.deposit_increasesBalance_andSavesCompletedTransaction.executor": "Coverage",
-    "JUnit.TransactionServiceImplTest.deposit_walletNotFound_throwsAndSavesNothing.executor": "Run",
-    "JUnit.TransactionServiceImplTest.executor": "Coverage",
-    "JUnit.TransactionServiceImplTest.grantWelcomeBonus_addsFiftyEuros_andCreatesCompletedDepositTransaction.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_insufficientBalance_throwsInsufficientBalanceException.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_receiverUserNotFound_throwsUserNotFoundException.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_receiverWalletNotFound_throwsReceiverNotFoundException.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_receiverWithoutBankCard_throwsReceiverBankCardNotFoundException.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_success_persistsSenderWalletAndSetsDescriptionWithCardMask.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_success_setsPendingStatus_andDeductsSenderImmediately.executor": "Run",
-    "JUnit.TransactionServiceImplTest.transfer_toSelf_throwsNotTransferMoneyYourselfException.executor": "Run",
-    "JUnit.TransactionServiceImplTest.withdrawSuccess_decreasesBalance_checksDailyLimit.executor": "Run",
-    "JUnit.TransactionServiceImplTest.withdraw_exceedsDailyLimit_throwsAndLeavesBalanceUnchanged.executor": "Run",
-    "JUnit.TransactionServiceImplTest.withdraw_insufficientBalance_throwsBeforeCheckingDailyLimit.executor": "Coverage",
-    "JUnit.UserControllerWebMvcTest.executor": "Coverage",
-    "JUnit.UserProfileDetailsServiceImplTest.executor": "Coverage",
-    "JUnit.UserServiceImplTest.executor": "Coverage",
-    "JUnit.WalletControllerWebMvcTest.executor": "Coverage",
-    "JUnit.WalletMailboxControllerWebMvcTest.executor": "Coverage",
-    "JUnit.WalletServiceImplTest.executor": "Coverage",
-    "JUnit.WithdrawDailyLimitServiceImplTest.executor": "Coverage",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.ASWalletApplication.executor": "Run",
-    "Spring Boot.AsWalletApplication.executor": "Run",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2/src/main/resources/static/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode.JAVA",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ASAWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AsWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JUnit.AdminControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.AdminMailboxControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.AdminMailboxServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.AdminRiskReviewControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.AdminRiskReviewServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.AdminServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.BankCardServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GlobalExceptionHandlerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PasswordResetControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PasswordResetServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PendingTransferProcessingServiceTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.ProfileControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionControllerDepositWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionControllerTransferWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionControllerWithdrawWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionServiceImplTest.deposit_increaseBalance_andSavesCompletedTransaction.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.deposit_increasesBalance_andSavesCompletedTransaction.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionServiceImplTest.deposit_walletNotFound_throwsAndSavesNothing.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.TransactionServiceImplTest.grantWelcomeBonus_addsFiftyEuros_andCreatesCompletedDepositTransaction.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_insufficientBalance_throwsInsufficientBalanceException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_receiverUserNotFound_throwsUserNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_receiverWalletNotFound_throwsReceiverNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_receiverWithoutBankCard_throwsReceiverBankCardNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_success_persistsSenderWalletAndSetsDescriptionWithCardMask.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_success_setsPendingStatus_andDeductsSenderImmediately.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.transfer_toSelf_throwsNotTransferMoneyYourselfException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.withdrawSuccess_decreasesBalance_checksDailyLimit.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.withdraw_exceedsDailyLimit_throwsAndLeavesBalanceUnchanged.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TransactionServiceImplTest.withdraw_insufficientBalance_throwsBeforeCheckingDailyLimit.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserProfileDetailsServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.WalletControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.WalletMailboxControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.WalletServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.WithdrawDailyLimitServiceImplTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ASWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AsWalletApplication.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ASWallet-Vol.2/src/main/resources/static/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JAVA&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images" />
@@ -437,7 +451,8 @@
       <workItem from="1783623635496" duration="613000" />
       <workItem from="1783686098135" duration="40574000" />
       <workItem from="1783772633607" duration="42305000" />
-      <workItem from="1783857986462" duration="43266000" />
+      <workItem from="1783857986462" duration="44410000" />
+      <workItem from="1783973156191" duration="10433000" />
     </task>
     <servers />
   </component>

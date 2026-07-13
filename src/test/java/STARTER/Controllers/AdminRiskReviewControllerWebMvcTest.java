@@ -36,10 +36,10 @@ class AdminRiskReviewControllerWebMvcTest {
     private AdminRiskReviewService adminRiskReviewService;
 
     @Test
-    void listPendingReviews_returnsViewWithAssessments() throws Exception {
+    void listRiskReviews_returnsViewWithAssessments() throws Exception {
         UUID id = UUID.randomUUID();
 
-        when(adminRiskReviewService.listPendingReviews()).thenReturn(List.of(
+        when(adminRiskReviewService.listRiskReviews()).thenReturn(List.of(
                 AdminRiskAssessmentViewDTO.builder()
                         .id(id)
                         .senderUsername("Plamen")
@@ -48,6 +48,7 @@ class AdminRiskReviewControllerWebMvcTest {
                         .riskScore(50)
                         .riskLevel("MEDIUM")
                         .decision("REVIEW")
+                        .status("PENDING")
                         .createdAt("2026-07-10 16:00")
                         .reasons(List.of("Night transfer"))
                         .build()
@@ -89,7 +90,7 @@ class AdminRiskReviewControllerWebMvcTest {
 
     @Test
     void clear_redirectsWithSuccessMessage() throws Exception {
-        when(adminRiskReviewService.deleteAllPendingReviews()).thenReturn(2);
+        when(adminRiskReviewService.deleteAllRiskReviews()).thenReturn(2);
 
         mockMvc.perform(post("/admin/risk-reviews/clear")
                         .with(user("admin").roles("ADMIN"))
@@ -98,10 +99,10 @@ class AdminRiskReviewControllerWebMvcTest {
                 .andExpect(redirectedUrl("/admin/risk-reviews"))
                 .andExpect(flash().attribute(
                         "successMessage",
-                        "Deleted 2 pending risk review(s). Funds returned to senders."
+                        "Deleted 2 risk review(s). Pending transfers were cancelled and funds returned to senders."
                 ));
 
-        verify(adminRiskReviewService).deleteAllPendingReviews();
+        verify(adminRiskReviewService).deleteAllRiskReviews();
     }
 
     @Test

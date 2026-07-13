@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Privacy Policy - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-legal-page body-legal-page-gold-panel">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/settingsLight.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form legal-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="legal-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Privacy Policy</h2>
+            <p class="wallet-form-hint">How ASWallet handles your personal data</p>
+            <p class="legal-updated">Last updated: July 2026</p>
+        </header>
+
+        <div class="legal-content auth-stagger">
+            <section class="legal-section">
+                <h3 class="legal-section__title">1. Who we are</h3>
+                <p class="legal-section__text">
+                    ASWallet is a digital wallet application for deposits, withdrawals, transfers, and transaction
+                    history. This policy explains what data we collect, why we use it, and what choices you have.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">2. Data we collect</h3>
+                <ul class="legal-list">
+                    <li>Account details: username, email, password (stored hashed), registration date.</li>
+                    <li>Profile details: name, phone, avatar, account status.</li>
+                    <li>Wallet data: balance, bank card last four digits, card holder name, expiry.</li>
+                    <li>Transactions: amounts, types, categories, dates, sender/receiver usernames, status.</li>
+                    <li>Settings: balance visibility and email notification preferences.</li>
+                    <li>Messages exchanged with admin support through the in-app mailbox.</li>
+                    <li>Security logs: login activity timestamps (admin audit may also review account events).</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">3. How we use your data</h3>
+                <ul class="legal-list">
+                    <li>To operate your wallet and process deposits, withdrawals, and transfers.</li>
+                    <li>To enforce daily withdraw limits and risk review rules on flagged transfers.</li>
+                    <li>To send optional email notifications when you enable them in Settings.</li>
+                    <li>To provide support through admin messaging and account recovery flows.</li>
+                    <li>To keep the platform secure and prevent misuse of accounts.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">4. Sharing and processors</h3>
+                <p class="legal-section__text">
+                    We do not sell your personal data. Transfers may be assessed by the ASWallet risk microservice
+                    (sender/receiver usernames, amount, and risk-related metadata). Email delivery uses the configured
+                    mail provider. Database hosting runs on infrastructure you control in this demo deployment.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">5. Retention</h3>
+                <p class="legal-section__text">
+                    Data is kept while your account is active. You may clear transaction history from the app.
+                    Deleting your account removes your profile, wallet records, and related personal data from the
+                    main application database, subject to technical logs retained for security.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">6. Your rights</h3>
+                <ul class="legal-list">
+                    <li>Access and update profile details from Profile and Settings.</li>
+                    <li>Export transactions as PDF from Data &amp; Privacy.</li>
+                    <li>Control email notifications and balance visibility in Settings.</li>
+                    <li>Delete your account permanently from Account &amp; Security.</li>
+                    <li>Contact us for privacy questions using the Contact Us page.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">7. Security</h3>
+                <p class="legal-section__text">
+                    Passwords are hashed. Sessions are protected by Spring Security and CSRF checks on sensitive
+                    actions. No system is perfectly secure—use a strong unique password and keep your login private.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">8. Contact</h3>
+                <p class="legal-section__text">
+                    Questions about this policy: <a class="legal-inline-link" th:href="@{/wallet/contact-us}">Contact Us</a>
+                    or email <a class="legal-inline-link" href="mailto:aswallet.noreply@abv.bg">aswallet.noreply@abv.bg</a>.
+                </p>
+            </section>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

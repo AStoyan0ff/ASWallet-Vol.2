@@ -50,5 +50,16 @@
     --btn-red-text-shadow: rgba(255, 210, 205, 0.35);
     --btn-red-bg: linear-gradient(145deg, #f08888 0%, #e53935 28%, #c62828 55%, #9a1515 100%);
     --btn-red-bg-hover: linear-gradient(145deg, #f59898 0%, #ef5350 28%, #d32f2f 55%, #b71c1c 100%);
+
+    --btn-blue-text: #081018;
+    --btn-blue-border: rgba(140, 200, 255, 0.35);
+    --btn-blue-border-hover: rgba(160, 215, 255, 0.5);
+    --btn-blue-inset: rgba(190, 230, 255, 0.35);
+    --btn-blue-inset-hover: rgba(210, 240, 255, 0.4);
+    --btn-blue-shadow: rgba(0, 40, 100, 0.28);
+    --btn-blue-shadow-hover: rgba(0, 40, 100, 0.22);
+    --btn-blue-text-shadow: rgba(190, 230, 255, 0.35);
+    --btn-blue-bg: linear-gradient(145deg, #7eb8f0 0%, #4a90e0 28%, #2563b8 55%, #1a4a8a 100%);
+    --btn-blue-bg-hover: linear-gradient(145deg, #92c8f8 0%, #5a9fef 28%, #3270c8 55%, #2058a0 100%);
 }
 

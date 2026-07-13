@@ -17,6 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -659,6 +663,46 @@ class TransactionServiceImplTest {
         assertThat(dto.getReceiverUsername()).isEqualTo("Georgi");
         assertThat(dto.getReceiverAccountStatus()).isEqualTo(AccountStatus.INACTIVE);
         assertThat(dto.getCreatedAt()).isEqualTo("2026-07-07 12:30:00");
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void getUserTransactionsPage_returnsMappedPage() {
+        Transaction transaction = new Transaction();
+        transaction.setId(UUID.randomUUID());
+        transaction.setAmount(new BigDecimal("10.00"));
+        transaction.setDescription("Food");
+        transaction.setCreatedAt(LocalDateTime.of(2026, 7, 7, 12, 30, 0));
+        transaction.setStatus(TransactionStatus.COMPLETED);
+        transaction.setType(TransactionType.DEPOSIT);
+        transaction.setReceiverWallet(wallet);
+
+        Page<Transaction> page = new PageImpl<>(
+                List.of(transaction),
+                PageRequest.of(0, 5),
+                1
+        );
+
+        when(walletRepository.findByUser_Id(userId)).thenReturn(Optional.of(wallet));
+        when(transactionRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+        when(profileDetailsRepository.findByUser_Username("Plamen")).thenReturn(Optional.empty());
+
+        Page<TransactionViewDTO> result = transactionService.getUserTransactionsPage(userId, 0, 5);
+
+        assertThat(result.getContent()).hasSize(1);
+        assertThat(result.getTotalElements()).isEqualTo(1);
+        assertThat(result.getContent().getFirst().getAmount()).isEqualByComparingTo("10.00");
+    }
+
+    @Test
+    void hasPendingTransfers_delegatesToRepository() {
+        when(walletRepository.findByUser_Id(userId)).thenReturn(Optional.of(wallet));
+        when(transactionRepository.existsByWalletInvolvedAndStatusIn(
+                wallet.getId(),
+                List.of(TransactionStatus.PENDING, TransactionStatus.PENDING_RISK_REVIEW)
+        )).thenReturn(true);
+
+        assertThat(transactionService.hasPendingTransfers(userId)).isTrue();
     }
 
     // --- CLEAR Transaction History ---

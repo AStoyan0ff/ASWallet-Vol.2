@@ -19,6 +19,9 @@ public class AdminRiskAssessmentViewDTO {
     private int riskScore;
     private String riskLevel;
     private String decision;
+    private String status;
     private String createdAt;
+    private String reviewedBy;
+    private String reviewedAt;
     private List<String> reasons;
 }

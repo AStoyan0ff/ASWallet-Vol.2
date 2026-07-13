@@ -1944,6 +1944,47 @@
     color: #ffcdd2;
 }
 
+.risk-review-status-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 4.2rem;
+    padding: 0.32rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.risk-review-status-chip--pending {
+    background: rgba(255, 167, 38, 0.14);
+    border: 1px solid rgba(255, 167, 38, 0.34);
+    color: #ffe082;
+}
+
+.risk-review-status-chip--approved {
+    background: rgba(102, 187, 106, 0.14);
+    border: 1px solid rgba(102, 187, 106, 0.34);
+    color: #b9f6ca;
+}
+
+.risk-review-status-chip--rejected {
+    background: rgba(229, 115, 115, 0.14);
+    border: 1px solid rgba(229, 115, 115, 0.34);
+    color: #ffcdd2;
+}
+
+.risk-reviews-detail-reviewed-note {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 0.84rem;
+    color: rgba(255, 236, 190, 0.82);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 167, 38, 0.22);
+}
+
 .risk-review-actions-row {
     display: flex;
     flex-direction: column;
@@ -2191,6 +2232,30 @@
     color: #8b3a2a;
     background: rgba(255, 205, 210, 0.65);
     border-color: rgba(239, 154, 154, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-review-status-chip--pending {
+    color: #a67c00;
+    background: rgba(255, 224, 178, 0.65);
+    border-color: rgba(212, 175, 55, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-review-status-chip--approved {
+    color: #1b5e20;
+    background: rgba(200, 230, 201, 0.65);
+    border-color: rgba(129, 199, 132, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-review-status-chip--rejected {
+    color: #8b3a2a;
+    background: rgba(255, 205, 210, 0.65);
+    border-color: rgba(239, 154, 154, 0.45);
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-reviewed-note {
+    color: #5c4f3a;
+    background: rgba(255, 248, 235, 0.88);
+    border-color: rgba(158, 142, 118, 0.32);
 }
 
 .body-admin-risk-reviews-wallet-panel .tx-empty {

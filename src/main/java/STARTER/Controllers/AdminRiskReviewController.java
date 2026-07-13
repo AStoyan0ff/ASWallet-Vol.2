@@ -25,7 +25,7 @@ public class AdminRiskReviewController {
     @GetMapping
     public String listPendingReviews(Model model, Principal principal, RedirectAttributes redirectAttributes) {
         try {
-            model.addAttribute("assessments", adminRiskReviewService.listPendingReviews());
+            model.addAttribute("assessments", adminRiskReviewService.listRiskReviews());
         } catch (RuntimeException ex) {
             model.addAttribute("assessments", java.util.List.of());
             model.addAttribute("errorMessage", ex.getMessage());
@@ -59,18 +59,18 @@ public class AdminRiskReviewController {
             RedirectAttributes redirectAttributes) {
 
         try {
-            int deleted = adminRiskReviewService.deleteAllPendingReviews();
+            int deleted = adminRiskReviewService.deleteAllRiskReviews();
 
             if (deleted == 0) {
                 redirectAttributes.addFlashAttribute(
                         "successMessage",
-                        "No pending risk reviews to delete."
+                        "No risk reviews to delete."
                 );
 
             } else {
                 redirectAttributes.addFlashAttribute(
                         "successMessage",
-                        "Deleted " + deleted + " pending risk review(s). Funds returned to senders."
+                        "Deleted " + deleted + " risk review(s). Pending transfers were cancelled and funds returned to senders."
                 );
             }
 

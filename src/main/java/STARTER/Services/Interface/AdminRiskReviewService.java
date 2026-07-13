@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public interface AdminRiskReviewService {
 
-    List<AdminRiskAssessmentViewDTO> listPendingReviews();
+    List<AdminRiskAssessmentViewDTO> listRiskReviews();
     long countPendingReviews();
     void approve(UUID assessmentId, String reviewedBy);
     void reject(UUID assessmentId, String reviewedBy);
-    int deleteAllPendingReviews();
+    int deleteAllRiskReviews();
 
 }

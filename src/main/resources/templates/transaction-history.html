@@ -102,6 +102,7 @@
                                   class="tx-cancel-pending-form"
                                   onsubmit="return confirm('Cancel this pending transfer? The amount will return to your wallet.');">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <input type="hidden" name="page" th:value="${currentPage}">
                                 <button type="submit" class="wallet-btn wallet-btn-danger tx-cancel-pending-btn">Cancel</button>
                             </form>
                         </div>
@@ -147,6 +148,21 @@
                 </tr>
                 </tbody>
             </table>
+
+            <nav class="tx-pagination"
+                 th:if="${totalPages > 1}"
+                 aria-label="Transaction history pages">
+                <a class="home-pill form-pill-link tx-pagination-btn"
+                   th:if="${hasPrevious}"
+                   th:href="@{/transactions/history(page=${currentPage - 1})}">Previous</a>
+                <span class="tx-pagination-status">
+                    Page <span th:text="${currentPage + 1}">1</span>
+                    of <span th:text="${totalPages}">1</span>
+                </span>
+                <a class="home-pill form-pill-link tx-pagination-btn"
+                   th:if="${hasNext}"
+                   th:href="@{/transactions/history(page=${currentPage + 1})}">Next</a>
+            </nav>
         </div>
 
         <p class="tx-empty auth-stagger" th:if="${#lists.isEmpty(transactions)}">No transactions yet.</p>

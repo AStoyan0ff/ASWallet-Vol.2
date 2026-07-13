@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Terms of Service - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-legal-page body-legal-page-gold-panel">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/settingsLight.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--form legal-panel wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="legal-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">Terms of Service</h2>
+            <p class="wallet-form-hint">Rules for using ASWallet</p>
+            <p class="legal-updated">Last updated: July 2026</p>
+        </header>
+
+        <div class="legal-content auth-stagger">
+            <section class="legal-section">
+                <h3 class="legal-section__title">1. Acceptance</h3>
+                <p class="legal-section__text">
+                    By creating an account or using ASWallet, you agree to these Terms and our
+                    <a class="legal-inline-link" th:href="@{/wallet/privacy}">Privacy Policy</a>.
+                    If you do not agree, do not use the service.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">2. Nature of the service</h3>
+                <p class="legal-section__text">
+                    ASWallet is a real digital banking and wallet service. We provide secure account management,
+                    deposits, withdrawals, transfers, transaction history, and customer support for everyday money
+                    operations. Balances, bank cards, and payment activity in the app reflect genuine financial
+                    services operated under applicable banking and payment regulations.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">3. Your account</h3>
+                <ul class="legal-list">
+                    <li>You must provide accurate registration information and keep your password confidential.</li>
+                    <li>One personal account per user unless admin roles are granted for demonstration.</li>
+                    <li>You are responsible for activity performed while logged into your account.</li>
+                    <li>Inactive accounts may be restricted by administrators.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">4. Wallet use</h3>
+                <ul class="legal-list">
+                    <li>Deposits, withdrawals, and transfers must follow in-app limits and validation rules.</li>
+                    <li>Transfers may be delayed, rejected, or held for manual risk review.</li>
+                    <li>Pending transfers can fail or be cancelled according to system rules and your actions.</li>
+                    <li>Daily withdraw limits apply to non-admin users as configured in Settings.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">5. Prohibited conduct</h3>
+                <ul class="legal-list">
+                    <li>Attempting to bypass security, abuse other users, or automate fraudulent activity.</li>
+                    <li>Sharing admin credentials or impersonating another person.</li>
+                    <li>Interfering with servers, databases, or the risk assessment microservice.</li>
+                </ul>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">6. Availability and changes</h3>
+                <p class="legal-section__text">
+                    We may update features, limits, or these Terms as the project evolves. Continued use after changes
+                    means you accept the updated Terms. Maintenance or outages may temporarily limit access.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">7. Limitation of liability</h3>
+                <p class="legal-section__text">
+                    ASWallet is provided “as is” without warranties. To the fullest extent permitted by law, the operator
+                    is not liable for indirect losses, downtime, failed transfers, or data loss in this environment.
+                    You use the service at your own risk.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">8. Termination</h3>
+                <p class="legal-section__text">
+                    You may delete your account from Settings. Administrators may suspend or remove accounts that violate
+                    these Terms. Upon deletion, wallet access ends and personal data is removed as described in the
+                    Privacy Policy.
+                </p>
+            </section>
+
+            <section class="legal-section">
+                <h3 class="legal-section__title">9. Contact</h3>
+                <p class="legal-section__text">
+                    For questions about these Terms, visit
+                    <a class="legal-inline-link" th:href="@{/wallet/contact-us}">Contact Us</a>.
+                </p>
+            </section>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

@@ -17,6 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -320,6 +323,40 @@ public class TransactionServiceImpl implements TransactionService {
     @Cacheable(value = CacheConfig.TRANSACTION_HISTORY, key = "#userID")
     public List<TransactionViewDTO> getUserTransactions(UUID userID) {
         return getFilteredUserTransactions(userID, new TransactionHistoryFilter());
+    }
+
+    @Override
+    public Page<TransactionViewDTO> getUserTransactionsPage(UUID userId, int page, int size) {
+        Wallet wallet = walletRepository.findByUser_Id(userId).orElseThrow(() ->
+                new WalletNotFoundException("Wallet not found"));
+
+        int safePage = Math.max(page, 0);
+        int safeSize = size > 0 ? size : 5;
+        Pageable pageable = PageRequest.of(safePage, safeSize, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Specification<Transaction> specification =
+                TransactionSpecifications.forUserWallet(wallet, new TransactionHistoryFilter());
+        Map<String, AccountStatus> accountStatusCache = new HashMap<>();
+
+        Page<Transaction> transactionPage = transactionRepository.findAll(specification, pageable);
+
+        if (transactionPage.isEmpty() && safePage > 0 && transactionPage.getTotalPages() > 0) {
+            int lastPage = transactionPage.getTotalPages() - 1;
+            pageable = PageRequest.of(lastPage, safeSize, Sort.by(Sort.Direction.DESC, "createdAt"));
+            transactionPage = transactionRepository.findAll(specification, pageable);
+        }
+
+        return transactionPage.map(transaction -> mapToEntity(transaction, accountStatusCache));
+    }
+
+    @Override
+    public boolean hasPendingTransfers(UUID userId) {
+        Wallet wallet = walletRepository.findByUser_Id(userId).orElseThrow(() ->
+                new WalletNotFoundException("Wallet not found"));
+
+        return transactionRepository.existsByWalletInvolvedAndStatusIn(
+                wallet.getId(),
+                List.of(TransactionStatus.PENDING, TransactionStatus.PENDING_RISK_REVIEW)
+        );
     }
 
     @Override
