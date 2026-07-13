@@ -1656,15 +1656,15 @@
 .body-admin-risk-reviews .wallet-landing {
     width: 100%;
     max-width: 100%;
-    align-items: stretch;
+    align-items: center;
     padding: 24px clamp(10px, 2vw, 28px) 32px;
 }
 
 .wallet-panel--admin-risk-reviews {
-    width: min(1520px, 99vw);
-    max-width: 99vw;
+    width: min(1180px, 96vw);
+    max-width: 96vw;
     margin-inline: auto;
-    padding: 32px clamp(22px, 3vw, 44px) 40px;
+    padding: 28px clamp(20px, 2.5vw, 36px) 32px;
     text-align: left;
 }
 
@@ -1708,110 +1708,202 @@
     /* metallic red — see base/buttons.css */
 }
 
-.risk-reviews-table-wrap {
-    width: 100%;
-    max-height: clamp(340px, 68vh, 760px);
-    overflow: auto;
+/* Master–detail layout (/admin/risk-reviews) */
+.risk-reviews-master-detail {
+    display: grid;
+    grid-template-columns: minmax(260px, 36%) minmax(0, 64%);
+    gap: 16px;
     margin-top: 10px;
-    padding: 2px 6px 2px 2px;
+    min-height: clamp(300px, 50vh, 540px);
+}
+
+.risk-reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: clamp(300px, 50vh, 540px);
+    overflow: auto;
+    padding: 8px;
     border-radius: 14px;
     border: 1px solid rgba(201, 168, 92, 0.32);
     background: linear-gradient(160deg, rgba(16, 13, 10, 0.96), rgba(8, 7, 6, 0.92));
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.04),
-        0 8px 18px rgba(0, 0, 0, 0.22);
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 8px 18px rgba(0, 0, 0, 0.22);
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 167, 38, 0.45) rgba(10, 10, 10, 0.6);
 }
 
-.risk-reviews-table-wrap::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-.risk-reviews-table-wrap::-webkit-scrollbar-track {
-    background: rgba(10, 10, 10, 0.55);
-    border-radius: 999px;
-}
-
-.risk-reviews-table-wrap::-webkit-scrollbar-thumb {
-    background: rgba(255, 167, 38, 0.42);
-    border-radius: 999px;
-}
-
-.risk-reviews-table {
+.risk-reviews-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
     width: 100%;
-    min-width: 1360px;
-    table-layout: fixed;
-    border-collapse: collapse;
-    background: transparent;
-}
-
-.risk-col-user { width: 8.5%; }
-.risk-col-amount { width: 7%; }
-.risk-col-score { width: 6%; }
-.risk-col-level { width: 8%; }
-.risk-col-transaction { width: 17%; }
-.risk-col-created { width: 11%; }
-.risk-col-reasons { width: 33.5%; }
-.risk-col-actions { width: 9%; }
-
-.risk-reviews-table th,
-.risk-reviews-table td {
-    padding: 16px 18px;
-    text-align: left;
-    vertical-align: top;
-    border-bottom: 1px solid rgba(201, 168, 92, 0.18);
+    margin: 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(201, 168, 92, 0.22);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
     color: #ffecb3;
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.risk-reviews-table thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background: rgba(12, 10, 8, 0.98);
-    font-size: 0.74rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 183, 77, 0.92);
-    border-bottom: 1px solid rgba(255, 167, 38, 0.28);
-    padding-top: 18px;
-    padding-bottom: 18px;
+.risk-reviews-list-item:hover {
+    border-color: rgba(255, 167, 38, 0.38);
+    background: rgba(255, 167, 38, 0.07);
 }
 
-.body-admin-risk-reviews .risk-reviews-table tbody tr td {
-    background: transparent;
+.risk-reviews-list-item.is-selected {
+    border-color: rgba(255, 167, 38, 0.55);
+    background: rgba(255, 167, 38, 0.12);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.12),
+            0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
-.body-admin-risk-reviews .risk-reviews-table tbody tr:nth-child(even) td {
-    background: transparent;
-}
-
-.risk-reviews-table tbody tr:hover td {
-    background: rgba(255, 167, 38, 0.05);
-}
-
-.risk-reviews-table td:nth-child(1),
-.risk-reviews-table td:nth-child(2) {
+.risk-reviews-list-item__route {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
     color: #ffb74d;
+    line-height: 1.3;
+}
+
+.risk-reviews-list-item__arrow {
+    color: rgba(255, 236, 190, 0.72);
     font-weight: 600;
 }
 
-.risk-reviews-table td:nth-child(3) {
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
+.risk-reviews-list-item__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.risk-reviews-table td:nth-child(7) {
-    white-space: nowrap;
+.risk-reviews-list-item__amount {
     font-size: 0.84rem;
-    color: rgba(255, 236, 179, 0.88);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #ffe082;
 }
 
-.risk-reviews-table td:nth-child(8) {
-    word-break: break-word;
+.risk-reviews-list-item__created {
+    font-size: 0.74rem;
+    color: rgba(255, 236, 179, 0.78);
+    line-height: 1.3;
+}
+
+.risk-reviews-detail {
+    position: relative;
+    min-height: clamp(300px, 50vh, 540px);
+}
+
+.risk-reviews-detail-pane {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    min-height: clamp(300px, 50vh, 540px);
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(201, 168, 92, 0.32);
+    background: linear-gradient(160deg, rgba(16, 13, 10, 0.96), rgba(8, 7, 6, 0.92));
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.04),
+            0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.risk-reviews-detail-pane.is-active {
+    display: flex;
+}
+
+.risk-reviews-detail-pane__header {
+    margin: 0;
+}
+
+.risk-reviews-detail-pane__title {
+    margin: 0 0 6px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 183, 77, 0.92);
+}
+
+.risk-reviews-detail-pane__route {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffb74d;
+    line-height: 1.35;
+}
+
+.risk-reviews-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    margin: 0;
+}
+
+.risk-reviews-detail-row {
+    margin: 0;
+}
+
+.risk-reviews-detail-row dt {
+    margin: 0 0 4px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 183, 77, 0.78);
+}
+
+.risk-reviews-detail-row dd {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #ffecb3;
+    line-height: 1.4;
+}
+
+.risk-reviews-detail-reasons {
+    flex: 1;
+    min-height: 0;
+    padding-top: 4px;
+    border-top: 1px solid rgba(201, 168, 92, 0.18);
+}
+
+.risk-reviews-detail-reasons__title {
+    margin: 0 0 8px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 183, 77, 0.78);
+}
+
+.risk-reviews-detail-reasons__empty {
+    margin: 0;
+    font-size: 0.86rem;
+    color: rgba(255, 236, 179, 0.72);
+}
+
+.risk-reviews-detail-actions {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.risk-reviews-detail-actions .risk-review-form {
+    flex: 1 1 0;
 }
 
 .risk-score-chip,
@@ -1852,10 +1944,6 @@
     color: #ffcdd2;
 }
 
-.risk-review-actions {
-    min-width: 7.5rem;
-}
-
 .risk-review-actions-row {
     display: flex;
     flex-direction: column;
@@ -1888,20 +1976,36 @@
 
 @media (max-width: 1100px) {
     .wallet-panel--admin-risk-reviews {
-        width: 99vw;
+        width: min(96vw, 96vw);
         padding: 28px 16px 32px;
-    }
-
-    .risk-reviews-table th,
-    .risk-reviews-table td {
-        padding: 14px 14px;
-        font-size: 0.86rem;
     }
 }
 
 @media (max-width: 900px) {
     .wallet-panel--admin-risk-reviews {
         padding: 24px 14px 28px;
+    }
+
+    .risk-reviews-master-detail {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .risk-reviews-list {
+        max-height: 240px;
+    }
+
+    .risk-reviews-detail,
+    .risk-reviews-detail-pane {
+        min-height: 0;
+    }
+
+    .risk-reviews-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .risk-reviews-detail-actions {
+        flex-direction: column;
     }
 }
 
@@ -1999,51 +2103,62 @@
     box-shadow: none;
 }
 
-.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap {
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list,
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-pane {
     border: 1px solid rgba(158, 142, 118, 0.38);
     background: rgba(255, 255, 255, 0.55);
     box-shadow: none;
-    scrollbar-color: rgba(158, 142, 118, 0.55) rgba(244, 238, 228, 0.65);
 }
 
-.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap::-webkit-scrollbar-track {
-    background: rgba(244, 238, 228, 0.65);
-}
-
-.body-admin-risk-reviews-wallet-panel .risk-reviews-table-wrap::-webkit-scrollbar-thumb {
-    background: rgba(158, 142, 118, 0.55);
-}
-
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table th,
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td {
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item {
     color: #1f1a14;
-    border-bottom-color: rgba(158, 142, 118, 0.28);
+    border-color: rgba(158, 142, 118, 0.28);
+    background: rgba(255, 255, 255, 0.42);
 }
 
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table thead th {
-    background: linear-gradient(180deg, #e8e0d4 0%, #ede6db 100%);
-    color: #6b5a38;
-    border-bottom-color: rgba(158, 142, 118, 0.38);
-    box-shadow: none;
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item:hover {
+    border-color: rgba(158, 142, 118, 0.45);
+    background: rgba(255, 255, 255, 0.62);
 }
 
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table tbody tr:nth-child(even) td {
-    background: rgba(244, 238, 228, 0.55);
-    color: #1f1a14;
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item.is-selected {
+    border-color: rgba(180, 140, 40, 0.55);
+    background: rgba(255, 248, 235, 0.88);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.72),
+            0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table tbody tr:hover td {
-    background: rgba(212, 175, 55, 0.1);
-    color: #1f1a14;
-}
-
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(1),
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(2) {
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item__route,
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-pane__route {
     color: #8a7340;
 }
 
-.body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .risk-reviews-table td:nth-child(7) {
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item__arrow {
+    color: #7a6e5c;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item__amount {
+    color: #6b5a38;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-list-item__created {
     color: #5c4f3a;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-pane__title,
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-reasons__title,
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-row dt {
+    color: #6b5a38;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-row dd,
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-reasons__empty {
+    color: #1f1a14;
+}
+
+.body-admin-risk-reviews-wallet-panel .risk-reviews-detail-reasons {
+    border-top-color: rgba(158, 142, 118, 0.28);
 }
 
 .body-admin-risk-reviews-wallet-panel .risk-transaction-ref {

@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="body-wallet body-wallet-page body-wallet-white-panel body-wallet-light-page">
+<body class="body-wallet body-wallet-page body-wallet-white-panel body-wallet-light-page body-wallet-premium-fe">
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/walletLight.png}" alt="">
     <div class="home-bg-overlay"></div>
@@ -14,7 +14,17 @@
 
 <main class="wallet-landing reveal-item">
     <section class="wallet-panel wallet-panel--materialize reveal-child">
-        <span class="home-pill wallet-dashboard-pill auth-stagger">Dashboard</span>
+        <span class="home-pill wallet-dashboard-pill auth-stagger">
+            <span class="wallet-dashboard-pill__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="3" width="8" height="8" rx="1.5"/>
+                    <rect x="13" y="3" width="8" height="8" rx="1.5"/>
+                    <rect x="3" y="13" width="8" height="8" rx="1.5"/>
+                    <rect x="13" y="13" width="8" height="8" rx="1.5"/>
+                </svg>
+            </span>
+            Dashboard
+        </span>
         <p class="wallet-greeting auth-stagger">Hello, <span class="wallet-username"
                                                              th:text="${wallet.username}"></span></p>
         <h2 class="wallet-title auth-stagger">YOUR WALLET</h2>
@@ -37,15 +47,17 @@
             <div class="wallet-bank-card__orb wallet-bank-card__orb--two" aria-hidden="true"></div>
 
             <div class="wallet-bank-card__face">
+                <span class="wallet-bank-card__brand" aria-hidden="true">AS WALLET</span>
+
                 <span class="wallet-bank-card__contactless" aria-hidden="true">
                     <img class="wallet-bank-card__contactless-img"
-                         th:src="@{/images/logos/noContact.png}"
+                         th:src="@{/images/asset/noContact.png}"
                          alt="">
                 </span>
 
                 <span class="wallet-bank-card__chip" aria-hidden="true">
                     <img class="wallet-bank-card__chip-img"
-                         th:src="@{/images/logos/emv-chip.png}"
+                         th:src="@{/images/asset/emv-chip.png}"
                          alt="">
                 </span>
 
@@ -61,14 +73,15 @@
 
                     <div class="wallet-bank-card__footer">
                         <p class="wallet-currency">
-                            Currency: <span th:text="${wallet.currency}"></span>
+                            <span class="wallet-currency-label">Currency</span>
+                            <span class="wallet-currency-value" th:text="${wallet.currency}"></span>
                         </p>
 
                         <div class="wallet-iban"
                              th:if="${savedBankCard != null and savedBankCard.iban != null}"
                              th:data-iban="${savedBankCard.iban}">
                             <p class="wallet-iban-line">
-                                <span class="wallet-iban-label">IBAN:</span>
+                                <span class="wallet-iban-label">IBAN</span>
                                 <span class="wallet-iban-value"></span>
                             </p>
                             <button type="button"

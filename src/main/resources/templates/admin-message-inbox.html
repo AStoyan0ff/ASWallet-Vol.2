@@ -14,7 +14,7 @@
 <main class="wallet-landing reveal-item">
     <section class="wallet-panel wallet-panel--wide wallet-panel--admin wallet-panel--materialize reveal-child">
         <div class="form-panel-top form-panel-top--split auth-stagger">
-            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+            <a class="home-pill form-pill-link" th:href="@{/admin}">Back to admin</a>
             <form th:if="${!#lists.isEmpty(replies)}"
                   class="mailbox-delete-form mailbox-delete-form--top"
                   th:action="@{/admin/messages/inbox/delete}"

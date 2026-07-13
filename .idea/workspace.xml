@@ -5,80 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/10df84b9-98f7-4b68-9fbf-e29946a020af.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/LoginActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/LoginActivityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/LoginActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Interface/LoginActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/base/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/base/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/base/variables.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/base/variables.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/account-security.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/account-security.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/auth.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/bank-details.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/bank-details.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/contact-us.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/contact-us.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/settings.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/settings.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/4.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/aswallet-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/logos/aswallet-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/bank-details.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/change-password.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/contactUs.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/contactUs.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/daily-limit.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/daily-limit.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/delete-account.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/delete-account.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/emv-chip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/logos/emv-chip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/export-file.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/export-file.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/homePage.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/homePage.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/log-reg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/mailbox.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/mailbox.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/noContact.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/logos/noContact.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/res-pass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/res-pass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/setings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/transfer.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/transfer.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/userDetails.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/userDetails.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/wallet-iban.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/wallet-iban.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/account-deleted.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account-deleted.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-login-activity.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-login-activity.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/aswallet-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/aswallet-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/emv-chip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/emv-chip.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/my-card.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/my-card.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/logos/noContact.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/noContact.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-message-inbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-message-inbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-message-thread.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-message-thread.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-risk-reviews.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-send-message.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-send-message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin-user-manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin-user-manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bank-details.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bank-details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/change-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/change-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contact-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contact-us.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/daily-limit-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/daily-limit-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/delete-account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/delete-account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/deposit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/deposit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/forgot-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments/app-footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/app-footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/profile-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/profile-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/reset-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/reset-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transaction-export.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transaction-export.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transaction-history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transfer-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transfer-confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/transfer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/transfer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet-message-view.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet-message-view.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet-messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet-messages.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet-send-message.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet-send-message.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/withdraw.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/withdraw.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,61 +70,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.309135533760682E-9" />
-      <entry key="MS500" value="0.018823840510063878" />
-      <entry key="S2" value="0.4666308708685701" />
-      <entry key="S5" value="1.0645721999706002" />
-      <entry key="S10" value="1.4463410482235846" />
-      <entry key="S30" value="1.7916145083154593" />
-      <entry key="S60" value="1.8924685441117717" />
-      <entry key="M2" value="1.945369789842194" />
-      <entry key="M5" value="1.9779365041700243" />
-      <entry key="M10" value="1.989061529418263" />
-      <entry key="M15" value="1.995841502993444" />
-      <entry key="M30" value="2.0925790522960193" />
-      <entry key="H1" value="3.292759841933947" />
-      <entry key="H2" value="11.93869640421839" />
-      <entry key="H4" value="39.694060465671434" />
-      <entry key="D1" value="281.0091727573103" />
-      <entry key="W1" value="671.6166348002769" />
-    </decayedCancelled>
-    <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0000000000550595" />
-      <entry key="M15" value="1.0000002485294524" />
-      <entry key="M30" value="1.0011683786960552" />
-      <entry key="H1" value="1.0826762754143198" />
-      <entry key="H2" value="1.7214614543246076" />
-      <entry key="H4" value="3.676450407966901" />
-      <entry key="D1" value="53.78358138826415" />
-      <entry key="W1" value="140.28198091193775" />
+      <entry key="S5" value="1.0000000000000209" />
+      <entry key="S10" value="1.0000002823552452" />
+      <entry key="S30" value="1.0164542433887354" />
+      <entry key="S60" value="1.2590988076534413" />
+      <entry key="M2" value="2.06509749551177" />
+      <entry key="M5" value="3.6167763806596644" />
+      <entry key="M10" value="4.5939176042031535" />
+      <entry key="M15" value="5.0057752620621585" />
+      <entry key="M30" value="5.473633778153952" />
+      <entry key="H1" value="5.827880870186404" />
+      <entry key="H2" value="7.946396108265221" />
+      <entry key="H4" value="22.517797449109345" />
+      <entry key="D1" value="248.96428645535835" />
+      <entry key="W1" value="663.8060926646197" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="1.2807420496835397E-182" />
+      <entry key="S60" value="1.1316987451099957E-91" />
+      <entry key="M2" value="3.364073044852022E-46" />
+      <entry key="M5" value="6.467644892664766E-19" />
+      <entry key="M10" value="8.042166930235268E-10" />
+      <entry key="M15" value="8.647996334943518E-7" />
+      <entry key="M30" value="9.310324513922867E-4" />
+      <entry key="H1" value="0.03301622894892126" />
+      <entry key="H2" value="0.300615747069927" />
+      <entry key="H4" value="1.5363349977718528" />
+      <entry key="D1" value="46.50424379032349" />
+      <entry key="W1" value="137.39769359139177" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="6.885191039457745E-7" />
-      <entry key="MS500" value="0.06021632359175728" />
-      <entry key="S2" value="0.7866740866579287" />
-      <entry key="S5" value="1.6683117400985352" />
-      <entry key="S10" value="2.2171436144985788" />
-      <entry key="S30" value="2.70691509808336" />
-      <entry key="S60" value="2.848979277436929" />
-      <entry key="M2" value="2.9233319825319515" />
-      <entry key="M5" value="2.9690499308837763" />
-      <entry key="M10" value="2.9846062385635754" />
-      <entry key="M15" value="2.9928688158371646" />
-      <entry key="M30" value="3.092250207889056" />
-      <entry key="H1" value="4.37438684395706" />
-      <entry key="H2" value="13.658434211176449" />
-      <entry key="H4" value="43.3679309873683" />
-      <entry key="D1" value="334.78749870463287" />
-      <entry key="W1" value="811.8968730214795" />
+      <entry key="MS100" value="0.8827029962906549" />
+      <entry key="MS500" value="0.9753554615276419" />
+      <entry key="S2" value="0.9937810933225548" />
+      <entry key="S5" value="0.9975077808975502" />
+      <entry key="S10" value="0.9987533946471743" />
+      <entry key="S30" value="1.016023026529701" />
+      <entry key="S60" value="1.2587672533434315" />
+      <entry key="M2" value="2.0647216792084544" />
+      <entry key="M5" value="3.616436895862453" />
+      <entry key="M10" value="4.593680889742974" />
+      <entry key="M15" value="5.005598562960135" />
+      <entry key="M30" value="5.47446317038349" />
+      <entry key="H1" value="5.860811767737633" />
+      <entry key="H2" value="8.246683341213767" />
+      <entry key="H4" value="24.053040373063666" />
+      <entry key="D1" value="295.4639837418684" />
+      <entry key="W1" value="801.2020790581481" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -194,7 +136,6 @@
 }</component>
   <component name="ProjectId" id="3CuCxwreDDxkvF7XLwxyLlkdycE" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -265,7 +206,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JAVA",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   },
@@ -496,7 +437,7 @@
       <workItem from="1783623635496" duration="613000" />
       <workItem from="1783686098135" duration="40574000" />
       <workItem from="1783772633607" duration="42305000" />
-      <workItem from="1783857986462" duration="29233000" />
+      <workItem from="1783857986462" duration="43266000" />
     </task>
     <servers />
   </component>
