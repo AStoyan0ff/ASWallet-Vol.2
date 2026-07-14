@@ -12,7 +12,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk">
-  <img src="https://img.shields.io/badge/version-2.0.1-blue">
+  <img src="https://img.shields.io/badge/version-2.0.2-blue">
   <img src="https://img.shields.io/badge/Spring%20Boot-4.0.6-brightgreen?logo=springboot">
   <img src="https://img.shields.io/badge/Spring%20Security-Authentication-success?logo=springsecurity">
   <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql">
@@ -26,7 +26,7 @@
   ASWallet-Vol.2 is a full-stack personal wallet platform. Users register, manage a digital wallet,
   link a bank card, receive a welcome bonus, and perform deposits, withdrawals, and transfers.
   The system includes profile management, admin tooling, messaging, scheduling, caching,
-  PDF export, and a REST risk-assessment microservice integrated via OpenFeign.
+  PDF export, legal pages, and a REST risk-assessment microservice integrated via OpenFeign.
 </p>
 
 ---
@@ -51,7 +51,7 @@
 16. [Testing & Coverage](#testing--coverage)
 17. [For Examiners / Reviewers](#for-examiners--reviewers)
 18. [Spring Advanced Assignment](#spring-advanced-assignment)
-19. [Version](#version)
+19. [Version History](#version-history)
 20. [Planned Work](#planned-work)
 21. [Author](#author)
 
@@ -59,14 +59,24 @@
 
 ## Overview
 
-ASWallet-Vol.2 is designed as a **two-application system** (per Spring Advanced requirements):
+ASWallet-Vol.2 is a **two-application system** (per Spring Advanced requirements):
 
-| Application                       | Port (default) | Role                                                         |
-|-----------------------------------|----------------|--------------------------------------------------------------|
-| **ASWallet-Vol.2 Main**           | `8080`         | Thymeleaf UI, wallet logic, security, MySQL `as_wallet`      |
-| **REST Microservice** | `8081`         | Transfer risk assessment API, separate DB `as_wallet_svc`, consumed via **Feign** |
+| Application             | Port (default) | Role                                                         |
+|-------------------------|----------------|--------------------------------------------------------------|
+| **ASWallet-Vol.2 Main** | `8080`         | Thymeleaf UI, wallet logic, Spring Security, MySQL `as_wallet` |
+| **REST Microservice**   | `8081`         | Transfer risk assessment API, separate DB `as_wallet_svc`, consumed via **Feign** |
 
 The **main application** (this repository) integrates with the sibling project **`ASWallet-Vol.2-svc`**.
+
+**What is implemented today (v2.0.2):**
+
+- Full wallet lifecycle: register, login, card, deposit, withdraw, transfer (with 2-step confirm)
+- Risk-aware transfers via microservice (`ALLOW` / `REVIEW` / `BLOCK`)
+- Admin panel: users, roles, status, login audit, mailbox, **risk reviews with history**
+- User mailbox, PDF export, settings, profile, daily limit, contact page
+- **Privacy Policy** and **Terms of Service** pages
+- **Paginated transaction history** (5 rows per page)
+- Spring Events (email), scheduling, caching, validation, 70%+ test coverage
 
 ---
 
@@ -91,11 +101,11 @@ The **main application** (this repository) integrates with the sibling project *
 │         │                                                               │
 │         └── Feign Client (RiskAssessmentClient) ──────────────────┐     │
 └───────────────────────────────────────────────────────────────────│─────┘
-                                                                    │ REST
+                                                                    │ REST (no auth today)
                                                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
 │         ASWallet-Vol.2-svc — Risk Microservice (:8081)                  │
-│  POST assess · GET pending · PATCH review → JPA → MySQL as_wallet_svc   │
+│  POST assess · GET manual-reviews · PATCH review · DELETE → as_wallet_svc │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -106,29 +116,30 @@ Presentation   →  Controllers, Thymeleaf templates, DTOs
 Business       →  Services (Interface + Impl)
 Persistence    →  Repositories, JPA Entities, Specifications
 Cross-cutting  →  Security, Events, Scheduling, Cache, ExceptionHandler
+Integration    →  OpenFeign (risk microservice)
 ```
 
 ---
 
 ## Tech Stack
 
-### Main Application (implemented)
+### Main Application
 
 | Layer       | Technology                                                |
 |-------------|-----------------------------------------------------------|
 | Language    | Java 21                                                   |
 | Framework   | Spring Boot 4.0.6                                         |
 | Web         | Spring MVC, Thymeleaf                                     |
-| Security    | Spring Security (session, CSRF, roles)                    |
+| Security    | Spring Security (session, CSRF, roles) — **main app only** |
 | Persistence | Spring Data JPA, Hibernate                                |
-| Database    | MySQL                                                     |
+| Database    | MySQL (`as_wallet`)                                       |
 | Validation  | Jakarta Bean Validation                                   |
 | Mail        | Spring Mail (SMTP — ABV)                                  |
 | Events      | Spring `ApplicationEvent` + `@TransactionalEventListener` |
 | Scheduling  | `@EnableScheduling`, cron + fixed delay                   |
 | Caching     | `@EnableCaching`, `ConcurrentMapCacheManager`             |
 | PDF         | OpenPDF 2.0.3                                             |
-| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5 (risk MS)      |
+| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5 (PATCH)       |
 | Frontend    | HTML5, modular CSS, vanilla JavaScript                    |
 | Build       | Maven                                                     |
 | Utilities   | Lombok                                                    |
@@ -139,12 +150,12 @@ Cross-cutting  →  Security, Events, Scheduling, Cache, ExceptionHandler
 |-------------|----------------------------------------------------|
 | Framework   | Spring Boot 4.0.6 (separate app)                   |
 | API         | Spring Web (REST)                                  |
-| Integration | **Spring Cloud OpenFeign** + **feign-hc5** (PATCH) |
-| Database    | MySQL `as_wallet_svc`                              |
+| Persistence | Spring Data JPA, MySQL `as_wallet_svc`             |
 | Entity      | `TransferRiskAssessment`                           |
-| Testing     | Unit + WebMvc tests                                |
+| Security    | **None** (optional per assignment — see [Security](#security)) |
+| Testing     | Unit + integration + WebMvc tests                  |
 
-See the microservice README: `../ASWallet-Vol.2-svc/README.md` (sibling folder).
+See: `../ASWallet-Vol.2-svc/README.md`
 
 ---
 
@@ -186,8 +197,10 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 | `UserRole`          | `USER`, `ADMIN`                                           |
 | `AccountStatus`     | `ACTIVE`, `INACTIVE`                                      |
 | `TransactionType`   | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                         |
-| `TransactionStatus` | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED`             |
+| `TransactionStatus` | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED` |
 | `SpendingCategory`  | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT` |
+| `RiskDecision`      | `ALLOW`, `REVIEW`, `BLOCK` (from microservice)          |
+| `AssessmentStatus`  | `PENDING`, `APPROVED`, `REJECTED` (microservice reviews) |
 
 ---
 
@@ -198,7 +211,7 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Registration, login, logout
 - BCrypt passwords; CSRF on all POST forms
 - Forgot / reset password (email token, SHA-256 stored, expiry, scheduled cleanup)
-- Change password
+- Change password (strength meter UI)
 - Delete own account (cascade: wallet, card, transactions, profile, tokens, messages)
 - Inactive users cannot log in (`AccountStatus.INACTIVE`)
 
@@ -209,10 +222,14 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Deposit (card + CVC)
 - Withdraw (card; daily limit for non-admin users)
 - Transfer by receiver username (2-step confirm; receiver needs card)
-- **Risk-aware transfers:** on confirm, main app calls microservice via Feign; `BLOCK` stops transfer before creation; `REVIEW` saves as `PENDING_RISK_REVIEW` (held until admin action); `ALLOW` saves as `PENDING` and auto-completes via scheduler (~5 s)
-- Pending transfers: scheduler processes `PENDING` only → `COMPLETED` / `FAILED`; `PENDING_RISK_REVIEW` is skipped by scheduler until admin approve/reject
+- **Risk-aware transfers:** on confirm, main app calls microservice via Feign:
+  - **`BLOCK`** — transfer not created; user sees error
+  - **`REVIEW`** — transfer saved as `PENDING_RISK_REVIEW`; funds debited; held until admin action
+  - **`ALLOW`** — transfer saved as `PENDING`; scheduler auto-completes after processing delay (~5 s)
+- Pending transfers: scheduler processes `PENDING` only; `PENDING_RISK_REVIEW` skipped until admin approve/reject
 - Stale auto-cancel and user cancel apply to both `PENDING` and `PENDING_RISK_REVIEW`
-- Transaction history, clear history, spending category per operation
+- **Transaction history** with spending category, clear history, **pagination** (5 per page, Previous/Next)
+- Auto-refresh hint when pending transfers exist
 
 ### Bank card
 
@@ -226,6 +243,7 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Settings hub: hide balance, email notification toggles
 - Daily withdraw limit editor (€50–€500)
 - Contact Us page (about text + support details)
+- **Data & Privacy:** links to Privacy Policy and Terms of Service
 
 ### Admin
 
@@ -234,7 +252,11 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Delete non-admin users
 - Per-user manage page
 - Login activity audit
-- **Risk reviews** (`/admin/risk-reviews`): list pending assessments from microservice; **Approve** completes held transfer; **Reject** refunds sender and cancels; **Delete all reviews** rejects each linked transfer and bulk-deletes pending assessments in MS
+- **Risk reviews** (`/admin/risk-reviews`):
+  - Lists all manual reviews (`decision=REVIEW`) including **approved/rejected history**
+  - Status chips: `PENDING`, `APPROVED`, `REJECTED`
+  - Approve/Reject only when status is `PENDING`
+  - **Delete all** always visible (top-right); clears list and cancels pending linked transfers
 - Mailbox: send to users, inbox, threads
 
 ### User mailbox
@@ -246,11 +268,16 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 - Filter transactions (type, status, dates) via JPA Specifications
 - Preview on page; download PDF (OpenPDF)
 
+### Legal
+
+- **Privacy Policy** (`/wallet/privacy`) — data collection, retention, user rights
+- **Terms of Service** (`/wallet/terms`) — ASWallet as financial platform, user liability
+
 ---
 
 ## REST Microservice
 
-> Implemented in sibling project **`ASWallet-Vol.2-svc`** (separate repo folder, port `8081`, database `as_wallet_svc`).
+> Sibling project **`ASWallet-Vol.2-svc`** — port `8081`, database `as_wallet_svc`.
 
 ### Layout
 
@@ -258,9 +285,6 @@ AdminMailboxMessage              admin ↔ user messaging (recipientUserId → U
 D:\Projects\
 ├── ASWallet-Vol.2/              ← this repository (main app :8080)
 └── ASWallet-Vol.2-svc/          ← risk microservice (:8081)
-    ├── src/main/java/SVC/...
-    ├── src/main/resources/application.properties
-    └── pom.xml
 ```
 
 ### Feign client (main app)
@@ -273,36 +297,47 @@ public interface RiskAssessmentClient {
     RiskAssessmentClientResponse createAssessment(@RequestBody RiskAssessmentCreateRequest request);
 
     @GetMapping("/api/risk-assessments")
-    List<RiskAssessmentClientResponse> listAssessments(@RequestParam("status") String status);
+    List<RiskAssessmentClientResponse> listAssessments(
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "decision", required = false) String decision);
+
+    @GetMapping("/api/risk-assessments/manual-reviews")
+    List<RiskAssessmentClientResponse> listManualReviews();
 
     @GetMapping("/api/risk-assessments/{id}")
-    RiskAssessmentClientResponse getAssessment(@PathVariable("id") UUID id);
+    RiskAssessmentClientResponse getAssessment(@PathVariable UUID id);
 
     @PatchMapping("/api/risk-assessments/{id}/review")
     RiskAssessmentClientResponse reviewAssessment(
-            @PathVariable("id") UUID id,
+            @PathVariable UUID id,
             @RequestBody RiskAssessmentReviewRequest request);
 
     @DeleteMapping("/api/risk-assessments")
-    void deleteAssessments(@RequestParam("status") String status);
+    void deleteAssessments(
+            @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "decision", required = false) String decision);
+
+    @DeleteMapping("/api/risk-assessments/manual-reviews")
+    void deleteManualReviews();
 }
 ```
 
-Requires **`feign-hc5`** on the classpath so `PATCH` works (`spring.cloud.openfeign.httpclient.hc5.enabled=true`).
+Requires **`feign-hc5`** (`spring.cloud.openfeign.httpclient.hc5.enabled=true`) for `PATCH`.
 
 ### Integration flow
 
-1. User confirms transfer → main app pre-generates transaction UUID → `TransferRiskAssessmentService` → Feign **POST** (includes `transactionRef`)
-2. Microservice returns decision:
-   - **`ALLOW`** → transfer saved as `PENDING`; scheduler completes after processing delay
-   - **`REVIEW`** → transfer saved as `PENDING_RISK_REVIEW`; funds debited from sender; scheduler **does not** auto-complete
-   - **`BLOCK`** (score ≥ 70) → `TransferBlockedByRiskException`; no transfer created
-3. Admin opens `/admin/risk-reviews` → Feign **GET** `?status=PENDING` (badge on admin dashboard)
-4. Admin **Approve** → wallet completes transfer (`COMPLETED`) → Feign **PATCH** `/review` → `APPROVED`
-5. Admin **Reject** → wallet refunds sender (`CANCELLED`) → Feign **PATCH** `/review` → `REJECTED`
-6. Admin **Delete all reviews** → reject/refund each linked transfer → Feign **DELETE** `?status=PENDING`
+1. User confirms transfer → main app pre-generates transaction UUID → Feign **POST** (includes `transactionRef`)
+2. Microservice returns decision → main app sets transaction status accordingly
+3. Admin opens `/admin/risk-reviews` → Feign **GET** `/manual-reviews` (all `REVIEW` decisions, any status)
+4. Admin **Approve** → wallet completes transfer → Feign **PATCH** → `APPROVED`
+5. Admin **Reject** → wallet refunds sender → Feign **PATCH** → `REJECTED`
+6. Admin **Delete all** → reject pending linked transfers → Feign **DELETE** `/manual-reviews`
 
-Orphaned assessments (MS record exists but wallet transaction missing, e.g. after a failed save) are handled gracefully: MS status still updates; wallet action is skipped with a warning log.
+Orphaned assessments (MS record without wallet transaction) are handled gracefully: MS status still updates; wallet action skipped with warning log.
+
+### Fail-open behaviour
+
+When microservice is unreachable and `app.risk-service.fail-open=true`, transfers are **allowed without risk check** (`ALLOW` synthetic response). Documented for demo resilience; not ideal for production banking (see [Planned Work](#planned-work)).
 
 ### Spring Advanced checklist (microservice)
 
@@ -313,12 +348,14 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 | ≥ 1 domain entity in microservice | ✅ `TransferRiskAssessment` |
 | ≥ 2 MS functionalities from UI    | ✅ assess on transfer + admin review |
 | Feign in main app                 | ✅ `RiskAssessmentClient` |
-| ≥ 1 GET + ≥ 2 POST/PATCH/DELETE from main | ✅ GET list + POST assess + PATCH review + DELETE clear |
-| 70% test coverage (microservice)  | ✅ unit + WebMvc tests |
+| ≥ 1 GET + ≥ 2 POST/PATCH/DELETE from main | ✅ |
+| 70% test coverage (microservice)  | ✅ unit + WebMvc + integration |
 
 ---
 
 ## Web Pages & Routes
+
+**33 dynamic pages + 4 Thymeleaf fragments** (37 HTML templates total).
 
 ### Public
 
@@ -344,6 +381,8 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 | GET      | `/wallet/export`                 | `transaction-export.html`  |
 | GET      | `/wallet/export/pdf`             | *(PDF download)*           |
 | GET      | `/wallet/contact-us`             | `contact-us.html`          |
+| GET      | `/wallet/privacy`                | `privacy-policy.html`      |
+| GET      | `/wallet/terms`                  | `terms-of-service.html`    |
 | GET/POST | `/wallet/messages/send`          | `wallet-send-message.html` |
 | GET      | `/wallet/messages`               | `wallet-messages.html`     |
 | GET      | `/wallet/messages/{id}`          | `wallet-message-view.html` |
@@ -352,6 +391,8 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 | GET/POST | `/transactions/transfer`         | `transfer.html`            |
 | GET/POST | `/transactions/transfer/confirm` | `transfer-confirm.html`    |
 | GET      | `/transactions/history`          | `transaction-history.html` |
+| POST     | `/transactions/history/clear`    | redirect                   |
+| POST     | `/transactions/history/{id}/cancel` | redirect                |
 | GET      | `/profile`                       | `profile.html`             |
 | GET/POST | `/profile/edit`                  | `profile-edit.html`        |
 
@@ -368,7 +409,7 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 | GET      | `/admin/risk-reviews`                     | `admin-risk-reviews.html`   |
 | POST     | `/admin/risk-reviews/{id}/approve`        | redirect                    |
 | POST     | `/admin/risk-reviews/{id}/reject`         | redirect                    |
-| POST     | `/admin/risk-reviews/clear`               | redirect (delete all pending) |
+| POST     | `/admin/risk-reviews/clear`               | redirect (delete all)       |
 
 ### Thymeleaf fragments
 
@@ -383,6 +424,8 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 
 ## Security
 
+### Main application (required — Spring Advanced)
+
 | Mechanism        | Implementation                                              |
 |------------------|-------------------------------------------------------------|
 | Authentication   | Spring Security form login                                  |
@@ -396,7 +439,17 @@ Orphaned assessments (MS record exists but wallet transaction missing, e.g. afte
 | Card data        | Last 4 + metadata only; CVC never stored                    |
 | Role reload      | `ReloadUserAuthoritiesFilter` after promotion               |
 | Avatars          | Local upload to `uploads/avatars/` (gitignored)             |
-| Secrets          | `MAIL_PASSWORD`, `ADMIN_PASSWORD` via environment variables |
+| Secrets          | `MAIL_PASSWORD`, `ADMIN_PASSWORD` via environment variables   |
+
+### Microservice (optional per assignment)
+
+Per `src/main/resources/Spring-Advanced`:
+
+> *Security and Roles — required only for the Main application. The REST microservice(s) may implement security, but it is optional.*
+
+**Current state:** `ASWallet-Vol.2-svc` exposes REST endpoints on `:8081` **without authentication**. Any client that can reach the port may call the API directly (bypassing main-app admin checks). Acceptable for localhost demo; not suitable for exposed/production deployments.
+
+**Planned (see [Planned Work](#planned-work)):** service-to-service protection via shared API key (`X-API-Key` header) between main app (Feign) and microservice.
 
 ---
 
@@ -438,8 +491,8 @@ SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD` environment variable.
 `GlobalExceptionHandler` — unified handling for built-in and **20+ custom domain exceptions**, including:
 
 `InsufficientBalanceException`, `DailyWithdrawLimitExceededException`, `InvalidCardDetailsException`,
-`CannotChangeAdminAccountStatusException`, `MailboxMessageNotFoundException`, `PendingTransferNotFoundException`,
-`InvalidAvatarFileException`, and others under `CustomException/`.
+`TransferBlockedByRiskException`, `RiskReviewServiceException`, `CannotChangeAdminAccountStatusException`,
+`MailboxMessageNotFoundException`, `PendingTransferNotFoundException`, `InvalidAvatarFileException`, and others.
 
 ---
 
@@ -453,16 +506,18 @@ SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD` environment variable.
 | `base/variables.css`         | Design tokens                          |
 | `base/reset.css`             | Reset, footer, shared form base        |
 | `base/layout-panels.css`     | Panels, backgrounds, shared layout     |
+| `base/buttons.css`           | Shared button styles                   |
 | `pages/home.css`             | Landing, bank-card login/register      |
 | `pages/auth.css`             | Auth forms, materialize animations     |
-| `pages/wallet.css`           | Dashboard, balance card, quick actions (incl. elevated tile style) |
-| `pages/transactions.css`     | Deposit, withdraw, transfer, history   |
+| `pages/wallet.css`           | Dashboard, balance card, quick actions |
+| `pages/transactions.css`     | Deposit, withdraw, transfer, history, pagination |
 | `pages/bank-details.css`     | Bank card add/view                     |
 | `pages/profile.css`          | Profile, daily limit                   |
 | `pages/settings.css`         | Settings hub, toggles                  |
-| `pages/admin.css`            | Admin panel, risk reviews, mailbox     |
+| `pages/admin.css`            | Admin panel, risk reviews, status chips |
 | `pages/account-security.css` | Password, delete account               |
 | `pages/contact-us.css`       | Contact page                           |
+| `pages/legal-pages.css`      | Privacy Policy, Terms of Service       |
 
 ### JavaScript (`static/js/`)
 
@@ -481,12 +536,6 @@ SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD` environment variable.
 | `transaction-history.js` | Auto-refresh for pending transfers         |
 | `admin.js`               | Admin panel interactions                   |
 
-### Images (`static/images/`)
-
-`2.png`, `4.png`, `5.png`, `wallet.png`, `log-reg.png`, `res-pass.png`, `transfer.png`, `bank-details.png`,
-`userDetails.png`, `editDetails.png`, `setings.png`, `change-password.png`, `delete-account.png`, `daily-limit.png`,
-`export-file.png`, `contactUs.png`, `mailbox.png`, `emv-chip.png`, `noContact.png`, `default-avatar.svg`
-
 ---
 
 ## Complete Project Structure
@@ -501,65 +550,57 @@ ASWallet-Vol.2/
     ├── main/
     │   ├── java/STARTER/
     │   │   ├── ASWalletApplication.java
-    │   │   ├── Configuration/
-    │   │   │   ├── AdminBootstrapConfig.java
-    │   │   │   ├── AppModelAdvice.java
-    │   │   │   ├── AsyncConfig.java
-    │   │   │   ├── AvatarUploadConfig.java
-    │   │   │   ├── BankCardIbanBackfillConfig.java
-    │   │   │   ├── CacheConfig.java
-    │   │   │   ├── SchedulingConfig.java
-    │   │   │   ├── SecurityConfig.java
-    │   │   │   ├── SupportMailboxBackfillConfig.java
-    │   │   │   ├── WalletBalanceBackfillConfig.java
-    │   │   │   └── WithdrawDailyLimitBackfillConfig.java
-    │   │   ├── Controllers/              (13 controllers)
+    │   │   ├── Clients/                    # Feign + DTOs
+    │   │   ├── Configuration/              (11 config classes)
+    │   │   ├── Controllers/                (15 controllers)
     │   │   ├── Services/
-    │   │   │   ├── Interface/            (13 interfaces)
-    │   │   │   └── Impl/                 (16 implementations)
-    │   │   ├── Repositories/             (8 repositories)
-    │   │   ├── Models/                   (9 entities)
-    │   │   ├── DTOs/                     (25 DTOs)
-    │   │   ├── Enums/                    (5 enums)
-    │   │   ├── Events/                   (4 event classes)
-    │   │   ├── Scheduling/               (2 schedulers)
-    │   │   ├── Security/                 (2 classes)
-    │   │   ├── Specifications/           (TransactionSpecifications)
-    │   │   ├── CustomException/          (20 exceptions)
+    │   │   │   ├── Interface/              (14 interfaces)
+    │   │   │   └── Impl/                   (17 implementations)
+    │   │   ├── Repositories/               (8 repositories)
+    │   │   ├── Models/                     (9 entities)
+    │   │   ├── DTOs/
+    │   │   ├── Enums/
+    │   │   ├── Events/
+    │   │   ├── Scheduling/
+    │   │   ├── Security/
+    │   │   ├── Specifications/
+    │   │   ├── CustomException/
     │   │   ├── GlobalExceptionHandler/
-    │   │   └── Utils/                    (5 utilities)
+    │   │   └── Utils/
     │   └── resources/
     │       ├── application.properties
     │       ├── Spring-Advanced             # Assignment brief
-    │       ├── templates/                  # 31 pages + 4 fragments
+    │       ├── templates/                  # 33 pages + 4 fragments
     │       └── static/
-    │           ├── css/                    # 14 files (base + pages)
+    │           ├── css/                    # 16 files
     │           ├── js/                     # 12 scripts
-    │           └── images/                 # 20 assets
+    │           └── images/
     └── test/
         └── java/STARTER/
             ├── ASWalletApplicationTests.java          # optional smoke (needs MySQL)
-            ├── Controllers/                           # 11 @WebMvcTest classes
+            ├── Controllers/                           # 13 @WebMvcTest classes
             ├── GlobalExceptionHandler/
-            │   └── GlobalExceptionHandlerTest.java
-            └── Services/Impl/                         # 10 service unit test classes
+            └── Services/Impl/                         # 11 service unit test classes
 ```
 
 ### Microservice sibling project
 
 ```
-ASWallet-Vol.2-svc/                          # separate folder (sibling to this repo)
+ASWallet-Vol.2-svc/
 ├── pom.xml
+├── README.md
 └── src/main/java/SVC/
     ├── ASWalletSvcApplication.java
     ├── Controllers/RiskAssessmentController.java
     ├── Models/TransferRiskAssessment.java
     ├── Services/RiskScoringService.java
     ├── Services/RiskAssessmentService.java
-    └── ...
+    ├── Repositories/TransferRiskAssessmentRepository.java
+    ├── DTOs/
+    ├── Enums/
+    ├── Exceptions/
+    └── GlobalExceptionHandler/
 ```
-
-See `../ASWallet-Vol.2-svc/README.md` for API and scoring details.
 
 ---
 
@@ -588,9 +629,9 @@ Use `application-local.properties` (gitignored) for local credentials.
 
 ```properties
 spring.application.name=ASWallet-Vol.2
-app.version=2.0.1
+app.version=2.0.2
 app.base-url=http://localhost:8080
-app.admin.username=admin
+server.address=0.0.0.0          # LAN access (phone testing via http://<PC-IP>:8080)
 app.transfer.processing-delay-seconds=5
 app.transfer.process.cron=0 */1 * * * *
 app.withdraw.daily-limit.min=50
@@ -602,6 +643,8 @@ app.risk-service.base-url=http://localhost:8081
 app.risk-service.fail-open=true
 spring.cloud.openfeign.httpclient.hc5.enabled=true
 ```
+
+For phone/LAN testing, point `app.risk-service.base-url` to the PC LAN IP (not `localhost`) on the device.
 
 ---
 
@@ -631,40 +674,35 @@ Main class: `STARTER.ASWalletApplication`
 
 ### Run risk microservice (required for transfer risk checks)
 
-Clone or open sibling project **`ASWallet-Vol.2-svc`**, create DB `as_wallet_svc`, then:
-
 ```powershell
 cd ..\ASWallet-Vol.2-svc
 $env:DB_PASSWORD = "your_mysql_password"
 mvn spring-boot:run
 ```
 
-Microservice: **http://localhost:8081**  
+Microservice: **http://localhost:8081**
+
 If the microservice is down and `app.risk-service.fail-open=true`, transfers still work (risk check skipped).
 
 ---
 
 ## Testing & Coverage
 
-Automated tests for the **main application** use JUnit 5, Mockito, AssertJ, and Spring Boot `@WebMvcTest` (with `spring-security-test`).
+JUnit 5, Mockito, AssertJ, Spring Boot `@WebMvcTest` (with `spring-security-test`).
 
 ### Summary
 
 | Metric | Value |
 |--------|-------|
-| Test classes | **23** (+ optional `ASWalletApplicationTests`) |
-| Test methods | **~244** |
-| Line coverage (JaCoCo) | **~77%** (target 70% ✅ for main app) |
-| Microservice coverage | ✅ see `ASWallet-Vol.2-svc` (unit + WebMvc) |
+| Test classes | **25** (+ optional `ASWalletApplicationTests`) |
+| Line coverage (JaCoCo, main app) | **~77%** (target 70% ✅) |
+| Microservice coverage | ✅ unit + integration + WebMvc |
 
 ### Run tests
 
 ```powershell
-# All tests except contextLoads (no live MySQL required for the suite)
 mvn test "-Dtest=!ASWalletApplicationTests"
-
-# Single class
-mvn test "-Dtest=WalletControllerWebMvcTest"
+mvn test "-Dtest=TransactionHistoryControllerWebMvcTest"
 ```
 
 ### JaCoCo report
@@ -677,51 +715,27 @@ Open: `target/site/jacoco/index.html`
 
 ### Unit tests (`Services/Impl`)
 
-| Test class | Focus |
-|------------|-------|
-| `TransactionServiceImplTest` | deposit, withdraw, transfer, welcome bonus |
-| `UserServiceImplTest` | register, password, delete account |
-| `WalletServiceImplTest` | wallet CRUD / balance |
-| `BankCardServiceImplTest` | card save, IBAN, welcome bonus |
-| `PasswordResetServiceImplTest` | forgot / reset token flow |
-| `PendingTransferProcessingServiceTest` | async transfer processing, risk-held approve/reject |
-| `AdminRiskReviewServiceImplTest` | admin risk review approve/reject/clear |
-| `AdminServiceImplTest` | admin user management |
-| `AdminMailboxServiceImplTest` | admin ↔ user messaging |
-| `UserProfileDetailsServiceImplTest` | profile, settings, account status |
-| `WithdrawDailyLimitServiceImplTest` | daily limit rules |
+`TransactionServiceImplTest`, `UserServiceImplTest`, `WalletServiceImplTest`, `BankCardServiceImplTest`,
+`PasswordResetServiceImplTest`, `PendingTransferProcessingServiceTest`, `AdminRiskReviewServiceImplTest`,
+`AdminServiceImplTest`, `AdminMailboxServiceImplTest`, `UserProfileDetailsServiceImplTest`,
+`WithdrawDailyLimitServiceImplTest`
 
 ### WebMvc tests (`Controllers`)
 
-| Test class | Controller |
-|------------|------------|
-| `UserControllerWebMvcTest` | login, register |
-| `PasswordResetControllerWebMvcTest` | forgot / reset password |
-| `ProfileControllerWebMvcTest` | profile view / edit |
-| `WalletControllerWebMvcTest` | wallet, bank card, settings, delete account |
-| `WalletMailboxControllerWebMvcTest` | user mailbox |
-| `AdminControllerWebMvcTest` | admin dashboard, users, roles |
-| `AdminRiskReviewControllerWebMvcTest` | admin risk reviews |
-| `AdminMailboxControllerWebMvcTest` | admin mailbox |
-| `TransactionControllerDepositWebMvcTest` | deposit |
-| `TransactionControllerWithdrawWebMvcTest` | withdraw |
-| `TransactionControllerTransferWebMvcTest` | transfer + confirm |
+`UserControllerWebMvcTest`, `PasswordResetControllerWebMvcTest`, `ProfileControllerWebMvcTest`,
+`WalletControllerWebMvcTest`, `WalletMailboxControllerWebMvcTest`, `AdminControllerWebMvcTest`,
+`AdminRiskReviewControllerWebMvcTest`, `AdminMailboxControllerWebMvcTest`,
+`TransactionControllerDepositWebMvcTest`, `TransactionControllerWithdrawWebMvcTest`,
+`TransactionControllerTransferWebMvcTest`, `LegalPagesControllerWebMvcTest`,
+`TransactionHistoryControllerWebMvcTest`
 
 ### Other
 
-| Test class | Focus |
-|------------|-------|
-| `GlobalExceptionHandlerTest` | centralized error handling |
+`GlobalExceptionHandlerTest`
 
-### Controllers without MockMvc yet
+### Controllers without dedicated MockMvc yet
 
-`HomeController`, `ContactUsController`, `DailyLimitController`, `TransactionHistoryController`, `TransactionExportController` — low priority; main app coverage target is already met.
-
-### Test dependencies (`pom.xml`)
-
-- `spring-boot-starter-webmvc-test`
-- `spring-security-test` / `spring-boot-starter-security-test`
-- `mockito-junit-jupiter`, `assertj-core`
+`HomeController`, `ContactUsController`, `DailyLimitController`, `TransactionExportController` — low priority; coverage target met.
 
 ---
 
@@ -731,10 +745,10 @@ Open: `target/site/jacoco/index.html`
 
 1. Register → Login → Wallet (€0.00)
 2. Bank Details → add card → €50 bonus
-3. Deposit → Withdraw → Transfer (confirm flow)
-4. History → Export PDF
-5. Settings → Profile → Contact Us
-6. Admin: `/admin` — status, role, mailbox, login activity, **risk reviews**
+3. Deposit → Withdraw → Transfer (confirm flow; trigger risk review with night/large amount)
+4. History → pagination → Export PDF
+5. Settings → Privacy / Terms → Profile → Contact Us
+6. Admin: `/admin` — users, mailbox, login activity, **risk reviews** (approve/reject/history/delete all)
 
 ### Test card
 
@@ -753,14 +767,13 @@ Open: `target/site/jacoco/index.html`
 |----------------------|---------------------------------|
 | DB connection failed | Start MySQL; check credentials  |
 | No emails            | Set `MAIL_PASSWORD`             |
-| Transfer blocked     | Receiver needs bank card; or risk score ≥ 70 (microservice `BLOCK`) |
-| Risk review stuck    | Start microservice on `:8081`; admin approves/rejects at `/admin/risk-reviews` |
-| `Data truncated for column 'status'` | Run migration below if upgrading an existing DB |
+| Transfer blocked     | Receiver needs bank card; or risk score ≥ 70 |
+| Risk review stuck    | Start microservice on `:8081`; admin at `/admin/risk-reviews` |
+| Phone cannot connect | Use `http://<PC-LAN-IP>:8080`; set `app.risk-service.base-url` to same IP for svc |
+| `Data truncated for column 'status'` | Run migration below if upgrading DB |
 | Inactive login       | Admin reactivates from `/admin` |
 
 ### Database migration (existing installs)
-
-If `transactions.status` was created as MySQL `ENUM`, add the new status value:
 
 ```sql
 USE as_wallet;
@@ -778,7 +791,7 @@ Official brief: `src/main/resources/Spring-Advanced`
 | Requirement                      | Status         |
 |----------------------------------|----------------|
 | ≥ 3 domain entities              | ✅              |
-| ≥ 10 web pages (≥ 9 dynamic)     | ✅ 31 templates |
+| ≥ 10 web pages (≥ 9 dynamic)     | ✅ 33 pages     |
 | ≥ 6 valid domain functionalities | ✅              |
 | Spring Security + 2 roles        | ✅              |
 | Admin manages roles              | ✅              |
@@ -801,65 +814,51 @@ Official brief: `src/main/resources/Spring-Advanced`
 | 1 | Register bank card      | Card + bonus + transaction |
 | 2 | Deposit                 | Balance ↑                  |
 | 3 | Withdraw                | Balance ↓                  |
-| 4 | Confirm transfer        | Balances updated; risk assessed via Feign |
+| 4 | Confirm transfer        | Risk assessed via Feign; balances updated |
 | 5 | Cancel pending transfer | Refund + status change     |
 | 6 | Send mailbox message    | Message persisted          |
 | 7 | Export PDF              | Filtered download          |
-| 8 | Admin risk review       | Approve/reject/clear flagged transfer (Feign PATCH/DELETE) |
+| 8 | Admin risk review       | Approve/reject/clear flagged transfer |
 
 ### Valid domain functionalities (microservice via main UI)
 
-| # | Action (UI)              | Feign | MS state change        |
-|---|--------------------------|-------|------------------------|
-| 1 | Confirm transfer         | POST  | New risk assessment    |
-| 2 | Admin approve risk review | PATCH | Assessment → APPROVED; wallet transfer → COMPLETED |
-| 3 | Admin reject risk review  | PATCH | Assessment → REJECTED; wallet transfer → CANCELLED + refund |
-| 4 | Admin delete all reviews  | DELETE | All pending assessments removed; linked transfers rejected |
-
-Reading pending reviews (GET) supports the admin page but is read-only until approve/reject/clear.
+| # | Action (UI)               | Feign | MS state change        |
+|---|---------------------------|-------|------------------------|
+| 1 | Confirm transfer          | POST  | New risk assessment    |
+| 2 | Admin approve risk review | PATCH | Assessment → APPROVED  |
+| 3 | Admin reject risk review  | PATCH | Assessment → REJECTED  |
+| 4 | Admin delete all reviews  | DELETE | Manual reviews cleared |
 
 ---
 
-## Recent changes (v2.0.1)
+## Version History
 
-### Risk review — end-to-end wallet integration
+### v2.0.2 (current)
 
-- New transaction status **`PENDING_RISK_REVIEW`** for transfers flagged by the microservice (`REVIEW` decision)
-- Transfer confirm pre-generates UUID and sends **`transactionRef`** to the microservice for linking
-- **`Transaction`** implements `Persistable<UUID>`; status column mapped as `varchar(32)` for enum extensibility
-- **`PendingTransferProcessingService`**: `approveRiskHeldTransfer` / `rejectRiskHeldTransfer`; scheduler ignores risk-held transfers
-- **`AdminRiskReviewServiceImpl`**: approve/reject/clear with wallet side-effects + Feign PATCH/DELETE
-- **`AdminRiskReviewController`**: `POST /admin/risk-reviews/clear` (delete all pending)
-- Feign client extended: **`getAssessment`**, **`deleteAssessments`**
-- Transaction history shows **Risk review** badge for `PENDING_RISK_REVIEW` transfers
+- **Risk review history:** `/admin/risk-reviews` lists all manual reviews (`GET /manual-reviews`); approved/rejected stay visible until Delete all; status chips; Approve/Reject hidden when closed
+- **Transaction history pagination:** 5 rows per page, Previous/Next
+- **Legal pages:** Privacy Policy (`/wallet/privacy`), Terms of Service (`/wallet/terms`); links from Settings → Data & Privacy
+- **Feign:** `listManualReviews`, `deleteManualReviews`, `decision` filter on list/delete
+- **Tests:** `LegalPagesControllerWebMvcTest`, `TransactionHistoryControllerWebMvcTest`; updated risk review tests
 
-### Admin & wallet UI
+### v2.0.1
 
-- **`/admin/risk-reviews`**: wider panel, uniform table rows, compact Approve/Reject, **Delete all reviews** button
-- **Admin Tools** (`/admin`): borderless elevated tile buttons (`wallet-quick-actions-grid--elevated`)
-- **Quick Actions** & **More Actions** (`/wallet`): same elevated tile style as Admin Tools
-
-### Tests
-
-- `AdminRiskReviewServiceImplTest`, `AdminRiskReviewControllerWebMvcTest`
-- Updated `TransactionServiceImplTest`, `PendingTransferProcessingServiceTest` for risk-held flow
-
----
-
-## Version
-
-**2.0.1** — `pom.xml` · `app.version` · footer on all pages.
+- End-to-end `PENDING_RISK_REVIEW` flow, admin risk UI, elevated wallet/admin tiles
+- Feign `getAssessment`, `deleteAssessments`; risk-held approve/reject in scheduler
 
 ---
 
 ## Planned Work
 
-| Item                                 | Notes                |
-|--------------------------------------|----------------------|
-| Admin risk history (all assessments) | Optional audit page  |
-| Edit / replace bank card             | UX improvement       |
-| OTP / 2FA                            | Security enhancement |
-| Desktop dashboard redesign           | Future UI variant    |
+| Item | Priority | Notes |
+|------|----------|-------|
+| **Microservice security (API key)** | High | `app.risk-service.api-key` + `X-API-Key` header via Feign interceptor; filter in svc. Optional per assignment; recommended before non-localhost deployment. |
+| **Fail-open policy** | Medium | Replace boolean with modes: `allow` (demo), `block`, `review` (hold as `PENDING_RISK_REVIEW` when svc down) |
+| **Mobile-responsive home** | Medium | Viewport meta, scale hero/cards for iPhone and small screens |
+| **DB secrets via env** | Medium | Move MySQL passwords to `${DB_PASSWORD}` (main + svc) |
+| Edit / replace bank card | Low | UX improvement |
+| OTP / 2FA | Low | Security enhancement (bonus-eligible) |
+| JWT service auth | Low | Alternative to API key; bonus-eligible |
 
 ---
 
