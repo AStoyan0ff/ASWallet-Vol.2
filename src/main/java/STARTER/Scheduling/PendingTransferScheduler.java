@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-// Advanced — pending transfer lifecycle (PENDING → COMPLETED / FAILED / CANCELLED)
 public class PendingTransferScheduler {
 
     private static final Logger logger = LoggerFactory.getLogger(PendingTransferScheduler.class);
