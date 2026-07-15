@@ -58,8 +58,8 @@
 
 ## Project Inventory
 
-Snapshot of the **current codebase** (main app `ASWallet-Vol.2`):
-Microservice: **`../ASWallet-Vol.2-svc`** - https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
+- Snapshot of the **current codebase** (main app `ASWallet-Vol.2`)
+- Microservice: **`../ASWallet-Vol.2-svc`** - https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
 
 | Area | Count | Notes |
 |------|-------|-------|
