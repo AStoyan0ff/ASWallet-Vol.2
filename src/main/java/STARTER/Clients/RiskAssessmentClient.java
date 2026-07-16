@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "aswallet-risk-service", url = "${app.risk-service.base-url}")
+@FeignClient(
+        name = "aswallet-risk-service",
+        url = "${app.risk-service.base-url}",
+        configuration = RiskServiceFeignConfig.class
+)
 public interface RiskAssessmentClient {
 
     @PostMapping("/api/risk-assessments")

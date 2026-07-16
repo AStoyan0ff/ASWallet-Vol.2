@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/TransactionControllerTransferWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/TransactionControllerTransferWebMvcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -426,7 +435,8 @@
       <workItem from="1783973156191" duration="12521000" />
       <workItem from="1783988201981" duration="1238000" />
       <workItem from="1784048431828" duration="2606000" />
-      <workItem from="1784117330137" duration="2410000" />
+      <workItem from="1784117330137" duration="3778000" />
+      <workItem from="1784156400257" duration="1923000" />
     </task>
     <servers />
   </component>

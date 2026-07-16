@@ -61,26 +61,26 @@
 - Snapshot of the **current codebase** (main app `ASWallet-Vol.2`)
 - Microservice: **`../ASWallet-Vol.2-svc`** - https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
 
-| Area | Count | Notes |
-|------|-------|-------|
-| Java source files | **159** | `src/main/java/STARTER/` |
-| Controllers | **15** | Spring MVC |
-| Service interfaces | **15** | `Services/Interface/` |
-| Service implementations | **20** | `Services/Impl/` (incl. support classes) |
-| JPA repositories | **8** | |
-| JPA entities | **9** | incl. `BaseClass` |
-| DTOs | **27** | `DTOs/` |
-| Enums | **8** | `Enums/` |
-| Custom exceptions | **26** | `CustomException/` |
-| Configuration classes | **11** | `Configuration/` |
-| Feign client files | **4** | client + 3 DTOs |
-| Thymeleaf pages | **33** | dynamic/full pages |
-| Thymeleaf fragments | **4** | reusable partials |
-| HTML templates total | **37** | pages + fragments |
-| CSS files | **16** | `static/css/` |
-| JavaScript files | **16** | `static/js/` |
-| Test classes | **26** | ~**272** test methods (excl. optional smoke) |
-| Line coverage (JaCoCo) | **~77%** | target 70% ✅ |
+| Area | Count      | Notes                                          |
+|------|------------|------------------------------------------------|
+| Java source files | **159**    | `src/main/java/STARTER/`                       |
+| Controllers | **15**     | Spring MVC                                     |
+| Service interfaces | **15**     | `Services/Interface/`                          |
+| Service implementations | **20**     | `Services/Impl/` (incl. support classes)       |
+| JPA repositories | **8**      |                                                |
+| JPA entities | **9**      | incl. `BaseClass`                              |
+| DTOs | **27**     | `DTOs/`                                        |
+| Enums | **8**      | `Enums/`                                       |
+| Custom exceptions | **26**     | `CustomException/`                             |
+| Configuration classes | **11**     | `Configuration/`                               |
+| Feign client files | **4**      | client + 3 DTOs                                |
+| Thymeleaf pages | **33**     | dynamic/full pages                             |
+| Thymeleaf fragments | **4**      | reusable partials                              |
+| HTML templates total | **37**     | pages + fragments                              |
+| CSS files | **16**     | `static/css/`                                  |
+| JavaScript files | **16**     | `static/js/`                                   |
+| Test classes | **26**     | **272 +-** test methods (excl. optional smoke) |
+| Line coverage (JaCoCo) | **77% ++** | target 70% ✅                                   |
 
 Sibling microservice: **`../ASWallet-Vol.2-svc`** — see its README.
 
@@ -316,6 +316,17 @@ Admin list uses `GET /manual-reviews` (all `REVIEW` decisions, any status). **De
 | Authorization | Public paths; `/admin/**` → ADMIN; else authenticated |
 | Account lock | `INACTIVE` blocks login |
 | Secrets | `MAIL_PASSWORD`, `ADMIN_PASSWORD` via env |
+
+### Microservice (API key)
+
+Service-to-service auth via shared secret (not Spring Security login):
+
+| Side | Property | Default |
+|------|----------|---------|
+| Main app (Feign) | `app.risk-service.api-key` | `aswallet-dev-api-key` |
+| Microservice | `app.security.api-key` | `aswallet-dev-api-key` |
+
+Feign interceptor (`RiskServiceFeignConfig`) sends `X-API-Key` on every call. Override both with `$env:RISK_SERVICE_API_KEY`.
 
 ---
 

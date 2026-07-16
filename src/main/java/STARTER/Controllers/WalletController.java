@@ -6,6 +6,7 @@ import STARTER.DTOs.DeleteAccountRequest;
 import STARTER.DTOs.WalletSettingsRequest;
 import STARTER.DTOs.WalletViewDTO;
 import STARTER.Services.Interface.AdminMailboxService;
+import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.BankCardService;
 import STARTER.Services.Interface.UserProfileDetailsService;
 import STARTER.Services.Interface.UserService;
@@ -37,19 +38,22 @@ public class WalletController {
     private final BankCardService bankCardService;
     private final UserProfileDetailsService userProfileDetailsService;
     private final AdminMailboxService adminMailboxService;
+    private final AdminRiskReviewService adminRiskReviewService;
 
     public WalletController(
             WalletService walletService,
             UserService userService,
             BankCardService bankCardService,
             UserProfileDetailsService userProfileDetailsService,
-            AdminMailboxService adminMailboxService
+            AdminMailboxService adminMailboxService,
+            AdminRiskReviewService adminRiskReviewService
     ) {
         this.walletService = walletService;
         this.userService = userService;
         this.bankCardService = bankCardService;
         this.userProfileDetailsService = userProfileDetailsService;
         this.adminMailboxService = adminMailboxService;
+        this.adminRiskReviewService = adminRiskReviewService;
     }
 //      addAttribute() -> Добавя данни към текущия request
 
@@ -67,7 +71,7 @@ public class WalletController {
 
         if (isAdmin) {
             model.addAttribute("adminInboxUnreadCount", adminMailboxService.countUnreadForAdminInbox());
-
+            model.addAttribute("pendingRiskReviewCount", adminRiskReviewService.countPendingReviews());
         } else {
             model.addAttribute("unreadMessageCount", adminMailboxService.countUnreadForUser(principal.getName()));
         }

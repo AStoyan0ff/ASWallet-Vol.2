@@ -135,7 +135,7 @@ public class TransactionController {
         session.removeAttribute(SESSION_PENDING_TRANSFER);
         redirectAttributes.addFlashAttribute(
                 "successMessage",
-                "Transfer submitted. It will be processed shortly — check Transaction History for status."
+                "Transfer submitted. It will be processed shortly — watch the status below."
         );
         return "redirect:/transactions/history";
     }

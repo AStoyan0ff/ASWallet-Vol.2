@@ -160,7 +160,7 @@ class TransactionControllerTransferWebMvcTest {
                 .andExpect(redirectedUrl("/transactions/history"))
                 .andExpect(flash().attribute(
                         "successMessage",
-                        "Transfer submitted. It will be processed shortly — check Transaction History for status."
+                        "Transfer submitted. It will be processed shortly — watch the status below."
                 ));
 
         verify(transactionService).transfer(eq(userView.getId()), any(TransferMoneyDTO.class));

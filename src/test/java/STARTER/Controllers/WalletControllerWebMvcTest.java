@@ -44,6 +44,9 @@ class WalletControllerWebMvcTest {
     @MockitoBean
     private AdminMailboxService adminMailboxService;
 
+    @MockitoBean
+    private AdminRiskReviewService adminRiskReviewService;
+
     private WalletViewDTO walletView;
     private UserViewDTO userView;
     private BankCardViewDTO bankCardView;
@@ -102,6 +105,7 @@ class WalletControllerWebMvcTest {
         when(userProfileDetailsService.isBalanceHidden("admin")).thenReturn(false);
         when(bankCardService.getBankCardByUsername("admin")).thenReturn(Optional.empty());
         when(adminMailboxService.countUnreadForAdminInbox()).thenReturn(4L);
+        when(adminRiskReviewService.countPendingReviews()).thenReturn(3L);
 
         mockMvc.perform(get("/wallet")
                         .with(csrf())
@@ -109,7 +113,8 @@ class WalletControllerWebMvcTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("wallet"))
                 .andExpect(model().attribute("isAdmin", true))
-                .andExpect(model().attribute("adminInboxUnreadCount", 4L));
+                .andExpect(model().attribute("adminInboxUnreadCount", 4L))
+                .andExpect(model().attribute("pendingRiskReviewCount", 3L));
     }
 
     // --- BANK DETAILS ---
