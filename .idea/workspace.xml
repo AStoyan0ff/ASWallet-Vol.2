@@ -7,19 +7,6 @@
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Configuration/SupportMailboxBackfillConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Configuration/SupportMailboxBackfillConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/UserProfileDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/UserProfileDetailsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ClientIpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ClientIpUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/IbanGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/IbanGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ValidationPatterns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ValidationPatterns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="305" />
+    <option name="cachedIndexableFilesCount" value="310" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -197,7 +184,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2",
+    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2/src/main/resources/static/images/asset",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -218,6 +205,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images\asset" />
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images" />
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images\logos" />
       <recent name="D:\Projects\ASWallet\src\main\resources\static\images" />
@@ -227,7 +215,7 @@
       <recent name="D:\Projects\ASWallet" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AdminDashboardServiceImplTest">
+  <component name="RunManager" selected="Spring Boot.ASWalletApplication">
     <configuration name="AdminControllerWebMvcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ASWallet-Vol.2" />
       <extension name="coverage">
@@ -445,7 +433,8 @@
       <workItem from="1784156400257" duration="2411000" />
       <workItem from="1784214287529" duration="2588000" />
       <workItem from="1784217548643" duration="8039000" />
-      <workItem from="1784303838878" duration="5908000" />
+      <workItem from="1784303838878" duration="6464000" />
+      <workItem from="1784311818219" duration="302000" />
     </task>
     <servers />
   </component>

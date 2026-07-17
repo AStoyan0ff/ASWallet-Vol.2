@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="https://spring.io/img/projects/spring-boot.svg" width="120">
+  <img src="src/main/resources/static/images/asset/screenShot.png" width="360" alt="ASWallet">
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
   <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven">
 </p>
 
-<h1 align="center">AStoyanoff's Wallet Project</h1>
+<h1 align="center">ASWallet-Vol.2 Project</h1>
 
 <p align="center">
   Full-stack personal wallet platform with Thymeleaf UI, Spring Security, scheduling, caching,
