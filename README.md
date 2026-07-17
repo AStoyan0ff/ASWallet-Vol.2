@@ -1,13 +1,20 @@
-<h1 align="center">
-  💰 ASWallet-Vol.2 💰
-</h1>
+<p align="center">
+  <img
+    src="https://readme-typing-svg.demolab.com?font=Orbitron&size=42&duration=2500&pause=1000&color=E53935&center=true&vCenter=true&width=700&lines=%F0%9F%92%B0+ASWallet-Vol.2+%F0%9F%92%B0"
+    alt="ASWallet-Vol.2"
+  />
+</p>
+
+---
 
 <p align="center">
   <img src="src/main/resources/static/images/asset/screenShot.png" width="420" alt="ASWallet">
 </p>
 
+---
+
 <p align="center">
-  Personal FinTech Wallet — Main Application (Spring Boot)
+  Full-Stack Personal FinTech Wallet Platform with Integrated Risk Assessment Microservice
 </p>
 
 <p align="center">
@@ -20,7 +27,7 @@
   <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven">
 </p>
 
-<h1 align="center">ASWallet-Vol.2 Project</h1>
+<h1 align="center">Project Overview</h1>
 
 <p align="center">
   Full-stack personal wallet platform with Thymeleaf UI, Spring Security, scheduling, caching,
@@ -61,26 +68,26 @@
 - Snapshot of the **current codebase** (main app `ASWallet-Vol.2`)
 - Microservice: **`../ASWallet-Vol.2-svc`** - https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
 
-| Area | Count      | Notes                                          |
-|------|------------|------------------------------------------------|
-| Java source files | **159**    | `src/main/java/STARTER/`                       |
-| Controllers | **15**     | Spring MVC                                     |
-| Service interfaces | **15**     | `Services/Interface/`                          |
-| Service implementations | **20**     | `Services/Impl/` (incl. support classes)       |
-| JPA repositories | **8**      |                                                |
-| JPA entities | **9**      | incl. `BaseClass`                              |
-| DTOs | **27**     | `DTOs/`                                        |
-| Enums | **8**      | `Enums/`                                       |
-| Custom exceptions | **26**     | `CustomException/`                             |
-| Configuration classes | **11**     | `Configuration/`                               |
-| Feign client files | **4**      | client + 3 DTOs                                |
-| Thymeleaf pages | **33**     | dynamic/full pages                             |
-| Thymeleaf fragments | **4**      | reusable partials                              |
-| HTML templates total | **37**     | pages + fragments                              |
-| CSS files | **16**     | `static/css/`                                  |
-| JavaScript files | **17**     | `static/js/`                                   |
-| Test classes | **26**     | **272 +-** test methods (excl. optional smoke) |
-| Line coverage (JaCoCo) | **77% ++** | target 70% ✅                                   |
+| Area | Count     | Notes                                    |
+|------|-----------|------------------------------------------|
+| Java source files | **160**   | `src/main/java/STARTER/`                 |
+| Controllers | **15**    | Spring MVC                               |
+| Service interfaces | **15**    | `Services/Interface/`                    |
+| Service implementations | **20**    | `Services/Impl/` (incl. support classes) |
+| JPA repositories | **8**     |                                          |
+| JPA entities | **9**     | incl. `BaseClass`                        |
+| DTOs | **28**    | `DTOs/`                                  |
+| Enums | **8**     | `Enums/`                                 |
+| Custom exceptions | **26**    | `CustomException/`                       |
+| Configuration classes | **11**    | `Configuration/`                         |
+| Feign client files | **4**     | client + 3 DTOs                          |
+| Thymeleaf pages | **33**    | dynamic/full pages                       |
+| Thymeleaf fragments | **4**     | reusable partials                        |
+| HTML templates total | **37**    | pages + fragments                        |
+| CSS files | **16**    | `static/css/`                            |
+| JavaScript files | **18**    | `static/js/`                             |
+| Test classes | **26**    | **272 +-** test methods                  |
+|Line coverage (JaCoCo) | **77.8%** | target 70% ✅                             |
 
 Sibling microservice: **`../ASWallet-Vol.2-svc`** — see its README.
 
@@ -125,24 +132,24 @@ Two independent Spring Boot applications (Spring Advanced requirement):
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Language | Java 21 |
-| Framework | Spring Boot 4.0.6 |
-| Web | Spring MVC, Thymeleaf |
-| Security | Spring Security (session, CSRF, roles) |
-| Persistence | Spring Data JPA, Hibernate |
-| Database | MySQL (`as_wallet`) |
-| Validation | Jakarta Bean Validation |
-| Mail | Spring Mail (SMTP — ABV) |
+| Layer | Technology                                                |
+|-------|-----------------------------------------------------------|
+| Language | Java 21                                                   |
+| Framework | Spring Boot 4.0.6                                         |
+| Web | Spring MVC, Thymeleaf                                     |
+| Security | Spring Security (session, CSRF, roles)                    |
+| Persistence | Spring Data JPA, Hibernate                                |
+| Database | MySQL (`as_wallet`)                                       |
+| Validation | Jakarta Bean Validation                                   |
+| Mail | Spring Mail (SMTP — ABV)                                  |
 | Events | Spring `ApplicationEvent` + `@TransactionalEventListener` |
-| Scheduling | `@EnableScheduling` — cron + fixed delay |
-| Caching | `@EnableCaching`, `ConcurrentMapCacheManager` |
-| PDF | OpenPDF 2.0.3 |
-| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5 |
-| Frontend | HTML5, **16 CSS** + **16 JS** modules, vanilla JS |
-| Build | Maven |
-| Utilities | Lombok |
+| Scheduling | `@EnableScheduling` — cron + fixed delay                  |
+| Caching | `@EnableCaching`, `ConcurrentMapCacheManager`             |
+| PDF | OpenPDF 2.0.3                                             |
+| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5                |
+| Frontend | HTML5, **16 CSS** + **17 JS** modules, vanilla JS         |
+| Build | Maven                                                     |
+| Utilities | Lombok                                                    |
 
 ---
 
@@ -254,7 +261,7 @@ Admin list uses `GET /manual-reviews` (all `REVIEW` decisions, any status). **De
 ### All Thymeleaf pages (33)
 
 | # | Template | Route(s) | Access |
-|---|----------|----------|--------|
+|---|----------|----------|------|
 | 1 | `home.html` | `/` | Public |
 | 2 | `login.html` | `/login` | Public |
 | 3 | `register.html` | `/register` | Public |
