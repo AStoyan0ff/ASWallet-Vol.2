@@ -45,9 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ? formattedIban
             : maskedIban;
 
-        toggleBtn.textContent = visible
-            ? "Hide"
-            : "Show";
+        toggleBtn.classList.toggle("is-visible", visible);
 
         toggleBtn.setAttribute("aria-pressed", visible
             ? "true"

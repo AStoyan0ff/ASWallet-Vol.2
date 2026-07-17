@@ -3,11 +3,13 @@ package STARTER.Controllers;
 import STARTER.DTOs.BankCardRequest;
 import STARTER.DTOs.ChangePasswordRequest;
 import STARTER.DTOs.DeleteAccountRequest;
+import STARTER.DTOs.PaymentItemDTO;
 import STARTER.DTOs.WalletSettingsRequest;
 import STARTER.DTOs.WalletViewDTO;
 import STARTER.Services.Interface.AdminMailboxService;
 import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.BankCardService;
+import STARTER.Services.Interface.PaymentService;
 import STARTER.Services.Interface.UserProfileDetailsService;
 import STARTER.Services.Interface.UserService;
 import STARTER.Services.Interface.WalletService;
@@ -27,6 +29,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.http.ResponseEntity;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,6 +42,7 @@ public class WalletController {
     private final UserProfileDetailsService userProfileDetailsService;
     private final AdminMailboxService adminMailboxService;
     private final AdminRiskReviewService adminRiskReviewService;
+    private final PaymentService paymentService;
 
     public WalletController(
             WalletService walletService,
@@ -46,7 +50,8 @@ public class WalletController {
             BankCardService bankCardService,
             UserProfileDetailsService userProfileDetailsService,
             AdminMailboxService adminMailboxService,
-            AdminRiskReviewService adminRiskReviewService
+            AdminRiskReviewService adminRiskReviewService,
+            PaymentService paymentService
     ) {
         this.walletService = walletService;
         this.userService = userService;
@@ -54,6 +59,7 @@ public class WalletController {
         this.userProfileDetailsService = userProfileDetailsService;
         this.adminMailboxService = adminMailboxService;
         this.adminRiskReviewService = adminRiskReviewService;
+        this.paymentService = paymentService;
     }
 //      addAttribute() -> Добавя данни към текущия request
 
@@ -168,6 +174,13 @@ public class WalletController {
         );
 
         return "redirect:/wallet/change-password";
+    }
+
+    @GetMapping("/wallet/payments")
+    public String paymentsPage(Model model, Principal principal) {
+        List<PaymentItemDTO> payments = paymentService.listPaymentsForUsername(principal.getName());
+        model.addAttribute("payments", payments);
+        return "payments";
     }
 
     // Advanced — wallet settings (/wallet/settings)

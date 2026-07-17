@@ -7,6 +7,15 @@
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/account-security.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/account-security.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/wallet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/asset/my-card.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/asset/my-card.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/editDetails.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/wallet-iban.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/wallet-iban.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,59 +67,59 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000347289988345" />
-      <entry key="S5" value="1.0164912475989598" />
-      <entry key="S10" value="1.1343720098425794" />
-      <entry key="S30" value="1.727270921938457" />
-      <entry key="S60" value="2.5132483648226023" />
-      <entry key="M2" value="3.848049238130392" />
-      <entry key="M5" value="7.09403005222766" />
-      <entry key="M10" value="11.288606203573227" />
-      <entry key="M15" value="14.084721814247331" />
-      <entry key="M30" value="18.33943820506081" />
-      <entry key="H1" value="21.364607704753944" />
-      <entry key="H2" value="24.87310029782189" />
-      <entry key="H4" value="39.5643541520177" />
-      <entry key="D1" value="265.26805176728226" />
-      <entry key="W1" value="681.7980717597541" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000212464946" />
+      <entry key="S10" value="1.0001458143012347" />
+      <entry key="S30" value="1.0615217439210496" />
+      <entry key="S60" value="1.421702387343124" />
+      <entry key="M2" value="2.4891109218540075" />
+      <entry key="M5" value="5.820363328070455" />
+      <entry key="M10" value="10.803125139879995" />
+      <entry key="M15" value="14.598864314294822" />
+      <entry key="M30" value="21.115057282619404" />
+      <entry key="H1" value="26.199702275071537" />
+      <entry key="H2" value="31.008041281229733" />
+      <entry key="H4" value="46.123558404972584" />
+      <entry key="D1" value="271.7439707020874" />
+      <entry key="W1" value="689.2413705617231" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.0000917218752552E-172" />
-      <entry key="S5" value="1.5849513386114603E-69" />
-      <entry key="S10" value="3.981144733128227E-35" />
-      <entry key="S30" value="3.4145697521950125E-12" />
-      <entry key="S60" value="1.847855446780135E-6" />
-      <entry key="M2" value="0.0013593584688301075" />
-      <entry key="M5" value="0.07134008112808532" />
-      <entry key="M10" value="0.2670956405914447" />
-      <entry key="M15" value="0.4147421714301361" />
-      <entry key="M30" value="0.6445672970623828" />
-      <entry key="H1" value="0.8281675959989994" />
-      <entry key="H2" value="1.160886332731181" />
-      <entry key="H4" value="2.3891089167191155" />
-      <entry key="D1" value="47.00989855773226" />
-      <entry key="W1" value="138.19066442070104" />
+      <entry key="S2" value="1.759832930827206E-279" />
+      <entry key="S5" value="3.1491154023522243E-112" />
+      <entry key="S10" value="1.7745747102763043E-56" />
+      <entry key="S30" value="2.608343370301162E-19" />
+      <entry key="S60" value="5.107194308327381E-10" />
+      <entry key="M2" value="2.2599102434228178E-5" />
+      <entry key="M5" value="0.013855955384476764" />
+      <entry key="M10" value="0.11771132232246213" />
+      <entry key="M15" value="0.2401849676570951" />
+      <entry key="M30" value="0.49051475994936" />
+      <entry key="H1" value="0.722453900507313" />
+      <entry key="H2" value="1.0842655303797575" />
+      <entry key="H4" value="2.308920213492176" />
+      <entry key="D1" value="46.74316802918745" />
+      <entry key="W1" value="138.0783792055194" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8066417592221263" />
-      <entry key="MS500" value="0.9579352182226964" />
-      <entry key="S2" value="0.9893480134875448" />
-      <entry key="S5" value="1.0121186048062292" />
-      <entry key="S10" value="1.1318830758461937" />
-      <entry key="S30" value="1.7259554761876794" />
-      <entry key="S60" value="2.5122633656761777" />
-      <entry key="M2" value="3.848116391445364" />
-      <entry key="M5" value="7.16164743867343" />
-      <entry key="M10" value="11.550895792860858" />
-      <entry key="M15" value="14.494944708788735" />
-      <entry key="M30" value="18.98077584856553" />
-      <entry key="H1" value="22.19081152641234" />
-      <entry key="H2" value="26.03265759321301" />
-      <entry key="H4" value="41.95189351545223" />
-      <entry key="D1" value="312.273357031147" />
-      <entry key="W1" value="819.9870179886411" />
+      <entry key="MS100" value="0.7371346086455506" />
+      <entry key="MS500" value="0.9408261075137876" />
+      <entry key="S2" value="0.9848664428955506" />
+      <entry key="S5" value="0.9939188913344035" />
+      <entry key="S10" value="0.9971002796303566" />
+      <entry key="S30" value="1.06045947618758" />
+      <entry key="S60" value="1.4210385441654343" />
+      <entry key="M2" value="2.488571481772629" />
+      <entry key="M5" value="5.833035213736164" />
+      <entry key="M10" value="10.918373139689386" />
+      <entry key="M15" value="14.836163380035703" />
+      <entry key="M30" value="21.6029558462027" />
+      <entry key="H1" value="26.92035672673625" />
+      <entry key="H2" value="32.09102037855964" />
+      <entry key="H4" value="48.4309386817286" />
+      <entry key="D1" value="318.48256758303154" />
+      <entry key="W1" value="827.3180324102482" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -184,7 +193,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2/src/main/resources/static/images/asset",
+    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2/src/main/resources/static/images",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -205,8 +214,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images\asset" />
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images" />
+      <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images\asset" />
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images\logos" />
       <recent name="D:\Projects\ASWallet\src\main\resources\static\images" />
     </key>
@@ -434,7 +443,7 @@
       <workItem from="1784214287529" duration="2588000" />
       <workItem from="1784217548643" duration="8039000" />
       <workItem from="1784303838878" duration="6464000" />
-      <workItem from="1784311818219" duration="302000" />
+      <workItem from="1784311818219" duration="11878000" />
     </task>
     <servers />
   </component>

@@ -11,6 +11,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,6 +47,9 @@ class WalletControllerWebMvcTest {
 
     @MockitoBean
     private AdminRiskReviewService adminRiskReviewService;
+
+    @MockitoBean
+    private PaymentService paymentService;
 
     private WalletViewDTO walletView;
     private UserViewDTO userView;
@@ -343,6 +347,18 @@ class WalletControllerWebMvcTest {
                 .andExpect(redirectedUrl("/wallet/delete-account"));
 
         verify(userService, never()).deleteAccount(any(), any());
+    }
+
+    @Test
+    void getPayments_returnsPaymentsView() throws Exception {
+        when(paymentService.listPaymentsForUsername("Plamen")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/wallet/payments").with(user("Plamen")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("payments"))
+                .andExpect(model().attributeExists("payments"));
+
+        verify(paymentService).listPaymentsForUsername("Plamen");
     }
 
     @Test

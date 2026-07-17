@@ -435,10 +435,16 @@
     flex-direction: column;
     margin-top: 0;
     align-items: center;
-    gap: 6px;
+    gap: 0;
 }
 
 .wallet-bank-card .wallet-iban-line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     color: #fff;
     text-shadow:
             0 2px 3px rgba(255,255,255,.2),
@@ -463,20 +469,50 @@
 }
 
 .wallet-bank-card .wallet-iban-toggle {
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    background: rgba(0, 0, 0, 0.16);
-    color: rgba(255, 255, 255, 0.88);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0 0 0 6px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.28);
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: none;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .wallet-bank-card .wallet-iban-toggle:hover {
-    border-color: rgba(255, 255, 255, 0.42);
     color: #fff;
-    background: rgba(0, 0, 0, 0.24);
+    border-color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.42);
 }
 
 .wallet-bank-card .wallet-iban-toggle:focus-visible {
     outline: 2px solid rgba(255, 255, 255, 0.55);
     outline-offset: 2px;
+}
+
+.wallet-bank-card .wallet-iban-toggle svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.wallet-bank-card .wallet-iban-toggle .wallet-iban-eye-off {
+    display: none;
+}
+
+.wallet-bank-card .wallet-iban-toggle.is-visible .wallet-iban-eye-on {
+    display: none;
+}
+
+.wallet-bank-card .wallet-iban-toggle.is-visible .wallet-iban-eye-off {
+    display: block;
 }
 
 @media (max-width: 480px) {
@@ -1253,24 +1289,23 @@
     transform: translateY(-1px);
     background: linear-gradient(
             180deg,
-            #fffef7 0%,
-            #ffe082 28%,
-            #ffb74d 58%,
-            #ff9800 100%
+            #ffffff 0%,
+            #f2f2f2 28%,
+            #cfd3d6 58%,
+            #9aa0a6 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    -webkit-text-stroke: 0.6px rgba(20, 12, 0, 0.45);
+    -webkit-text-stroke: 0.6px rgba(20, 20, 24, 0.42);
     filter:
-            drop-shadow(-1px -1px 0 rgba(255, 255, 255, 0.55))
-            drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.42))
-            drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.38))
-            drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.34))
-            drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.28))
-            drop-shadow(5px 6px 0 rgba(0, 0, 0, 0.22))
-            drop-shadow(0 10px 18px rgba(0, 0, 0, 0.48))
-            drop-shadow(0 0 22px rgba(255, 183, 77, 0.38));
+            drop-shadow(-1px -1px 0 rgba(255, 255, 255, 0.45))
+            drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.38))
+            drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.34))
+            drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.3))
+            drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.24))
+            drop-shadow(5px 6px 0 rgba(0, 0, 0, 0.18))
+            drop-shadow(0 10px 18px rgba(0, 0, 0, 0.42));
 }
 
 .body-wallet-white-panel .wallet-balance-box.wallet-bank-card .wallet-balance-mask {
@@ -1317,8 +1352,8 @@
 }
 
 .body-wallet-white-panel .wallet-bank-card .wallet-iban-toggle {
-    font-size: 0.82rem;
-    padding: 4px 12px;
+    font-size: inherit;
+    padding: 0;
 }
 
 .body-wallet-white-panel .wallet-quick-actions-title {
@@ -1558,7 +1593,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     width: 100%;
     max-width: 100%;
     margin: 10px 0 0;
@@ -1604,7 +1639,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 0;
     width: 100%;
     margin: 8px 0 0;
 }
@@ -1613,9 +1648,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
     margin: 0;
     max-width: 100%;
     min-width: 0;
@@ -1653,24 +1688,25 @@
 }
 
 .body-wallet-premium-fe .wallet-bank-card .wallet-iban-toggle {
-    margin: 0;
-    padding: 5px 18px;
+    width: 28px;
+    height: 28px;
+    margin: 0 0 0 4px;
+    padding: 0;
+    border: 1px solid rgba(255, 215, 128, 0.72);
     border-radius: 999px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.03em;
-    line-height: 1.3;
-    border: 1px solid rgba(255, 255, 255, 0.42);
     color: #fff8e8;
-    background: rgba(0, 0, 0, 0.45);
-    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.42);
 }
 
 .body-wallet-premium-fe .wallet-bank-card .wallet-iban-toggle:hover {
-    border-color: rgba(255, 215, 128, 0.85);
     color: #fff8e8;
-    background: rgba(0, 0, 0, 0.68);
+    border-color: rgba(255, 215, 128, 0.95);
+    background: rgba(0, 0, 0, 0.58);
+}
+
+.body-wallet-premium-fe .wallet-bank-card .wallet-iban-toggle svg {
+    width: 15px;
+    height: 15px;
 }
 
 .body-wallet-premium-fe .wallet-quick-actions,
@@ -1709,52 +1745,65 @@
     min-height: 58px;
     padding: 8px 4px;
     border-radius: 12px;
-    /* brass gradient trial — remove background + border-color below to revert */
-    border-color: rgba(220, 190, 120, 0.42);
+    border: 1px solid rgba(212, 175, 55, 0.55);
     background: linear-gradient(
-            180deg,
-            #b8924a 0%,
-            #dcc992 18%,
-            #f3e8c8 42%,
-            #faf2dc 50%,
-            #f0e4c0 58%,
-            #d8bc78 82%,
-            #a88238 100%
+            145deg,
+            #050505 0%,
+            #0c0c0c 22%,
+            #171717 34%,
+            #3f3d3a 44%,
+            #5c4a18 52%,
+            #8a7024 60%,
+            #b8922e 70%,
+            #d4af37 80%,
+            #e6c04a 90%,
+            #ffe082 100%
     );
+    color: #fff8e8;
     box-shadow:
-            inset 0 1px 0 rgba(255, 236, 190, 0.42),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.14),
-            0 4px 0 rgba(120, 90, 30, 0.55),
-            0 8px 16px rgba(0, 0, 0, 0.22);
+            inset 0 1px 0 rgba(255, 236, 190, 0.32),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+            0 4px 0 rgba(40, 28, 8, 0.55),
+            0 8px 16px rgba(0, 0, 0, 0.28);
 }
 
 .body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:hover {
-    border-color: rgba(235, 205, 140, 0.52);
+    border-color: rgba(240, 208, 96, 0.72);
     background: linear-gradient(
-            180deg,
-            #c4a058 0%,
-            #e8d8a8 18%,
-            #faf0d8 42%,
-            #fff8ea 50%,
-            #f5e8cc 58%,
-            #e0c888 82%,
-            #b89040 100%
+            145deg,
+            #0a0a0a 0%,
+            #141414 22%,
+            #222222 34%,
+            #4a4640 44%,
+            #6e5820 52%,
+            #a08228 60%,
+            #d0a832 70%,
+            #e6c04a 80%,
+            #f0d060 90%,
+            #ffe9a0 100%
     );
+    color: #fff8e8;
     box-shadow:
-            inset 0 1px 0 rgba(255, 244, 225, 0.5),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.12),
-            0 5px 0 rgba(120, 90, 30, 0.58),
-            0 12px 22px rgba(0, 0, 0, 0.26);
+            inset 0 1px 0 rgba(255, 244, 210, 0.4),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.14),
+            0 5px 0 rgba(40, 28, 8, 0.58),
+            0 12px 22px rgba(0, 0, 0, 0.32);
 }
 
 .body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action-icon {
     width: 20px;
     height: 20px;
+    color: #fff8e8;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 
 .body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action-label {
     font-size: 0.6rem;
     letter-spacing: 0.04em;
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.16),
+            0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .body-wallet-premium-fe .wallet-more-actions {
@@ -1903,9 +1952,13 @@
     }
 
     .body-wallet-premium-fe .wallet-bank-card .wallet-iban-toggle {
-        padding: 4px 14px;
-        font-size: 0.64rem;
-        font-weight: 800;
+        width: 24px;
+        height: 24px;
+    }
+
+    .body-wallet-premium-fe .wallet-bank-card .wallet-iban-toggle svg {
+        width: 14px;
+        height: 14px;
     }
 
     .body-wallet-premium-fe .wallet-bank-card__contactless {

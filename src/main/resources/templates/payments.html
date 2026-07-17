@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Payments - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="body-wallet body-payments body-payments-gold-panel">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/payments.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="payments-card payments-card--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
+        </div>
+
+        <header class="payments-card-header auth-stagger">
+            <h1 class="payments-card-title">Payments</h1>
+            <p class="payments-card-subtitle">Transfers you sent to other users</p>
+        </header>
+
+        <div class="payments-list auth-stagger" th:if="${!payments.isEmpty()}">
+            <div class="payments-list-scroll">
+                <article class="payment-row"
+                         th:each="payment : ${payments}">
+                    <div class="payment-avatar"
+                         th:classappend="${!payment.hasCustomAvatar} ? ' payment-avatar--default' : (' payment-avatar--tone-' + ${payment.avatarTone})">
+                        <img class="payment-avatar-img"
+                             th:src="${payment.avatarImageSrc}"
+                             th:alt="${payment.receiverUser}">
+                    </div>
+
+                    <div class="payment-body">
+                        <div class="payment-top">
+                            <p class="payment-receiver"
+                               th:text="${payment.receiverUser}">Receiver</p>
+                            <time class="payment-date"
+                                  th:text="${payment.dateLabel}">1.01</time>
+                        </div>
+                        <p class="payment-data"
+                           th:text="${payment.data}">You sent € 0.00</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="payments-empty auth-stagger" th:if="${payments.isEmpty()}">
+            <img class="payments-empty-img"
+                 th:src="@{/images/asset/noContact.png}"
+                 alt=""
+                 aria-hidden="true">
+            <p class="payments-empty-title">No payments yet</p>
+            <p class="payments-empty-desc">Transfers you send to other users will show up here.</p>
+            <a class="home-pill form-pill-link" th:href="@{/transactions/transfer}">Make a transfer</a>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

@@ -17,6 +17,8 @@
   Full-Stack Personal FinTech Wallet Platform with Integrated Risk Assessment Microservice
 </p>
 
+---
+
 <p align="center">
   <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk">
   <img src="https://img.shields.io/badge/version-2.0.2-blue">
@@ -26,6 +28,8 @@
   <img src="https://img.shields.io/badge/Thymeleaf-Frontend-green?logo=thymeleaf">
   <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven">
 </p>
+
+---
 
 <h1 align="center">Project Overview</h1>
 
