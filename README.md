@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="src/main/resources/static/images/asset/screenShot.png" width="360" alt="ASWallet">
+  <img src="src/main/resources/static/images/asset/screenShot.png" width="420" alt="ASWallet">
 </p>
 
 <p align="center">
