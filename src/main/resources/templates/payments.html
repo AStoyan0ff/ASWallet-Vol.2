@@ -11,14 +11,14 @@
 </div>
 
 <main class="wallet-landing reveal-item">
-    <section class="payments-card payments-card--materialize reveal-child">
+    <section class="wallet-panel wallet-panel--form user-profile-panel payments-panel wallet-panel--materialize reveal-child">
         <div class="form-panel-top auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/wallet/settings}">Back to settings</a>
         </div>
 
-        <header class="payments-card-header auth-stagger">
-            <h1 class="payments-card-title">Payments</h1>
-            <p class="payments-card-subtitle">Transfers you sent to other users</p>
+        <header class="user-profile-header auth-stagger">
+            <h2 class="wallet-title wallet-title--center">PAYMENTS</h2>
+            <p class="wallet-form-hint">Transfers you sent to other users</p>
         </header>
 
         <div class="payments-list auth-stagger" th:if="${!payments.isEmpty()}">
@@ -26,7 +26,9 @@
                 <article class="payment-row"
                          th:each="payment : ${payments}">
                     <div class="payment-avatar"
-                         th:classappend="${!payment.hasCustomAvatar} ? ' payment-avatar--default' : (' payment-avatar--tone-' + ${payment.avatarTone})">
+                         th:classappend="${!payment.hasCustomAvatar}
+                            ? ' payment-avatar--default'
+                            : (' payment-avatar--tone-' + ${payment.avatarTone})">
                         <img class="payment-avatar-img"
                              th:src="${payment.avatarImageSrc}"
                              th:alt="${payment.receiverUser}">

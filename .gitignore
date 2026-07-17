@@ -2,3 +2,4 @@
 /target/
 uploads/
 src/main/resources/application-local.properties
+.idea/

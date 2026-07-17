@@ -8,186 +8,197 @@
 ---
 
 <p align="center">
-  <img src="src/main/resources/static/images/asset/screenShot.png" width="420" alt="ASWallet">
+  <img
+    src="src/main/resources/static/images/asset/screenShot.png"
+    width="520"
+    alt="ASWallet application preview"
+  />
 </p>
 
 ---
 
 <p align="center">
-  Full-Stack Personal FinTech Wallet Platform with Integrated Risk Assessment Microservice
+  Full-Stack Personal FinTech Wallet Platform with an Integrated Risk Assessment Microservice
 </p>
 
 ---
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk">
-  <img src="https://img.shields.io/badge/version-2.0.2-blue">
-  <img src="https://img.shields.io/badge/Spring%20Boot-4.0.6-brightgreen?logo=springboot">
-  <img src="https://img.shields.io/badge/Spring%20Security-Authentication-success?logo=springsecurity">
-  <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql">
-  <img src="https://img.shields.io/badge/Thymeleaf-Frontend-green?logo=thymeleaf">
-  <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven">
-</p>
-
----
-
-<h1 align="center">Project Overview</h1>
-
-<p align="center">
-  Full-stack personal wallet platform with Thymeleaf UI, Spring Security, scheduling, caching,
-  PDF export, admin tooling, messaging, legal pages, and a REST risk-assessment microservice
-  (<code>ASWallet-Vol.2-svc</code>) integrated via OpenFeign.
+  <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk" alt="Java 21">
+  <img src="https://img.shields.io/badge/Version-2.0.2-blue" alt="Version 2.0.2">
+  <img src="https://img.shields.io/badge/Spring%20Boot-4.0.6-brightgreen?logo=springboot" alt="Spring Boot 4.0.6">
+  <img src="https://img.shields.io/badge/Spring%20Security-Authentication-success?logo=springsecurity" alt="Spring Security">
+  <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql" alt="MySQL">
+  <img src="https://img.shields.io/badge/Thymeleaf-Frontend-green?logo=thymeleaf" alt="Thymeleaf">
+  <img src="https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven" alt="Maven">
+  <img src="https://img.shields.io/badge/JaCoCo-77.8%25-success" alt="JaCoCo coverage">
 </p>
 
 ---
 
 ## Table of Contents
 
-1. [Project Inventory](#project-inventory)
-2. [Overview](#overview)
-3. [System Architecture](#system-architecture)
-4. [Tech Stack](#tech-stack)
-5. [Domain Model](#domain-model)
-6. [Application Features](#application-features)
-7. [REST Microservice Integration](#rest-microservice-integration)
-8. [Web Pages & Routes](#web-pages--routes)
-9. [Security](#security)
-10. [Scheduling & Caching](#scheduling--caching)
-11. [Email & Events](#email--events)
-12. [Error Handling](#error-handling)
-13. [Frontend Assets](#frontend-assets)
-14. [Backend Source Inventory](#backend-source-inventory)
-15. [Configuration](#configuration)
-16. [Getting Started](#getting-started)
-17. [Testing & Coverage](#testing--coverage)
-18. [For Examiners / Reviewers](#for-examiners--reviewers)
-19. [Spring Advanced Assignment](#spring-advanced-assignment)
-20. [Version History](#version-history)
-21. [Author](#author)
+1. [Project Overview](#project-overview)
+2. [System Architecture](#system-architecture)
+3. [Tech Stack](#tech-stack)
+4. [Domain Model](#domain-model)
+5. [Application Features](#application-features)
+6. [Risk Assessment Microservice](#risk-assessment-microservice)
+7. [Web Pages and Routes](#web-pages-and-routes)
+8. [Security](#security)
+9. [Scheduling and Caching](#scheduling-and-caching)
+10. [Email and Events](#email-and-events)
+11. [Error Handling](#error-handling)
+12. [Project Structure](#project-structure)
+13. [Configuration](#configuration)
+14. [Getting Started](#getting-started)
+15. [Testing and Coverage](#testing-and-coverage)
+16. [For Examiners and Reviewers](#for-examiners-and-reviewers)
+17. [Version History](#version-history)
+18. [Author](#author)
 
 ---
 
-## Project Inventory
+## Project Overview
 
-- Snapshot of the **current codebase** (main app `ASWallet-Vol.2`)
-- Microservice: **`../ASWallet-Vol.2-svc`** - https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
+**ASWallet-Vol.2** is a full-stack personal finance application built with Spring Boot and Thymeleaf.
 
-| Area | Count     | Notes                                    |
-|------|-----------|------------------------------------------|
-| Java source files | **160**   | `src/main/java/STARTER/`                 |
-| Controllers | **15**    | Spring MVC                               |
-| Service interfaces | **15**    | `Services/Interface/`                    |
-| Service implementations | **20**    | `Services/Impl/` (incl. support classes) |
-| JPA repositories | **8**     |                                          |
-| JPA entities | **9**     | incl. `BaseClass`                        |
-| DTOs | **28**    | `DTOs/`                                  |
-| Enums | **8**     | `Enums/`                                 |
-| Custom exceptions | **26**    | `CustomException/`                       |
-| Configuration classes | **11**    | `Configuration/`                         |
-| Feign client files | **4**     | client + 3 DTOs                          |
-| Thymeleaf pages | **33**    | dynamic/full pages                       |
-| Thymeleaf fragments | **4**     | reusable partials                        |
-| HTML templates total | **37**    | pages + fragments                        |
-| CSS files | **16**    | `static/css/`                            |
-| JavaScript files | **18**    | `static/js/`                             |
-| Test classes | **26**    | **272 +-** test methods                  |
-|Line coverage (JaCoCo) | **77.8%** | target 70% ✅                             |
+It provides wallet management, deposits, withdrawals, transfers, transaction history, PDF export, user profiles, messaging, administration tools and security features.
 
-Sibling microservice: **`../ASWallet-Vol.2-svc`** — see its README.
+Transfers are evaluated by an independent REST microservice:
 
----
+- **Main application:** `ASWallet-Vol.2`
+- **Risk microservice:** [`ASWallet-Vol.2-svc`](https://github.com/AStoyan0ff/ASWallet-Vol.2-svc)
 
-## Overview
+The applications communicate through Spring Cloud OpenFeign and are protected with a shared API key.
 
-Two independent Spring Boot applications (Spring Advanced requirement):
+### Project Statistics
 
-| Application | Port | Database | Role |
-|-------------|------|----------|------|
-| **ASWallet-Vol.2** (this repo) | `8080` | `as_wallet` | UI, wallet logic, security, Feign client |
-| **ASWallet-Vol.2-svc** | `8081` | `as_wallet_svc` | Transfer risk scoring REST API |
+| Area | Count |
+|------|------:|
+| Java source files | 163 |
+| Controllers | 15 |
+| Service interfaces | 17 |
+| Service implementations | 22 |
+| JPA repositories | 8 |
+| JPA entities | 9 |
+| DTOs | 29 |
+| Enums | 8 |
+| Custom exceptions | 26 |
+| Configuration classes | 11 |
+| Thymeleaf pages | 34 |
+| Reusable fragments | 4 |
+| CSS files | 16 |
+| JavaScript files | 19 |
+| Test classes | 26 |
+| Test methods | ~272 |
+| JaCoCo line coverage | **77.8%** ✅ |
 
 ---
 
 ## System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         Browser (Thymeleaf UI)                            │
-└─────────────────────────────────┬───────────────────────────────────────┘
-                                  │ HTTP
-                                  ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                 ASWallet-Vol.2 Main Application (:8080)                 │
-│  Controllers → Services → Repositories → MySQL (as_wallet)              │
-│       │              ├── Cache · Scheduling · Events → SMTP             │
-│       └── Feign (RiskAssessmentClient) ─────────────────────────────┐     │
-└───────────────────────────────────────────────────────────────────│─────┘
-                                                                    │ REST
-                                                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│         ASWallet-Vol.2-svc — Risk Microservice (:8081)                  │
-│  RiskAssessmentController → Services → JPA → MySQL (as_wallet_svc)      │
-└─────────────────────────────────────────────────────────────────────────┘
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                    Browser / Thymeleaf UI                    │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ HTTP
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│              ASWallet Main Application (:8080)              │
+│                                                             │
+│  Controllers → Services → Repositories → MySQL              │
+│       │                                                     │
+│       ├── Security, Cache, Scheduling and Events             │
+│       ├── SMTP Email Service                                 │
+│       └── OpenFeign RiskAssessmentClient                     │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ REST + X-API-Key
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│             Risk Assessment Microservice (:8081)             │
+│                                                             │
+│  Controller → Services → Repositories → MySQL               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Layers (main app):** Presentation (Controllers, Thymeleaf, DTOs) → Business (Services) → Persistence (Repositories, Entities) → Cross-cutting (Security, Events, Cache, Scheduling, ExceptionHandler, Feign).
+### Application Layers
+
+- **Presentation:** Spring MVC controllers, Thymeleaf templates and DTOs
+- **Business:** Service interfaces and implementations
+- **Persistence:** Spring Data JPA repositories and entities
+- **Security:** Authentication, authorization, CSRF and API-key validation
+- **Integration:** Spring Cloud OpenFeign
+- **Cross-cutting:** Events, caching, scheduling and exception handling
+
+### Applications
+
+| Application | Port | Database | Responsibility |
+|-------------|------|----------|----------------|
+| `ASWallet-Vol.2` | `8080` | `as_wallet` | UI, wallet operations, security and Feign client |
+| `ASWallet-Vol.2-svc` | `8081` | `as_wallet_svc` | Transfer risk assessment REST API |
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology                                                |
-|-------|-----------------------------------------------------------|
-| Language | Java 21                                                   |
-| Framework | Spring Boot 4.0.6                                         |
-| Web | Spring MVC, Thymeleaf                                     |
-| Security | Spring Security (session, CSRF, roles)                    |
-| Persistence | Spring Data JPA, Hibernate                                |
-| Database | MySQL (`as_wallet`)                                       |
-| Validation | Jakarta Bean Validation                                   |
-| Mail | Spring Mail (SMTP — ABV)                                  |
-| Events | Spring `ApplicationEvent` + `@TransactionalEventListener` |
-| Scheduling | `@EnableScheduling` — cron + fixed delay                  |
-| Caching | `@EnableCaching`, `ConcurrentMapCacheManager`             |
-| PDF | OpenPDF 2.0.3                                             |
-| Integration | Spring Cloud OpenFeign 2025.1.1, feign-hc5                |
-| Frontend | HTML5, **16 CSS** + **17 JS** modules, vanilla JS         |
-| Build | Maven                                                     |
-| Utilities | Lombok                                                    |
+| Area | Technology |
+|------|------------|
+| Language | Java 21 |
+| Framework | Spring Boot 4.0.6 |
+| Web | Spring MVC |
+| Frontend | Thymeleaf, HTML5, CSS3, vanilla JavaScript |
+| Security | Spring Security, BCrypt, CSRF |
+| Persistence | Spring Data JPA, Hibernate |
+| Database | MySQL |
+| Validation | Jakarta Bean Validation |
+| Integration | Spring Cloud OpenFeign 2025.1.1, Feign HC5 |
+| Email | Spring Mail, SMTP |
+| Events | Spring Application Events |
+| Scheduling | Spring Scheduling |
+| Caching | Spring Cache |
+| PDF export | OpenPDF 2.0.3 |
+| Testing | JUnit 5, Mockito, MockMvc, JaCoCo |
+| Build | Maven |
+| Utilities | Lombok |
 
 ---
 
 ## Domain Model
 
-All entities extend `BaseClass` with **UUID** primary key.
+All entities use UUID primary keys inherited from `BaseClass`.
 
 ### Relationships
 
+```text
+User (1) ───── (1) Wallet
+  │                │
+  │                └──── (*) Transaction
+  │                         sender / receiver
+  │
+  ├──── (1) UserProfileDetails
+  ├──── (1) BankCard
+  ├──── (*) LoginActivity
+  └──── (*) PasswordResetToken
+
+AdminMailboxMessage ───── User
 ```
-User (1) ── (1) Wallet (1) ── (*) Transaction (*) ── (1) Wallet
-  │                   ▲              sender / receiver
-  ├── (1) UserProfileDetails
-  ├── (1) BankCard
-  └── technical: PasswordResetToken, LoginActivity
 
-AdminMailboxMessage → User (recipient)
-```
+### Entities
 
-### Entities (9)
+| Entity | Database table | Purpose |
+|--------|----------------|---------|
+| `User` | `users` | Account credentials and role |
+| `Wallet` | `wallets` | User balance |
+| `Transaction` | `transactions` | Deposits, withdrawals and transfers |
+| `BankCard` | `bank_cards` | Card information and generated IBAN |
+| `UserProfileDetails` | `user_profile_details` | Profile, status and wallet settings |
+| `AdminMailboxMessage` | `admin_mailbox_messages` | Communication between users and administrators |
+| `PasswordResetToken` | `password_reset_tokens` | Forgot-password tokens |
+| `LoginActivity` | `login_activity` | Authentication audit records |
+| `BaseClass` | — | UUID mapped superclass |
 
-| Entity | Table | Type | Purpose                                |
-|--------|-------|------|----------------------------------------|
-| `User` | `users` | Domain | Account, BCrypt password, role         |
-| `Wallet` | `wallets` | Domain | Balance (EUR)                          |
-| `Transaction` | `transactions` | Domain | Deposit / withdraw / transfer          |
-| `BankCard` | `bank_cards` | Domain | Card metadata, IBAN                    |
-| `UserProfileDetails` | `user_profile_details` | Domain | Profile, status, settings, daily limit |
-| `AdminMailboxMessage` | `admin_mailbox_messages` | Domain | Admin <-> user messaging               |
-| `PasswordResetToken` | `password_reset_tokens` | Technical | Forgot-password tokens                 |
-| `LoginActivity` | `login_activity` | Technical | Login audit                            |
-| `BaseClass` | — | Mapped superclass | UUID `id`                              |
-
-### Enums (8)
+### Enums
 
 | Enum | Values |
 |------|--------|
@@ -204,431 +215,550 @@ AdminMailboxMessage → User (recipient)
 
 ## Application Features
 
-### Authentication & account
+### Authentication and Account Management
 
-- Register, login, logout, forgot/reset password, change password, delete account
-- BCrypt passwords, CSRF on POST, inactive account lock
-- Password reset: SHA-256 token hash, expiry, scheduled cleanup
+- User registration, login and logout
+- BCrypt password hashing
+- Forgot-password and reset-password flow
+- SHA-256 hashed reset tokens
+- Token expiration and scheduled cleanup
+- Password change
+- Account deletion
+- Inactive account login protection
+- Login activity audit
 
-### Wallet & transactions
+### Wallet and Transactions
 
-- Auto wallet on register; €50 welcome bonus on first card
-- Deposit, withdraw (daily limit), transfer (2-step confirm)
-- **Risk-aware transfers** via Feign → `BLOCK` / `REVIEW` / `ALLOW`
-- Pending transfer scheduler; user cancel; stale auto-cancel
-- Transaction history with **pagination** (5/page), spending categories, clear history
-- PDF export with JPA Specifications filters
+- Automatic wallet creation after registration
+- €50 welcome bonus after adding the first bank card
+- Deposits and withdrawals
+- Configurable daily withdrawal limit
+- Two-step transfer confirmation
+- Risk-aware transfers through the microservice
+- Pending transfer processing
+- Manual transfer cancellation
+- Automatic cancellation of stale transfers
+- Transaction categories
+- Transaction history with filters and pagination
+- PDF export using JPA Specifications
 
-### Bank card
+### Bank Card
 
-- Add at register or `/wallet/bank-details`; live preview; masked display; generated IBAN
+- Add a card during registration or from the wallet
+- Live card preview
+- Masked card information
+- Card validation
+- Automatically generated IBAN
 
-### Profile & settings
+### Profile and Settings
 
-- View/edit profile, avatar upload, settings toggles, daily limit editor
-- Contact Us; **Privacy Policy**; **Terms of Service**
+- View and edit profile information
+- Avatar upload and preview
+- Hide or display wallet balance
+- Daily withdrawal limit editor
+- Contact Us page
+- Privacy Policy
+- Terms of Service
 
-### Admin
+### Payments
 
-- User management (status, role, delete), login activity audit
-- **Risk reviews** with history, status chips, approve/reject/delete all
-- Admin mailbox (send, inbox, threads)
+The `/wallet/payments` page displays outgoing transfers with:
 
-### User mailbox
+- Receiver avatar and username
+- Transfer amount
+- Transaction status
+- Transaction date
+- Five visible rows with in-panel scrolling
 
-- Send to admin, inbox, view/delete messages, unread badge
+### Messaging
+
+Users can:
+
+- Send messages to the administrator
+- Open their inbox
+- View and delete messages
+- See an unread-message badge
+
+Administrators can:
+
+- Send messages to users
+- View the admin inbox
+- Follow message threads
+- Monitor unread messages
+
+### Administration
+
+- User management
+- Account status management
+- Role management
+- User deletion
+- Login activity audit
+- Risk review history
+- Approve or reject transfers
+- Clear completed risk reviews
+- Administrative mailbox
 
 ---
 
-## REST Microservice Integration
+## Risk Assessment Microservice
 
-Sibling: **`ASWallet-Vol.2-svc`** (`:8081`, `as_wallet_svc`). Full API docs: `../ASWallet-Vol.2-svc/README.md`.
+The independent microservice is available in:
+
+[`ASWallet-Vol.2-svc`](https://github.com/AStoyan0ff/ASWallet-Vol.2-svc)
+
+The main application sends transfer information through `RiskAssessmentClient`.
+
+### Risk Decisions
+
+| Decision | Transaction status | Behaviour |
+|----------|--------------------|-----------|
+| `ALLOW` | `PENDING` | The scheduler completes the transfer |
+| `REVIEW` | `PENDING_RISK_REVIEW` | Funds are held until an administrator reviews the transfer |
+| `BLOCK` | Not created | The transfer is rejected immediately |
+
+### Manual Review Endpoints
+
+- `GET /manual-reviews` — return transfers requiring manual review
+- `PATCH /manual-reviews/{id}` — approve or reject a review
+- `DELETE /manual-reviews` — delete review history
+
+### Fail-Open Behaviour
+
+```properties
+app.risk-service.fail-open=true
+```
+
+When enabled, transfers can continue if the risk microservice is temporarily unavailable.
 
 ---
 
-### Flow summary
+## Web Pages and Routes
 
-| Decision | Wallet status | Behaviour |
-|----------|---------------|-----------|
-| `ALLOW` | `PENDING` | Scheduler completes (~5 s) |
-| `REVIEW` | `PENDING_RISK_REVIEW` | Held until admin approve/reject |
-| `BLOCK` | — | Transfer not created |
+### Public Pages
 
-Admin list uses `GET /manual-reviews` (all `REVIEW` decisions, any status). **Delete all** → `DELETE /manual-reviews`.
+| Template | Route |
+|----------|-------|
+| `home.html` | `/` |
+| `login.html` | `/login` |
+| `register.html` | `/register` |
+| `forgot-password.html` | `/forgot-password` |
+| `reset-password.html` | `/reset-password` |
+| `account-deleted.html` | `/account-deleted` |
 
-`app.risk-service.fail-open=true` → if svc down, transfers allowed without check
+### Authenticated User Pages
 
----
+| Template | Route |
+|----------|-------|
+| `wallet.html` | `/wallet` |
+| `bank-details.html` | `/wallet/bank-details` |
+| `settings.html` | `/wallet/settings` |
+| `payments.html` | `/wallet/payments` |
+| `change-password.html` | `/wallet/change-password` |
+| `delete-account.html` | `/wallet/delete-account` |
+| `daily-limit-edit.html` | `/wallet/daily-limit/edit` |
+| `transaction-export.html` | `/wallet/export` |
+| `contact-us.html` | `/wallet/contact-us` |
+| `privacy-policy.html` | `/wallet/privacy` |
+| `terms-of-service.html` | `/wallet/terms` |
+| `wallet-send-message.html` | `/wallet/messages/send` |
+| `wallet-messages.html` | `/wallet/messages` |
+| `wallet-message-view.html` | `/wallet/messages/{id}` |
+| `deposit.html` | `/transactions/deposit` |
+| `withdraw.html` | `/transactions/withdraw` |
+| `transfer.html` | `/transactions/transfer` |
+| `transfer-confirm.html` | `/transactions/transfer/confirm` |
+| `transaction-history.html` | `/transactions/history` |
+| `profile.html` | `/profile` |
+| `profile-edit.html` | `/profile/edit` |
 
-## Web Pages & Routes
+### Administrator Pages
 
-### All Thymeleaf pages (33)
+| Template | Route |
+|----------|-------|
+| `admin.html` | `/admin` |
+| `admin-login-activity.html` | `/admin/login-activity` |
+| `admin-user-manage.html` | `/admin/users/{id}/manage` |
+| `admin-send-message.html` | `/admin/messages/send` |
+| `admin-message-inbox.html` | `/admin/messages/inbox` |
+| `admin-message-thread.html` | `/admin/messages/users/{username}/thread` |
+| `admin-risk-reviews.html` | `/admin/risk-reviews` |
 
-| # | Template | Route(s) | Access |
-|---|----------|----------|------|
-| 1 | `home.html` | `/` | Public |
-| 2 | `login.html` | `/login` | Public |
-| 3 | `register.html` | `/register` | Public |
-| 4 | `forgot-password.html` | `/forgot-password` | Public |
-| 5 | `reset-password.html` | `/reset-password` | Public |
-| 6 | `account-deleted.html` | `/account-deleted` | Public |
-| 7 | `wallet.html` | `/wallet` | Auth |
-| 8 | `bank-details.html` | `/wallet/bank-details` | Auth |
-| 9 | `settings.html` | `/wallet/settings` | Auth |
-| 10 | `change-password.html` | `/wallet/change-password` | Auth |
-| 11 | `delete-account.html` | `/wallet/delete-account` | Auth |
-| 12 | `daily-limit-edit.html` | `/wallet/daily-limit/edit` | Auth |
-| 13 | `transaction-export.html` | `/wallet/export` | Auth |
-| 14 | `contact-us.html` | `/wallet/contact-us` | Auth |
-| 15 | `privacy-policy.html` | `/wallet/privacy` | Auth |
-| 16 | `terms-of-service.html` | `/wallet/terms` | Auth |
-| 17 | `wallet-send-message.html` | `/wallet/messages/send` | Auth |
-| 18 | `wallet-messages.html` | `/wallet/messages` | Auth |
-| 19 | `wallet-message-view.html` | `/wallet/messages/{id}` | Auth |
-| 20 | `deposit.html` | `/transactions/deposit` | Auth |
-| 21 | `withdraw.html` | `/transactions/withdraw` | Auth |
-| 22 | `transfer.html` | `/transactions/transfer` | Auth |
-| 23 | `transfer-confirm.html` | `/transactions/transfer/confirm` | Auth |
-| 24 | `transaction-history.html` | `/transactions/history` | Auth |
-| 25 | `profile.html` | `/profile` | Auth |
-| 26 | `profile-edit.html` | `/profile/edit` | Auth |
-| 27 | `admin.html` | `/admin` | Admin |
-| 28 | `admin-login-activity.html` | `/admin/login-activity` | Admin |
-| 29 | `admin-user-manage.html` | `/admin/users/{id}/manage` | Admin |
-| 30 | `admin-send-message.html` | `/admin/messages/send` | Admin |
-| 31 | `admin-message-inbox.html` | `/admin/messages/inbox` | Admin |
-| 32 | `admin-message-thread.html` | `/admin/messages/users/{username}/thread` | Admin |
-| 33 | `admin-risk-reviews.html` | `/admin/risk-reviews` | Admin |
+### Reusable Thymeleaf Fragments
 
-**Non-page endpoints:** `GET /wallet/export/pdf` (PDF download), `POST` redirects for cancel/clear/approve/reject.
-
-### Fragments (4)
-
-| Fragment | File |
-|----------|------|
-| App footer (version) | `fragments/app-footer.html` |
-| Password visibility toggle | `fragments/password-visibility-toggle.html` |
-| Spending category field | `fragments/spending-category-field.html` |
-| Transaction filter fields | `fragments/transaction-filter-fields.html` |
+- Application footer with the current version
+- Password visibility toggle
+- Spending category field
+- Transaction filter fields
 
 ---
 
 ## Security
 
-### Main application (required)
+### Main Application
 
 | Mechanism | Implementation |
 |-----------|----------------|
-| Authentication | Spring Security form login (`/spring-security-login`) |
+| Authentication | Spring Security form login |
+| Login processing | `/spring-security-login` |
 | Password storage | BCrypt |
-| Session | HTTP session + `JSESSIONID` |
-| CSRF | Enabled on all POST forms |
-| Roles | `ROLE_USER`, `ROLE_ADMIN` |
-| Authorization | Public paths; `/admin/**` → ADMIN; else authenticated |
-| Account lock | `INACTIVE` blocks login |
-| Secrets | `MAIL_PASSWORD`, `ADMIN_PASSWORD` via env |
+| Session management | HTTP session and `JSESSIONID` |
+| CSRF protection | Enabled for state-changing forms |
+| User roles | `ROLE_USER`, `ROLE_ADMIN` |
+| Admin authorization | `/admin/**` requires `ROLE_ADMIN` |
+| Account protection | Inactive accounts cannot log in |
+| Secrets | Loaded from environment variables |
 
-### Microservice (API key)
+### Microservice API Key
 
-Service-to-service auth via shared secret (not Spring Security login):
+Service-to-service communication is protected with the `X-API-Key` header.
 
-| Side | Property | Default |
-|------|----------|---------|
-| Main app (Feign) | `app.risk-service.api-key` | `aswallet-dev-api-key` |
-| Microservice | `app.security.api-key` | `aswallet-dev-api-key` |
+| Application | Property |
+|-------------|----------|
+| Main application | `app.risk-service.api-key` |
+| Risk microservice | `app.security.api-key` |
 
-Feign interceptor (`RiskServiceFeignConfig`) sends `X-API-Key` on every call. Override both with `$env:RISK_SERVICE_API_KEY`.
+Both applications must use the same value:
+
+```powershell
+$env:RISK_SERVICE_API_KEY = "your-secure-api-key"
+```
 
 ---
 
-## Scheduling & Caching
+## Scheduling and Caching
+
+### Scheduled Jobs
 
 | Job | Trigger | Purpose |
 |-----|---------|---------|
-| `PendingTransferScheduler.processPendingTransfers` | Cron `app.transfer.process.cron` | Complete `PENDING` transfers |
-| `PendingTransferScheduler.cancelStalePendingTransfers` | Fixed delay | Cancel stale pending |
-| `PasswordResetTokenCleanupScheduler` | Cron `app.password-reset.cleanup.cron` | Purge expired tokens |
+| `processPendingTransfers` | Configurable cron | Complete pending transfers |
+| `cancelStalePendingTransfers` | Fixed delay | Cancel expired pending transfers |
+| `PasswordResetTokenCleanupScheduler` | Configurable cron | Delete expired reset tokens |
+
+### Application Caches
 
 | Cache | Purpose |
 |-------|---------|
-| `profiles` | Profile reads |
-| `walletSettings` | Settings reads |
-| `transactionHistory` | History reads |
+| `profiles` | User profile reads |
+| `walletSettings` | Wallet settings reads |
+| `transactionHistory` | Transaction history reads |
 
-Eviction via `ApplicationCacheEviction`.
+Cache eviction is managed through `ApplicationCacheEviction`.
 
 ---
 
-## Email & Events
+## Email and Events
 
-| Event | Listener | Emails |
-|-------|----------|--------|
-| `UserRegisteredEvent` | `UserRegisteredEventListener` | Registration confirmation |
-| `TransactionCompletedEvent` | `TransactionCompletedEventListener` | Deposit / withdraw / transfer |
+| Event | Listener | Purpose |
+|-------|----------|---------|
+| `UserRegisteredEvent` | `UserRegisteredEventListener` | Send registration confirmation |
+| `TransactionCompletedEvent` | `TransactionCompletedEventListener` | Send transaction notification |
 
-SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD`.
+SMTP configuration:
+
+```properties
+spring.mail.host=smtp.abv.bg
+spring.mail.port=465
+```
+
+The email password is loaded from `MAIL_PASSWORD`.
 
 ---
 
 ## Error Handling
 
-`GlobalExceptionHandler` — built-in + **26 custom exceptions**, e.g.:
+`GlobalExceptionHandler` provides centralized handling for validation, upload and domain exceptions.
 
-`InsufficientBalanceException`, `TransferBlockedByRiskException`, `RiskReviewServiceException`,
-`DailyWithdrawLimitExceededException`, `InvalidCardDetailsException`, `PendingTransferNotFoundException`,
-`CannotCancelTransferException`, `MailboxMessageNotFoundException`, `UserNotFoundException`, …
+The application contains 26 custom exceptions, including:
 
----
-
-## Frontend Assets
-
-### CSS - 16 files (`static/css/`)
-
-Entry: `style.css` imports the rest in cascade order.
-
-| File | Scope |
-|------|-------|
-| `style.css` | Entry point (imports below) |
-| `base/variables.css` | Design tokens, colours, spacing |
-| `base/reset.css` | Reset, typography, footer base |
-| `base/layout-panels.css` | Panels, backgrounds, shared layout |
-| `base/buttons.css` | Shared button / pill styles |
-| `pages/home.css` | Landing, bank-card login/register CTAs |
-| `pages/auth.css` | Auth forms, materialize reveal animations |
-| `pages/wallet.css` | Dashboard, balance card, quick actions |
-| `pages/transactions.css` | Deposit, withdraw, transfer, history, pagination |
-| `pages/bank-details.css` | Bank card add/view, card preview |
-| `pages/profile.css` | Profile view, daily limit |
-| `pages/settings.css` | Settings hub, toggles |
-| `pages/admin.css` | Admin panel, risk reviews, status chips, mailbox |
-| `pages/account-security.css` | Change password, delete account |
-| `pages/contact-us.css` | Contact page |
-| `pages/legal-pages.css` | Privacy Policy, Terms of Service |
-
-### JavaScript - 17 files (`static/js/`)
-
-| File | Used on | Purpose |
-|------|---------|---------|
-| `home.js` | Most pages | Materialize reveal animations, bank-card shine on landing |
-| `password-toggle.js` | Login, register, password forms | Show/hide password fields |
-| `bank-details.js` | Bank details | Card number formatting, live card preview |
-| `wallet-card.js` | Wallet dashboard | Balance card hover/animation |
-| `wallet-iban.js` | Wallet dashboard | IBAN show/hide toggle |
-| `wallet-settings.js` | Settings | AJAX save for toggles |
-| `deposit.js` | Deposit | Deposit form helpers |
-| `withdraw.js` | Withdraw | Amount step init (via shared module) |
-| `transfer.js` | Transfer | Amount step init for transfer form |
-| `transaction-amount-step.js` | Deposit, withdraw, transfer | Shared ±€5 amount stepper, min/max clamp |
-| `transaction-history.js` | History (when pending) | Auto-refresh while pending transfers exist |
-| `change-password.js` | Change password | Strength meter, requirement checklist |
-| `daily-limit-edit.js` | Daily limit | Stepper UI for limit slider |
-| `profile-edit.js` | Profile edit | Avatar image preview before upload |
-| `admin.js` | Admin dashboard | Admin panel interactions |
-| `risk-reviews.js` | Admin risk reviews | Master-detail list selection, keyboard nav |
-
-### Images (`static/images/`)
-
-Page backgrounds and assets referenced by templates (under `static/images/`):
-
-| Path | Used by |
-|------|---------|
-| `homePage.png` | Home |
-| `reg-log.png` | Login, register |
-| `asset/aswallet-logo.png` | Login, register |
-| `forgot-password.png` | Forgot password |
-| `res-pass.png` | Reset password |
-| `delete-account.png` | Delete account, account deleted |
-| `walletLight.png` | Wallet, admin inbox |
-| `bank-details-light.png` | Bank details |
-| `settingsLight.png` | Settings, privacy, terms |
-| `change-password-light.png` | Change password |
-| `userDetails.png` | Profile, profile edit |
-| `daily-limit.png` | Daily limit edit |
-| `deposit.png` | Deposit, withdraw |
-| `transfer.png` | Transfer, transfer confirm |
-| `history.png` | Transaction history |
-| `export-file.png` | Transaction export |
-| `contactUs.png` | Contact us |
-| `mailbox.png` | Mailbox pages |
-| `5.png` | Admin pages |
-| `asset/emv-chip.png` | Home, wallet, bank details cards |
-| `asset/noContact.png` | Home, wallet, bank details cards |
-| `default-avatar.svg` | Default profile avatar |
-
-User-uploaded avatars: `uploads/avatars/` (gitignored).
+- `InsufficientBalanceException`
+- `TransferBlockedByRiskException`
+- `RiskReviewServiceException`
+- `DailyWithdrawLimitExceededException`
+- `InvalidCardDetailsException`
+- `PendingTransferNotFoundException`
+- `CannotCancelTransferException`
+- `MailboxMessageNotFoundException`
+- `UserNotFoundException`
 
 ---
 
-## Backend Source Inventory
+## Project Structure
 
-### Controllers (15)
+```text
+src
+├── main
+│   ├── java/STARTER
+│   │   ├── Clients
+│   │   ├── Configuration
+│   │   ├── Controllers
+│   │   ├── CustomException
+│   │   ├── DTOs
+│   │   ├── Enums
+│   │   ├── Events
+│   │   ├── GlobalExceptionHandler
+│   │   ├── Models
+│   │   ├── Repositories
+│   │   ├── Scheduling
+│   │   ├── Security
+│   │   ├── Services
+│   │   ├── Specifications
+│   │   └── Utils
+│   │
+│   └── resources
+│       ├── static
+│       │   ├── css
+│       │   ├── images
+│       │   └── js
+│       ├── templates
+│       │   └── fragments
+│       └── application.properties
+│
+└── test
+    └── java/STARTER
+```
 
-| Controller | Responsibility |
-|------------|----------------|
-| `HomeController` | Landing page |
-| `UserController` | Register, login, logout |
-| `PasswordResetController` | Forgot / reset password |
-| `WalletController` | Dashboard, bank card, settings, delete account |
-| `TransactionController` | Deposit, withdraw, transfer, confirm |
-| `TransactionHistoryController` | History, pagination, cancel, clear |
-| `TransactionExportController` | Filter preview, PDF download |
-| `ProfileController` | Profile view / edit |
-| `DailyLimitController` | Daily withdraw limit editor |
-| `ContactUsController` | Contact page |
-| `LegalPagesController` | Privacy Policy, Terms of Service |
-| `WalletMailboxController` | User mailbox |
-| `AdminController` | Admin dashboard, users, roles, status |
-| `AdminMailboxController` | Admin messaging |
-| `AdminRiskReviewController` | Risk review approve/reject/clear |
+### Frontend Organization
 
-### Service interfaces (16)
+The frontend contains:
 
-`AdminMailboxService`, `AdminDashboardService`, `AdminRiskReviewService`, `AdminService`, 
-`BankCardService`, `EmailService`, `LoginActivityService`, `PasswordResetService`,
-`TransactionExportService`, `TransactionService`, `TransferRiskAssessmentService`,
-`UserProfileDetailsService`, `UserService`, `WalletService`, `WithdrawDailyLimitService`,
-`AvatarStorageService`
+- 16 modular CSS files
+- 19 JavaScript files
+- 34 Thymeleaf pages
+- 4 reusable Thymeleaf fragments
+- Separate page backgrounds and application assets
 
-### Service implementations (21)
+User-uploaded avatars are stored in:
 
-`AdminMailboxServiceImpl`, `AdminDashboardServiceImpl` , `AdminRiskReviewServiceImpl`, `AdminServiceImpl`,
-`ApplicationCacheEviction`, `AppUserDetailsService`, `AvatarStorageServiceImpl`,
-`BankCardServiceImpl`, `EmailServiceImpl`, `LoginActivityServiceImpl`,
-`PasswordResetServiceImpl`, `PendingTransferProcessingService`, `TransactionExportServiceImpl`,
-`TransactionServiceImpl`, `TransferRefundSupport`, `TransferRiskAssessmentServiceImpl`,
-`UserDeletionService`, `UserProfileDetailsServiceImpl`, `UserServiceImpl`,
-`WalletServiceImpl`, `WithdrawDailyLimitServiceImpl`
+```text
+uploads/avatars/
+```
 
-### Repositories (8)
-
-`AdminMailboxMessageRepository`, `BankCardRepository`, `LoginActivityRepository`,
-`PasswordResetTokenRepository`, `TransactionRepository`, `UserProfileDetailsRepository`,
-`UserRepository`, `WalletRepository`
-
-### Configuration (11)
-
-`AdminBootstrapConfig`, `AppModelAdvice`, `AsyncConfig`, `AvatarUploadConfig`,
-`BankCardIbanBackfillConfig`, `CacheConfig`, `SchedulingConfig`, `SecurityConfig`,
-`SupportMailboxBackfillConfig`, `WalletBalanceBackfillConfig`, `WithdrawDailyLimitBackfillConfig`
-
-### Other packages
-
-| Package | Files | Contents |
-|---------|-------|----------|
-| `Clients/` | 4 | `RiskAssessmentClient` + Feign DTOs |
-| `DTOs/` | 27 | Request/response/view DTOs |
-| `Enums/` | 8 | Domain enums |
-| `Events/` | 4 | 2 events + 2 listeners |
-| `Scheduling/` | 2 | Transfer + token cleanup schedulers |
-| `Security/` | 2 | `AppUserPrincipal`, `ReloadUserAuthoritiesFilter` |
-| `Specifications/` | 1 | `TransactionSpecifications` |
-| `Utils/` | 5 | IBAN, card validation, IP, dates, patterns |
-| `GlobalExceptionHandler/` | 1 | Central error handling |
-
-### DTOs (28)
-
-`AdminRecipientOptionDTO`, `AdminDashboardSummaryDTO` , `AdminRiskAssessmentViewDTO`, `AdminSendMessageRequest`,
-`AdminUserViewDTO`, `BankCardRequest`, `BankCardViewDTO`, `ChangePasswordRequest`,
-`DailyLimitEditRequest`, `DeleteAccountRequest`, `DepositMoneyDTO`, `ForgotPasswordRequest`,
-`LoginActivityViewDTO`, `LoginDTO`, `MailboxMessageViewDTO`, `ProfileEditRequest`,
-`ResetPasswordRequest`, `TransactionHistoryFilter`, `TransactionViewDTO`, `TransferMoneyDTO`,
-`UserDTO`, `UserProfileDetailsViewDTO`, `UserSendMessageRequest`, `UserViewDTO`,
-`WalletSettingsRequest`, `WalletViewDTO`, `WithdrawDailyLimitViewDTO`, `WithdrawMoneyDTO`
+This directory is excluded from Git.
 
 ---
+
+## Configuration
+
+### Required Environment Variables
 
 | Variable | Purpose |
 |----------|---------|
-| `MAIL_PASSWORD` | SMTP |
-| `ADMIN_PASSWORD` | Bootstrap admin password |
-| `ADMIN_CARD_*` | Optional admin bootstrap card |
+| `DB_PASSWORD` | MySQL database password |
+| `MAIL_PASSWORD` | SMTP account password |
+| `ADMIN_PASSWORD` | Bootstrap administrator password |
+| `RISK_SERVICE_API_KEY` | Shared microservice API key |
+| `ADMIN_CARD_*` | Optional administrator card configuration |
 
-Use `application-local.properties` (gitignored) for local DB credentials.
+Local credentials can be stored in:
+
+```text
+application-local.properties
+```
+
+This file should remain excluded from Git.
 
 ---
 
 ## Getting Started
 
-**Prerequisites:** Java 21, Maven, MySQL.
+### Prerequisites
+
+- Java 21
+- Maven
+- MySQL
+- Git
+
+### 1. Clone the Main Application
 
 ```powershell
-$env:MAIL_PASSWORD = "your-smtp-password"
-mvn spring-boot:run
-# → http://localhost:8080
-
-$env:DB_PASSWORD = "your_mysql_password"
-mvn spring-boot:run
-# → http://localhost:8081
+git clone https://github.com/AStoyan0ff/ASWallet-Vol.2.git
+cd ASWallet-Vol.2
 ```
 
-**LAN / phone testing:** `server.address=0.0.0.0` is set. On phone use `http://<PC-LAN-IP>:8080` and set `app.risk-service.base-url=http://<PC-LAN-IP>:8081`.
+### 2. Clone the Risk Microservice
+
+Clone it next to the main application:
+
+```powershell
+git clone https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
+```
+
+Recommended directory structure:
+
+```text
+Projects/
+├── ASWallet-Vol.2/
+└── ASWallet-Vol.2-svc/
+```
+
+### 3. Create the Databases
+
+```sql
+CREATE DATABASE as_wallet;
+CREATE DATABASE as_wallet_svc;
+```
+
+### 4. Set Environment Variables
+
+```powershell
+$env:DB_PASSWORD = "your-mysql-password"
+$env:MAIL_PASSWORD = "your-smtp-password"
+$env:ADMIN_PASSWORD = "your-admin-password"
+$env:RISK_SERVICE_API_KEY = "your-secure-api-key"
+```
+
+### 5. Start the Risk Microservice
+
+From `ASWallet-Vol.2-svc`:
+
+```powershell
+mvn spring-boot:run
+```
+
+The microservice starts at:
+
+```text
+http://localhost:8081
+```
+
+### 6. Start the Main Application
+
+From `ASWallet-Vol.2`:
+
+```powershell
+mvn spring-boot:run
+```
+
+Open:
+
+```text
+http://localhost:8080
+```
+
+### LAN and Phone Testing
+
+The application can listen on all network interfaces:
+
+```properties
+server.address=0.0.0.0
+```
+
+Open the application from another device with:
+
+```text
+http://<PC-LAN-IP>:8080
+```
+
+Configure the risk service URL when testing across the local network:
+
+```properties
+app.risk-service.base-url=http://<PC-LAN-IP>:8081
+```
 
 ---
 
-## Testing & Coverage
+## Testing and Coverage
 
-| Metric | Value                                                |
-|--------|------------------------------------------------------|
-| Test classes | **26**                                               |
-| Test methods | **~272** (excl. optional `ASWalletApplicationTests`) |
-| Line coverage | **77.8%** JaCoCo ✅                                   |
+| Metric | Result |
+|--------|-------:|
+| Test classes | 26 |
+| Test methods | ~272 |
+| JaCoCo line coverage | **77.8%** ✅ |
+| Coverage target | 70% |
+
+Run the test suite:
+
+```powershell
+mvn test
+```
+
+If the application context test requires a running MySQL instance, run:
 
 ```powershell
 mvn test "-Dtest=!ASWalletApplicationTests"
 ```
 
-### Unit tests — Services (12 classes)
+### Test Categories
 
-`TransactionServiceImplTest`, `UserServiceImplTest`, `WalletServiceImplTest`,
-`BankCardServiceImplTest`, `PasswordResetServiceImplTest`, `PendingTransferProcessingServiceTest`,
-`AdminRiskReviewServiceImplTest`, `AdminServiceImplTest`, `AdminMailboxServiceImplTest`, 
-`UserProfileDetailsServiceImplTest`, `WithdrawDailyLimitServiceImplTest`, `AdminDashboardServiceImplTest`
-
-### WebMvc tests — Controllers (13 classes)
-
-`UserControllerWebMvcTest`, `PasswordResetControllerWebMvcTest`, `ProfileControllerWebMvcTest`,
-`WalletControllerWebMvcTest`, `WalletMailboxControllerWebMvcTest`, `AdminControllerWebMvcTest`,
-`AdminRiskReviewControllerWebMvcTest`, `AdminMailboxControllerWebMvcTest`,
-`TransactionControllerDepositWebMvcTest`, `TransactionControllerWithdrawWebMvcTest`,
-`TransactionControllerTransferWebMvcTest`, `LegalPagesControllerWebMvcTest`,
-`TransactionHistoryControllerWebMvcTest`
-
-### Other
-
-`GlobalExceptionHandlerTest`, optional `ASWalletApplicationTests` (needs live MySQL)
+- Service unit tests with Mockito
+- Spring MVC controller tests with MockMvc
+- Security and authorization tests
+- Risk-review workflow tests
+- Transaction flow tests
+- Global exception-handler tests
+- Legal-page tests
+- Transaction history and pagination tests
 
 ---
 
-## For Examiners / Reviewers
+## For Examiners and Reviewers
 
-**5-min demo:** Register → card + bonus → deposit → transfer (trigger risk review) → history pagination → admin risk reviews → PDF export → privacy/terms.
+### Suggested Five-Minute Demonstration
 
-**Test card:** `4111 1111 1111 1111` · future expiry · CVC `123`
+1. Register a new user
+2. Add a bank card and receive the welcome bonus
+3. Make a deposit
+4. Create a transfer that triggers risk review
+5. Open the paginated transaction history
+6. Log in as administrator
+7. Approve or reject the risk review
+8. Export the transaction history as PDF
+9. Open the Privacy Policy and Terms of Service
 
-**Admin:** `admin` / `admin123` (or `ADMIN_PASSWORD`)
+### Test Card
 
-| Issue | Fix |
-|-------|-----|
-| Risk review empty | Start svc on `:8081` |
-| Transfer blocked | Receiver needs card, or score ≥ 70 |
-| Phone can't connect | Use LAN IP for both apps |
+```text
+Card number: 4111 1111 1111 1111
+Expiration:  Any future date
+CVC:         123
+```
+
+### Administrator
+
+```text
+Username: admin
+Password: ADMIN_PASSWORD environment variable
+```
+
+### Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| Risk-review list is empty | Start the risk microservice on port `8081` |
+| Transfer is blocked unexpectedly | Verify the receiver has a card and inspect the risk score |
+| Microservice returns `401` | Ensure both applications use the same API key |
+| Phone cannot connect | Use the computer's LAN IP instead of `localhost` |
+| Email cannot be sent | Verify `MAIL_PASSWORD` and the SMTP configuration |
+| Application cannot connect to MySQL | Verify the databases and `DB_PASSWORD` |
 
 ---
 
 ## Version History
 
-### v2.0.2 (current)
+### v2.0.2 — Current
 
-- Risk review **history** (`/manual-reviews`, status chips, Delete all)
-- Transaction history **pagination**
-- **Privacy Policy** + **Terms of Service**
-- Feign: `listManualReviews`, `deleteManualReviews`, `decision` filter
-- Tests: `LegalPagesControllerWebMvcTest`, `TransactionHistoryControllerWebMvcTest`
-- `PENDING_RISK_REVIEW` end-to-end flow
-- Admin risk UI, Feign PATCH/DELETE extensions
+- Added risk-review history and status indicators
+- Added manual review approval and rejection
+- Added deletion of risk-review history
+- Added `PENDING_RISK_REVIEW` transfer flow
+- Added transaction history pagination
+- Added Privacy Policy and Terms of Service
+- Added the Payments page
+- Added outgoing transfer information
+- Extended the Feign client with PATCH and DELETE operations
+- Added controller tests for legal pages and transaction history
+- Improved the wallet balance card and IBAN visibility control
+- Improved the quick-action button design
 
 ---
 
 ## Author
 
-Developed by **AStoyanoff®**
+Developed by **Andrey Stoyanov**
+
+GitHub: [AStoyan0ff](https://github.com/AStoyan0ff)
+
+<p align="center">
+  <strong>ASWallet-Vol.2 — Your money, your control.</strong>
+</p>
