@@ -424,7 +424,6 @@ Service-to-service communication is protected with the `X-API-Key` header.
 | Variable | Purpose                                                                      |
 |----------|------------------------------------------------------------------------------|
 | `RISK_SERVICE_API_KEY` | **Overrides the default development API key used between both applications** |
-```
 
 ---
 
@@ -437,6 +436,8 @@ Service-to-service communication is protected with the `X-API-Key` header.
 | `processPendingTransfers` | Configurable cron | Complete pending transfers |
 | `cancelStalePendingTransfers` | Fixed delay | Cancel expired pending transfers |
 | `PasswordResetTokenCleanupScheduler` | Configurable cron | Delete expired reset tokens |
+
+---
 
 ### Application Caches
 
