@@ -417,10 +417,13 @@ Service-to-service communication is protected with the `X-API-Key` header.
 | Main application | `app.risk-service.api-key` |
 | Risk microservice | `app.security.api-key` |
 
-Both applications must use the same value:
+---
 
-```powershell
-$env:RISK_SERVICE_API_KEY = "your-secure-api-key"
+### Optional Environment Variables
+
+| Variable | Purpose                                                                      |
+|----------|------------------------------------------------------------------------------|
+| `RISK_SERVICE_API_KEY` | **Overrides the default development API key used between both applications** |
 ```
 
 ---
