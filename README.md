@@ -78,7 +78,7 @@
 | Thymeleaf fragments | **4**      | reusable partials                              |
 | HTML templates total | **37**     | pages + fragments                              |
 | CSS files | **16**     | `static/css/`                                  |
-| JavaScript files | **16**     | `static/js/`                                   |
+| JavaScript files | **17**     | `static/js/`                                   |
 | Test classes | **26**     | **272 +-** test methods (excl. optional smoke) |
 | Line coverage (JaCoCo) | **77% ++** | target 70% ✅                                   |
 
@@ -164,17 +164,17 @@ AdminMailboxMessage → User (recipient)
 
 ### Entities (9)
 
-| Entity | Table | Type | Purpose |
-|--------|-------|------|---------|
-| `User` | `users` | Domain | Account, BCrypt password, role |
-| `Wallet` | `wallets` | Domain | Balance (EUR) |
-| `Transaction` | `transactions` | Domain | Deposit / withdraw / transfer |
-| `BankCard` | `bank_cards` | Domain | Card metadata, IBAN |
+| Entity | Table | Type | Purpose                                |
+|--------|-------|------|----------------------------------------|
+| `User` | `users` | Domain | Account, BCrypt password, role         |
+| `Wallet` | `wallets` | Domain | Balance (EUR)                          |
+| `Transaction` | `transactions` | Domain | Deposit / withdraw / transfer          |
+| `BankCard` | `bank_cards` | Domain | Card metadata, IBAN                    |
 | `UserProfileDetails` | `user_profile_details` | Domain | Profile, status, settings, daily limit |
-| `AdminMailboxMessage` | `admin_mailbox_messages` | Domain | Admin ↔ user messaging |
-| `PasswordResetToken` | `password_reset_tokens` | Technical | Forgot-password tokens |
-| `LoginActivity` | `login_activity` | Technical | Login audit |
-| `BaseClass` | — | Mapped superclass | UUID `id` |
+| `AdminMailboxMessage` | `admin_mailbox_messages` | Domain | Admin <-> user messaging               |
+| `PasswordResetToken` | `password_reset_tokens` | Technical | Forgot-password tokens                 |
+| `LoginActivity` | `login_activity` | Technical | Login audit                            |
+| `BaseClass` | — | Mapped superclass | UUID `id`                              |
 
 ### Enums (8)
 
@@ -371,7 +371,7 @@ SMTP: `smtp.abv.bg:465` — requires `MAIL_PASSWORD`.
 
 ## Frontend Assets
 
-### CSS — 16 files (`static/css/`)
+### CSS - 16 files (`static/css/`)
 
 Entry: `style.css` imports the rest in cascade order.
 
@@ -394,7 +394,7 @@ Entry: `style.css` imports the rest in cascade order.
 | `pages/contact-us.css` | Contact page |
 | `pages/legal-pages.css` | Privacy Policy, Terms of Service |
 
-### JavaScript — 16 files (`static/js/`)
+### JavaScript - 17 files (`static/js/`)
 
 | File | Used on | Purpose |
 |------|---------|---------|
@@ -470,16 +470,17 @@ User-uploaded avatars: `uploads/avatars/` (gitignored).
 | `AdminMailboxController` | Admin messaging |
 | `AdminRiskReviewController` | Risk review approve/reject/clear |
 
-### Service interfaces (15)
+### Service interfaces (16)
 
-`AdminMailboxService`, `AdminRiskReviewService`, `AdminService`, `AvatarStorageService`,
+`AdminMailboxService`, `AdminDashboardService`, `AdminRiskReviewService`, `AdminService`, 
 `BankCardService`, `EmailService`, `LoginActivityService`, `PasswordResetService`,
 `TransactionExportService`, `TransactionService`, `TransferRiskAssessmentService`,
-`UserProfileDetailsService`, `UserService`, `WalletService`, `WithdrawDailyLimitService`
+`UserProfileDetailsService`, `UserService`, `WalletService`, `WithdrawDailyLimitService`,
+`AvatarStorageService`
 
-### Service implementations (20)
+### Service implementations (21)
 
-`AdminMailboxServiceImpl`, `AdminRiskReviewServiceImpl`, `AdminServiceImpl`,
+`AdminMailboxServiceImpl`, `AdminDashboardServiceImpl` , `AdminRiskReviewServiceImpl`, `AdminServiceImpl`,
 `ApplicationCacheEviction`, `AppUserDetailsService`, `AvatarStorageServiceImpl`,
 `BankCardServiceImpl`, `EmailServiceImpl`, `LoginActivityServiceImpl`,
 `PasswordResetServiceImpl`, `PendingTransferProcessingService`, `TransactionExportServiceImpl`,
@@ -513,9 +514,9 @@ User-uploaded avatars: `uploads/avatars/` (gitignored).
 | `Utils/` | 5 | IBAN, card validation, IP, dates, patterns |
 | `GlobalExceptionHandler/` | 1 | Central error handling |
 
-### DTOs (27)
+### DTOs (28)
 
-`AdminRecipientOptionDTO`, `AdminRiskAssessmentViewDTO`, `AdminSendMessageRequest`,
+`AdminRecipientOptionDTO`, `AdminDashboardSummaryDTO` , `AdminRiskAssessmentViewDTO`, `AdminSendMessageRequest`,
 `AdminUserViewDTO`, `BankCardRequest`, `BankCardViewDTO`, `ChangePasswordRequest`,
 `DailyLimitEditRequest`, `DeleteAccountRequest`, `DepositMoneyDTO`, `ForgotPasswordRequest`,
 `LoginActivityViewDTO`, `LoginDTO`, `MailboxMessageViewDTO`, `ProfileEditRequest`,
@@ -555,22 +556,22 @@ mvn spring-boot:run
 
 ## Testing & Coverage
 
-| Metric | Value |
-|--------|-------|
-| Test classes | **26** |
+| Metric | Value                                                |
+|--------|------------------------------------------------------|
+| Test classes | **26**                                               |
 | Test methods | **~272** (excl. optional `ASWalletApplicationTests`) |
-| Line coverage | **~77%** JaCoCo ✅ |
+| Line coverage | **77.8%** JaCoCo ✅                                   |
 
 ```powershell
 mvn test "-Dtest=!ASWalletApplicationTests"
 ```
 
-### Unit tests — Services (11 classes)
+### Unit tests — Services (12 classes)
 
 `TransactionServiceImplTest`, `UserServiceImplTest`, `WalletServiceImplTest`,
 `BankCardServiceImplTest`, `PasswordResetServiceImplTest`, `PendingTransferProcessingServiceTest`,
-`AdminRiskReviewServiceImplTest`, `AdminServiceImplTest`, `AdminMailboxServiceImplTest`,
-`UserProfileDetailsServiceImplTest`, `WithdrawDailyLimitServiceImplTest`
+`AdminRiskReviewServiceImplTest`, `AdminServiceImplTest`, `AdminMailboxServiceImplTest`, 
+`UserProfileDetailsServiceImplTest`, `WithdrawDailyLimitServiceImplTest`, `AdminDashboardServiceImplTest`
 
 ### WebMvc tests — Controllers (13 classes)
 
@@ -600,23 +601,6 @@ mvn test "-Dtest=!ASWalletApplicationTests"
 | Risk review empty | Start svc on `:8081` |
 | Transfer blocked | Receiver needs card, or score ≥ 70 |
 | Phone can't connect | Use LAN IP for both apps |
-
----
-
-## Spring Advanced Assignment
-
-| Requirement | Status |
-|-------------|--------|
-| ≥ 3 domain entities | ✅ |
-| ≥ 10 web pages | ✅ 33 |
-| ≥ 6 functionalities | ✅ 8+ |
-| Spring Security + 2 roles | ✅ main app |
-| REST microservice + Feign | ✅ |
-| Separate MS database | ✅ |
-| Scheduling + caching | ✅ |
-| Validation + error handling | ✅ |
-| 70% coverage (both apps) | ✅ |
-| PDF export (bonus) | ✅ |
 
 ---
 

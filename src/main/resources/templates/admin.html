@@ -28,6 +28,56 @@
         <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
         <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
+        <section class="admin-dashboard-summary auth-stagger"
+                 aria-label="Today overview"
+                 th:if="${dashboard != null}"
+                 id="adminDashboardSummary">
+            <h3 class="wallet-quick-actions-title">Today at a glance</h3>
+
+            <div class="admin-kpi-row">
+                <a class="admin-kpi-card admin-kpi-card--link" th:href="@{/admin/risk-reviews}">
+                    <span class="admin-kpi-card__label">Risk pending</span>
+                    <span class="admin-kpi-card__value" th:text="${dashboard.pendingRiskReviews}">0</span>
+                </a>
+                <div class="admin-kpi-card">
+                    <span class="admin-kpi-card__label">Transfers today</span>
+                    <span class="admin-kpi-card__value" th:text="${dashboard.transfersToday}">0</span>
+                </div>
+                <a class="admin-kpi-card admin-kpi-card--link" th:href="@{/admin/messages/inbox}">
+                    <span class="admin-kpi-card__label">Inbox unread</span>
+                    <span class="admin-kpi-card__value" th:text="${dashboard.unreadInbox}">0</span>
+                </a>
+                <div class="admin-kpi-card">
+                    <span class="admin-kpi-card__label">Active users</span>
+                    <span class="admin-kpi-card__value" th:text="${dashboard.activeUsers}">0</span>
+                </div>
+            </div>
+
+            <div class="admin-chart-row">
+                <div class="admin-chart-card">
+                    <h4 class="admin-chart-card__title">Transfers today by status</h4>
+                    <div class="admin-chart-card__canvas-wrap">
+                        <canvas id="adminTodayStatusChart" aria-label="Transfers today by status"></canvas>
+                    </div>
+                </div>
+                <div class="admin-chart-card">
+                    <h4 class="admin-chart-card__title">Transfers — last 7 days</h4>
+                    <div class="admin-chart-card__canvas-wrap">
+                        <canvas id="adminWeekTransfersChart" aria-label="Transfers last 7 days"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <script th:inline="javascript">
+                window.adminDashboardChartData = {
+                    todayLabels: /*[[${dashboard.todayStatusLabels}]]*/ [],
+                    todayCounts: /*[[${dashboard.todayStatusCounts}]]*/ [],
+                    weekLabels: /*[[${dashboard.last7DaysLabels}]]*/ [],
+                    weekCounts: /*[[${dashboard.last7DaysCounts}]]*/ []
+                };
+            </script>
+        </section>
+
         <section class="admin-tools-section auth-stagger" aria-label="Admin tools">
             <h3 class="wallet-quick-actions-title">Admin Tools</h3>
             <div class="wallet-quick-actions-grid admin-tools-grid wallet-quick-actions-grid--elevated">
@@ -153,6 +203,8 @@
 
 <footer th:replace="~{fragments/app-footer :: footer}"></footer>
 <script th:src="@{/js/home.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script th:src="@{/js/admin-dashboard.js}"></script>
 <script th:src="@{/js/admin.js}"></script>
 </body>
 </html>

@@ -93,4 +93,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
             @Param("walletId") UUID walletId,
             @Param("statuses") Collection<TransactionStatus> statuses
     );
+
+    long countByTypeAndCreatedAtGreaterThanEqualAndCreatedAtLessThan(
+            TransactionType type,
+            LocalDateTime startInclusive,
+            LocalDateTime endExclusive
+    );
+
+    long countByTypeAndStatusAndCreatedAtGreaterThanEqualAndCreatedAtLessThan(
+            TransactionType type,
+            TransactionStatus status,
+            LocalDateTime startInclusive,
+            LocalDateTime endExclusive
+    );
 }

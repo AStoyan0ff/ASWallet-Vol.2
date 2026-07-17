@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-// Advanced — backfill mailbox direction flags and admin recipients for existing rows
 @Component
 public class SupportMailboxBackfillConfig implements ApplicationRunner {
 

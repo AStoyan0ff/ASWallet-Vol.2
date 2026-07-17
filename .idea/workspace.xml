@@ -7,14 +7,19 @@
     <list default="true" id="1e92d6cb-76b7-4a14-8db7-2f775e898801" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Clients/RiskAssessmentClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/WalletController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/transactions.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wallet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/TransactionControllerTransferWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/TransactionControllerTransferWebMvcTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/WalletControllerWebMvcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Configuration/SupportMailboxBackfillConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Configuration/SupportMailboxBackfillConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/GlobalExceptionHandler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/TransactionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/UserProfileDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Repositories/UserProfileDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/PendingTransferProcessingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Services/Impl/TransferRiskAssessmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ClientIpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ClientIpUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/IbanGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/IbanGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ValidationPatterns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/STARTER/Utils/ValidationPatterns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/pages/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/STARTER/Controllers/AdminControllerWebMvcTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="304" />
+    <option name="cachedIndexableFilesCount" value="305" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -64,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000007964019006" />
-      <entry key="MS500" value="1.0602873865365086" />
-      <entry key="S2" value="1.4955147816320395" />
-      <entry key="S5" value="1.7551316020567889" />
-      <entry key="S10" value="1.8689830850234395" />
-      <entry key="S30" value="1.9543394469944968" />
-      <entry key="S60" value="1.9953853312327787" />
-      <entry key="M2" value="2.356608997320487" />
-      <entry key="M5" value="4.69293658086862" />
-      <entry key="M10" value="7.5681298609929675" />
-      <entry key="M15" value="9.15636027567896" />
-      <entry key="M30" value="11.244429250399278" />
-      <entry key="H1" value="12.61408466297731" />
-      <entry key="H2" value="15.20463490485632" />
-      <entry key="H4" value="29.72920059996868" />
-      <entry key="D1" value="255.74979412086276" />
-      <entry key="W1" value="671.3486157178444" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000347289988345" />
+      <entry key="S5" value="1.0164912475989598" />
+      <entry key="S10" value="1.1343720098425794" />
+      <entry key="S30" value="1.727270921938457" />
+      <entry key="S60" value="2.5132483648226023" />
+      <entry key="M2" value="3.848049238130392" />
+      <entry key="M5" value="7.09403005222766" />
+      <entry key="M10" value="11.288606203573227" />
+      <entry key="M15" value="14.084721814247331" />
+      <entry key="M30" value="18.33943820506081" />
+      <entry key="H1" value="21.364607704753944" />
+      <entry key="H2" value="24.87310029782189" />
+      <entry key="H4" value="39.5643541520177" />
+      <entry key="D1" value="265.26805176728226" />
+      <entry key="W1" value="681.7980717597541" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="7.16632148764764E-261" />
-      <entry key="S2" value="9.200767826212265E-66" />
-      <entry key="S5" value="9.672297113520914E-27" />
-      <entry key="S10" value="9.83478373606706E-14" />
-      <entry key="S30" value="4.6158845518379745E-5" />
-      <entry key="S60" value="0.006794030138171286" />
-      <entry key="M2" value="0.08242590695995577" />
-      <entry key="M5" value="0.36848981948119053" />
-      <entry key="M10" value="0.6070336234272471" />
-      <entry key="M15" value="0.7169279226313934" />
-      <entry key="M30" value="0.8474555269216093" />
-      <entry key="H1" value="0.9496040502116765" />
-      <entry key="H2" value="1.2430879611935846" />
-      <entry key="H4" value="2.472247977810247" />
-      <entry key="D1" value="47.278678347651784" />
-      <entry key="W1" value="138.30326126948378" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.0000917218752552E-172" />
+      <entry key="S5" value="1.5849513386114603E-69" />
+      <entry key="S10" value="3.981144733128227E-35" />
+      <entry key="S30" value="3.4145697521950125E-12" />
+      <entry key="S60" value="1.847855446780135E-6" />
+      <entry key="M2" value="0.0013593584688301075" />
+      <entry key="M5" value="0.07134008112808532" />
+      <entry key="M10" value="0.2670956405914447" />
+      <entry key="M15" value="0.4147421714301361" />
+      <entry key="M30" value="0.6445672970623828" />
+      <entry key="H1" value="0.8281675959989994" />
+      <entry key="H2" value="1.160886332731181" />
+      <entry key="H4" value="2.3891089167191155" />
+      <entry key="D1" value="47.00989855773226" />
+      <entry key="W1" value="138.19066442070104" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.840897071163166" />
-      <entry key="MS500" value="1.023928421204301" />
-      <entry key="S2" value="1.4821026193894016" />
-      <entry key="S5" value="1.7487464092084641" />
-      <entry key="S10" value="1.8655668202933968" />
-      <entry key="S30" value="1.9531848291768956" />
-      <entry key="S60" value="2.0010939585643928" />
-      <entry key="M2" value="2.4356546370901095" />
-      <entry key="M5" value="5.055471368717576" />
-      <entry key="M10" value="8.17015116714685" />
-      <entry key="M15" value="9.869301859692845" />
-      <entry key="M30" value="12.089502085203435" />
-      <entry key="H1" value="13.562357678174802" />
-      <entry key="H2" value="16.446757434176998" />
-      <entry key="H4" value="32.200052620201056" />
-      <entry key="D1" value="303.02389086040034" />
-      <entry key="W1" value="809.6501628145487" />
+      <entry key="MS100" value="0.8066417592221263" />
+      <entry key="MS500" value="0.9579352182226964" />
+      <entry key="S2" value="0.9893480134875448" />
+      <entry key="S5" value="1.0121186048062292" />
+      <entry key="S10" value="1.1318830758461937" />
+      <entry key="S30" value="1.7259554761876794" />
+      <entry key="S60" value="2.5122633656761777" />
+      <entry key="M2" value="3.848116391445364" />
+      <entry key="M5" value="7.16164743867343" />
+      <entry key="M10" value="11.550895792860858" />
+      <entry key="M15" value="14.494944708788735" />
+      <entry key="M30" value="18.98077584856553" />
+      <entry key="H1" value="22.19081152641234" />
+      <entry key="H2" value="26.03265759321301" />
+      <entry key="H4" value="41.95189351545223" />
+      <entry key="D1" value="312.273357031147" />
+      <entry key="W1" value="819.9870179886411" />
     </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
@@ -132,84 +137,85 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ASAWalletApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AsWalletApplication.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JUnit.AdminControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AdminMailboxControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AdminMailboxServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AdminRiskReviewControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AdminRiskReviewServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.AdminServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.BankCardServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.GlobalExceptionHandlerTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.PasswordResetControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.PasswordResetServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.PendingTransferProcessingServiceTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.ProfileControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionControllerDepositWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionControllerTransferWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionControllerWithdrawWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionServiceImplTest.deposit_increaseBalance_andSavesCompletedTransaction.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.deposit_increasesBalance_andSavesCompletedTransaction.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionServiceImplTest.deposit_walletNotFound_throwsAndSavesNothing.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.TransactionServiceImplTest.grantWelcomeBonus_addsFiftyEuros_andCreatesCompletedDepositTransaction.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_insufficientBalance_throwsInsufficientBalanceException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_receiverUserNotFound_throwsUserNotFoundException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_receiverWalletNotFound_throwsReceiverNotFoundException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_receiverWithoutBankCard_throwsReceiverBankCardNotFoundException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_success_persistsSenderWalletAndSetsDescriptionWithCardMask.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_success_setsPendingStatus_andDeductsSenderImmediately.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.transfer_toSelf_throwsNotTransferMoneyYourselfException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.withdrawSuccess_decreasesBalance_checksDailyLimit.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.withdraw_exceedsDailyLimit_throwsAndLeavesBalanceUnchanged.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TransactionServiceImplTest.withdraw_insufficientBalance_throwsBeforeCheckingDailyLimit.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.UserControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.UserProfileDetailsServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.UserServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.WalletControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.WalletMailboxControllerWebMvcTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.WalletServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.WithdrawDailyLimitServiceImplTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ASWalletApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AsWalletApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/ASWallet-Vol.2/src/main/resources/static/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JAVA&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ASAWalletApplication.executor": "Run",
+    "Application.AsWalletApplication.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JUnit.AdminControllerWebMvcTest.executor": "Run",
+    "JUnit.AdminDashboardServiceImplTest.executor": "Run",
+    "JUnit.AdminMailboxControllerWebMvcTest.executor": "Coverage",
+    "JUnit.AdminMailboxServiceImplTest.executor": "Coverage",
+    "JUnit.AdminRiskReviewControllerWebMvcTest.executor": "Coverage",
+    "JUnit.AdminRiskReviewServiceImplTest.executor": "Coverage",
+    "JUnit.AdminServiceImplTest.executor": "Coverage",
+    "JUnit.BankCardServiceImplTest.executor": "Coverage",
+    "JUnit.GlobalExceptionHandlerTest.executor": "Coverage",
+    "JUnit.PasswordResetControllerWebMvcTest.executor": "Coverage",
+    "JUnit.PasswordResetServiceImplTest.executor": "Coverage",
+    "JUnit.PendingTransferProcessingServiceTest.executor": "Coverage",
+    "JUnit.ProfileControllerWebMvcTest.executor": "Coverage",
+    "JUnit.TransactionControllerDepositWebMvcTest.executor": "Coverage",
+    "JUnit.TransactionControllerTransferWebMvcTest.executor": "Coverage",
+    "JUnit.TransactionControllerWithdrawWebMvcTest.executor": "Coverage",
+    "JUnit.TransactionServiceImplTest.deposit_increaseBalance_andSavesCompletedTransaction.executor": "Run",
+    "JUnit.TransactionServiceImplTest.deposit_increasesBalance_andSavesCompletedTransaction.executor": "Coverage",
+    "JUnit.TransactionServiceImplTest.deposit_walletNotFound_throwsAndSavesNothing.executor": "Run",
+    "JUnit.TransactionServiceImplTest.executor": "Coverage",
+    "JUnit.TransactionServiceImplTest.grantWelcomeBonus_addsFiftyEuros_andCreatesCompletedDepositTransaction.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_insufficientBalance_throwsInsufficientBalanceException.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_receiverUserNotFound_throwsUserNotFoundException.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_receiverWalletNotFound_throwsReceiverNotFoundException.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_receiverWithoutBankCard_throwsReceiverBankCardNotFoundException.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_success_persistsSenderWalletAndSetsDescriptionWithCardMask.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_success_setsPendingStatus_andDeductsSenderImmediately.executor": "Run",
+    "JUnit.TransactionServiceImplTest.transfer_toSelf_throwsNotTransferMoneyYourselfException.executor": "Run",
+    "JUnit.TransactionServiceImplTest.withdrawSuccess_decreasesBalance_checksDailyLimit.executor": "Run",
+    "JUnit.TransactionServiceImplTest.withdraw_exceedsDailyLimit_throwsAndLeavesBalanceUnchanged.executor": "Run",
+    "JUnit.TransactionServiceImplTest.withdraw_insufficientBalance_throwsBeforeCheckingDailyLimit.executor": "Coverage",
+    "JUnit.UserControllerWebMvcTest.executor": "Coverage",
+    "JUnit.UserProfileDetailsServiceImplTest.executor": "Coverage",
+    "JUnit.UserServiceImplTest.executor": "Coverage",
+    "JUnit.WalletControllerWebMvcTest.executor": "Coverage",
+    "JUnit.WalletMailboxControllerWebMvcTest.executor": "Coverage",
+    "JUnit.WalletServiceImplTest.executor": "Coverage",
+    "JUnit.WithdrawDailyLimitServiceImplTest.executor": "Coverage",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.ASWalletApplication.executor": "Run",
+    "Spring Boot.AsWalletApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Projects/ASWallet-Vol.2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JAVA",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\ASWallet-Vol.2\src\main\resources\static\images" />
@@ -221,8 +227,8 @@
       <recent name="D:\Projects\ASWallet" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ASWalletApplication">
-    <configuration name="AdminRiskReviewControllerWebMvcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.AdminDashboardServiceImplTest">
+    <configuration name="AdminControllerWebMvcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ASWallet-Vol.2" />
       <extension name="coverage">
         <pattern>
@@ -231,7 +237,22 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="STARTER.Controllers" />
-      <option name="MAIN_CLASS_NAME" value="STARTER.Controllers.AdminRiskReviewControllerWebMvcTest" />
+      <option name="MAIN_CLASS_NAME" value="STARTER.Controllers.AdminControllerWebMvcTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminDashboardServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ASWallet-Vol.2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="STARTER.Services.Impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="STARTER.Services.Impl" />
+      <option name="MAIN_CLASS_NAME" value="STARTER.Services.Impl.AdminDashboardServiceImplTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -267,21 +288,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProfileControllerWebMvcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ASWallet-Vol.2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="STARTER.Controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="STARTER.Controllers" />
-      <option name="MAIN_CLASS_NAME" value="STARTER.Controllers.ProfileControllerWebMvcTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TransactionServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ASWallet-Vol.2" />
       <extension name="coverage">
@@ -309,20 +315,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.AdminRiskReviewControllerWebMvcTest" />
+      <item itemvalue="JUnit.AdminControllerWebMvcTest" />
+      <item itemvalue="JUnit.AdminDashboardServiceImplTest" />
       <item itemvalue="JUnit.AdminRiskReviewServiceImplTest" />
       <item itemvalue="JUnit.PendingTransferProcessingServiceTest" />
       <item itemvalue="JUnit.TransactionServiceImplTest" />
-      <item itemvalue="JUnit.ProfileControllerWebMvcTest" />
       <item itemvalue="Spring Boot.ASWalletApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AdminDashboardServiceImplTest" />
+        <item itemvalue="JUnit.AdminControllerWebMvcTest" />
         <item itemvalue="JUnit.TransactionServiceImplTest" />
         <item itemvalue="JUnit.PendingTransferProcessingServiceTest" />
         <item itemvalue="JUnit.AdminRiskReviewServiceImplTest" />
-        <item itemvalue="JUnit.AdminRiskReviewControllerWebMvcTest" />
-        <item itemvalue="JUnit.ProfileControllerWebMvcTest" />
       </list>
     </recent_temporary>
   </component>
@@ -436,7 +442,10 @@
       <workItem from="1783988201981" duration="1238000" />
       <workItem from="1784048431828" duration="2606000" />
       <workItem from="1784117330137" duration="3778000" />
-      <workItem from="1784156400257" duration="1923000" />
+      <workItem from="1784156400257" duration="2411000" />
+      <workItem from="1784214287529" duration="2588000" />
+      <workItem from="1784217548643" duration="8039000" />
+      <workItem from="1784303838878" duration="5908000" />
     </task>
     <servers />
   </component>

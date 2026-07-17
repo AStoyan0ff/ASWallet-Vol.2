@@ -1,8 +1,10 @@
 package STARTER.Controllers;
 
+import STARTER.DTOs.AdminDashboardSummaryDTO;
 import STARTER.DTOs.AdminUserViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
+import STARTER.Services.Interface.AdminDashboardService;
 import STARTER.Services.Interface.AdminMailboxService;
 import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.AdminService;
@@ -27,31 +29,33 @@ public class AdminController {
     private final AdminMailboxService adminMailboxService;
     private final LoginActivityService loginActivityService;
     private final AdminRiskReviewService adminRiskReviewService;
+    private final AdminDashboardService adminDashboardService;
 
     @Value("${app.admin.username:admin}")
     private String primaryAdminUsername;
 
     public AdminController(
-
             AdminService adminService,
             AdminMailboxService adminMailboxService,
             LoginActivityService loginActivityService,
-            AdminRiskReviewService adminRiskReviewService
-
+            AdminRiskReviewService adminRiskReviewService,
+            AdminDashboardService adminDashboardService
     ) {
-
         this.adminService = adminService;
         this.adminMailboxService = adminMailboxService;
         this.loginActivityService = loginActivityService;
         this.adminRiskReviewService = adminRiskReviewService;
+        this.adminDashboardService = adminDashboardService;
     }
 
     @GetMapping
     public String dashboard(Model model, Principal principal) {
+        AdminDashboardSummaryDTO dashboard = adminDashboardService.getSummary();
 
         model.addAttribute("users", adminService.getAllUsers());
-        model.addAttribute("adminInboxUnreadCount", adminMailboxService.countUnreadForAdminInbox());
-        model.addAttribute("pendingRiskReviewCount", adminRiskReviewService.countPendingReviews());
+        model.addAttribute("dashboard", dashboard);
+        model.addAttribute("adminInboxUnreadCount", dashboard.getUnreadInbox());
+        model.addAttribute("pendingRiskReviewCount", dashboard.getPendingRiskReviews());
         addAdminContext(model, principal);
 
         return "admin";

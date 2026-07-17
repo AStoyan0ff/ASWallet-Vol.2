@@ -1,9 +1,11 @@
 package STARTER.Controllers;
 
+import STARTER.DTOs.AdminDashboardSummaryDTO;
 import STARTER.DTOs.AdminUserViewDTO;
 import STARTER.DTOs.LoginActivityViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
+import STARTER.Services.Interface.AdminDashboardService;
 import STARTER.Services.Interface.AdminMailboxService;
 import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.AdminService;
@@ -50,6 +52,9 @@ class AdminControllerWebMvcTest {
     @MockitoBean
     private AdminRiskReviewService adminRiskReviewService;
 
+    @MockitoBean
+    private AdminDashboardService adminDashboardService;
+
     private UUID targetUserId;
     private AdminUserViewDTO manageableUser;
 
@@ -69,12 +74,35 @@ class AdminControllerWebMvcTest {
                 .build();
 
         when(adminRiskReviewService.countPendingReviews()).thenReturn(0L);
+        when(adminDashboardService.getSummary()).thenReturn(
+                AdminDashboardSummaryDTO.builder()
+                        .pendingRiskReviews(0L)
+                        .transfersToday(0L)
+                        .unreadInbox(0L)
+                        .activeUsers(0L)
+                        .todayStatusLabels(List.of("Pending", "Risk hold", "Completed", "Failed", "Cancelled"))
+                        .todayStatusCounts(List.of(0L, 0L, 0L, 0L, 0L))
+                        .last7DaysLabels(List.of("a", "b", "c", "d", "e", "f", "g"))
+                        .last7DaysCounts(List.of(0L, 0L, 0L, 0L, 0L, 0L, 0L))
+                        .build()
+        );
     }
 
     @Test
     void getDashboard_returnsAdminViewWithUsersAndContext() throws Exception {
         when(adminService.getAllUsers()).thenReturn(List.of(manageableUser));
-        when(adminMailboxService.countUnreadForAdminInbox()).thenReturn(3L);
+        when(adminDashboardService.getSummary()).thenReturn(
+                AdminDashboardSummaryDTO.builder()
+                        .pendingRiskReviews(1L)
+                        .transfersToday(4L)
+                        .unreadInbox(3L)
+                        .activeUsers(8L)
+                        .todayStatusLabels(List.of("Pending", "Risk hold", "Completed", "Failed", "Cancelled"))
+                        .todayStatusCounts(List.of(1L, 0L, 3L, 0L, 0L))
+                        .last7DaysLabels(List.of("a", "b", "c", "d", "e", "f", "g"))
+                        .last7DaysCounts(List.of(0L, 1L, 0L, 2L, 0L, 0L, 4L))
+                        .build()
+        );
 
         mockMvc.perform(get("/admin")
                         .with(csrf())
@@ -82,7 +110,9 @@ class AdminControllerWebMvcTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("admin"))
                 .andExpect(model().attributeExists("users"))
+                .andExpect(model().attributeExists("dashboard"))
                 .andExpect(model().attribute("adminInboxUnreadCount", 3L))
+                .andExpect(model().attribute("pendingRiskReviewCount", 1L))
                 .andExpect(model().attribute("currentUsername", "admin"))
                 .andExpect(model().attribute("primaryAdminUsername", "admin"))
                 .andExpect(model().attribute("isPrimaryAdmin", true));

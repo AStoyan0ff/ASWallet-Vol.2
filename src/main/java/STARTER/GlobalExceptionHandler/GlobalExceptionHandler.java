@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ControllerAdvice
@@ -18,9 +19,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
             UserAlreadyExistsException.class,
-            EmailAlreadyExistsException.class
-    })
+            EmailAlreadyExistsException.class})
+
     public String handleRegistrationConflict(RuntimeException ex, RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/register";
     }
@@ -39,7 +41,9 @@ public class GlobalExceptionHandler {
 
         if (uri.contains("/reset-password")) {
             String token = request.getParameter("token");
+
             if (token != null && !token.isBlank()) {
+
                 redirectAttributes.addFlashAttribute(
                         "resetPasswordRequest",
                         ResetPasswordRequest.builder().token(token).build()
@@ -53,6 +57,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidOrExpiredTokenException.class)
     public String handleInvalidOrExpiredToken(InvalidOrExpiredTokenException ex,
                                               RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/forgot-password";
     }
@@ -61,6 +66,7 @@ public class GlobalExceptionHandler {
     public String handleInsufficientBalance(InsufficientBalanceException ex,
                                               HttpServletRequest request,
                                               RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:" + resolveTransactionRedirect(request);
     }
@@ -68,6 +74,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DailyWithdrawLimitExceededException.class)
     public String handleDailyWithdrawLimitExceeded(DailyWithdrawLimitExceededException ex,
                                                    RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/transactions/withdraw";
     }
@@ -76,18 +83,20 @@ public class GlobalExceptionHandler {
             NotTransferMoneyYourselfException.class,
             SenderNotFoundException.class,
             ReceiverNotFoundException.class,
-            TransferBlockedByRiskException.class
-    })
+            TransferBlockedByRiskException.class})
+
     public String handleTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/transactions/transfer";
     }
 
     @ExceptionHandler({
             CannotCancelTransferException.class,
-            PendingTransferNotFoundException.class
-    })
+            PendingTransferNotFoundException.class})
+
     public String handlePendingTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
         return "redirect:/transactions/history";
     }
@@ -96,6 +105,7 @@ public class GlobalExceptionHandler {
     public String handleUserNotFound(UserNotFoundException ex,
                                      HttpServletRequest request,
                                      RedirectAttributes redirectAttributes) {
+        
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
         String uri = request.getRequestURI();
@@ -207,8 +217,8 @@ public class GlobalExceptionHandler {
         return "redirect:/profile/edit";
     }
 
-    @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
-    public String handleMaxUploadSize(org.springframework.web.multipart.MaxUploadSizeExceededException ex,
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public String handleMaxUploadSize(MaxUploadSizeExceededException ex,
                                       RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("errorMessage", "Avatar file is too large. Maximum size is 2 MB.");

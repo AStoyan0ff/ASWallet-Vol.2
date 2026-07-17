@@ -23,18 +23,12 @@ public class ValidationPatterns {
 
     public static final String EXPIRY_YEAR = "^\\d{2}$";
 
-//    public static final String OPTIONAL_DESCRIPTION =
-//            "^$|^[\\p{L}\\p{N}\\s',.\\-!?()]{1,200}$";
-
-    // Advanced: profile validation patterns (Latin + Cyrillic and other Unicode letters)
     public static final String OPTIONAL_PERSON_NAME =
             "^$|^\\p{L}[\\p{L} '\\- ]{0,49}$";
 
     public static final String OPTIONAL_PHONE =
             "^$|\\+?[0-9]{7,15}$";
 
-//    public static final String OPTIONAL_AVATAR_URL =
-//            "^$|(https?://.+|/images/.+|images/.+)$";
 
     public static final String RESET_TOKEN =
             "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";

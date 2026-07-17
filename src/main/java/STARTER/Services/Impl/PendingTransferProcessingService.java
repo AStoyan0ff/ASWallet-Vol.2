@@ -207,8 +207,9 @@ public class PendingTransferProcessingService {
             return null;
         }
 
-        if (transaction.getStatus() != TransactionStatus.PENDING
-                && transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW) {
+        if (transaction.getStatus() != TransactionStatus.PENDING &&
+            transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW) {
+
             return null;
         }
 
@@ -222,6 +223,7 @@ public class PendingTransferProcessingService {
 
         if (transaction.getType() != TransactionType.TRANSFER ||
             transaction.getStatus() != status) {
+            
                 return null;
         }
 

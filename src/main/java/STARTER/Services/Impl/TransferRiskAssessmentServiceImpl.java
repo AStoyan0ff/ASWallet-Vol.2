@@ -112,17 +112,19 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
 
         if (response.getDecision() == RiskDecision.REVIEW) {
 
-            logger.info(
+            logger.info
+                (
                     "Transfer flagged for manual review: assessmentId={}, transactionRef={}, score={}, reasons={}",
                     response.getId(),
                     response.getTransactionRef(),
                     response.getRiskScore(),
                     response.getReasons()
-            );
+                );
         }
     }
 
-    private RiskAssessmentCreateRequest buildRequest(
+    private RiskAssessmentCreateRequest buildRequest
+        (
             UUID transactionRef,
             User senderUser,
             Wallet senderWallet,
@@ -130,11 +132,14 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
             Wallet receiverWallet,
             TransferMoneyDTO transferMoneyDTO,
             boolean receiverHasBankCard
-    ) {
+        ) {
+
         WithdrawDailyLimitViewDTO limitView = withdrawDailyLimitService.getViewForUsername(senderUser.getUsername());
+
         BigDecimal dailyLimit = limitView.isApplies()
                 ? limitView.getDailyLimit()
                 : withdrawDailyLimitService.defaultDailyLimit();
+
         BigDecimal withdrawnToday = limitView.isApplies()
                 ? limitView.getWithdrawnToday()
                 : BigDecimal.ZERO;
@@ -147,11 +152,12 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         LocalDateTime startOfDay = today.atStartOfDay(dayZoneId).toLocalDateTime();
         LocalDateTime endOfDay = today.plusDays(1).atStartOfDay(dayZoneId).toLocalDateTime();
 
-        long transfersTodayCount = transactionRepository.countTransfersBetween(
+        long transfersTodayCount = transactionRepository.countTransfersBetween
+            (
                 senderWallet.getId(),
                 startOfDay,
                 endOfDay
-        );
+            );
 
         boolean newReceiver = !transactionRepository.existsTransferBetweenSenderAndReceiver(
                 senderWallet.getId(),
@@ -159,6 +165,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         );
 
         RiskAssessmentCreateRequest request = new RiskAssessmentCreateRequest();
+
         request.setTransactionRef(transactionRef);
         request.setSenderUsername(senderUser.getUsername());
         request.setReceiverUsername(receiverUser.getUsername());
@@ -171,6 +178,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         request.setNewReceiver(newReceiver);
         request.setAccountStatus(accountStatus.name());
         request.setHourOfDay(LocalDateTime.now(dayZoneId).getHour());
+
         return request;
     }
 
@@ -190,6 +198,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         RiskAssessmentClientResponse response = new RiskAssessmentClientResponse();
         response.setDecision(RiskDecision.ALLOW);
         response.setRiskScore(0);
+
         return response;
     }
 }

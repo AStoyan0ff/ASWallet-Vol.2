@@ -12,8 +12,7 @@ public class IbanGenerator {
     public static final String COUNTRY_CODE = "BG";
     public static final String BANK_CODE = "ASWL";
     public static final int IBAN_LENGTH = 22;
-//    public static final int ACCOUNT_DIGITS = 14;
-//    public static final String MASKED_DISPLAY = "BG** **** **** **** **** ****";
+
 
     public String generate(UUID userId, Predicate<String> uniquenessCheck) {
 

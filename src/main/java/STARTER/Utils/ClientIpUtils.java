@@ -22,8 +22,8 @@ public class ClientIpUtils {
         return normalize(request.getRemoteAddr());
     }
 
-    // Advanced — readable client IP for login activity (LAN IPv4, local loopback)
     public static String normalize(String ip) {
+
         if (ip == null || ip.isBlank()) {
             return "-";
         }
@@ -31,7 +31,7 @@ public class ClientIpUtils {
         String value = ip.trim();
 
         if ("0:0:0:0:0:0:0:1".equals(value) || "::1".equals(value)) {
-            return "127.0.0.1"; // localhost realpath
+            return "127.0.0.1"; // localhost real path
         }
 
         if (value.regionMatches(true, 0, "::ffff:", 0, 7)) {
