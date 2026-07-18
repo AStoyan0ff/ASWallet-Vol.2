@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     const data = window.adminDashboardChartData;
     const todayCanvas = document.getElementById("adminTodayStatusChart");
     const weekCanvas = document.getElementById("adminWeekTransfersChart");
@@ -10,37 +11,73 @@ document.addEventListener("DOMContentLoaded", () => {
     const textColor = "rgba(255, 244, 225, 0.88)";
     const gridColor = "rgba(255, 236, 190, 0.18)";
 
+    const statusColors = ["#ffb74d", "#e53935", "#66bb6a", "#ff7043", "#90a4ae"];
+
+    const todayLabels = data.todayLabels || [];
     const todayCounts = (data.todayCounts || []).map(Number);
     const weekCounts = (data.weekCounts || []).map(Number);
     const hasTodayData = todayCounts.some((value) => value > 0);
 
+    const todayColors = todayLabels.map((_, index) => statusColors[index % statusColors.length]);
+    const todayValues = hasTodayData
+        ? todayCounts
+        : todayLabels.map(() => 1);
+
     new Chart(todayCanvas, {
         type: "doughnut",
+
         data: {
-            labels: data.todayLabels || [],
+
+            labels: todayLabels,
             datasets: [{
-                data: hasTodayData ? todayCounts : [1],
-                backgroundColor: hasTodayData
-                    ? ["#ffb74d", "#ffd54f", "#81c784", "#e57373", "#b0bec5"]
-                    : ["rgba(255, 255, 255, 0.18)"],
+                data: todayValues,
+                backgroundColor: todayColors,
                 borderWidth: 0,
-                hoverOffset: 4
+                hoverOffset: hasTodayData ? 4 : 0
             }]
         },
         options: {
+
             responsive: true,
             maintainAspectRatio: false,
+            cutout: "58%",
+
             plugins: {
                 legend: {
                     position: "right",
+                    onClick: null,
                     labels: {
-                        color: textColor,
-                        boxWidth: 10,
-                        font: { size: 11 }
+                        color: "#fff4e1",
+                        boxWidth: 12,
+                        boxHeight: 12,
+                        padding: 8,
+                        font: { size: 11 },
+                        generateLabels: function (chart) {
+                            const labels = chart.data.labels || [];
+                            return labels.map(function (label, index) {
+                                const color = statusColors[index % statusColors.length];
+                                return {
+                                    text: label,
+                                    fillStyle: color,
+                                    strokeStyle: color,
+                                    fontColor: "#fff4e1",
+                                    lineWidth: 0,
+                                    hidden: false,
+                                    index: index
+                                };
+                            });
+                        }
                     }
                 },
                 tooltip: {
-                    enabled: hasTodayData
+                    enabled: hasTodayData,
+                    callbacks: {
+                        label: function (context) {
+                            const label = context.label || "";
+                            const value = todayCounts[context.dataIndex] || 0;
+                            return label + ": " + value;
+                        }
+                    }
                 }
             }
         }

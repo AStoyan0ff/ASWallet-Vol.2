@@ -14,7 +14,6 @@
     let canRemove = false;
 
     function setHint(message) {
-
         if (hint) {
             hint.textContent = message;
         }
@@ -30,7 +29,7 @@
         removeBtn.setAttribute("aria-disabled", (!hasSelection || !canRemove).toString());
 
         if (!hasSelection) {
-            setHint("Select a user below, then use Manage or Remove.");
+            setHint("Select a user, then Manage or Remove.");
             return;
         }
 
@@ -43,7 +42,6 @@
 
         if (canRemove) {
             setHint("Selected: " + username + ". Manage or remove this account.");
-
         } else {
             setHint("Selected: " + username + ". You can manage this account.");
         }
@@ -64,7 +62,6 @@
     }
 
     document.querySelectorAll(".admin-user-card[data-user-id]").forEach(function (card) {
-
         card.addEventListener("click", function () {
             selectCard(card);
         });
@@ -85,14 +82,12 @@
         }
 
         const manageUrl = selectedCard.dataset.manageUrl;
-
         if (manageUrl) {
             window.location.href = manageUrl;
         }
     });
 
     removeBtn.addEventListener("click", function () {
-
         if (removeBtn.classList.contains("is-disabled") || !selectedCard || !canRemove || !removeForm) {
             return;
         }
@@ -112,6 +107,63 @@
         removeForm.submit();
     });
 
+    function syncActionButtonWidth() {
+
+        const toolBtn = document.querySelector(".admin-tools-grid--left .wallet-quick-action");
+        const split = document.querySelector(".admin-split");
+
+        if (!toolBtn || !split) {
+            return;
+        }
+
+        const width = Math.round(toolBtn.getBoundingClientRect().width);
+
+        if (width > 0) {
+            split.style.setProperty("--admin-tool-btn-width", width + "px");
+        }
+    }
+
+    function updateUserListScroll() {
+
+        const scroll = document.querySelector(".admin-split__pane--right .admin-user-list-scroll");
+
+        if (!scroll) {
+            return;
+        }
+
+        const list = scroll.querySelector(".admin-user-list");
+        const cards = list ? Array.from(list.querySelectorAll(".admin-user-card[data-user-id]")) : [];
+
+        if (cards.length <= 4) {
+
+            scroll.classList.remove("is-scrollable");
+            scroll.style.maxHeight = "";
+
+            return;
+        }
+
+        const styles = window.getComputedStyle(list);
+        const gap = parseFloat(styles.rowGap || styles.gap || "0") || 0;
+        let height = 0;
+
+        for (let i = 0; i < 4; i++) {
+            height += cards[i].offsetHeight;
+        }
+
+        height += gap * 3;
+
+        scroll.style.maxHeight = Math.ceil(height) + "px";
+        scroll.classList.add("is-scrollable");
+    }
+
     updateTools();
+    updateUserListScroll();
+    syncActionButtonWidth();
+
+    window.addEventListener("resize", function () {
+
+        updateUserListScroll();
+        syncActionButtonWidth();
+    });
 
 })();

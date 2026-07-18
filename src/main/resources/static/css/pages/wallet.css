@@ -1415,10 +1415,11 @@
 }
 
 .body-wallet-premium-fe .wallet-panel {
-    width: min(720px, 96%);
+    width: min(980px, 96%);
     max-height: calc(100dvh - 36px);
-    overflow: hidden;
-    padding: 22px 28px 18px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 18px 24px 16px;
 }
 
 .body-wallet-premium-fe .wallet-dashboard-pill {
@@ -1456,6 +1457,47 @@
     font-size: clamp(1.45rem, 3.2vw, 1.95rem);
     font-weight: 800;
     letter-spacing: 0.1em;
+}
+
+/* Two-column dashboard: card | actions (all wider screens) */
+.body-wallet-premium-fe .wallet-dashboard-body {
+    display: grid;
+    grid-template-columns: minmax(300px, 1.15fr) minmax(260px, 0.85fr);
+    gap: 14px 22px;
+    align-items: center;
+    width: 100%;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-main {
+    min-width: 0;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-quick-actions,
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-more-actions {
+    margin-bottom: 0;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-quick-actions-grid--elevated {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-logout {
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-logout-tile {
+    width: 100%;
+    max-width: 100%;
 }
 
 .body-wallet-premium-fe .reveal-item.is-visible .wallet-panel--materialize.reveal-child {
@@ -1509,9 +1551,10 @@
 }
 
 .body-wallet-premium-fe .wallet-balance-box.wallet-bank-card {
-    width: min(100%, 460px);
-    margin: 0 auto 12px;
-    min-height: 218px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 200px;
     border: 1px solid rgba(212, 175, 55, 0.62);
     box-shadow:
             0 22px 44px rgba(0, 0, 0, 0.38),
@@ -1853,22 +1896,22 @@
     }
 
     .body-wallet-premium-fe .wallet-panel {
-        width: min(780px, 90%);
+        width: min(1040px, 94%);
         max-height: calc(100dvh - 40px);
-        padding: 26px 44px 20px;
+        padding: 20px 28px 18px;
     }
 
     .body-wallet-premium-fe .wallet-balance-box.wallet-bank-card {
-        width: min(100%, 540px);
-        min-height: 224px;
+        max-width: 520px;
+        min-height: 210px;
     }
 
     .body-wallet-premium-fe .wallet-bank-card__content {
-        padding-top: 30px;
+        padding-top: 28px;
     }
 
     .body-wallet-premium-fe .wallet-bank-card__footer {
-        padding-bottom: 24px;
+        padding-bottom: 20px;
     }
 }
 
@@ -1908,6 +1951,22 @@
 
     .body-wallet-premium-fe .wallet-more-actions {
         margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 820px) {
+    .body-wallet-premium-fe .wallet-dashboard-body {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .body-wallet-premium-fe .wallet-dashboard-side .wallet-quick-actions-grid--elevated {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .body-wallet-premium-fe .wallet-balance-box.wallet-bank-card {
+        max-width: 460px;
+        margin-bottom: 4px;
     }
 }
 

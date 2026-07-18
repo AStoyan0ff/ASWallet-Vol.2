@@ -37,7 +37,8 @@
         </div>
 
         <!-- Advanced — balance hidden via /wallet/settings -->
-
+        <div class="wallet-dashboard-body">
+            <div class="wallet-dashboard-main">
         <div class="wallet-balance-box wallet-bank-card auth-stagger"
              th:classappend="${balanceHidden} ? ' is-balance-hidden' : ''">
             <div class="wallet-bank-card__shine" aria-hidden="true"></div>
@@ -105,7 +106,9 @@
                 </div>
             </div>
         </div>
+            </div>
 
+            <aside class="wallet-dashboard-side">
         <!-- Advanced — dashboard quick actions -->
         <section class="wallet-quick-actions auth-stagger">
             <h3 class="wallet-quick-actions-title">Quick Actions</h3>
@@ -254,6 +257,8 @@
                 <span class="wallet-quick-action-label">LOGOUT</span>
             </button>
         </form>
+            </aside>
+        </div>
     </section>
 </main>
 
