@@ -1,0 +1,174 @@
+/* ASWallet — shared laptop / short-viewport layer
+   Loaded last so pages inherit safer height + scroll behaviour.
+   Per-page polish can still override these rules later. */
+
+:root {
+    --laptop-page-pad-y: 18px;
+    --laptop-page-pad-x: 16px;
+    --laptop-panel-max: calc(100dvh - 36px);
+    --laptop-gap: 10px;
+}
+
+/* Typical laptop height OR laptop width with limited height */
+@media (max-height: 900px), (max-width: 1440px) and (max-height: 960px) {
+    :root {
+        --laptop-page-pad-y: 14px;
+        --laptop-page-pad-x: 14px;
+        --laptop-panel-max: calc(100dvh - 28px);
+        --laptop-gap: 8px;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    /* Unlock page scroll — many screens used height:100dvh + overflow:hidden */
+    html:has(.body-wallet-settings),
+    html:has(.body-payments),
+    html:has(.body-wallet-premium-fe) {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    body.body-wallet,
+    body.body-auth,
+    body.body-home,
+    body.body-admin,
+    body.body-user-details,
+    body.body-edit-details,
+    body.body-daily-limit,
+    body.body-change-password,
+    body.body-delete-account,
+    body.body-payments,
+    body.body-wallet-settings,
+    body.body-bank-details,
+    body.body-contact-us,
+    body.body-legal-page,
+    body.body-transaction-history,
+    body.body-deposit-light,
+    body.body-withdraw-light,
+    body.body-transfer-light {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 100dvh;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    /* Landing shells: grow with content, keep vertical room */
+    body.body-wallet .wallet-landing,
+    body.body-auth .wallet-landing,
+    body.body-user-details .wallet-landing,
+    body.body-edit-details .wallet-landing,
+    body.body-daily-limit .wallet-landing,
+    body.body-change-password .wallet-landing,
+    body.body-delete-account .wallet-landing,
+    body.body-payments .wallet-landing,
+    body.body-wallet-settings .wallet-landing,
+    body.body-bank-details .wallet-landing,
+    body.body-contact-us .wallet-landing,
+    body.body-legal-page .wallet-landing,
+    body.body-transaction-history .wallet-landing,
+    body.body-deposit-light .wallet-landing,
+    body.body-withdraw-light .wallet-landing,
+    body.body-transfer-light .wallet-landing,
+    body.body-wallet-premium-fe .wallet-landing,
+    body.body-admin .wallet-landing {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 100dvh;
+        overflow: visible !important;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: var(--laptop-page-pad-y) !important;
+        padding-bottom: calc(var(--laptop-page-pad-y) + 12px) !important;
+        padding-left: var(--laptop-page-pad-x) !important;
+        padding-right: var(--laptop-page-pad-x) !important;
+        box-sizing: border-box;
+    }
+
+    /* Panels: cap height softly; allow inner/page scroll instead of clipping */
+    body.body-wallet .wallet-panel,
+    body.body-wallet .user-profile-panel,
+    body.body-wallet .payments-panel,
+    body.body-wallet .pwd-card,
+    body.body-wallet .del-card,
+    body.body-wallet .bank-card-panel,
+    body.body-wallet .wallet-settings-panel,
+    body.body-auth .auth-panel,
+    body.body-admin .wallet-panel {
+        max-height: none;
+    }
+
+    body.body-wallet-premium-fe .wallet-panel,
+    body.body-payments .payments-panel,
+    body.body-wallet-settings .wallet-settings-panel {
+        max-height: var(--laptop-panel-max);
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    /* Slightly tighter form headers on short screens */
+    body.body-wallet .wallet-title,
+    body.body-auth .wallet-title,
+    body.body-user-details .wallet-title,
+    body.body-edit-details .wallet-title {
+        margin-bottom: 4px;
+    }
+
+    body.body-wallet .wallet-form-hint,
+    body.body-auth .wallet-form-hint,
+    body.body-user-details .wallet-form-hint,
+    body.body-edit-details .wallet-form-hint {
+        margin-top: 2px;
+        margin-bottom: 8px;
+    }
+
+    body.body-wallet .form-panel-top,
+    body.body-auth .form-panel-top {
+        margin-bottom: var(--laptop-gap);
+    }
+}
+
+/* Shorter laptop lids / 1366x768-class viewports */
+@media (max-height: 780px) {
+    :root {
+        --laptop-page-pad-y: 10px;
+        --laptop-page-pad-x: 12px;
+        --laptop-panel-max: calc(100dvh - 20px);
+        --laptop-gap: 6px;
+    }
+
+    body.body-wallet .wallet-panel,
+    body.body-wallet .user-profile-panel,
+    body.body-wallet .payments-panel,
+    body.body-wallet .pwd-card,
+    body.body-wallet .del-card,
+    body.body-wallet .bank-card-panel,
+    body.body-wallet .wallet-settings-panel,
+    body.body-auth .auth-panel {
+        padding-top: 16px;
+        padding-bottom: 14px;
+    }
+
+    body.body-wallet-premium-fe .wallet-panel {
+        padding: 14px 18px 12px;
+    }
+
+    body.body-wallet .wallet-title.wallet-title--center,
+    body.body-user-details .wallet-title,
+    body.body-payments .wallet-title {
+        font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+    }
+}
+
+/* Narrow laptop width — keep horizontal breathing room */
+@media (max-width: 1366px) and (min-width: 901px) {
+    body.body-wallet .wallet-panel,
+    body.body-wallet .user-profile-panel,
+    body.body-wallet .wallet-settings-panel,
+    body.body-auth .auth-panel {
+        width: min(100%, 96%);
+    }
+}

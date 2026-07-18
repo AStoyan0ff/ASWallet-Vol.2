@@ -61,5 +61,11 @@
     --btn-blue-text-shadow: rgba(190, 230, 255, 0.35);
     --btn-blue-bg: linear-gradient(145deg, #7eb8f0 0%, #4a90e0 28%, #2563b8 55%, #1a4a8a 100%);
     --btn-blue-bg-hover: linear-gradient(145deg, #92c8f8 0%, #5a9fef 28%, #3270c8 55%, #2058a0 100%);
+
+    /* Shared laptop / short-viewport tokens (see base/laptop-viewport.css) */
+    --laptop-page-pad-y: 18px;
+    --laptop-page-pad-x: 16px;
+    --laptop-panel-max: calc(100dvh - 36px);
+    --laptop-gap: 10px;
 }
 
