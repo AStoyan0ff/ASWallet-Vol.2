@@ -107,6 +107,9 @@ public class AvatarStorageServiceImpl implements AvatarStorageService {
     }
 
     private Path resolveStoragePath() {
-        return Paths.get(avatarsDir).toAbsolutePath().normalize();
+
+        return Paths.get(avatarsDir)
+                .toAbsolutePath()
+                .normalize();
     }
 }

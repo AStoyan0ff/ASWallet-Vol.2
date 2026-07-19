@@ -2,6 +2,7 @@ package STARTER.Services.Impl;
 
 import STARTER.Enums.AccountStatus;
 import STARTER.Models.User;
+import STARTER.Models.UserProfileDetails;
 import STARTER.Repositories.UserProfileDetailsRepository;
 import STARTER.Repositories.UserRepository;
 import STARTER.Security.AppUserPrincipal;
@@ -31,7 +32,7 @@ public class AppUserDetailsService implements UserDetailsService {
             new UsernameNotFoundException("User not found"));
 
         AccountStatus accountStatus = profileDetailsRepository.findByUser_Username(username)
-            .map(profile -> profile.getAccountStatus())
+            .map(UserProfileDetails::getAccountStatus)
             .orElse(AccountStatus.ACTIVE);
 
         // Advanced: load account status for isEnabled()

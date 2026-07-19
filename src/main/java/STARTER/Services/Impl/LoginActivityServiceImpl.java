@@ -66,6 +66,7 @@ public class LoginActivityServiceImpl implements LoginActivityService {
     }
 
     private LoginActivityViewDTO mapToView(LoginActivity activity) {
+
         return LoginActivityViewDTO.builder()
                 .username(activity.getUsername())
                 .ipAddress(ClientIpUtils.normalize(activity.getIpAddress()))
