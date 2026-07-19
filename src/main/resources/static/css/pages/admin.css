@@ -14,7 +14,7 @@
 
 .body-export-file .wallet-landing {
     align-items: safe center;
-    padding: 28px 20px;
+    padding: 14px 16px 28px;
     overflow: visible;
 }
 
@@ -43,15 +43,24 @@
 }
 
 .body-export-file .wallet-panel--export {
-    padding: 22px 22px 20px;
+    width: min(480px, 94%);
+    padding: 16px 18px 14px;
+}
+
+.body-export-file .form-panel-top {
+    margin-bottom: 6px;
 }
 
 .body-export-file .wallet-title {
+    margin: 0 0 2px;
+    font-size: clamp(1.05rem, 2.4vw, 1.28rem);
     color: #2c2418;
     text-shadow: none;
 }
 
 .body-export-file .wallet-form-hint {
+    margin: 0 0 10px;
+    font-size: 0.78rem;
     color: #888;
     text-shadow:
             0 2px 3px rgba(255,255,255,.2),
@@ -70,12 +79,13 @@
 
 .body-export-file .tx-filter-field label {
     color: #5c4f3a;
+    font-size: 0.74rem;
 }
 
 .body-export-file .tx-filter-form .tx-filter-field input,
 .body-export-file .tx-filter-form .tx-filter-field select {
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    padding: 7px 10px;
+    font-size: 0.84rem;
     color: #2c2418;
     color-scheme: light;
     border: 1px solid rgba(158, 142, 118, 0.42);
@@ -88,7 +98,7 @@
 }
 
 .body-export-file .tx-filter-form .tx-filter-field select {
-    padding-right: 34px;
+    padding-right: 32px;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
@@ -98,8 +108,8 @@
             linear-gradient(135deg, #8a7340 50%, transparent 50%),
             linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
     background-position:
-            calc(100% - 16px) calc(50% + 2px),
-            calc(100% - 11px) calc(50% + 2px),
+            calc(100% - 14px) calc(50% + 2px),
+            calc(100% - 9px) calc(50% + 2px),
             0 0;
     background-size: 5px 5px, 5px 5px, 100% 100%;
     background-repeat: no-repeat;
@@ -138,9 +148,9 @@
     align-items: center;
     justify-content: center;
     min-width: auto;
-    padding: 4px 9px;
+    padding: 3px 8px;
     margin-bottom: 0;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 800;
     text-align: center;
     box-sizing: border-box;
@@ -160,28 +170,28 @@
 }
 
 .wallet-panel--export {
-    width: min(560px, 96%);
+    width: min(480px, 94%);
 }
 
 .body-export-file .tx-export-count {
-    margin: 14px 0 0;
+    margin: 10px 0 0;
     text-align: center;
     color: #2c2418;
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     font-weight: 600;
 }
 
 .body-export-file .tx-export-preview {
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 .body-export-file .tx-export-preview > summary.tx-export-count {
     list-style: none;
     cursor: pointer;
     margin: 0;
-    padding: 10px 14px;
+    padding: 8px 12px;
     border: 1px solid rgba(158, 142, 118, 0.42);
-    border-radius: 10px;
+    border-radius: 9px;
     background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
     box-shadow:
             inset 0 2px 5px rgba(0, 0, 0, 0.14),
@@ -205,16 +215,16 @@
 
 .body-export-file .tx-export-count-hint {
     display: block;
-    margin-top: 4px;
-    font-size: 0.76rem;
+    margin-top: 3px;
+    font-size: 0.7rem;
     color: #7a6e5c;
     font-weight: 500;
 }
 
 .body-export-file .tx-export-count--empty {
-    padding: 10px 14px;
+    padding: 8px 12px;
     border: 1px solid rgba(158, 142, 118, 0.42);
-    border-radius: 10px;
+    border-radius: 9px;
     background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
     box-shadow:
             inset 0 2px 5px rgba(0, 0, 0, 0.14),
@@ -226,10 +236,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    max-height: 220px;
+    max-height: 180px;
     overflow-y: auto;
     border: 1px solid rgba(158, 142, 118, 0.42);
-    border-radius: 10px;
+    border-radius: 9px;
     background: #ffffff;
     scrollbar-width: thin;
     scrollbar-color: rgba(212, 175, 55, 0.55) #f2ebe0;
@@ -257,12 +267,12 @@
 .body-export-file .tx-export-preview-item {
     display: grid;
     grid-template-columns: auto auto 1fr auto;
-    gap: 8px 12px;
+    gap: 6px 10px;
     align-items: center;
-    padding: 10px 12px;
+    padding: 8px 10px;
     border-bottom: 1px solid rgba(158, 142, 118, 0.28);
     color: #2c2418;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
 }
 
 .body-export-file .tx-export-preview-item:last-child {
@@ -284,19 +294,19 @@
 
 .body-export-file .tx-export-preview-date {
     color: #9a9080;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     white-space: nowrap;
 }
 
 .body-export-file .tx-export-actions {
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 .body-export-file .tx-export-action-btn {
     width: 100%;
-    padding: 11px 16px;
-    border-radius: 10px;
-    font-size: 0.92rem;
+    padding: 9px 14px;
+    border-radius: 9px;
+    font-size: 0.84rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -559,22 +569,22 @@
 
 /* Advanced - admin panel layout and account status actions */
 .wallet-panel--admin {
-    width: min(1120px, 96%);
-    max-height: calc(100dvh - 32px);
+    width: min(920px, 94%);
+    max-height: calc(100dvh - 48px);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 16px 18px 18px;
+    padding: 12px 14px 16px;
     text-align: center;
 }
 
 .wallet-panel--admin .wallet-title.wallet-title--center {
-    margin: 2px 0 4px;
-    font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+    margin: 2px 0 2px;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
 }
 
 .wallet-panel--admin .wallet-greeting {
-    margin: 0 0 10px;
-    font-size: 0.85rem;
+    margin: 0 0 8px;
+    font-size: 0.78rem;
 }
 
 .wallet-panel--admin .wallet-title.wallet-title--center,
@@ -591,14 +601,17 @@
     margin-bottom: 4px;
 }
 
-/* Two separate panes */
+/* Two separate panes — dark fill masks RWB white band in the column gap */
 .admin-split {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 14px;
+    gap: 8px;
     align-items: stretch;
     width: 100%;
     text-align: left;
+    padding: 6px;
+    border-radius: 16px;
+    background: linear-gradient(165deg, rgba(42, 8, 8, 0.9) 0%, rgba(22, 5, 5, 0.94) 100%);
 }
 
 .admin-split__pane {
@@ -607,9 +620,10 @@
     gap: 0;
     min-width: 0;
     min-height: 0;
-    overflow: hidden;
-    padding: 14px;
-    border-radius: 18px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 14px;
     border: 1px solid rgba(201, 168, 92, 0.45);
     background: linear-gradient(165deg, rgba(58, 12, 12, 0.92) 0%, rgba(28, 6, 6, 0.94) 100%);
     box-shadow:
@@ -619,7 +633,7 @@
 
 .admin-split__title {
     margin: 0;
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -636,7 +650,7 @@
 .admin-dashboard-summary {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     flex: 1 1 auto;
     min-height: 0;
     margin-bottom: 0;
@@ -647,9 +661,9 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 6px;
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: 6px;
     flex: 0 0 auto;
 }
 
@@ -665,13 +679,13 @@
 
 .admin-split__pane--right > .admin-split__title {
     flex: 0 0 auto;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
 }
 
 .admin-kpi-row {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 0;
 }
 
@@ -681,9 +695,9 @@
     align-items: center;
     justify-content: center;
     gap: 2px;
-    min-height: 56px;
-    padding: 8px 6px;
-    border-radius: 12px;
+    min-height: 46px;
+    padding: 6px 4px;
+    border-radius: 10px;
     border: 1px solid rgba(201, 168, 92, 0.34);
     background: linear-gradient(180deg, rgba(40, 8, 8, 0.95) 0%, rgba(18, 4, 4, 0.96) 100%);
     text-decoration: none;
@@ -696,7 +710,7 @@
 }
 
 .admin-kpi-card__label {
-    font-size: 0.58rem;
+    font-size: 0.52rem;
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -705,7 +719,7 @@
 }
 
 .admin-kpi-card__value {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: 800;
     line-height: 1.1;
     text-align: center;
@@ -715,27 +729,27 @@
 .admin-chart-stack {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     flex: 1 1 auto;
 }
 
 .admin-chart-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px;
 }
 
 .admin-chart-card {
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid rgba(201, 168, 92, 0.3);
     background: rgba(0, 0, 0, 0.28);
-    padding: 10px 12px 8px;
+    padding: 8px 10px 6px;
 }
 
 .admin-chart-card__title {
-    margin: 0 0 6px;
+    margin: 0 0 4px;
     text-align: center;
-    font-size: 0.68rem;
+    font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -744,15 +758,15 @@
 
 .admin-chart-card__canvas-wrap {
     position: relative;
-    height: 150px;
+    height: 116px;
 }
 
 .admin-chart-card__canvas-wrap--status {
-    height: 156px;
+    height: 120px;
 }
 
 .admin-chart-card__canvas-wrap--week {
-    height: 148px;
+    height: 114px;
 }
 
 .admin-tools-grid {
@@ -771,30 +785,30 @@
 
 .admin-tools-grid--left .wallet-quick-action,
 .admin-users-actions__row .admin-users-action-btn {
-    min-height: 54px !important;
-    height: 54px !important;
-    max-height: 54px;
-    padding: 6px 4px !important;
-    gap: 4px !important;
+    min-height: 46px !important;
+    height: 46px !important;
+    max-height: 46px;
+    padding: 5px 4px !important;
+    gap: 3px !important;
     box-sizing: border-box;
 }
 
 .admin-tools-grid--left .wallet-quick-action-label,
 .admin-users-actions__row .admin-users-action-btn .wallet-quick-action-label {
-    font-size: 0.62rem !important;
+    font-size: 0.56rem !important;
     line-height: 1.15;
 }
 
 .admin-tools-grid--left .wallet-quick-action-icon,
 .admin-users-actions__row .admin-users-action-btn .wallet-quick-action-icon {
-    width: 20px !important;
-    height: 20px !important;
+    width: 17px !important;
+    height: 17px !important;
 }
 
 .admin-tools-grid--left .wallet-quick-action-icon svg,
 .admin-users-actions__row .admin-users-action-btn .wallet-quick-action-icon svg {
-    width: 20px !important;
-    height: 20px !important;
+    width: 17px !important;
+    height: 17px !important;
 }
 
 .admin-tools-grid .admin-tool-action.is-disabled {
@@ -857,7 +871,8 @@
 
 .admin-split__pane--right {
     min-height: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .admin-split__pane--right .admin-split__title {
@@ -901,16 +916,16 @@
 }
 
 .admin-split__pane--right .admin-user-list {
-    gap: 8px;
+    gap: 6px;
 }
 
 .admin-split__pane--right .admin-user-card {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-    padding: 12px 14px;
-    border-radius: 12px;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 10px;
     border: 1px solid rgba(158, 142, 118, 0.4);
     background: linear-gradient(180deg, #efe7db 0%, #e4dccf 100%);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
@@ -963,13 +978,13 @@
 
 .admin-split__pane--right .admin-user-card__name {
     color: #2c1f14;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
 }
 
 .admin-split__pane--right .admin-user-card__email {
     display: inline;
     color: rgba(70, 50, 35, 0.78);
-    font-size: 0.76rem;
+    font-size: 0.7rem;
     margin-top: 0;
     text-align: center;
     word-break: break-word;
@@ -978,7 +993,7 @@
 .admin-split__pane--right .admin-user-card__registered {
     display: inline;
     color: rgba(90, 70, 50, 0.72);
-    font-size: 0.72rem;
+    font-size: 0.66rem;
     margin-right: 0;
     text-align: center;
     white-space: nowrap;
@@ -1003,12 +1018,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 7.5rem;
-    width: 7.5rem;
-    min-height: 1.55rem;
-    padding: 2px 8px;
+    min-width: 6.75rem;
+    width: 6.75rem;
+    min-height: 1.4rem;
+    padding: 2px 6px;
     border-radius: 999px;
-    font-size: 0.58rem;
+    font-size: 0.54rem;
     font-weight: 800;
     letter-spacing: 0.03em;
     box-sizing: border-box;
@@ -1016,7 +1031,7 @@
 
 .admin-split__pane--right .admin-user-card__balance {
     color: #8a6410;
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     font-weight: 700;
     text-align: left;
 }
@@ -1093,7 +1108,7 @@
 
     .admin-chart-card__canvas-wrap--status,
     .admin-chart-card__canvas-wrap--week {
-        height: 140px;
+        height: 110px;
     }
 }
 
@@ -1609,12 +1624,13 @@
 /* Advanced — admin user manage page (/admin/users/{id}/manage) */
 .body-admin-user-manage .wallet-landing {
     align-items: safe center;
-    padding-top: 28px;
+    padding-top: 14px;
     padding-bottom: 28px;
 }
 
 .wallet-panel--admin-manage {
-    width: min(520px, 96%);
+    width: min(400px, 94%);
+    padding: 16px 16px 14px;
     text-align: left;
 }
 
@@ -1638,9 +1654,30 @@
     text-align: center;
 }
 
-.body-admin-user-manage .pref-section-title {
-    margin: 20px 0 10px;
+.body-admin-user-manage .form-panel-top {
+    margin-bottom: 6px;
+}
+
+.body-admin-user-manage .wallet-title {
+    margin: 0 0 2px;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+}
+
+.body-admin-user-manage .wallet-greeting {
+    margin: 0 0 8px;
+    font-size: 0.8rem;
+}
+
+.body-admin-user-manage .success,
+.body-admin-user-manage .error {
+    margin-bottom: 8px;
+    padding: 8px 10px;
     font-size: 0.82rem;
+}
+
+.body-admin-user-manage .pref-section-title {
+    margin: 12px 0 6px;
+    font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -1650,23 +1687,23 @@
 }
 
 .body-admin-user-manage .pref-section-title:first-of-type {
-    margin-top: 8px;
+    margin-top: 4px;
 }
 
 .admin-manage-summary {
-    margin: 8px 0 4px;
-    padding: 14px 16px;
+    margin: 6px 0 2px;
+    padding: 10px 12px;
 }
 
 .body-admin-user-manage .admin-manage-avatar-wrap {
     display: flex;
     justify-content: center;
-    margin: 0 0 14px;
+    margin: 0 0 10px;
 }
 
 .body-admin-user-manage .admin-manage-avatar {
-    width: 72px;
-    height: 72px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(201, 168, 92, 0.55);
@@ -1674,9 +1711,9 @@
 }
 
 .admin-manage-summary p {
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     color: #f5e6c8;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
 }
 
 .admin-manage-summary p:last-child {
@@ -1685,12 +1722,19 @@
 
 .admin-manage-label {
     display: inline-block;
-    min-width: 88px;
-    font-size: 0.72rem;
+    min-width: 78px;
+    font-size: 0.66rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #a8894a;
+}
+
+.body-admin-user-manage .admin-manage-form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin: 0 0 4px;
 }
 
 .admin-manage-form {
@@ -1698,6 +1742,25 @@
     flex-direction: column;
     gap: 10px;
     margin: 0 0 6px;
+}
+
+.body-admin-user-manage .admin-field-label {
+    font-size: 0.72rem;
+}
+
+.body-admin-user-manage .admin-status-select {
+    padding: 7px 34px 7px 10px;
+    font-size: 0.84rem;
+}
+
+.body-admin-user-manage .admin-manage-submit {
+    width: 50%;
+    min-width: 132px;
+    max-width: 190px;
+    align-self: center;
+    margin-inline: auto;
+    padding: 8px 14px;
+    font-size: 0.82rem;
 }
 
 .admin-manage-submit {
@@ -1709,8 +1772,9 @@
 }
 
 .body-admin-user-manage .admin-manage-role-restricted {
-    margin: 16px 0 4px;
+    margin: 10px 0 2px;
     text-align: center;
+    font-size: 0.78rem;
 }
 
 .body-admin .admin-send-message-panel {
@@ -3856,6 +3920,13 @@
 /* /admin — wallet-style B&W gradient panel (page bg unchanged) */
 .body-admin.body-admin-wallet-panel .wallet-landing {
     overflow: visible;
+    padding-top: 18px;
+    padding-bottom: 36px;
+}
+
+.body-admin .app-version-footer {
+    color: rgba(255, 231, 200, 0.5);
+    padding-bottom: 10px;
 }
 
 .body-admin.body-admin-wallet-panel .wallet-panel--admin.wallet-panel--materialize.reveal-child {
@@ -4381,6 +4452,8 @@
 /* /admin/users/{id}/manage — wallet-style B&W gradient panel */
 .body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-landing {
     overflow: visible;
+    padding-top: 14px;
+    padding-bottom: 28px;
 }
 
 .body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-panel--admin-manage.wallet-panel--materialize.reveal-child {
@@ -4555,7 +4628,7 @@
 
 .body-admin-user-manage-wallet-panel .admin-manage-submit.admin-action-btn {
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: 0.82rem;
 }
 
 @media (max-width: 480px) {

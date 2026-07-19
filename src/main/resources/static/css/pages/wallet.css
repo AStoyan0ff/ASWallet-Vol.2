@@ -2066,8 +2066,9 @@
 }
 
 .body-deposit-light .wallet-landing {
-    padding: 16px 20px;
+    padding: 10px 14px 24px;
     overflow: visible;
+    align-items: safe center;
 }
 
 .body-deposit-light .wallet-panel--deposit.wallet-panel--materialize.reveal-child {
@@ -2095,26 +2096,30 @@
 }
 
 .body-deposit-light .wallet-panel--deposit {
-    padding: 22px 22px 20px;
+    width: min(400px, 94%);
+    padding: 14px 16px 12px;
 }
 
 .body-deposit-light .wallet-panel--deposit .form-panel-top {
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
 .body-deposit-light .wallet-panel--deposit .wallet-title {
+    margin: 0 0 2px;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
     color: #2c2418;
     text-shadow: none;
 }
 
 .body-deposit-light .wallet-panel--deposit .wallet-form-hint {
-    margin: -6px 0 12px;
+    margin: 0 0 6px;
+    font-size: 0.74rem;
     color: #7a6e5c;
 }
 
 .body-deposit-light .wallet-panel--deposit .deposit-flow {
-    gap: 6px;
-    margin-bottom: 12px;
+    gap: 3px;
+    margin-bottom: 6px;
 }
 
 .body-deposit-light .wallet-panel--deposit .deposit-flow-end {
@@ -2123,17 +2128,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 3px;
     width: 100%;
-    max-width: 228px;
+    max-width: 186px;
     margin: 0 auto;
-    padding: 10px 12px 8px;
+    padding: 7px 9px 5px;
     overflow: hidden;
     aspect-ratio: 1.586;
     min-height: 0;
     text-align: center;
     border: none;
-    border-radius: 14px;
+    border-radius: 11px;
     background: linear-gradient(
             145deg,
             #3f5f62 0%,
@@ -2181,7 +2186,7 @@
     position: relative;
     z-index: 1;
     margin: 0;
-    font-size: 0.66rem;
+    font-size: 0.56rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -2192,7 +2197,7 @@
     position: relative;
     z-index: 1;
     margin: 0;
-    font-size: clamp(0.88rem, 3.2vw, 1.08rem);
+    font-size: clamp(0.72rem, 2.6vw, 0.88rem);
     font-weight: 800;
     color: #ffe082;
     letter-spacing: 0.06em;
@@ -2206,7 +2211,7 @@
 }
 
 .body-deposit-light .wallet-panel--deposit .deposit-flow-end--wallet .deposit-flow-value {
-    font-size: clamp(0.96rem, 3.6vw, 1.18rem);
+    font-size: clamp(0.78rem, 2.8vw, 0.95rem);
     color: #ffd54f;
     letter-spacing: 0.04em;
     text-shadow:
@@ -2219,17 +2224,17 @@
     position: relative;
     z-index: 1;
     margin: 0;
-    font-size: 0.68rem;
+    font-size: 0.58rem;
     font-weight: 800;
     color: #ffffff;
 }
 
 .body-deposit-light .wallet-panel--deposit .deposit-flow-end--wallet .deposit-flow-meta {
-    margin-top: 8px;
+    margin-top: 3px;
 }
 
 .body-deposit-light .wallet-panel--deposit .deposit-flow-arrow {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     line-height: 1;
     color: #ffa726;
 }
@@ -2261,6 +2266,7 @@
 
 .body-deposit-light .wallet-panel--deposit .auth-form {
     margin-top: 0;
+    max-width: 280px;
     padding: 0;
     border: none;
     border-radius: 0;
@@ -2268,17 +2274,23 @@
     box-shadow: none;
 }
 
+.body-deposit-light .wallet-panel--deposit .auth-form .auth-field-group {
+    margin-bottom: 6px;
+}
+
 .body-deposit-light .wallet-panel--deposit .auth-form .auth-field-group:has(.auth-submit) {
-    margin-top: 14px;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
 
 .body-deposit-light .wallet-panel--deposit .auth-form label {
     color: #5c4f3a;
+    font-size: 0.7rem;
 }
 
 .body-deposit-light .wallet-panel--deposit .auth-form input {
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    padding: 6px 9px;
+    font-size: 0.8rem;
     color: #2c2418;
     border: 1px solid rgba(158, 142, 118, 0.42);
     border-radius: var(--surface-radius);
@@ -2306,9 +2318,9 @@
 .body-deposit-light .wallet-panel--deposit .auth-form select {
     width: 100%;
     box-sizing: border-box;
-    padding: 8px 36px 8px 12px;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
+    padding: 6px 32px 6px 9px;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
     font-family: inherit;
     font-weight: 600;
     color: #2c2418;
@@ -2564,6 +2576,14 @@
 .body-deposit-light .wallet-panel--deposit .auth-form .deposit-cvc-hint {
     color: #7a6e5c;
     text-align: center;
+    margin-top: 3px;
+    font-size: 0.66rem;
+}
+
+.body-deposit-light .wallet-panel--deposit .auth-form .auth-submit {
+    margin-top: 2px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
 }
 
 .body-deposit-light .app-version-footer {

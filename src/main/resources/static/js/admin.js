@@ -42,6 +42,7 @@
 
         if (canRemove) {
             setHint("Selected: " + username + ". Manage or remove this account.");
+
         } else {
             setHint("Selected: " + username + ". You can manage this account.");
         }
@@ -82,12 +83,14 @@
         }
 
         const manageUrl = selectedCard.dataset.manageUrl;
+
         if (manageUrl) {
             window.location.href = manageUrl;
         }
     });
 
     removeBtn.addEventListener("click", function () {
+
         if (removeBtn.classList.contains("is-disabled") || !selectedCard || !canRemove || !removeForm) {
             return;
         }
@@ -144,6 +147,7 @@
 
         const styles = window.getComputedStyle(list);
         const gap = parseFloat(styles.rowGap || styles.gap || "0") || 0;
+
         let height = 0;
 
         for (let i = 0; i < 4; i++) {

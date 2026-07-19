@@ -22,10 +22,10 @@ html:has(.body-bank-details) {
 
 .body-bank-details .wallet-landing {
     justify-content: center;
-    align-items: center;
+    align-items: safe center;
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 16px 24px 28px;
+    padding: 12px 16px 24px;
     box-sizing: border-box;
 }
 
@@ -33,21 +33,27 @@ html:has(.body-bank-details) {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: min(520px, 94vw);
+    width: min(420px, 94vw);
     margin: 0 auto;
-    padding: 22px 28px 28px;
+    padding: 14px 18px 16px;
     border-radius: 16px;
     box-sizing: border-box;
 }
 
+/* After card save — slightly larger panel for all users */
+.body-bank-details .bank-card-panel:has(.asw-bank-card-scene--view) {
+    width: min(460px, 94vw);
+    padding: 16px 20px 18px;
+}
+
 .body-bank-details .form-panel-top {
-    margin: 0 0 14px;
+    margin: 0 0 8px;
 }
 
 .body-bank-details .bank-card-body {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 8px;
 }
 
 .body-bank-details .bank-card-header {
@@ -55,8 +61,8 @@ html:has(.body-bank-details) {
 }
 
 .bank-card-title {
-    margin: 0 0 4px;
-    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    margin: 0 0 2px;
+    font-size: clamp(1rem, 2.2vw, 1.18rem);
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -67,7 +73,7 @@ html:has(.body-bank-details) {
 .bank-card-subtitle {
     margin: 0;
     color: #f5f5f5;
-    font-size: 0.82rem;
+    font-size: 0.74rem;
     font-weight: 500;
 }
 
@@ -102,7 +108,7 @@ html:has(.body-bank-details) {
 
 .asw-bank-card-scene--edit .asw-bank-card {
     aspect-ratio: auto;
-    min-height: 460px;
+    min-height: 0;
     display: flex;
     flex-direction: column;
 }
@@ -111,23 +117,87 @@ html:has(.body-bank-details) {
     display: none;
 }
 
+.asw-bank-card-scene--edit .asw-bank-card__chip {
+    top: 10px;
+    left: 12px;
+    width: 30px;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__contactless {
+    top: 12px;
+    right: 12px;
+    width: 24px;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__brand {
+    top: 10px;
+    left: 50px;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__brand-name {
+    font-size: 0.68rem;
+}
+
+.asw-bank-card-scene--edit .asw-bank-card__brand-tag {
+    font-size: 0.42rem;
+}
+
 .asw-bank-card-scene--view .asw-bank-card {
     aspect-ratio: auto;
-    min-height: 228px;
+    min-height: 258px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__chip {
+    width: 42px;
+    top: 16px;
+    left: 18px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__contactless {
+    width: 34px;
+    top: 18px;
+    right: 18px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__brand {
+    top: 16px;
+    left: 70px;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__brand-name {
+    font-size: 0.86rem;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__brand-tag {
+    font-size: 0.52rem;
 }
 
 .asw-bank-card-scene--view .asw-bank-card__number {
     top: 36%;
-    font-size: clamp(0.74rem, 2.4vw, 0.92rem);
+    font-size: clamp(0.82rem, 2.5vw, 1.02rem);
 }
 
 .asw-bank-card-scene--view .asw-bank-card__holder {
     top: 48%;
     right: 96px;
+    font-size: clamp(0.68rem, 2.1vw, 0.82rem);
 }
 
 .asw-bank-card-scene--view .asw-bank-card__expiry {
     top: 48%;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__account-row small {
+    font-size: 0.46rem;
+}
+
+.asw-bank-card-scene--view .asw-bank-card__account-row span {
+    font-size: clamp(0.64rem, 2vw, 0.76rem);
+}
+
+.asw-bank-card-scene--view .asw-bank-card__network span {
+    width: 20px;
+    height: 20px;
 }
 
 .asw-bank-card__account {
@@ -386,9 +456,10 @@ html:has(.body-bank-details) {
     top: auto;
     bottom: auto;
     flex: 1 1 auto;
-    margin-top: 72px;
-    padding: 12px 14px 14px;
-    border-radius: 0 0 16px 16px;
+    gap: 4px;
+    margin-top: 48px;
+    padding: 8px 12px 10px;
+    border-radius: 0 0 14px 14px;
     background: transparent;
     backdrop-filter: none;
 }
@@ -398,8 +469,8 @@ html:has(.body-bank-details) {
 }
 
 .asw-bank-card__form-overlay .bank-card-label {
-    margin: 0 0 3px;
-    font-size: 0.62rem;
+    margin: 0 0 2px;
+    font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -409,12 +480,12 @@ html:has(.body-bank-details) {
 .asw-bank-card__form-overlay .bank-card-field input {
     width: 100%;
     box-sizing: border-box;
-    padding: 7px 10px;
+    padding: 6px 10px;
     border: 1px solid rgba(201, 168, 92, 0.28);
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.38);
     color: #fff8ef;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
 }
 
 .asw-bank-card-scene--edit .asw-bank-card__form-overlay .bank-card-field input {
@@ -458,7 +529,7 @@ html:has(.body-bank-details) {
 
 .asw-bank-card__form-overlay .bank-card-note {
     margin: 0;
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     color: rgba(184, 164, 138, 0.88);
     text-align: center;
     line-height: 1.3;
@@ -467,9 +538,9 @@ html:has(.body-bank-details) {
 .asw-bank-card__form-overlay .bank-card-submit {
     width: 100%;
     margin: 2px 0 0;
-    padding: 9px 12px;
+    padding: 8px 12px;
     border-radius: 8px;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -492,14 +563,14 @@ html:has(.body-bank-details) {
 }
 
 .bank-details-list--compact .bank-details-item {
-    padding: 8px 0;
+    padding: 6px 0;
 }
 
 .bank-details-item {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
-    gap: 8px 12px;
-    padding: 10px 0;
+    gap: 6px 10px;
+    padding: 8px 0;
     border-bottom: 1px solid var(--surface-border-color);
 }
 
@@ -509,7 +580,7 @@ html:has(.body-bank-details) {
 
 .bank-details-item dt {
     margin: 0;
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -518,7 +589,7 @@ html:has(.body-bank-details) {
 
 .bank-details-item dd {
     margin: 0;
-    font-size: 0.92rem;
+    font-size: 0.84rem;
     font-weight: 600;
     color: #ffecb3;
     text-align: right;
@@ -527,15 +598,15 @@ html:has(.body-bank-details) {
 
 @media (max-width: 420px) {
     .body-bank-details .bank-card-panel {
-        padding: 18px 16px 22px;
+        padding: 12px 14px 14px;
     }
 
     .asw-bank-card-scene--edit .asw-bank-card {
-        min-height: 480px;
+        min-height: 0;
     }
 
     .asw-bank-card-scene--edit .asw-bank-card__form-overlay {
-        margin-top: 68px;
+        margin-top: 44px;
     }
 
     .asw-bank-card__brand {
@@ -543,7 +614,7 @@ html:has(.body-bank-details) {
     }
 
     .asw-bank-card-scene--view .asw-bank-card {
-        min-height: 240px;
+        min-height: 232px;
     }
 
     .asw-bank-card__account {
@@ -571,7 +642,7 @@ html:has(.body-bank-details) {
 }
 
 .body-bank-details.body-bank-details-light .wallet-landing {
-    padding: 16px 20px;
+    padding: 12px 16px 24px;
     overflow: visible;
 }
 
@@ -635,21 +706,21 @@ html:has(.body-bank-details) {
 }
 
 .body-bank-details-light .asw-bank-card-scene--edit .asw-bank-card__form-overlay {
-    margin-top: 72px;
-    padding: 4px 2px 2px;
+    margin-top: 48px;
+    padding: 2px 0 0;
     background: transparent;
     backdrop-filter: none;
 }
 
 .body-bank-details-light .asw-bank-card__form-overlay .bank-card-label {
     color: #5c4f3a;
-    font-size: 0.72rem;
+    font-size: 0.62rem;
     letter-spacing: 0.04em;
 }
 
 .body-bank-details-light .asw-bank-card__form-overlay .bank-card-field input {
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    padding: 6px 10px;
+    font-size: 0.82rem;
     color: #2c2418;
     border: 1px solid rgba(158, 142, 118, 0.42);
     border-radius: var(--surface-radius);
@@ -699,7 +770,7 @@ html:has(.body-bank-details) {
 
 .body-bank-details-light .asw-bank-card__form-overlay .bank-card-note {
     color: #7a6e5c;
-    font-size: 0.72rem;
+    font-size: 0.64rem;
 }
 
 .body-bank-details-light .bank-details-list {
@@ -713,10 +784,10 @@ html:has(.body-bank-details) {
 .body-bank-details-light .bank-details-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     grid-template-columns: unset;
-    padding: 0 0 12px;
-    margin: 0 0 12px;
+    padding: 0 0 8px;
+    margin: 0 0 8px;
     border-bottom: 1px solid rgba(158, 142, 118, 0.38);
 }
 
@@ -727,12 +798,12 @@ html:has(.body-bank-details) {
 }
 
 .body-bank-details-light .bank-details-item dt {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     color: #8a7340;
 }
 
 .body-bank-details-light .bank-details-item dd {
-    font-size: 0.96rem;
+    font-size: 0.84rem;
     color: #2c2418;
     text-align: left;
 }
@@ -794,6 +865,123 @@ html:has(.body-bank-details) {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.body-bank-details.body-bank-details-gold-panel .bank-card-alert.success,
+.body-bank-details.body-bank-details-gold-panel .success.bank-card-alert {
+    color: #fff8e8;
+    background: rgba(46, 125, 50, 0.42);
+    border: 1px solid rgba(165, 214, 167, 0.65);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.body-bank-details.body-bank-details-gold-panel .bank-card-alert.error,
+.body-bank-details.body-bank-details-gold-panel .error.bank-card-alert {
+    color: #fff5f5;
+    background: rgba(183, 28, 28, 0.42);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Inner form blends into panel gradient — soft corners, no hard box */
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card-scene--edit .asw-bank-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card-scene--edit .asw-bank-card__form-overlay {
+    border-radius: 14px;
+    padding-top: 6px;
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-label {
+    color: rgba(255, 220, 179, 0.88);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-field input,
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card-scene--edit .asw-bank-card__form-overlay .bank-card-field input {
+    color: #fff8ef;
+    border: 1px solid rgba(201, 168, 92, 0.38);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.28);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.05),
+            inset 0 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-field input::placeholder {
+    color: rgba(255, 236, 200, 0.38);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-field input:focus,
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card-scene--edit .asw-bank-card__form-overlay .bank-card-field input:focus {
+    border-color: rgba(212, 175, 55, 0.72);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow:
+            inset 0 2px 6px rgba(0, 0, 0, 0.35),
+            0 0 0 2px rgba(212, 175, 55, 0.18);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .password-visibility-toggle {
+    color: rgba(255, 224, 130, 0.78);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .password-visibility-toggle:hover {
+    color: #ffe082;
+    background: rgba(212, 175, 55, 0.14);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-note {
+    color: rgba(255, 236, 190, 0.72);
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-form-row--submit {
+    margin-top: 10px;
+}
+
+.body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-submit {
+    margin-top: 4px;
+    border-radius: 12px;
+}
+
+/* Soft top corners on Username / Registered block + clip panel bottom */
+.body-bank-details.body-bank-details-gold-panel .bank-card-panel--materialize.reveal-child,
+.body-bank-details.body-bank-details-gold-panel .reveal-item.is-visible .bank-card-panel--materialize.reveal-child {
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.body-bank-details.body-bank-details-gold-panel .bank-details-list--compact {
+    text-align: center;
+    margin-top: 6px;
+    padding: 4px 8px 2px;
+    border-radius: 14px 14px 18px 18px;
+    overflow: hidden;
+}
+
+.body-bank-details.body-bank-details-gold-panel .bank-details-list--compact .bank-details-item {
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    border-bottom-color: rgba(60, 45, 12, 0.22);
+}
+
+.body-bank-details.body-bank-details-gold-panel .bank-details-list--compact .bank-details-item:first-child {
+    border-radius: 12px 12px 8px 8px;
+}
+
+.body-bank-details.body-bank-details-gold-panel .bank-details-list--compact .bank-details-item:last-child {
+    border-bottom: none;
+    border-radius: 8px 8px 14px 14px;
+}
+
 .body-bank-details.body-bank-details-gold-panel .bank-details-item {
     border-bottom-color: rgba(60, 45, 12, 0.28);
 }
@@ -805,6 +993,7 @@ html:has(.body-bank-details) {
 
 .body-bank-details.body-bank-details-gold-panel .bank-details-item dd {
     color: #2c2418;
+    text-align: center;
 }
 
 .body-bank-details.body-bank-details-gold-panel .home-bg-overlay {

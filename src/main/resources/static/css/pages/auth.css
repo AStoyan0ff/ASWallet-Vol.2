@@ -1561,17 +1561,122 @@
     }
 }
 
+/* /register — compact proportional card (avoids page scroll; login unchanged) */
+.body-auth-register .auth-landing {
+    min-height: 100dvh;
+    padding: 12px 16px 28px;
+    align-items: safe center;
+}
+
 .body-auth-light-card .auth-login-card--register {
-    width: min(420px, 94vw);
+    width: min(380px, 94vw);
+    padding: 22px 24px 18px;
+    border-radius: 24px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-back {
+    top: 12px;
+    left: 12px;
+    width: 30px;
+    height: 30px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-back svg {
+    width: 14px;
+    height: 14px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-card__header {
+    margin-bottom: 12px;
+    padding-top: 4px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-logo {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 10px;
 }
 
 .body-auth-light-card .auth-login-card--register .auth-login-card__title {
-    font-size: clamp(1.2rem, 3.8vw, 1.45rem);
+    margin: 0 0 4px;
+    font-size: clamp(1.05rem, 3.2vw, 1.22rem);
     line-height: 1.25;
 }
 
+.body-auth-light-card .auth-login-card--register .auth-login-card__subtitle {
+    margin: 0 0 10px;
+    font-size: 0.8rem;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-divider {
+    width: min(180px, 68%);
+    gap: 8px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-divider__gem {
+    width: 6px;
+    height: 6px;
+}
+
 .body-auth-light-card .auth-login-card--register .auth-login-field {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-input-icon {
+    left: 12px;
+    width: 16px;
+    height: 16px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-input-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-form input {
+    padding: 9px 12px 9px 38px;
+    font-size: 0.86rem;
+    border-radius: 9px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-form .password-field-wrap input {
+    padding-right: 40px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-note {
+    margin: 0 0 10px;
+    padding: 7px 10px;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    border-radius: 9px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-submit {
+    padding: 10px 16px;
+    font-size: 0.86rem;
+    border-radius: 9px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-or {
+    gap: 10px;
+    margin: 12px 0 10px;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-or__text {
+    font-size: 0.7rem;
+}
+
+.body-auth-light-card .auth-login-card--register .auth-login-register {
+    padding: 9px 16px;
+    font-size: 0.74rem;
+    border-radius: 9px;
+}
+
+.body-auth-light-card .auth-login-card--register .success,
+.body-auth-light-card .auth-login-card--register .error {
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    font-size: 0.8rem;
 }
 
 .body-auth-light-card .auth-login-note {
@@ -1588,7 +1693,8 @@
 
 @media (max-width: 480px) {
     .body-auth-light-card .auth-login-card--register {
-        padding: 30px 22px 24px;
+        padding: 18px 18px 16px;
+        border-radius: 20px;
     }
 }
 

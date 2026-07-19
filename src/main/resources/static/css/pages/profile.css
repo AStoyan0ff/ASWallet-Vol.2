@@ -19,10 +19,10 @@
 
 .body-user-details .wallet-landing {
     justify-content: center;
-    align-items: center;
+    align-items: safe center;
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 28px 24px;
+    padding: 12px 16px 28px;
     box-sizing: border-box;
     overflow: visible;
 }
@@ -48,10 +48,10 @@
 
 .body-edit-details .wallet-landing {
     justify-content: center;
-    align-items: center;
+    align-items: safe center;
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 28px 24px;
+    padding: 12px 16px 28px;
     box-sizing: border-box;
     overflow: visible;
 }
@@ -72,20 +72,43 @@
     width: min(460px, 96%);
 }
 
+.body-user-details .user-profile-panel,
+.body-edit-details .user-profile-panel {
+    width: min(400px, 94%);
+    padding: 18px 18px 16px;
+}
+
+.body-user-details .form-panel-top,
+.body-edit-details .form-panel-top {
+    margin-bottom: 6px;
+}
+
+.body-user-details .wallet-title,
+.body-edit-details .wallet-title {
+    margin: 0 0 2px;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+}
+
+.body-user-details .wallet-form-hint,
+.body-edit-details .wallet-form-hint {
+    margin: 0 0 6px;
+    font-size: 0.78rem;
+}
+
 .user-profile-header {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .user-profile-avatar-wrap {
     display: flex;
     justify-content: center;
-    margin: 8px 0 22px;
+    margin: 4px 0 12px;
 }
 
 .user-profile-avatar {
-    width: 96px;
-    height: 96px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255, 167, 38, 0.55);
@@ -95,7 +118,7 @@
 .user-profile-avatar--placeholder {
     display: grid;
     place-items: center;
-    font-size: 2rem;
+    font-size: 1.55rem;
     font-weight: 800;
     color: #ffb74d;
     background: radial-gradient(circle at 35% 30%, rgba(255, 143, 0, 0.22), rgba(10, 8, 6, 0.88) 72%);
@@ -103,7 +126,7 @@
 
 .user-profile-details-list {
     margin: 0;
-    padding: 16px 18px;
+    padding: 10px 12px;
 }
 
 .user-profile-details-item {
@@ -187,7 +210,7 @@
 .user-profile-avatar-preview {
     display: flex;
     justify-content: center;
-    margin: 8px 0 10px;
+    margin: 4px 0 8px;
 }
 
 .user-profile-avatar-file-wrap {
@@ -204,9 +227,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 18px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
@@ -217,8 +240,10 @@
 }
 
 .user-profile-avatar-hint {
-    margin: 8px 0 0;
-    max-width: 280px;
+    margin: 6px 0 0;
+    max-width: 260px;
+    font-size: 0.72rem;
+    line-height: 1.35;
 }
 
 .daily-limit-stepper-group {
@@ -441,6 +466,9 @@
     color: #2e7d32;
     background: rgba(200, 230, 201, 0.45);
     border: 1px solid rgba(129, 199, 132, 0.55);
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    font-size: 0.82rem;
 }
 
 .body-user-details .user-profile-avatar {
@@ -472,9 +500,9 @@
 .body-user-details .user-profile-details-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 0 0 12px;
-    margin: 0 0 12px;
+    gap: 2px;
+    padding: 0 0 8px;
+    margin: 0 0 8px;
     border-bottom: 1px solid rgba(158, 142, 118, 0.38);
 }
 
@@ -485,7 +513,7 @@
 }
 
 .body-user-details .user-profile-details-item dt {
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -495,7 +523,7 @@
 .body-user-details .user-profile-details-item dd {
     margin: 0;
     padding: 0;
-    font-size: 0.96rem;
+    font-size: 0.86rem;
     font-weight: 600;
     color: #2c2418;
     text-align: left;
@@ -562,6 +590,26 @@
 .body-user-details.body-user-details-gold-panel .wallet-form-hint {
     color: rgba(255, 236, 190, 0.82);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-user-details.body-user-details-gold-panel .success {
+    color: #fff8e8;
+    background: rgba(46, 125, 50, 0.42);
+    border: 1px solid rgba(165, 214, 167, 0.65);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.body-user-details.body-user-details-gold-panel .error {
+    color: #fff5f5;
+    background: rgba(183, 28, 28, 0.42);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .body-user-details.body-user-details-gold-panel .user-profile-details-item {
@@ -643,22 +691,31 @@
     color: #8b3a2a;
     background: rgba(255, 205, 210, 0.45);
     border: 1px solid rgba(239, 154, 154, 0.55);
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    font-size: 0.82rem;
 }
 
 .body-edit-details .auth-field-group label,
 .body-edit-details .user-profile-avatar-label {
     color: #5c4f3a;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.74rem;
 }
 
 .body-edit-details .auth-field-group {
-    margin-bottom: 10px;
+    margin-bottom: 7px;
+}
+
+.body-edit-details .auth-form .auth-submit {
+    margin-top: 4px;
+    padding: 9px 16px;
+    font-size: 0.86rem;
 }
 
 .body-edit-details .auth-form input {
-    padding: 8px 10px;
-    font-size: 0.88rem;
+    padding: 7px 10px;
+    font-size: 0.82rem;
     color: #2c2418;
     border: 1px solid rgba(158, 142, 118, 0.42);
     border-radius: 8px;
@@ -959,6 +1016,32 @@
 .body-daily-limit.body-daily-limit-gold-panel .wallet-form-hint {
     color: rgba(255, 236, 190, 0.82);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-picker-label {
+    color: #5c4a28;
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-stepper-btn {
+    border: 1px solid rgba(201, 168, 92, 0.55);
+    background: linear-gradient(180deg, #3a2a14 0%, #1a1208 55%, #0e0a06 100%);
+    color: #ffe082;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.18),
+            0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-stepper-glyph {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.body-daily-limit.body-daily-limit-gold-panel .daily-limit-stepper-btn:hover:not(:disabled) {
+    border-color: rgba(255, 224, 130, 0.75);
+    color: #fff8e8;
+    background: linear-gradient(180deg, #4a3618 0%, #24180c 55%, #120e08 100%);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.22),
+            0 8px 18px rgba(0, 0, 0, 0.4);
 }
 
 .body-daily-limit.body-daily-limit-gold-panel .daily-limit-range-hint {

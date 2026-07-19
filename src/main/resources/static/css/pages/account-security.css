@@ -14,16 +14,18 @@
 
 .body-change-password .wallet-landing {
     justify-content: center;
-    align-items: center;
+    align-items: safe center;
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 28px 24px;
+    padding: 14px 16px 28px;
     box-sizing: border-box;
 }
 
 .body-change-password .pwd-card {
     margin: 0 auto;
     margin-top: 0;
+    width: min(400px, 94vw);
+    padding: 28px 18px 14px;
 }
 
 .pwd-card {
@@ -45,6 +47,17 @@
 
 .pwd-back:hover {
     color: #ffb74d;
+}
+
+.body-change-password .pwd-card-badge {
+    top: -18px;
+    width: 42px;
+    height: 42px;
+}
+
+.body-change-password .pwd-card-badge svg {
+    width: 20px;
+    height: 20px;
 }
 
 .pwd-card-badge {
@@ -70,9 +83,18 @@
     height: 24px;
 }
 
+.body-change-password .pwd-card-header {
+    margin-bottom: 8px;
+}
+
 .pwd-card-header {
     text-align: center;
     margin-bottom: 13px;
+}
+
+.body-change-password .pwd-card-title {
+    margin: 0 0 2px;
+    font-size: clamp(1.1rem, 2.6vw, 1.3rem);
 }
 
 .pwd-card-title {
@@ -85,11 +107,21 @@
     text-shadow: 0 0 16px rgba(255, 143, 0, 0.35);
 }
 
+.body-change-password .pwd-card-subtitle {
+    font-size: 0.8rem;
+}
+
 .pwd-card-subtitle {
     margin: 0;
     color: #f5f5f5;
     font-size: 0.92rem;
     font-weight: 500;
+}
+
+.body-change-password .pwd-alert {
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    font-size: 0.82rem;
 }
 
 .pwd-alert {
@@ -102,6 +134,11 @@
     gap: 0;
 }
 
+.body-change-password .pwd-label {
+    margin: 0 0 3px;
+    font-size: 0.74rem;
+}
+
 .pwd-label {
     display: block;
     margin: 0 0 5px;
@@ -110,9 +147,19 @@
     font-weight: 600;
 }
 
+.body-change-password .pwd-field {
+    margin-bottom: 6px;
+}
+
 .pwd-field {
     position: relative;
     margin-bottom: 8px;
+}
+
+.body-change-password .pwd-field-icon {
+    left: 12px;
+    width: 16px;
+    height: 16px;
 }
 
 .pwd-field-icon {
@@ -129,6 +176,11 @@
 .pwd-field-icon svg {
     width: 100%;
     height: 100%;
+}
+
+.body-change-password .pwd-field input {
+    padding: 8px 12px 8px 38px;
+    font-size: 0.84rem;
 }
 
 .pwd-field input {
@@ -153,6 +205,60 @@
 
 .pwd-field-error {
     margin: -6px 0 8px;
+}
+
+.body-change-password .pwd-strength {
+    margin-bottom: 6px;
+}
+
+.body-change-password .pwd-strength-title,
+.body-change-password .pwd-strength-label {
+    font-size: 0.74rem;
+}
+
+.body-change-password .pwd-strength-bar {
+    gap: 4px;
+}
+
+.body-change-password .pwd-strength-seg {
+    height: 5px;
+}
+
+.body-change-password .pwd-requirements {
+    margin: 0 0 8px;
+    padding: 6px 10px;
+}
+
+.body-change-password .pwd-requirements li {
+    gap: 8px;
+    margin: 0 0 3px;
+    font-size: 0.74rem;
+}
+
+.body-change-password .pwd-req-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.body-change-password .pwd-submit {
+    gap: 8px;
+    margin-top: 2px;
+    padding: 9px 16px;
+    font-size: 0.84rem;
+}
+
+.body-change-password .pwd-submit svg {
+    width: 16px;
+    height: 16px;
+}
+
+.body-change-password .pwd-footer {
+    margin: 8px 0 0;
+    font-size: 0.72rem;
+}
+
+.body-change-password .form-panel-top {
+    margin-bottom: 6px;
 }
 
 .pwd-strength {
@@ -297,11 +403,12 @@
 
 @media (max-width: 720px) {
     .body-change-password .wallet-landing {
-        padding: 24px 16px;
+        padding: 12px 14px 24px;
     }
 
     .body-change-password .pwd-card {
         margin-top: 0;
+        padding: 26px 16px 12px;
     }
 }
 
@@ -548,10 +655,13 @@
 .body-change-password .pwd-card-title {
     color: #2c2418;
     text-shadow: none;
+    margin: 0 0 2px;
+    font-size: clamp(1.1rem, 2.6vw, 1.3rem);
 }
 
 .body-change-password .pwd-card-subtitle {
     color: #888;
+    font-size: 0.8rem;
     text-shadow:
             0 2px 3px rgba(255,255,255,.2),
             0 6px 10px rgba(0,0,0,.25),
@@ -560,13 +670,20 @@
 
 .body-change-password .pwd-label {
     color: #5c4f3a;
+    margin: 0 0 3px;
+    font-size: 0.74rem;
 }
 
 .body-change-password .pwd-field-icon {
     color: #9a9080;
+    left: 12px;
+    width: 16px;
+    height: 16px;
 }
 
 .body-change-password .pwd-field input {
+    padding: 8px 12px 8px 38px;
+    font-size: 0.84rem;
     color: #2c2418;
     border: 1px solid rgba(158, 142, 118, 0.42);
     border-radius: 10px;
