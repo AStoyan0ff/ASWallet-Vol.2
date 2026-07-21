@@ -295,3 +295,244 @@ body.body-admin .home-bg-overlay,
 .body-wallet.body-admin .home-bg-overlay {
     background: var(--user-bg-overlay);
 }
+
+/* /wallet premium-fe — black action tiles, gold labels, colored icons
+   (must live here: buttons.css loads after wallet.css and otherwise wins) */
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove),
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) {
+    border: none;
+    overflow: hidden;
+    background: linear-gradient(
+            145deg,
+            #141414 0%,
+            #0a0a0a 28%,
+            #050505 52%,
+            #000000 78%,
+            #0c0c0c 100%
+    );
+    color: #e6c04a;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 215, 128, 0.22),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+            0 4px 0 rgba(12, 10, 6, 0.85),
+            0 8px 16px rgba(0, 0, 0, 0.4);
+    filter: none;
+}
+
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove)::before,
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove)::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -60%;
+    width: 45%;
+    height: 180%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    background: linear-gradient(
+            115deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.04) 35%,
+            rgba(255, 255, 255, 0.14) 50%,
+            rgba(255, 255, 255, 0.04) 65%,
+            transparent 100%
+    );
+    transform: translateX(0) skewX(-18deg);
+    transition: none;
+}
+
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover,
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover {
+    border: none;
+    background: linear-gradient(
+            145deg,
+            #1c1c1c 0%,
+            #101010 28%,
+            #080808 52%,
+            #000000 78%,
+            #141414 100%
+    );
+    color: #f0d060;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+            0 5px 0 rgba(12, 10, 6, 0.88),
+            0 12px 22px rgba(0, 0, 0, 0.45);
+    filter: none;
+}
+
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover::before,
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove):hover::before {
+    opacity: 1;
+    animation: wallet-action-soft-sweep 0.7s ease-out;
+}
+
+@keyframes wallet-action-soft-sweep {
+    from {
+        transform: translateX(0) skewX(-18deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    to {
+        transform: translateX(280%) skewX(-18deg);
+        opacity: 0;
+    }
+}
+
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) > *:not(.wallet-quick-action-badge),
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) > *:not(.wallet-quick-action-badge) {
+    position: relative;
+    z-index: 1;
+}
+
+.body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) .wallet-quick-action-label,
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) .wallet-quick-action-label {
+    color: #e6c04a;
+    text-shadow:
+            0 1px 2px rgba(0, 0, 0, 0.75),
+            0 0 8px rgba(212, 175, 55, 0.18);
+}
+
+.body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--deposit:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--deposit:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #4ade80 !important;
+    stroke: #4ade80;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--withdraw:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--withdraw:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #f87171 !important;
+    stroke: #f87171;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--transfer:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon {
+    color: #4ade80 !important;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--transfer:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon .tx-arrow--out {
+    stroke: #f87171;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--transfer:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon .tx-arrow--in {
+    stroke: #4ade80;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--settings:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--settings:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #fbbf24 !important;
+    stroke: #fbbf24;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--history:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--history:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #1d4ed8 !important;
+    stroke: #1d4ed8;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--send:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--send:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #4ade80 !important;
+    stroke: #4ade80;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--inbox:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--inbox:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #ffffff !important;
+    stroke: #ffffff;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--bank:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--bank:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #fb923c !important;
+    stroke: #fb923c;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--admin:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--admin:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #ef4444 !important;
+    stroke: #ef4444;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--login-activity:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--login-activity:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #38bdf8 !important;
+    stroke: #38bdf8;
+}
+
+/* /admin — soft black sweep on Admin Tools + User Accounts action buttons */
+.admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled),
+.admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"]) {
+    overflow: hidden;
+}
+
+.admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled)::before,
+.admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"])::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -60%;
+    width: 45%;
+    height: 180%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    background: linear-gradient(
+            115deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.06) 35%,
+            rgba(0, 0, 0, 0.22) 50%,
+            rgba(0, 0, 0, 0.06) 65%,
+            transparent 100%
+    );
+    transform: translateX(0) skewX(-18deg);
+}
+
+.admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled):hover::before,
+.admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"]):hover::before {
+    opacity: 1;
+    animation: admin-action-soft-black-sweep 0.7s ease-out;
+}
+
+.admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled) > *:not(.wallet-quick-action-badge),
+.admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"]) > *:not(.wallet-quick-action-badge) {
+    position: relative;
+    z-index: 1;
+}
+
+.admin-tools-grid--left .wallet-quick-action-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 2;
+}
+
+@keyframes admin-action-soft-black-sweep {
+    from {
+        transform: translateX(0) skewX(-18deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    to {
+        transform: translateX(280%) skewX(-18deg);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled):hover::before,
+    .admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"]):hover::before {
+        animation: none;
+        opacity: 0;
+    }
+}

@@ -682,6 +682,10 @@
     margin: 0 0 8px;
 }
 
+.admin-split__pane--right .admin-users-actions.admin-pane-footer {
+    gap: 15px;
+}
+
 .admin-kpi-row {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -744,6 +748,11 @@
     border: 1px solid rgba(201, 168, 92, 0.3);
     background: rgba(0, 0, 0, 0.28);
     padding: 8px 10px 6px;
+    overflow: visible;
+}
+
+.admin-chart-card:has(.admin-chart-card__canvas-wrap--status) {
+    overflow: visible;
 }
 
 .admin-chart-card__title {
@@ -762,7 +771,134 @@
 }
 
 .admin-chart-card__canvas-wrap--status {
-    height: 120px;
+    height: 118px;
+    overflow: visible;
+}
+
+.admin-chart-status {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 8px;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    overflow: visible;
+}
+
+.admin-chart-status__stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 0;
+    overflow: visible;
+}
+
+.admin-chart-status__plot {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    flex: 0 0 auto;
+    z-index: 1;
+}
+
+.admin-chart-status__plot canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+.admin-chart-status__callouts {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.admin-chart-status__legend {
+    list-style: none;
+    margin: 0;
+    padding: 0 2px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 4px;
+    min-width: 0;
+    z-index: 3;
+    width: max-content;
+    max-width: 100%;
+}
+
+.admin-chart-status__legend-item {
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 6px;
+    min-width: 0;
+}
+
+.admin-chart-status__swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex: 0 0 auto;
+    justify-self: start;
+}
+
+.admin-chart-status__legend-label {
+    color: #fff4e1;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.admin-chart-callout-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: visible;
+}
+
+.admin-chart-callout-path {
+    stroke: rgba(255, 244, 225, 0.9);
+    stroke-width: 1.35;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.admin-chart-callout-box {
+    position: absolute;
+    width: max-content;
+    max-width: 110px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background: rgba(10, 8, 6, 0.94);
+    color: #fff4e1;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    transform: translateY(-50%);
+}
+
+.admin-chart-callout-box.is-left {
+    transform: translate(-100%, -50%);
+}
+
+.admin-chart-callout-box.is-right {
+    transform: translate(0, -50%);
 }
 
 .admin-chart-card__canvas-wrap--week {
@@ -880,51 +1016,84 @@
 }
 
 .admin-split__pane--right .admin-user-list-scroll {
-    flex: 1 1 0;
+    flex: 0 1 auto;
     min-height: 0;
     max-height: none;
     margin-top: 0;
-    padding-right: 8px;
+    padding-right: 6px;
     overflow-x: hidden;
     overflow-y: hidden;
     overscroll-behavior: contain;
     scrollbar-width: thin;
-    scrollbar-color: rgba(212, 175, 55, 0.7) rgba(0, 0, 0, 0.35);
+    scrollbar-color: #d4af37 #0a0a0a;
 }
 
 .admin-split__pane--right .admin-user-list-scroll.is-scrollable {
     overflow-y: auto;
-    padding-right: 8px;
+    padding-right: 6px;
 }
 
 .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 999px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
 }
 
 .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.7);
+    background: #d4af37;
+    border: none;
     border-radius: 999px;
+    min-height: 28px;
 }
 
 .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 224, 130, 0.85);
+    background: #e6c04a;
+}
+
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+    border: none;
+}
+
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-button:single-button {
+    display: block;
+    height: 12px;
+    width: 8px;
+    background-color: #0a0a0a;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}
+
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000000' d='M4 1.5L7 5.5H1z'/%3E%3C/svg%3E");
+    background-color: #d4af37;
+}
+
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23000000' d='M1 2.5h6L4 6.5z'/%3E%3C/svg%3E");
+    background-color: #d4af37;
+}
+
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-button:single-button:vertical:decrement:hover,
+.admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-button:single-button:vertical:increment:hover {
+    background-color: #e6c04a;
 }
 
 .admin-split__pane--right .admin-user-list {
-    gap: 6px;
+    gap: 5px;
 }
 
 .admin-split__pane--right .admin-user-card {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
-    padding: 10px 12px;
+    gap: 4px;
+    padding: 7px 10px;
     border-radius: 10px;
     border: 1px solid rgba(158, 142, 118, 0.4);
     background: linear-gradient(180deg, #efe7db 0%, #e4dccf 100%);
@@ -963,7 +1132,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 10px 16px;
+    gap: 6px 12px;
     width: 100%;
     text-align: center;
 }
@@ -978,13 +1147,13 @@
 
 .admin-split__pane--right .admin-user-card__name {
     color: #2c1f14;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
 }
 
 .admin-split__pane--right .admin-user-card__email {
     display: inline;
     color: rgba(70, 50, 35, 0.78);
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     margin-top: 0;
     text-align: center;
     word-break: break-word;
@@ -1031,7 +1200,7 @@
 
 .admin-split__pane--right .admin-user-card__balance {
     color: #8a6410;
-    font-size: 0.74rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-align: left;
 }
@@ -4033,6 +4202,13 @@
             inset 0 1px 0 rgba(255, 255, 255, 0.72),
             0 4px 14px rgba(0, 0, 0, 0.28);
     font-weight: 600;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    padding: 7px 10px;
+    margin-bottom: 10px;
+    max-width: 92%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .body-admin-wallet-panel .wallet-panel--admin > .error {
@@ -4050,20 +4226,22 @@
             0 2px 8px rgba(43, 5, 5, 0.38);
 }
 
-.body-admin-wallet-panel .admin-user-list-scroll {
-    scrollbar-color: rgba(158, 142, 118, 0.55) rgba(244, 238, 228, 0.65);
+.body-admin-wallet-panel .admin-split__pane--right .admin-user-list-scroll {
+    scrollbar-color: #d4af37 #0a0a0a;
 }
 
-.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-track {
-    background: rgba(244, 238, 228, 0.65);
+.body-admin-wallet-panel .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
 }
 
-.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-thumb {
-    background: rgba(158, 142, 118, 0.55);
+.body-admin-wallet-panel .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border: none;
 }
 
-.body-admin-wallet-panel .admin-user-list-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(138, 115, 64, 0.72);
+.body-admin-wallet-panel .admin-split__pane--right .admin-user-list-scroll::-webkit-scrollbar-thumb:hover {
+    background: #e6c04a;
 }
 
 .body-admin-wallet-panel .admin-user-card {

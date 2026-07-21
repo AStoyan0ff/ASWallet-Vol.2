@@ -106,13 +106,36 @@
                 </div>
             </div>
         </div>
-            </div>
 
+        <section class="wallet-recent-activity auth-stagger" aria-label="Recent activity">
+
+            <h3 class="wallet-recent-activity__title">Recent activity - Last (3)</h3>
+
+            <ul class="wallet-recent-activity__list" th:if="${recentTransactions != null and !#lists.isEmpty(recentTransactions)}">
+                <li class="wallet-recent-activity__item" th:each="tx : ${recentTransactions}">
+                    <span class="wallet-recent-activity__amount"
+                          th:with="isOutgoing=${tx.type.name() == 'WITHDRAW' or (tx.type.name() == 'TRANSFER' and tx.senderUsername == wallet.username)}"
+                          th:classappend="${isOutgoing} ? ' is-outgoing' : ' is-incoming'"
+                          th:text="${'€ ' + (isOutgoing ? '-' : '+') + #numbers.formatDecimal(tx.amount, 1, 'WHITESPACE', 2, 'POINT')}"></span>
+                    <span class="wallet-recent-activity__date" th:text="${tx.createdAt}"></span>
+                </li>
+            </ul>
+
+            <p class="wallet-recent-activity__empty"
+               th:if="${recentTransactions == null or #lists.isEmpty(recentTransactions)}">
+                No recent transactions
+            </p>
+            <a class="wallet-recent-activity__link" th:href="@{/transactions/history}">View history</a>
+
+        </section>
+            </div>
             <aside class="wallet-dashboard-side">
-        <!-- Advanced — dashboard quick actions -->
         <section class="wallet-quick-actions auth-stagger">
+
             <h3 class="wallet-quick-actions-title">Quick Actions</h3>
+
             <div class="wallet-quick-actions-grid wallet-quick-actions-grid--elevated">
+
                 <a class="wallet-quick-action wallet-quick-action--deposit" th:href="@{/transactions/deposit}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -122,6 +145,7 @@
                     </span>
                     <span class="wallet-quick-action-label">DEPOSIT</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--withdraw" th:href="@{/transactions/withdraw}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -131,17 +155,23 @@
                     </span>
                     <span class="wallet-quick-action-label">WITHDRAW</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--transfer" th:href="@{/transactions/transfer}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 7h11"/>
-                            <path d="M14 4l4 3-4 3"/>
-                            <path d="M17 17H6"/>
-                            <path d="M10 20l-4-3 4-3"/>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <g class="tx-arrow--in" stroke="currentColor">
+                                <path d="M7 7h11"/>
+                                <path d="M14 4l4 3-4 3"/>
+                            </g>
+                            <g class="tx-arrow--out" stroke="currentColor">
+                                <path d="M17 17H6"/>
+                                <path d="M10 20l-4-3 4-3"/>
+                            </g>
                         </svg>
                     </span>
                     <span class="wallet-quick-action-label">TRANSFER</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--settings" th:href="@{/wallet/settings}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -151,13 +181,16 @@
                     </span>
                     <span class="wallet-quick-action-label">SETTINGS</span>
                 </a>
+
             </div>
         </section>
 
-        <!-- Advanced — dashboard more actions -->
+
         <section class="wallet-more-actions auth-stagger">
             <h3 class="wallet-quick-actions-title">More Actions</h3>
+
             <div class="wallet-quick-actions-grid wallet-quick-actions-grid--elevated">
+
                 <a class="wallet-quick-action wallet-quick-action--history" th:href="@{/transactions/history}">
                     <span class="wallet-quick-action-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -167,6 +200,7 @@
                     </span>
                     <span class="wallet-quick-action-label">HISTORY</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--send"
                    th:unless="${isAdmin}"
                    th:href="@{/wallet/messages/send}">
@@ -178,6 +212,7 @@
                     </span>
                     <span class="wallet-quick-action-label">SEND MESSAGE</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--bank"
                    th:if="${isAdmin}"
                    th:href="@{/wallet/bank-details}">
@@ -190,6 +225,7 @@
                     <span class="wallet-quick-action-label"
                           th:text="${savedBankCard != null} ? 'VIEW BANK DETAILS' : 'ADD BANK CARD'">BANK DETAILS</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--inbox wallet-quick-action--badge"
                    th:unless="${isAdmin}"
                    th:href="@{/wallet/messages}">
@@ -204,6 +240,7 @@
                           th:if="${unreadMessageCount > 0}"
                           th:text="${unreadMessageCount}"></span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--login-activity"
                    th:if="${isAdmin}"
                    th:href="@{/admin/login-activity}">
@@ -216,6 +253,7 @@
                     </span>
                     <span class="wallet-quick-action-label">LOGIN ACTIVITY</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--bank"
                    th:unless="${isAdmin}"
                    th:href="@{/wallet/bank-details}">
@@ -228,6 +266,7 @@
                     <span class="wallet-quick-action-label"
                           th:text="${savedBankCard != null} ? 'VIEW BANK DETAILS' : 'ADD BANK CARD'">Bank Details</span>
                 </a>
+
                 <a class="wallet-quick-action wallet-quick-action--admin wallet-quick-action--badge"
                    th:if="${isAdmin}"
                    th:href="@{/admin}">
@@ -241,11 +280,13 @@
                           th:if="${pendingRiskReviewCount != null and pendingRiskReviewCount > 0}"
                           th:text="${pendingRiskReviewCount}"></span>
                 </a>
+
             </div>
         </section>
 
         <form class="wallet-logout auth-stagger" th:action="@{/logout}" method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
             <button type="submit" class="wallet-logout-tile">
                 <span class="wallet-quick-action-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -257,7 +298,8 @@
                 <span class="wallet-quick-action-label">LOGOUT</span>
             </button>
         </form>
-            </aside>
+
+        </aside>
         </div>
     </section>
 </main>

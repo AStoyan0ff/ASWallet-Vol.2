@@ -74,25 +74,25 @@ The applications communicate through Spring Cloud OpenFeign and are protected wi
 
 ### Project Statistics
 
-| Area | Count |
-|------|------:|
-| Java source files | 163 |
-| Controllers | 15 |
-| Service interfaces | 17 |
-| Service implementations | 22 |
-| JPA repositories | 8 |
-| JPA entities | 9 |
-| DTOs | 29 |
-| Enums | 8 |
-| Custom exceptions | 26 |
-| Configuration classes | 11 |
-| Thymeleaf pages | 34 |
-| Reusable fragments | 4 |
-| CSS files | 16 |
-| JavaScript files | 19 |
-| Test classes | 26 |
-| Test methods | ~272 |
-| JaCoCo line coverage | **77.8%** ✅ |
+| Area                    |       Count |
+|-------------------------|------------:|
+| Java source files       |         163 |
+| Controllers             |          15 |
+| Service interfaces      |          17 |
+| Service implementations |          22 |
+| JPA repositories        |           8 |
+| JPA entities            |           9 |
+| DTOs                    |          29 |
+| Enums                   |           8 |
+| Custom exceptions       |          26 |
+| Configuration classes   |          11 |
+| Thymeleaf pages         |          34 |
+| Reusable fragments      |           4 |
+| CSS files               |          16 |
+| JavaScript files        |          19 |
+| Test classes            |          26 |
+| Test methods            |        ~272 |
+| JaCoCo line coverage    | **77.8%** ✅ |
 
 ---
 
@@ -133,34 +133,34 @@ The applications communicate through Spring Cloud OpenFeign and are protected wi
 
 ### Applications
 
-| Application | Port | Database | Responsibility |
-|-------------|------|----------|----------------|
-| `ASWallet-Vol.2` | `8080` | `as_wallet` | UI, wallet operations, security and Feign client |
-| `ASWallet-Vol.2-svc` | `8081` | `as_wallet_svc` | Transfer risk assessment REST API |
+| Application          | Port   | Database        | Responsibility                                   |
+|----------------------|--------|-----------------|--------------------------------------------------|
+| `ASWallet-Vol.2`     | `8080` | `as_wallet`     | UI, wallet operations, security and Feign client |
+| `ASWallet-Vol.2-svc` | `8081` | `as_wallet_svc` | Transfer risk assessment REST API                |
 
 ---
 
 ## Tech Stack
 
-| Area | Technology |
-|------|------------|
-| Language | Java 21 |
-| Framework | Spring Boot 4.0.6 |
-| Web | Spring MVC |
-| Frontend | Thymeleaf, HTML5, CSS3, vanilla JavaScript |
-| Security | Spring Security, BCrypt, CSRF |
-| Persistence | Spring Data JPA, Hibernate |
-| Database | MySQL |
-| Validation | Jakarta Bean Validation |
+| Area        | Technology                                 |
+|-------------|--------------------------------------------|
+| Language    | Java 21                                    |
+| Framework   | Spring Boot 4.0.6                          |
+| Web         | Spring MVC                                 |
+| Frontend    | Thymeleaf, HTML5, CSS3, vanilla JavaScript |
+| Security    | Spring Security, BCrypt, CSRF              |
+| Persistence | Spring Data JPA, Hibernate                 |
+| Database    | MySQL                                      |
+| Validation  | Jakarta Bean Validation                    |
 | Integration | Spring Cloud OpenFeign 2025.1.1, Feign HC5 |
-| Email | Spring Mail, SMTP |
-| Events | Spring Application Events |
-| Scheduling | Spring Scheduling |
-| Caching | Spring Cache |
-| PDF export | OpenPDF 2.0.3 |
-| Testing | JUnit 5, Mockito, MockMvc, JaCoCo |
-| Build | Maven |
-| Utilities | Lombok |
+| Email       | Spring Mail, SMTP                          |
+| Events      | Spring Application Events                  |
+| Scheduling  | Spring Scheduling                          |
+| Caching     | Spring Cache                               |
+| PDF export  | OpenPDF 2.0.3                              |
+| Testing     | JUnit 5, Mockito, MockMvc, JaCoCo          |
+| Build       | Maven                                      |
+| Utilities   | Lombok                                     |
 
 ---
 
@@ -186,30 +186,30 @@ AdminMailboxMessage ───── User
 
 ### Entities
 
-| Entity | Database table | Purpose |
-|--------|----------------|---------|
-| `User` | `users` | Account credentials and role |
-| `Wallet` | `wallets` | User balance |
-| `Transaction` | `transactions` | Deposits, withdrawals and transfers |
-| `BankCard` | `bank_cards` | Card information and generated IBAN |
-| `UserProfileDetails` | `user_profile_details` | Profile, status and wallet settings |
+| Entity                | Database table           | Purpose                                        |
+|-----------------------|--------------------------|------------------------------------------------|
+| `User`                | `users`                  | Account credentials and role                   |
+| `Wallet`              | `wallets`                | User balance                                   |
+| `Transaction`         | `transactions`           | Deposits, withdrawals and transfers            |
+| `BankCard`            | `bank_cards`             | Card information and generated IBAN            |
+| `UserProfileDetails`  | `user_profile_details`   | Profile, status and wallet settings            |
 | `AdminMailboxMessage` | `admin_mailbox_messages` | Communication between users and administrators |
-| `PasswordResetToken` | `password_reset_tokens` | Forgot-password tokens |
-| `LoginActivity` | `login_activity` | Authentication audit records |
-| `BaseClass` | — | UUID mapped superclass |
+| `PasswordResetToken`  | `password_reset_tokens`  | Forgot-password tokens                         |
+| `LoginActivity`       | `login_activity`         | Authentication audit records                   |
+| `BaseClass`           | —                        | UUID mapped superclass                         |
 
 ### Enums
 
-| Enum | Values |
-|------|--------|
-| `UserRole` | `USER`, `ADMIN` |
-| `AccountStatus` | `ACTIVE`, `INACTIVE` |
-| `TransactionType` | `DEPOSIT`, `WITHDRAW`, `TRANSFER` |
+| Enum                | Values                                                               |
+|---------------------|----------------------------------------------------------------------|
+| `UserRole`          | `USER`, `ADMIN`                                                      |
+| `AccountStatus`     | `ACTIVE`, `INACTIVE`                                                 |
+| `TransactionType`   | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                                    |
 | `TransactionStatus` | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED` |
-| `SpendingCategory` | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT` |
-| `RiskDecision` | `ALLOW`, `REVIEW`, `BLOCK` |
-| `AssessmentStatus` | `PENDING`, `APPROVED`, `REJECTED` |
-| `RiskLevel` | `LOW`, `MEDIUM`, `HIGH` |
+| `SpendingCategory`  | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT`            |
+| `RiskDecision`      | `ALLOW`, `REVIEW`, `BLOCK`                                           |
+| `AssessmentStatus`  | `PENDING`, `APPROVED`, `REJECTED`                                    |
+| `RiskLevel`         | `LOW`, `MEDIUM`, `HIGH`                                              |
 
 ---
 
@@ -310,11 +310,11 @@ The main application sends transfer information through `RiskAssessmentClient`.
 
 ### Risk Decisions
 
-| Decision | Transaction status | Behaviour |
-|----------|--------------------|-----------|
-| `ALLOW` | `PENDING` | The scheduler completes the transfer |
+| Decision | Transaction status    | Behaviour                                                  |
+|----------|-----------------------|------------------------------------------------------------|
+| `ALLOW`  | `PENDING`             | The scheduler completes the transfer                       |
 | `REVIEW` | `PENDING_RISK_REVIEW` | Funds are held until an administrator reviews the transfer |
-| `BLOCK` | Not created | The transfer is rejected immediately |
+| `BLOCK`  | Not created           | The transfer is rejected immediately                       |
 
 ### Manual Review Endpoints
 
@@ -336,52 +336,52 @@ When enabled, transfers can continue if the risk microservice is temporarily una
 
 ### Public Pages
 
-| Template | Route |
-|----------|-------|
-| `home.html` | `/` |
-| `login.html` | `/login` |
-| `register.html` | `/register` |
+| Template               | Route              |
+|------------------------|--------------------|
+| `home.html`            | `/`                |
+| `login.html`           | `/login`           |
+| `register.html`        | `/register`        |
 | `forgot-password.html` | `/forgot-password` |
-| `reset-password.html` | `/reset-password` |
+| `reset-password.html`  | `/reset-password`  |
 | `account-deleted.html` | `/account-deleted` |
 
 ### Authenticated User Pages
 
-| Template | Route |
-|----------|-------|
-| `wallet.html` | `/wallet` |
-| `bank-details.html` | `/wallet/bank-details` |
-| `settings.html` | `/wallet/settings` |
-| `payments.html` | `/wallet/payments` |
-| `change-password.html` | `/wallet/change-password` |
-| `delete-account.html` | `/wallet/delete-account` |
-| `daily-limit-edit.html` | `/wallet/daily-limit/edit` |
-| `transaction-export.html` | `/wallet/export` |
-| `contact-us.html` | `/wallet/contact-us` |
-| `privacy-policy.html` | `/wallet/privacy` |
-| `terms-of-service.html` | `/wallet/terms` |
-| `wallet-send-message.html` | `/wallet/messages/send` |
-| `wallet-messages.html` | `/wallet/messages` |
-| `wallet-message-view.html` | `/wallet/messages/{id}` |
-| `deposit.html` | `/transactions/deposit` |
-| `withdraw.html` | `/transactions/withdraw` |
-| `transfer.html` | `/transactions/transfer` |
-| `transfer-confirm.html` | `/transactions/transfer/confirm` |
-| `transaction-history.html` | `/transactions/history` |
-| `profile.html` | `/profile` |
-| `profile-edit.html` | `/profile/edit` |
+| Template                   | Route                            |
+|----------------------------|----------------------------------|
+| `wallet.html`              | `/wallet`                        |
+| `bank-details.html`        | `/wallet/bank-details`           |
+| `settings.html`            | `/wallet/settings`               |
+| `payments.html`            | `/wallet/payments`               |
+| `change-password.html`     | `/wallet/change-password`        |
+| `delete-account.html`      | `/wallet/delete-account`         |
+| `daily-limit-edit.html`    | `/wallet/daily-limit/edit`       |
+| `transaction-export.html`  | `/wallet/export`                 |
+| `contact-us.html`          | `/wallet/contact-us`             |
+| `privacy-policy.html`      | `/wallet/privacy`                |
+| `terms-of-service.html`    | `/wallet/terms`                  |
+| `wallet-send-message.html` | `/wallet/messages/send`          |
+| `wallet-messages.html`     | `/wallet/messages`               |
+| `wallet-message-view.html` | `/wallet/messages/{id}`          |
+| `deposit.html`             | `/transactions/deposit`          |
+| `withdraw.html`            | `/transactions/withdraw`         |
+| `transfer.html`            | `/transactions/transfer`         |
+| `transfer-confirm.html`    | `/transactions/transfer/confirm` |
+| `transaction-history.html` | `/transactions/history`          |
+| `profile.html`             | `/profile`                       |
+| `profile-edit.html`        | `/profile/edit`                  |
 
 ### Administrator Pages
 
-| Template | Route |
-|----------|-------|
-| `admin.html` | `/admin` |
-| `admin-login-activity.html` | `/admin/login-activity` |
-| `admin-user-manage.html` | `/admin/users/{id}/manage` |
-| `admin-send-message.html` | `/admin/messages/send` |
-| `admin-message-inbox.html` | `/admin/messages/inbox` |
+| Template                    | Route                                     |
+|-----------------------------|-------------------------------------------|
+| `admin.html`                | `/admin`                                  |
+| `admin-login-activity.html` | `/admin/login-activity`                   |
+| `admin-user-manage.html`    | `/admin/users/{id}/manage`                |
+| `admin-send-message.html`   | `/admin/messages/send`                    |
+| `admin-message-inbox.html`  | `/admin/messages/inbox`                   |
 | `admin-message-thread.html` | `/admin/messages/users/{username}/thread` |
-| `admin-risk-reviews.html` | `/admin/risk-reviews` |
+| `admin-risk-reviews.html`   | `/admin/risk-reviews`                     |
 
 ### Reusable Thymeleaf Fragments
 
@@ -396,34 +396,34 @@ When enabled, transfers can continue if the risk microservice is temporarily una
 
 ### Main Application
 
-| Mechanism | Implementation |
-|-----------|----------------|
-| Authentication | Spring Security form login |
-| Login processing | `/spring-security-login` |
-| Password storage | BCrypt |
-| Session management | HTTP session and `JSESSIONID` |
-| CSRF protection | Enabled for state-changing forms |
-| User roles | `ROLE_USER`, `ROLE_ADMIN` |
+| Mechanism           | Implementation                    |
+|---------------------|-----------------------------------|
+| Authentication      | Spring Security form login        |
+| Login processing    | `/spring-security-login`          |
+| Password storage    | BCrypt                            |
+| Session management  | HTTP session and `JSESSIONID`     |
+| CSRF protection     | Enabled for state-changing forms  |
+| User roles          | `ROLE_USER`, `ROLE_ADMIN`         |
 | Admin authorization | `/admin/**` requires `ROLE_ADMIN` |
-| Account protection | Inactive accounts cannot log in |
-| Secrets | Loaded from environment variables |
+| Account protection  | Inactive accounts cannot log in   |
+| Secrets             | Loaded from environment variables |
 
 ### Microservice API Key
 
 Service-to-service communication is protected with the `X-API-Key` header.
 
-| Application | Property |
-|-------------|----------|
-| Main application | `app.risk-service.api-key` |
-| Risk microservice | `app.security.api-key` |
+| Application       | Property                   |
+|-------------------|----------------------------|
+| Main application  | `app.risk-service.api-key` |
+| Risk microservice | `app.security.api-key`     |
 
 ---
 
 ### Optional Environment Variables
 
-| Variable | Purpose                                                                      |
-|----------|------------------------------------------------------------------------------|
-| `RISK_SERVICE_API_KEY` | **Overrides the default development API key used between both applications** |
+| Variable               | Purpose                  |
+|------------------------|--------------------------|
+| `RISK_SERVICE_API_KEY` | **aswallet-dev-api-key** |
 
 ---
 
@@ -431,20 +431,20 @@ Service-to-service communication is protected with the `X-API-Key` header.
 
 ### Scheduled Jobs
 
-| Job | Trigger | Purpose |
-|-----|---------|---------|
-| `processPendingTransfers` | Configurable cron | Complete pending transfers |
-| `cancelStalePendingTransfers` | Fixed delay | Cancel expired pending transfers |
-| `PasswordResetTokenCleanupScheduler` | Configurable cron | Delete expired reset tokens |
+| Job                                  | Trigger           | Purpose                          |
+|--------------------------------------|-------------------|----------------------------------|
+| `processPendingTransfers`            | Configurable cron | Complete pending transfers       |
+| `cancelStalePendingTransfers`        | Fixed delay       | Cancel expired pending transfers |
+| `PasswordResetTokenCleanupScheduler` | Configurable cron | Delete expired reset tokens      |
 
 ---
 
 ### Application Caches
 
-| Cache | Purpose |
-|-------|---------|
-| `profiles` | User profile reads |
-| `walletSettings` | Wallet settings reads |
+| Cache                | Purpose                   |
+|----------------------|---------------------------|
+| `profiles`           | User profile reads        |
+| `walletSettings`     | Wallet settings reads     |
 | `transactionHistory` | Transaction history reads |
 
 Cache eviction is managed through `ApplicationCacheEviction`.
@@ -453,10 +453,10 @@ Cache eviction is managed through `ApplicationCacheEviction`.
 
 ## Email and Events
 
-| Event | Listener | Purpose |
-|-------|----------|---------|
-| `UserRegisteredEvent` | `UserRegisteredEventListener` | Send registration confirmation |
-| `TransactionCompletedEvent` | `TransactionCompletedEventListener` | Send transaction notification |
+| Event                       | Listener                            | Purpose                        |
+|-----------------------------|-------------------------------------|--------------------------------|
+| `UserRegisteredEvent`       | `UserRegisteredEventListener`       | Send registration confirmation |
+| `TransactionCompletedEvent` | `TransactionCompletedEventListener` | Send transaction notification  |
 
 SMTP configuration:
 
@@ -484,6 +484,7 @@ The application contains 26 custom exceptions, including:
 - `CannotCancelTransferException`
 - `MailboxMessageNotFoundException`
 - `UserNotFoundException`
+- `...`
 
 ---
 
@@ -526,10 +527,10 @@ src
 
 The frontend contains:
 
-- 16 modular CSS files
+- Sixteen modular CSS files
 - 19 JavaScript files
 - 34 Thymeleaf pages
-- 4 reusable Thymeleaf fragments
+- Four reusable Thymeleaf fragments
 - Separate page backgrounds and application assets
 
 User-uploaded avatars are stored in:
@@ -546,13 +547,12 @@ This directory is excluded from Git.
 
 ### Required Environment Variables
 
-| Variable | Purpose |
-|----------|---------|
-| `DB_PASSWORD` | MySQL database password |
-| `MAIL_PASSWORD` | SMTP account password |
-| `ADMIN_PASSWORD` | Bootstrap administrator password |
-| `RISK_SERVICE_API_KEY` | Shared microservice API key |
-| `ADMIN_CARD_*` | Optional administrator card configuration |
+| Variable         | Purpose                                   |
+|------------------|-------------------------------------------|
+| `DB_PASSWORD`    | MySQL database password: `your pass`      |
+| `MAIL_PASSWORD`  | SMTP `my pass`                            |
+| `ADMIN_PASSWORD` | admin123                                  |
+| `ADMIN_CARD_*`   | Optional administrator card configuration |
 
 Local credentials can be stored in:
 
@@ -564,20 +564,10 @@ This file should remain excluded from Git.
 
 ---
 
-## Getting Started
-
-### Prerequisites
-
-- Java 21
-- Maven
-- MySQL
-- Git
-
 ### 1. Clone the Main Application
 
 ```powershell
 git clone https://github.com/AStoyan0ff/ASWallet-Vol.2.git
-cd ASWallet-Vol.2
 ```
 
 ### 2. Clone the Risk Microservice
@@ -587,15 +577,6 @@ Clone it next to the main application:
 ```powershell
 git clone https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
 ```
-
-Recommended directory structure:
-
-```text
-Projects/
-├── ASWallet-Vol.2/
-└── ASWallet-Vol.2-svc/
-```
-
 ### 3. Create the Databases
 
 ```sql
@@ -606,10 +587,10 @@ CREATE DATABASE as_wallet_svc;
 ### 4. Set Environment Variables
 
 ```powershell
-$env:DB_PASSWORD = "your-mysql-password"
-$env:MAIL_PASSWORD = "your-smtp-password"
-$env:ADMIN_PASSWORD = "your-admin-password"
-$env:RISK_SERVICE_API_KEY = "your-secure-api-key"
+$env:DB_PASSWORD = "your password"
+$env:MAIL_PASSWORD = "my password"
+$env:ADMIN_PASSWORD = "admin123"
+$env:RISK_SERVICE_API_KEY = "aswallet-dev-api-key"
 ```
 
 ### 5. Start the Risk Microservice
@@ -651,25 +632,24 @@ server.address=0.0.0.0
 Open the application from another device with:
 
 ```text
-http://<PC-LAN-IP>:8080
+https://<PC-LAN-IP>:8080
 ```
 
 Configure the risk service URL when testing across the local network:
 
 ```properties
-app.risk-service.base-url=http://<PC-LAN-IP>:8081
+app.risk-service.base-url=https://<PC-LAN-IP>:8081
 ```
 
 ---
 
 ## Testing and Coverage
 
-| Metric | Result |
-|--------|-------:|
-| Test classes | 26 |
-| Test methods | ~272 |
-| JaCoCo line coverage | **77.8%** ✅ |
-| Coverage target | 70% |
+| Metric               |    Result |
+|----------------------|----------:|
+| Test classes         |      26+- |
+| Test methods         |     +-272 |
+| JaCoCo line coverage | **77.8%** |
 
 Run the test suite:
 
@@ -722,19 +702,19 @@ CVC:         123
 
 ```text
 Username: admin
-Password: ADMIN_PASSWORD environment variable
+Password: ADMIN_PASSWORD: admin123
 ```
 
 ### Troubleshooting
 
-| Problem | Solution |
-|---------|----------|
-| Risk-review list is empty | Start the risk microservice on port `8081` |
-| Transfer is blocked unexpectedly | Verify the receiver has a card and inspect the risk score |
-| Microservice returns `401` | Ensure both applications use the same API key |
-| Phone cannot connect | Use the computer's LAN IP instead of `localhost` |
-| Email cannot be sent | Verify `MAIL_PASSWORD` and the SMTP configuration |
-| Application cannot connect to MySQL | Verify the databases and `DB_PASSWORD` |
+| Problem                             | Solution                                                  |
+|-------------------------------------|-----------------------------------------------------------|
+| Risk-review list is empty           | Start the risk microservice on port `8081`                |
+| Transfer is blocked unexpectedly    | Verify the receiver has a card and inspect the risk score |
+| Microservice returns `401`          | Ensure both applications use the same API key             |
+| Phone cannot connect                | Use the computer's LAN IP instead of `localhost`          |
+| Email cannot be sent                | Verify `MAIL_PASSWORD` and the SMTP configuration         |
+| Application cannot connect to MySQL | Verify the databases and `DB_PASSWORD`                    |
 
 ---
 

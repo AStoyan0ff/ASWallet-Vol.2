@@ -6,6 +6,7 @@ import STARTER.Clients.RiskAssessmentClient;
 import STARTER.CustomException.RiskReviewServiceException;
 import STARTER.Enums.AssessmentStatus;
 import STARTER.Enums.RiskDecision;
+import STARTER.Repositories.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,7 @@ class AdminRiskReviewServiceImplTest {
 
     @Mock private RiskAssessmentClient riskAssessmentClient;
     @Mock private PendingTransferProcessingService pendingTransferProcessingService;
+    @Mock private TransactionRepository transactionRepository;
 
     private AdminRiskReviewServiceImpl adminRiskReviewService;
 
@@ -37,6 +39,7 @@ class AdminRiskReviewServiceImplTest {
         adminRiskReviewService = new AdminRiskReviewServiceImpl(
                 riskAssessmentClient,
                 pendingTransferProcessingService,
+                transactionRepository,
                 true
         );
         assessmentId = UUID.randomUUID();
@@ -117,6 +120,31 @@ class AdminRiskReviewServiceImplTest {
         assertThat(deleted).isEqualTo(1);
         verify(pendingTransferProcessingService).rejectRiskHeldTransfer(transactionRef);
         verify(riskAssessmentClient).deleteManualReviews();
+    }
+
+    @Test
+    void countPendingReviews_usesManualReviewsEndpoint() {
+        RiskAssessmentClientResponse pending = assessmentWithTransactionRef();
+        RiskAssessmentClientResponse approved = assessmentWithTransactionRef();
+        approved.setId(UUID.randomUUID());
+        approved.setStatus(AssessmentStatus.APPROVED);
+
+        when(riskAssessmentClient.listManualReviews()).thenReturn(java.util.List.of(pending, approved));
+
+        assertThat(adminRiskReviewService.countPendingReviews()).isEqualTo(1L);
+        verify(riskAssessmentClient).listManualReviews();
+        verify(riskAssessmentClient, never()).listAssessments(any(), any());
+    }
+
+    @Test
+    void countPendingReviews_fallsBackToLocalTransfersWhenMicroserviceFails() {
+        when(riskAssessmentClient.listManualReviews()).thenThrow(new RuntimeException("down"));
+        when(transactionRepository.countByTypeAndStatus(
+                STARTER.Enums.TransactionType.TRANSFER,
+                STARTER.Enums.TransactionStatus.PENDING_RISK_REVIEW
+        )).thenReturn(2L);
+
+        assertThat(adminRiskReviewService.countPendingReviews()).isEqualTo(2L);
     }
 
     private RiskAssessmentClientResponse assessmentWithTransactionRef() {

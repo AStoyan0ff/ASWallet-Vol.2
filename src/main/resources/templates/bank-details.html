@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <title th:text="${savedBankCard != null} ? 'View Bank Details ASWallet' : 'Bank Details ASWallet'">Bank Details
         ASWallet</title>
@@ -7,6 +8,7 @@
 </head>
 
 <body class="body-wallet body-bank-details body-bank-details-light body-bank-details-gold-panel">
+
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/bank-details-light.png}" alt="">
     <div class="home-bg-overlay"></div>
@@ -23,8 +25,9 @@
                 <h1 class="bank-card-title" th:text="${savedBankCard != null} ? 'View Bank Details' : 'Bank Details'">
                     Bank Details</h1>
                 <p class="bank-card-subtitle" th:if="${savedBankCard}">Your registered ASW Bank card</p>
-                <p class="bank-card-subtitle" th:unless="${savedBankCard}">Add a bank card to receive €50.00 welcome
-                    bonus</p>
+                <p
+                    class="bank-card-subtitle" th:unless="${savedBankCard}">Add a bank card to receive a € 50.00 welcome bonus
+                </p>
             </header>
 
             <div class="success bank-card-alert" th:if="${successMessage}" th:text="${successMessage}"></div>
@@ -32,6 +35,7 @@
 
             <div class="asw-bank-card-scene"
                  th:classappend="${savedBankCard != null} ? ' asw-bank-card-scene--view' : ' asw-bank-card-scene--edit'">
+
                 <article class="asw-bank-card" aria-label="ASW Bank card">
                     <span class="asw-bank-card__texture" aria-hidden="true"></span>
                     <span class="asw-bank-card__shine" aria-hidden="true"></span>
@@ -145,7 +149,7 @@
                                  th:errors="*{cardExpiryInFuture}"></div>
                         </div>
 
-                        <div class="asw-bank-card__field bank-card-form-row">
+                        <div class="asw-bank-card__field bank-card-form-row bank-card-form-row--cvc">
                             <label class="bank-card-label" for="cardCvc">Card CVC</label>
                             <div class="bank-card-field password-field-wrap">
                                 <input id="cardCvc" type="password" th:field="*{cardCvc}"

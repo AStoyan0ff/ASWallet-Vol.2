@@ -189,8 +189,12 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
             return "Transfer blocked by risk assessment (score " + response.getRiskScore() + ").";
         }
 
-        return "Transfer blocked by risk assessment: "
-                + reasons.stream().collect(Collectors.joining("; "));
+        String joined = reasons.stream()
+                .filter(reason -> reason != null && !reason.isBlank())
+                .map(reason -> reason.replaceAll("[.\\s]+$", ""))
+                .collect(Collectors.joining("; "));
+
+        return "Transfer blocked by risk assessment: " + joined + ".";
     }
 
     private RiskAssessmentClientResponse allowedResponse() {

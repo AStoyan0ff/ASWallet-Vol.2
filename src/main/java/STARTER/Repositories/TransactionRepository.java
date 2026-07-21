@@ -106,4 +106,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
             LocalDateTime startInclusive,
             LocalDateTime endExclusive
     );
+
+    long countByTypeAndStatus(TransactionType type, TransactionStatus status);
 }

@@ -468,12 +468,22 @@ html:has(.body-bank-details) {
     margin: 0;
 }
 
+.asw-bank-card__form-overlay .bank-card-form-row:not(.bank-card-form-row--cvc):not(.bank-card-form-row--submit) {
+    width: 88%;
+    max-width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .asw-bank-card__form-overlay .bank-card-label {
+    display: block;
+    width: 100%;
     margin: 0 0 2px;
     font-size: 0.58rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    text-align: center;
     color: rgba(255, 220, 179, 0.82);
 }
 
@@ -509,7 +519,19 @@ html:has(.body-bank-details) {
 }
 
 .asw-bank-card__form-overlay .bank-card-field.password-field-wrap input {
-    padding-right: 40px;
+    padding-right: 30px;
+}
+
+.asw-bank-card__form-overlay .bank-card-field.password-field-wrap .password-visibility-toggle {
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+}
+
+.asw-bank-card__form-overlay .bank-card-field.password-field-wrap .password-visibility-toggle svg {
+    width: 14px;
+    height: 14px;
 }
 
 .asw-bank-card__form-overlay .bank-card-expiry-row {
@@ -520,6 +542,18 @@ html:has(.body-bank-details) {
 
 .asw-bank-card__form-overlay .bank-card-expiry-col .bank-card-label {
     margin-top: 0;
+    text-align: center;
+}
+
+.asw-bank-card__form-overlay .bank-card-form-row--cvc {
+    width: calc((100% - 8px) / 2);
+    max-width: calc((100% - 8px) / 2);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.asw-bank-card__form-overlay .bank-card-form-row--cvc .bank-card-label {
+    text-align: center;
 }
 
 .asw-bank-card__form-overlay .bank-card-field-error {
@@ -535,10 +569,18 @@ html:has(.body-bank-details) {
     line-height: 1.3;
 }
 
+.asw-bank-card__form-overlay .bank-card-form-row--submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+}
+
 .asw-bank-card__form-overlay .bank-card-submit {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+    max-width: none;
     margin: 2px 0 0;
-    padding: 8px 12px;
+    padding: 8px 28px;
     border-radius: 8px;
     font-size: 0.72rem;
     font-weight: 800;
@@ -948,6 +990,9 @@ html:has(.body-bank-details) {
 
 .body-bank-details.body-bank-details-gold-panel .asw-bank-card__form-overlay .bank-card-submit {
     margin-top: 4px;
+    width: auto;
+    max-width: 240px;
+    padding: 8px 32px;
     border-radius: 12px;
 }
 

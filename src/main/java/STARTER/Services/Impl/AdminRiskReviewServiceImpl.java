@@ -7,6 +7,9 @@ import STARTER.CustomException.RiskReviewServiceException;
 import STARTER.DTOs.AdminRiskAssessmentViewDTO;
 import STARTER.Enums.AssessmentStatus;
 import STARTER.Enums.RiskDecision;
+import STARTER.Enums.TransactionStatus;
+import STARTER.Enums.TransactionType;
+import STARTER.Repositories.TransactionRepository;
 import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Utils.DateTimeDisplay;
 import org.slf4j.Logger;
@@ -23,12 +26,18 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
     private static final Logger logger = LoggerFactory.getLogger(AdminRiskReviewServiceImpl.class);
     private final RiskAssessmentClient riskAssessmentClient;
     private final PendingTransferProcessingService pendingTransferProcessingService;
+    private final TransactionRepository transactionRepository;
     private final boolean enabled;
 
-    public AdminRiskReviewServiceImpl(RiskAssessmentClient riskAssessmentClient, PendingTransferProcessingService pendingTransferProcessingService, @Value("${app.risk-service.enabled:true}") boolean enabled) {
+    public AdminRiskReviewServiceImpl(
+            RiskAssessmentClient riskAssessmentClient,
+            PendingTransferProcessingService pendingTransferProcessingService,
+            TransactionRepository transactionRepository,
+            @Value("${app.risk-service.enabled:true}") boolean enabled) {
 
         this.riskAssessmentClient = riskAssessmentClient;
         this.pendingTransferProcessingService = pendingTransferProcessingService;
+        this.transactionRepository = transactionRepository;
         this.enabled = enabled;
     }
 
@@ -53,17 +62,29 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
     public long countPendingReviews() {
 
         if (!enabled) {
-            return 0;
+            return countLocalPendingRiskHeldTransfers();
         }
-
 
         try {
-            return riskAssessmentClient.listAssessments(AssessmentStatus.PENDING.name(), null).stream().filter(assessment -> assessment.getDecision() == RiskDecision.REVIEW).count();
+            // Same source as /admin/risk-reviews — not listAssessments (can diverge / return empty).
+            return riskAssessmentClient.listManualReviews().stream()
+                    .filter(assessment -> assessment.getStatus() == AssessmentStatus.PENDING)
+                    .filter(assessment -> assessment.getDecision() == null
+                            || assessment.getDecision() == RiskDecision.REVIEW)
+                    .count();
 
         } catch (Exception ex) {
-            logger.debug("Could not count pending risk reviews: {}", ex.getMessage());
-            return 0;
+            logger.warn("Could not count pending risk reviews from microservice, using local transfers: {}",
+                    ex.getMessage());
+            return countLocalPendingRiskHeldTransfers();
         }
+    }
+
+    private long countLocalPendingRiskHeldTransfers() {
+        return transactionRepository.countByTypeAndStatus(
+                TransactionType.TRANSFER,
+                TransactionStatus.PENDING_RISK_REVIEW
+        );
     }
 
     @Override
@@ -118,7 +139,6 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
     }
 
     private void reviewWithWalletAction(
-
             UUID assessmentId, String reviewedBy, AssessmentStatus status, boolean approveTransfer) {
 
         if (!enabled) {
@@ -130,7 +150,6 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
         if (assessment.getStatus() != AssessmentStatus.PENDING) {
             throw new RiskReviewServiceException("Only pending risk reviews can be approved or rejected.");
         }
-
 
         boolean walletUpdated = applyWalletAction(assessment.getTransactionRef(), approveTransfer);
         patchAssessment(assessmentId, reviewedBy, status);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -51,6 +53,9 @@ class WalletControllerWebMvcTest {
     @MockitoBean
     private PaymentService paymentService;
 
+    @MockitoBean
+    private TransactionService transactionService;
+
     private WalletViewDTO walletView;
     private UserViewDTO userView;
     private BankCardViewDTO bankCardView;
@@ -83,6 +88,8 @@ class WalletControllerWebMvcTest {
         when(userService.findByUsername("Plamen")).thenReturn(userView);
         when(userProfileDetailsService.isBalanceHidden("Plamen")).thenReturn(false);
         when(adminMailboxService.countUnreadForUser("Plamen")).thenReturn(2L);
+        when(transactionService.getUserTransactionsPage(any(UUID.class), anyInt(), anyInt()))
+                .thenReturn(new PageImpl<>(Collections.emptyList()));
     }
 
     // --- GET / WALLET ---
@@ -100,7 +107,8 @@ class WalletControllerWebMvcTest {
                 .andExpect(model().attribute("balanceHidden", false))
                 .andExpect(model().attribute("isAdmin", false))
                 .andExpect(model().attribute("unreadMessageCount", 2L))
-                .andExpect(model().attributeExists("savedBankCard"));
+                .andExpect(model().attributeExists("savedBankCard"))
+                .andExpect(model().attributeExists("recentTransactions"));
     }
 
     @Test

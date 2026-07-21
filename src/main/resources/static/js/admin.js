@@ -14,6 +14,7 @@
     let canRemove = false;
 
     function setHint(message) {
+
         if (hint) {
             hint.textContent = message;
         }
@@ -63,6 +64,7 @@
     }
 
     document.querySelectorAll(".admin-user-card[data-user-id]").forEach(function (card) {
+
         card.addEventListener("click", function () {
             selectCard(card);
         });
@@ -127,7 +129,6 @@
     }
 
     function updateUserListScroll() {
-
         const scroll = document.querySelector(".admin-split__pane--right .admin-user-list-scroll");
 
         if (!scroll) {
@@ -136,8 +137,9 @@
 
         const list = scroll.querySelector(".admin-user-list");
         const cards = list ? Array.from(list.querySelectorAll(".admin-user-card[data-user-id]")) : [];
+        const visibleCount = 4;
 
-        if (cards.length <= 4) {
+        if (cards.length <= visibleCount) {
 
             scroll.classList.remove("is-scrollable");
             scroll.style.maxHeight = "";
@@ -150,11 +152,11 @@
 
         let height = 0;
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < visibleCount; i++) {
             height += cards[i].offsetHeight;
         }
 
-        height += gap * 3;
+        height += gap * (visibleCount - 1);
 
         scroll.style.maxHeight = Math.ceil(height) + "px";
         scroll.classList.add("is-scrollable");

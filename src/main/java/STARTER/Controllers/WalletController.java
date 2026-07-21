@@ -4,15 +4,18 @@ import STARTER.DTOs.BankCardRequest;
 import STARTER.DTOs.ChangePasswordRequest;
 import STARTER.DTOs.DeleteAccountRequest;
 import STARTER.DTOs.PaymentItemDTO;
+import STARTER.DTOs.TransactionViewDTO;
 import STARTER.DTOs.WalletSettingsRequest;
 import STARTER.DTOs.WalletViewDTO;
 import STARTER.Services.Interface.AdminMailboxService;
 import STARTER.Services.Interface.AdminRiskReviewService;
 import STARTER.Services.Interface.BankCardService;
 import STARTER.Services.Interface.PaymentService;
+import STARTER.Services.Interface.TransactionService;
 import STARTER.Services.Interface.UserProfileDetailsService;
 import STARTER.Services.Interface.UserService;
 import STARTER.Services.Interface.WalletService;
+import org.springframework.data.domain.Page;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -43,6 +46,7 @@ public class WalletController {
     private final AdminMailboxService adminMailboxService;
     private final AdminRiskReviewService adminRiskReviewService;
     private final PaymentService paymentService;
+    private final TransactionService transactionService;
 
     public WalletController(
             WalletService walletService,
@@ -51,7 +55,8 @@ public class WalletController {
             UserProfileDetailsService userProfileDetailsService,
             AdminMailboxService adminMailboxService,
             AdminRiskReviewService adminRiskReviewService,
-            PaymentService paymentService
+            PaymentService paymentService,
+            TransactionService transactionService
     ) {
         this.walletService = walletService;
         this.userService = userService;
@@ -60,6 +65,7 @@ public class WalletController {
         this.adminMailboxService = adminMailboxService;
         this.adminRiskReviewService = adminRiskReviewService;
         this.paymentService = paymentService;
+        this.transactionService = transactionService;
     }
 //      addAttribute() -> Добавя данни към текущия request
 
@@ -84,6 +90,10 @@ public class WalletController {
 
         bankCardService.getBankCardByUsername(principal.getName())
                 .ifPresent(card -> model.addAttribute("savedBankCard", card));
+
+        Page<TransactionViewDTO> recentPage =
+                transactionService.getUserTransactionsPage(wallet.getUserId(), 0, 3);
+        model.addAttribute("recentTransactions", recentPage.getContent());
 
         return "wallet";
     }

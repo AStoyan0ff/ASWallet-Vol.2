@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- Advanced — admin panel -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Admin Panel - ASWallet</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body class="body-wallet body-admin body-admin-wallet-panel body-admin-rwb-panel">
 
 <div class="home-bg-media" aria-hidden="true">
@@ -13,6 +13,7 @@
 </div>
 
 <main class="wallet-landing reveal-item">
+
     <section class="wallet-panel wallet-panel--admin wallet-panel--materialize reveal-child">
 
         <div class="form-panel-top auth-stagger">
@@ -29,7 +30,7 @@
         <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
 
         <div class="admin-split">
-            <!-- Left panel -->
+
             <div class="admin-split__pane admin-split__pane--left auth-stagger">
                 <section class="admin-dashboard-summary"
                          aria-label="Today overview"
@@ -57,12 +58,28 @@
                     </div>
 
                     <div class="admin-chart-stack">
+
                         <div class="admin-chart-card">
                             <h4 class="admin-chart-card__title">Transfers today by status</h4>
+
                             <div class="admin-chart-card__canvas-wrap admin-chart-card__canvas-wrap--status">
-                                <canvas id="adminTodayStatusChart" aria-label="Transfers today by status"></canvas>
+
+                                <div class="admin-chart-status">
+                                    <div class="admin-chart-status__stage">
+
+                                        <div class="admin-chart-status__plot">
+                                            <canvas id="adminTodayStatusChart" aria-label="Transfers today by status"></canvas>
+                                        </div>
+
+                                        <svg class="admin-chart-callout-svg" aria-hidden="true"></svg>
+                                        <div class="admin-chart-status__callouts" id="adminTodayStatusCallouts"></div>
+                                    </div>
+                                    <ul class="admin-chart-status__legend" id="adminTodayStatusLegend"></ul>
+                                </div>
+
                             </div>
                         </div>
+
                         <div class="admin-chart-card">
                             <h4 class="admin-chart-card__title">Transfers — last 7 days</h4>
                             <div class="admin-chart-card__canvas-wrap admin-chart-card__canvas-wrap--week">
@@ -123,7 +140,6 @@
                 </section>
             </div>
 
-            <!-- Right panel -->
             <section class="admin-split__pane admin-split__pane--right admin-users-section auth-stagger"
                      id="user-accounts"
                      aria-label="User accounts">
@@ -141,6 +157,7 @@
                                       data-removable=${user.username != currentUsername and user.role.name() == 'USER' and (isPrimaryAdmin ? user.username != primaryAdminUsername : true)},
                                       data-manage-url=@{/admin/users/{id}/manage(id=${user.id})},
                                       data-delete-url=@{/admin/users/{id}/delete(id=${user.id})}">
+
                             <div class="admin-user-card__top">
                                 <div class="admin-user-card__identity">
                                     <strong class="admin-user-card__name" th:text="${user.username}"></strong>
@@ -152,15 +169,18 @@
                                       th:classappend="${user.primaryAdminAccount} ? ' type-chip--super-admin' : (${user.role.name() == 'ADMIN'} ? ' type-chip--admin' : '')"
                                       th:text="${user.roleDisplay}"></span>
                             </div>
+
                             <div class="admin-user-card__middle">
                                 <span class="admin-user-card__email" th:text="${user.email}"></span>
                                 <span class="admin-user-card__registered" th:text="${user.createdAt}"></span>
                             </div>
+
                             <div class="admin-user-card__bottom">
                                 <span class="admin-user-card__balance">
                                     <span th:text="${user.balance}"></span>
                                     <span th:text="${user.currency}"></span>
                                 </span>
+
                                 <span class="admin-status admin-status--active"
                                       th:if="${user.accountStatus.name() == 'ACTIVE'}">
                                     <span class="admin-status__dot" aria-hidden="true">
@@ -171,6 +191,7 @@
                                     </span>
                                     <span class="admin-status__text">Active</span>
                                 </span>
+
                                 <span class="admin-status admin-status--inactive"
                                       th:if="${user.accountStatus.name() == 'INACTIVE'}">
                                     <span class="admin-status__dot" aria-hidden="true">
@@ -180,6 +201,7 @@
                                         </svg>
                                     </span>
                                     <span class="admin-status__text">Inactive</span>
+
                                 </span>
                             </div>
                         </article>
@@ -190,18 +212,22 @@
 
                 <div class="admin-users-actions admin-pane-footer">
                     <p class="admin-user-action-hint" id="adminUserActionHint">Select a user, then Manage or Remove.</p>
+
                     <div class="admin-users-actions__row wallet-quick-actions-grid wallet-quick-actions-grid--elevated">
                         <button type="button"
                                 id="adminManageTool"
                                 class="wallet-quick-action wallet-quick-action--admin-manage admin-tool-action admin-users-action-btn"
                                 aria-disabled="true">
+
                             <span class="wallet-quick-action-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                                     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
                                 </svg>
                             </span>
+
                             <span class="wallet-quick-action-label">Manage</span>
                         </button>
+
                         <button type="button"
                                 id="adminRemoveTool"
                                 class="wallet-quick-action wallet-quick-action--admin-remove admin-tool-action admin-users-action-btn"
@@ -216,6 +242,7 @@
                             <span class="wallet-quick-action-label">Remove</span>
                         </button>
                     </div>
+
                     <form id="adminRemoveForm" method="post" class="admin-remove-form" hidden>
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     </form>
@@ -229,7 +256,7 @@
 <footer th:replace="~{fragments/app-footer :: footer}"></footer>
 <script th:src="@{/js/home.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<script th:src="@{/js/admin-dashboard.js}"></script>
+<script th:src="@{/js/admin-dashboard.js(v='20260721f')}"></script>
 <script th:src="@{/js/admin.js}"></script>
 </body>
 </html>
