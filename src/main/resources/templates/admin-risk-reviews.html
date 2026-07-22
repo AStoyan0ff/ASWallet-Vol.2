@@ -1,321 +1,199 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
 <head>
-
     <title>Risk Reviews - ASWallet</title>
-
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
 </head>
 
 <body class="body-wallet body-admin body-admin-risk-reviews body-admin-risk-reviews-wallet-panel">
 
 <div class="home-bg-media" aria-hidden="true">
-
-    <img class="home-bg-image" th:src="@{/images/5.png}" alt="">
-
+    <img class="home-bg-image" th:src="@{/images/admin.png}" alt="">
     <div class="home-bg-overlay"></div>
-
 </div>
 
-
-
 <main class="wallet-landing reveal-item">
-
     <section class="wallet-panel wallet-panel--admin wallet-panel--admin-risk-reviews wallet-panel--materialize reveal-child">
-
         <div class="form-panel-top form-panel-top--split auth-stagger">
 
             <a class="home-pill form-pill-link" th:href="@{/admin}">Back to admin</a>
-
-
 
             <form th:action="@{/admin/risk-reviews/clear}"
                   method="post"
                   class="risk-reviews-clear-form"
                   onsubmit="return confirm('Delete all risk reviews shown here? Pending transfers will be cancelled and funds returned to senders.');">
-
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-
                 <button type="submit" class="home-pill risk-reviews-clear-btn">Delete all</button>
-
             </form>
-
         </div>
 
-
-
         <h2 class="wallet-title wallet-title--center auth-stagger">Risk Reviews</h2>
-
         <p class="wallet-greeting auth-stagger">
-
             Signed in as <span class="wallet-username" th:text="${currentUsername}"></span>
-
         </p>
 
         <p class="login-activity-hint auth-stagger">
-
-            Manual reviews stay visible here after approve or reject until you delete them.
-
+            Manual reviews stay visible here after approval or reject until you delete them.
         </p>
 
-
-
         <div class="risk-reviews-master-detail auth-stagger" th:if="${!#lists.isEmpty(assessments)}">
-
             <div class="risk-reviews-master">
-
                 <div class="risk-reviews-list"
 
                      role="listbox"
-
                      aria-label="Risk reviews"
-
                      tabindex="0">
-
                     <button type="button"
-
                             class="risk-reviews-list-item"
-
                             th:each="item, stat : ${assessments}"
-
                             th:data-review-id="${item.id}"
-
                             th:classappend="${stat.first} ? ' is-selected' : ''"
-
                             th:attr="aria-selected=${stat.first} ? 'true' : 'false'"
-
                             role="option">
-
                         <span class="risk-reviews-list-item__route">
-
                             <span th:text="${item.senderUsername}"></span>
-
                             <span class="risk-reviews-list-item__arrow" aria-hidden="true">→</span>
-
                             <span th:text="${item.receiverUsername}"></span>
-
                         </span>
 
                         <span class="risk-reviews-list-item__meta">
-
-                            <span class="risk-reviews-list-item__amount" th:text="${item.amount}"></span>
-
-                            <span class="risk-score-chip" th:text="${item.riskScore}"></span>
-
+                            <span class="risk-reviews-list-item__amount"
+                                  th:text="${item.amount}">
+                            </span>
+                            <span class="risk-score-chip"
+                                  th:text="${item.riskScore}">
+                            </span>
                             <span class="risk-level-chip"
-
                                   th:classappend="| risk-level-chip--${#strings.toLowerCase(item.riskLevel)}|"
-
-                                  th:text="${item.riskLevel}"></span>
-
+                                  th:text="${item.riskLevel}">
+                            </span>
                             <span class="risk-review-status-chip"
                                   th:classappend="| risk-review-status-chip--${#strings.toLowerCase(item.status)}|"
-                                  th:text="${item.status}"></span>
-
+                                  th:text="${item.status}">
+                            </span>
                         </span>
 
                         <span class="risk-reviews-list-item__created" th:text="${item.createdAt}"></span>
 
                     </button>
-
                 </div>
-
             </div>
 
-
-
             <div class="risk-reviews-detail">
-
                 <article class="risk-reviews-detail-pane"
-
                          th:each="item, stat : ${assessments}"
-
                          th:data-review-id="${item.id}"
-
                          th:classappend="${stat.first} ? ' is-active' : ''"
-
                          th:attr="aria-hidden=${stat.first} ? 'false' : 'true'">
 
                     <header class="risk-reviews-detail-pane__header">
-
                         <h3 class="risk-reviews-detail-pane__title">Review details</h3>
 
                         <p class="risk-reviews-detail-pane__route">
-
                             <span th:text="${item.senderUsername}"></span>
-
                             <span aria-hidden="true"> → </span>
-
                             <span th:text="${item.receiverUsername}"></span>
-
                         </p>
-
                     </header>
 
-
-
                     <dl class="risk-reviews-detail-grid">
-
                         <div class="risk-reviews-detail-row">
-
                             <dt>Amount</dt>
-
                             <dd th:text="${item.amount}"></dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row">
-
                             <dt>Score</dt>
-
                             <dd>
-
                                 <span class="risk-score-chip" th:text="${item.riskScore}"></span>
-
                             </dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row">
-
                             <dt>Level</dt>
-
                             <dd>
-
                                 <span class="risk-level-chip"
-
                                       th:classappend="| risk-level-chip--${#strings.toLowerCase(item.riskLevel)}|"
-
-                                      th:text="${item.riskLevel}"></span>
-
+                                      th:text="${item.riskLevel}">
+                                </span>
                             </dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row">
-
                             <dt>Transaction</dt>
-
                             <dd class="risk-transaction-ref" th:text="${item.transactionRef} ?: '-'"></dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row">
-
                             <dt>Review status</dt>
-
                             <dd>
                                 <span class="risk-review-status-chip"
                                       th:classappend="| risk-review-status-chip--${#strings.toLowerCase(item.status)}|"
-                                      th:text="${item.status}"></span>
+                                      th:text="${item.status}">
+                                </span>
                             </dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row">
-
                             <dt>Created</dt>
-
                             <dd th:text="${item.createdAt}"></dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row" th:if="${item.reviewedBy != null}">
-
                             <dt>Reviewed by</dt>
-
                             <dd th:text="${item.reviewedBy}"></dd>
-
                         </div>
 
                         <div class="risk-reviews-detail-row" th:if="${item.reviewedAt != null}">
-
                             <dt>Reviewed at</dt>
-
                             <dd th:text="${item.reviewedAt}"></dd>
-
                         </div>
-
                     </dl>
 
-
-
                     <div class="risk-reviews-detail-reasons">
-
                         <h4 class="risk-reviews-detail-reasons__title">Reasons</h4>
 
                         <ul class="risk-reasons-list" th:if="${item.reasons != null and !item.reasons.isEmpty()}">
-
                             <li th:each="reason : ${item.reasons}" th:text="${reason}"></li>
-
                         </ul>
 
                         <p class="risk-reviews-detail-reasons__empty" th:if="${item.reasons == null or item.reasons.isEmpty()}">
-
                             No reasons provided.
-
                         </p>
-
                     </div>
-
-
 
                     <div class="risk-review-actions-row risk-reviews-detail-actions"
                          th:if="${item.status == 'PENDING'}">
 
                         <form th:action="@{/admin/risk-reviews/{id}/approve(id=${item.id})}" method="post" class="risk-review-form">
-
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-
                             <button type="submit" class="wallet-btn admin-action-btn admin-action-btn--update">Approve</button>
-
                         </form>
 
                         <form th:action="@{/admin/risk-reviews/{id}/reject(id=${item.id})}" method="post" class="risk-review-form">
-
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-
                             <button type="submit" class="wallet-btn wallet-btn-danger">Reject</button>
-
                         </form>
-
                     </div>
 
                     <p class="risk-reviews-detail-reviewed-note"
                        th:if="${item.status != 'PENDING'}">
                         This review is closed. Approve and reject are no longer available.
                     </p>
-
                 </article>
-
             </div>
-
         </div>
 
-
-
         <p class="tx-empty auth-stagger" th:if="${#lists.isEmpty(assessments)}">
-
             No risk reviews right now.
-
         </p>
-
     </section>
-
 </main>
 
-
-
 <footer th:replace="~{fragments/app-footer :: footer}"></footer>
-
 <script th:src="@{/js/home.js}"></script>
-
 <script th:src="@{/js/risk-reviews.js}"></script>
 
 </body>
-
 </html>
 
