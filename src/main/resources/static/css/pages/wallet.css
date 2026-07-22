@@ -1735,6 +1735,7 @@
 }
 
 .body-wallet-premium-fe .wallet-balance-box.wallet-bank-card .wallet-balance-label {
+    margin-top: -8px;
     margin-bottom: 10px;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 0.78rem;
@@ -1753,7 +1754,7 @@
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(1.45rem, 4.5vw, 2.05rem);
     line-height: 1.06;
-    margin: 0;
+    margin: 6px 0 0;
     color: #fff8e8;
     -webkit-text-fill-color: #fff8e8;
     text-shadow:
@@ -1790,7 +1791,7 @@
     gap: 8px;
     width: 100%;
     max-width: 100%;
-    margin: 4px 0 0;
+    margin: 10px 0 0;
     padding: 0 0 16px;
     transform: none;
 }

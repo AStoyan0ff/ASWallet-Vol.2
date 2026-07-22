@@ -57,9 +57,15 @@
                 <dt>Account Status</dt>
                 <dd>
                     <span class="account-status account-status--active"
-                          th:if="${profile.accountStatus.name() == 'ACTIVE'}">🟢 Active</span>
+                          th:if="${profile.accountStatus.name() == 'ACTIVE'}">
+                        <span class="account-status-dot account-status-dot--active" aria-hidden="true"></span>
+                        Active
+                    </span>
                     <span class="account-status account-status--inactive"
-                          th:if="${profile.accountStatus.name() == 'INACTIVE'}">🔴 Inactive</span>
+                          th:if="${profile.accountStatus.name() == 'INACTIVE'}">
+                        <span class="account-status-dot account-status-dot--inactive" aria-hidden="true"></span>
+                        Inactive
+                    </span>
                 </dd>
             </div>
         </dl>

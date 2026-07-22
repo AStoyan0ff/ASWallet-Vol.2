@@ -25,8 +25,10 @@
             </span>
             Dashboard
         </span>
-        <p class="wallet-greeting auth-stagger">Hello, <span class="wallet-username"
-                                                             th:text="${wallet.username}"></span></p>
+        <p
+            class="wallet-greeting auth-stagger">Hello, <span class="wallet-username" th:text="${wallet.username}"></span>
+        </p>
+
         <h2 class="wallet-title auth-stagger">YOUR WALLET</h2>
 
         <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
@@ -36,9 +38,9 @@
             </p>
         </div>
 
-        <!-- Advanced — balance hidden via /wallet/settings -->
         <div class="wallet-dashboard-body">
             <div class="wallet-dashboard-main">
+
         <div class="wallet-balance-box wallet-bank-card auth-stagger"
              th:classappend="${balanceHidden} ? ' is-balance-hidden' : ''">
             <div class="wallet-bank-card__shine" aria-hidden="true"></div>
@@ -109,7 +111,7 @@
 
         <section class="wallet-recent-activity auth-stagger" aria-label="Recent activity">
 
-            <h3 class="wallet-recent-activity__title">Recent activity - Last (3)</h3>
+            <h3 class="wallet-recent-activity__title">Recent activity – Last (3)</h3>
 
             <ul class="wallet-recent-activity__list" th:if="${recentTransactions != null and !#lists.isEmpty(recentTransactions)}">
                 <li class="wallet-recent-activity__item" th:each="tx : ${recentTransactions}">

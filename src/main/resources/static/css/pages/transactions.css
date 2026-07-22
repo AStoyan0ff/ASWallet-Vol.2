@@ -742,3 +742,122 @@
     }
 }
 
+/* =========================================================
+   HISTORY COMPACT v2 — /transactions/history
+   Revert: delete this entire block (+ restore Category/Accounts
+   headers in transaction-history.html to Spending Category /
+   Account Status).
+   ========================================================= */
+.body-transaction-history.body-transaction-history-light .wallet-landing {
+    padding: 14px 16px 24px;
+}
+
+.body-transaction-history .wallet-panel--history,
+.body-transaction-history-light .wallet-panel--history {
+    width: min(1150px, 96%);
+    padding: 18px 20px 20px;
+}
+
+.body-transaction-history-light .tx-table-wrap {
+    margin-bottom: 16px;
+}
+
+.body-transaction-history .tx-table td.tx-account-status-cell,
+.body-transaction-history .tx-account-status-cell {
+    min-width: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.body-transaction-history .tx-account-status-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.body-transaction-history .tx-account-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            0 0 0 1px rgba(0, 0, 0, 0.14);
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.body-transaction-history .tx-account-dot--active {
+    background: #43a047;
+}
+
+.body-transaction-history .tx-account-dot--active::before {
+    content: "✓";
+}
+
+.body-transaction-history .tx-account-dot--inactive {
+    background: #e53935;
+}
+
+.body-transaction-history .tx-account-dot--inactive::before {
+    content: "✕";
+}
+
+.body-transaction-history .tx-account-dot-sep {
+    color: rgba(44, 36, 24, 0.45);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.body-transaction-history.body-transaction-history-gold-panel .tx-account-dot-sep {
+    color: rgba(255, 244, 225, 0.7);
+}
+
+.body-transaction-history .tx-account-status-row {
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.body-transaction-history .tx-account-status-label {
+    min-width: 28px;
+    font-size: 0.72rem;
+}
+
+.body-transaction-history .tx-table th:last-child,
+.body-transaction-history .tx-table td.tx-history-actions-cell {
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+.body-transaction-history .tx-history-action-wrap {
+    gap: 6px;
+}
+
+.body-transaction-history .tx-table td.tx-category-cell {
+    max-width: 9.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 781px) {
+    .body-transaction-history .tx-table th,
+    .body-transaction-history .tx-table td {
+        padding: 11px 8px;
+    }
+
+    .body-transaction-history .tx-table th:last-child,
+    .body-transaction-history .tx-table td.tx-history-actions-cell {
+        min-width: 0;
+        padding-right: 14px;
+    }
+}
+

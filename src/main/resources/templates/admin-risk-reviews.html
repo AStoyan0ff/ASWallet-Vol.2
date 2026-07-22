@@ -63,67 +63,65 @@
 
 
 
-        <div class="success auth-stagger" th:if="${successMessage}" th:text="${successMessage}"></div>
-
-        <div class="error auth-stagger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-
-
-
         <div class="risk-reviews-master-detail auth-stagger" th:if="${!#lists.isEmpty(assessments)}">
 
-            <div class="risk-reviews-list"
+            <div class="risk-reviews-master">
 
-                 role="listbox"
+                <div class="risk-reviews-list"
 
-                 aria-label="Risk reviews"
+                     role="listbox"
 
-                 tabindex="0">
+                     aria-label="Risk reviews"
 
-                <button type="button"
+                     tabindex="0">
 
-                        class="risk-reviews-list-item"
+                    <button type="button"
 
-                        th:each="item, stat : ${assessments}"
+                            class="risk-reviews-list-item"
 
-                        th:data-review-id="${item.id}"
+                            th:each="item, stat : ${assessments}"
 
-                        th:classappend="${stat.first} ? ' is-selected' : ''"
+                            th:data-review-id="${item.id}"
 
-                        th:attr="aria-selected=${stat.first} ? 'true' : 'false'"
+                            th:classappend="${stat.first} ? ' is-selected' : ''"
 
-                        role="option">
+                            th:attr="aria-selected=${stat.first} ? 'true' : 'false'"
 
-                    <span class="risk-reviews-list-item__route">
+                            role="option">
 
-                        <span th:text="${item.senderUsername}"></span>
+                        <span class="risk-reviews-list-item__route">
 
-                        <span class="risk-reviews-list-item__arrow" aria-hidden="true">→</span>
+                            <span th:text="${item.senderUsername}"></span>
 
-                        <span th:text="${item.receiverUsername}"></span>
+                            <span class="risk-reviews-list-item__arrow" aria-hidden="true">→</span>
 
-                    </span>
+                            <span th:text="${item.receiverUsername}"></span>
 
-                    <span class="risk-reviews-list-item__meta">
+                        </span>
 
-                        <span class="risk-reviews-list-item__amount" th:text="${item.amount}"></span>
+                        <span class="risk-reviews-list-item__meta">
 
-                        <span class="risk-score-chip" th:text="${item.riskScore}"></span>
+                            <span class="risk-reviews-list-item__amount" th:text="${item.amount}"></span>
 
-                        <span class="risk-level-chip"
+                            <span class="risk-score-chip" th:text="${item.riskScore}"></span>
 
-                              th:classappend="| risk-level-chip--${#strings.toLowerCase(item.riskLevel)}|"
+                            <span class="risk-level-chip"
 
-                              th:text="${item.riskLevel}"></span>
+                                  th:classappend="| risk-level-chip--${#strings.toLowerCase(item.riskLevel)}|"
 
-                        <span class="risk-review-status-chip"
-                              th:classappend="| risk-review-status-chip--${#strings.toLowerCase(item.status)}|"
-                              th:text="${item.status}"></span>
+                                  th:text="${item.riskLevel}"></span>
 
-                    </span>
+                            <span class="risk-review-status-chip"
+                                  th:classappend="| risk-review-status-chip--${#strings.toLowerCase(item.status)}|"
+                                  th:text="${item.status}"></span>
 
-                    <span class="risk-reviews-list-item__created" th:text="${item.createdAt}"></span>
+                        </span>
 
-                </button>
+                        <span class="risk-reviews-list-item__created" th:text="${item.createdAt}"></span>
+
+                    </button>
+
+                </div>
 
             </div>
 

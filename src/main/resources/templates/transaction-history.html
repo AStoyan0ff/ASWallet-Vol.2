@@ -14,8 +14,10 @@
 <main class="wallet-landing reveal-item">
     <section class="wallet-panel wallet-panel--wide wallet-panel--history wallet-panel--materialize reveal-child"
              th:attr="data-tx-auto-refresh=${hasPendingTransfers} ? 'true' : null, data-tx-refresh-seconds=12">
+
         <div class="form-panel-top form-panel-top--split auth-stagger">
             <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+
             <form th:if="${!#lists.isEmpty(transactions)}"
                   class="tx-clear-history-form"
                   th:action="@{/transactions/history/clear}"
@@ -42,11 +44,11 @@
                     <th>Type</th>
                     <th>Status</th>
                     <th>Amount</th>
-                    <th>Spending Category</th>
-                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Date & Time</th>
                     <th>From</th>
                     <th>To</th>
-                    <th>Account Status</th>
+                    <th>Accounts</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -66,28 +68,27 @@
                     <td th:text="${t.createdAt}"></td>
                     <td th:text="${t.senderUsername} ?: '****'"></td>
                     <td th:text="${t.receiverUsername} ?: '****'"></td>
-                    <!-- Advanced: sender and receiver account status -->
+
                     <td class="tx-account-status-cell">
-
-                        <div th:if="${t.senderUsername != null}" class="tx-account-status-row">
-                            <span class="tx-account-status-label">From</span>
-                            <span th:if="${t.senderAccountStatus != null and t.senderAccountStatus.name() == 'ACTIVE'}"
-                                  class="status-chip status-chip--active">Active</span>
-                            <span th:if="${t.senderAccountStatus != null and t.senderAccountStatus.name() == 'INACTIVE'}"
-                                  class="status-chip status-chip--inactive">Inactive</span>
+                        <div class="tx-account-status-dots"
+                             th:if="${t.senderUsername != null or t.receiverUsername != null}">
+                            <span th:if="${t.senderUsername != null}"
+                                  class="tx-account-dot"
+                                  th:classappend="${t.senderAccountStatus != null and t.senderAccountStatus.name() == 'INACTIVE'} ? ' tx-account-dot--inactive' : ' tx-account-dot--active'"
+                                  th:title="${'From: ' + (t.senderAccountStatus != null ? t.senderAccountStatus.name() : 'ACTIVE')}"
+                                  th:aria-label="${'From account ' + (t.senderAccountStatus != null ? t.senderAccountStatus.name() : 'ACTIVE')}"></span>
+                            <span th:if="${t.senderUsername != null and t.receiverUsername != null}"
+                                  class="tx-account-dot-sep"
+                                  aria-hidden="true">/</span>
+                            <span th:if="${t.receiverUsername != null}"
+                                  class="tx-account-dot"
+                                  th:classappend="${t.receiverAccountStatus != null and t.receiverAccountStatus.name() == 'INACTIVE'} ? ' tx-account-dot--inactive' : ' tx-account-dot--active'"
+                                  th:title="${'To: ' + (t.receiverAccountStatus != null ? t.receiverAccountStatus.name() : 'ACTIVE')}"
+                                  th:aria-label="${'To account ' + (t.receiverAccountStatus != null ? t.receiverAccountStatus.name() : 'ACTIVE')}"></span>
                         </div>
-
-                        <div th:if="${t.receiverUsername != null}" class="tx-account-status-row">
-                            <span class="tx-account-status-label">To</span>
-                            <span th:if="${t.receiverAccountStatus != null and t.receiverAccountStatus.name() == 'ACTIVE'}"
-                                  class="status-chip status-chip--active">Active</span>
-                            <span th:if="${t.receiverAccountStatus != null and t.receiverAccountStatus.name() == 'INACTIVE'}"
-                                  class="status-chip status-chip--inactive">Inactive</span>
-                        </div>
-
                         <span th:if="${t.senderUsername == null and t.receiverUsername == null}" class="admin-muted">-</span>
                     </td>
-                    <!-- Advanced: flow chips + pending spinner; Cancel only for pending sender -->
+
                     <td class="tx-history-actions-cell">
                         <div th:if="${(t.status.name() == 'PENDING' or t.status.name() == 'PENDING_RISK_REVIEW') and t.type.name() == 'TRANSFER' and t.senderUsername == currentUsername}"
                              class="tx-history-action-wrap">

@@ -37,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
     private static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
     private static final BigDecimal WELCOME_BONUS_EUR = new BigDecimal("50.00");
-    private static final String WELCOME_BONUS_DESCRIPTION = "Welcome bonus — bank card registered";
+    private static final String WELCOME_BONUS_DESCRIPTION = "Welcome Bonus";
 
     private final TransactionRepository transactionRepository;
     private final WalletRepository walletRepository;
@@ -408,7 +408,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         dto.setId(transaction.getId());
         dto.setAmount(transaction.getAmount());
-        dto.setDescription(transaction.getDescription());
+        dto.setDescription(toCategoryLabel(transaction.getDescription()));
         dto.setCreatedAt(DateTimeDisplay.format(transaction.getCreatedAt()));
         dto.setStatus(transaction.getStatus());
         dto.setType(transaction.getType());
@@ -443,6 +443,29 @@ public class TransactionServiceImpl implements TransactionService {
 
     private String formatSpendingDescription(SpendingCategory category, String suffix) {
         return category.getLabel() + suffix;
+    }
+
+    /** History/export display: category only (strip card / top-up suffix). */
+    private String toCategoryLabel(String description) {
+        if (description == null || description.isBlank()) {
+            return description;
+        }
+        if (description.regionMatches(true, 0, "Welcome bonus", 0, "Welcome bonus".length())) {
+            return WELCOME_BONUS_DESCRIPTION;
+        }
+        for (SpendingCategory category : SpendingCategory.values()) {
+            String label = category.getLabel();
+            if (description.equals(label)) {
+                return label;
+            }
+            if (description.startsWith(label) && description.length() > label.length()) {
+                char next = description.charAt(label.length());
+                if (next == ' ' || next == '(' || next == '—' || next == '–' || next == '-') {
+                    return label;
+                }
+            }
+        }
+        return description;
     }
 
     private void publishTransactionEvent(

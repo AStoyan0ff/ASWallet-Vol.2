@@ -91,17 +91,8 @@ public class AdminRiskReviewController {
 
             if (approve) {
                 adminRiskReviewService.approve(id, principal.getName());
-                redirectAttributes.addFlashAttribute(
-                        "successMessage",
-                        "Risk assessment approved."
-                );
-
             } else {
                 adminRiskReviewService.reject(id, principal.getName());
-                redirectAttributes.addFlashAttribute(
-                        "successMessage",
-                        "Risk assessment rejected."
-                );
             }
 
         } catch (RuntimeException ex) {
