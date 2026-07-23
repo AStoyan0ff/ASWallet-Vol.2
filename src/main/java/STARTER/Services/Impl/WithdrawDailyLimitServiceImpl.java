@@ -45,8 +45,8 @@ public class WithdrawDailyLimitServiceImpl implements WithdrawDailyLimitService 
             @Value("${app.withdraw.daily-limit.max:500}") BigDecimal maxLimit,
             @Value("${app.withdraw.daily-limit.default:500}") BigDecimal defaultLimit,
             @Value("${app.withdraw.daily-limit.step:50}") int stepSize,
-            @Value("${app.withdraw.day-timezone:Europe/Sofia}") String dayTimezone
-    ) {
+            @Value("${app.withdraw.day-timezone:Europe/Sofia}") String dayTimezone) {
+
         this.userRepository = userRepository;
         this.profileDetailsRepository = profileDetailsRepository;
         this.walletRepository = walletRepository;
@@ -90,6 +90,7 @@ public class WithdrawDailyLimitServiceImpl implements WithdrawDailyLimitService 
 
     @Override
     public BigDecimal normalizeUserDailyLimit(BigDecimal requestedLimit) {
+
         if (requestedLimit == null) {
             return defaultLimit;
         }
@@ -100,6 +101,7 @@ public class WithdrawDailyLimitServiceImpl implements WithdrawDailyLimitService 
 
         int min = minLimit.intValue();
         int max = maxLimit.intValue();
+
         stepped = Math.clamp(stepped, min, max);
         stepped = Math.round(stepped / (float) stepSize) * stepSize;
         stepped = Math.clamp(stepped, min, max);

@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-// Advanced: admin user view with account status
+
 public class AdminUserViewDTO {
 
     private UUID id;
@@ -21,11 +21,9 @@ public class AdminUserViewDTO {
     private String currency;
     private String createdAt;
     private UserRole role;
-    // Advanced — display label: SUPER ADMIN / ADMIN / USER
     private String roleDisplay;
     private boolean primaryAdminAccount;
     private AccountStatus accountStatus;
-    // Advanced — profile snapshot for admin manage view
     private String phone;
     private String avatarImageSrc;
 }

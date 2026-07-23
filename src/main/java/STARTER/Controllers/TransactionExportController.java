@@ -16,7 +16,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
-// Advanced — transaction export page (/wallet/export)
 @Controller
 public class TransactionExportController {
 

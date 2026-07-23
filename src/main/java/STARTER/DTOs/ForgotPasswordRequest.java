@@ -13,9 +13,6 @@ import lombok.*;
 public class ForgotPasswordRequest {
 
     @NotBlank(message = "Email is required")
-    @Pattern(
-            regexp = ValidationPatterns.EMAIL,
-            message = "Email must be in format name@domain.com"
-    )
+    @Pattern(regexp = ValidationPatterns.EMAIL, message = "Email must be in format name@domain.com")
     private String email;
 }

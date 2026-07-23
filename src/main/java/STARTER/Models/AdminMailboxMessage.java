@@ -1,6 +1,8 @@
 package STARTER.Models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,26 +16,25 @@ import java.util.UUID;
 @Builder
 
 @Table(name = "admin_mailbox_messages")
-// Advanced - admin <-> user mailbox message
 public class AdminMailboxMessage extends BaseClass {
 
     @Column(name = "recipient_user_id", nullable = false)
     private UUID recipientUserId;
 
-    @Column(name = "recipient_username", nullable = false) // length = 30
+    @Column(name = "recipient_username", nullable = false)
     private String recipientUsername;
 
-    @Column(name = "sender_username", nullable = false) // length = 30
+    @Column(name = "sender_username", nullable = false)
     private String senderUsername;
 
-    @Column(name = "admin_recipient_username") // length = 30
+    @Column(name = "admin_recipient_username")
     private String adminRecipientUsername;
 
     @Column(name = "from_admin", nullable = false)
     @Builder.Default
     private boolean fromAdmin = true;
 
-    @Column(nullable = false) // length = 2000
+    @Column(nullable = false)
     private String body;
 
     @Column(name = "read_by_recipient", nullable = false)
@@ -49,6 +50,7 @@ public class AdminMailboxMessage extends BaseClass {
 
     @Override
     protected void onPrePersist() {
+
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
         }

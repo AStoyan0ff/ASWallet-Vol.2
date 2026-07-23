@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-// Advanced - profile view DTO
 @Getter
 @Setter
 @NoArgsConstructor

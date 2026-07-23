@@ -1,4 +1,4 @@
-﻿.body-export-file {
+.body-export-file {
     color: #3d3428;
     background: #f2ebe0;
 }
@@ -157,11 +157,11 @@
 }
 
 .body-export-file .export-nav-pill--clear {
-    /* metallic red — see base/buttons.css */
+    
 }
 
 .body-export-file .export-nav-pill--clear:hover {
-    /* metallic red — see base/buttons.css */
+    
 }
 
 .form-panel-top--split {
@@ -314,14 +314,13 @@
 }
 
 .body-export-file .tx-export-action-btn:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-export-file .app-version-footer {
     color: rgba(61, 52, 40, 0.55);
 }
 
-/* /wallet/export — black-to-gold metallic panel */
 .body-export-file.body-export-file-gold-panel .wallet-panel--export.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -567,7 +566,6 @@
     background: var(--surface-bg);
 }
 
-/* Advanced - admin panel layout and account status actions */
 .wallet-panel--admin {
     width: min(920px, 94%);
     max-height: calc(100dvh - 48px);
@@ -601,7 +599,6 @@
     margin-bottom: 4px;
 }
 
-/* Two separate panes — dark fill masks RWB white band in the column gap */
 .admin-split {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -656,7 +653,6 @@
     margin-bottom: 0;
 }
 
-/* Shared footer: equal space above label and below label to buttons */
 .admin-pane-footer {
     display: flex;
     flex-direction: column;
@@ -729,7 +725,6 @@
     text-align: center;
 }
 
-/* Charts stacked full-width like the mockup */
 .admin-chart-stack {
     display: flex;
     flex-direction: column;
@@ -955,7 +950,6 @@
         0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-/* Right pane: search + users + actions */
 .admin-users-toolbar {
     width: 100%;
 }
@@ -1368,11 +1362,11 @@
 }
 
 .wallet-quick-action--admin-manage .wallet-quick-action-icon {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .wallet-quick-action--admin-remove .wallet-quick-action-icon {
-    /* metallic red — see base/buttons.css */
+    
 }
 
 .admin-user-action-hint {
@@ -1580,7 +1574,6 @@
     background: linear-gradient(130deg, #ffb74d, #ff8f00);
 }
 
-/* Advanced — admin panel role chips */
 .body-admin .type-chip--super-admin {
     color: #1a1408;
     background: linear-gradient(130deg, #e8c96a, #c9a227);
@@ -1634,14 +1627,12 @@
     border: 1px solid rgba(129, 199, 132, 0.45);
 }
 
-/* Advanced - inactive account status chip */
 .status-chip--inactive {
     color: #ffcdd2;
     background: rgba(198, 40, 40, 0.18);
     border: 1px solid rgba(239, 83, 80, 0.45);
 }
 
-/* Advanced - account status on profile page */
 .account-status {
     font-weight: 600;
 }
@@ -1654,7 +1645,6 @@
     color: #e57373;
 }
 
-/* Advanced - account status in transaction history */
 .tx-account-status-cell {
     min-width: 150px;
 }
@@ -1758,39 +1748,35 @@
     text-align: center;
 }
 
-/* Advanced - update button in admin panel */
 .admin-action-btn--update {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .admin-action-btn--update:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
-/* Advanced — role update button in admin panel */
 .admin-action-btn--role {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .admin-action-btn--role:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
-/* Advanced — manage user button on /admin */
 .admin-action-btn--manage {
     text-decoration: none;
-    /* metallic — see base/buttons.css */
+    
 }
 
 .admin-action-btn--manage:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .admin-action-btn--full {
     width: 100%;
 }
 
-/* Advanced — admin user manage page (/admin/users/{id}/manage) */
 .body-admin-user-manage .wallet-landing {
     align-items: safe center;
     padding-top: 14px;
@@ -2094,7 +2080,7 @@
 
 .body-wallet-messages .mailbox-delete-btn:hover,
 .body-admin-message-inbox .mailbox-delete-btn:hover {
-    /* metallic red — see base/buttons.css */
+    
 }
 
 .body-wallet-messages .mailbox-list,
@@ -2282,7 +2268,6 @@
     }
 }
 
-/* Advanced — admin login activity */
 .body-admin-login-activity .wallet-title.wallet-title--center,
 .body-admin-login-activity .wallet-greeting,
 .body-admin-login-activity .tx-empty {
@@ -2411,7 +2396,6 @@
     margin-top: 0.35rem;
 }
 
-/* Advanced — admin risk reviews (/admin/risk-reviews) */
 .body-admin-risk-reviews .wallet-landing {
     width: 100%;
     max-width: 100%;
@@ -2463,10 +2447,9 @@
 }
 
 .body-admin-risk-reviews .risk-reviews-clear-btn:hover {
-    /* metallic red — see base/buttons.css */
+    
 }
 
-/* Master–detail layout (/admin/risk-reviews) */
 .risk-reviews-master-detail {
     display: grid;
     grid-template-columns: minmax(260px, 36%) minmax(0, 64%);
@@ -2486,7 +2469,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    /* ~4 list cards visible, rest via scroll */
+    
     max-height: 27.5rem;
     overflow-x: hidden;
     overflow-y: auto;
@@ -2811,7 +2794,6 @@
     white-space: nowrap;
 }
 
-/* Side-by-side Approve / Reject — stay inside the detail pane */
 .risk-reviews-detail-actions.risk-review-actions-row {
     flex-direction: row;
     align-items: center;
@@ -2875,7 +2857,6 @@
     }
 }
 
-/* /admin/risk-reviews — wallet-style B&W gradient panel */
 .body-admin-risk-reviews.body-admin-risk-reviews-wallet-panel .wallet-landing {
     overflow: visible;
 }
@@ -3096,7 +3077,6 @@
     }
 }
 
-/* /wallet/messages/send — light page + white panel + cream form */
 .body-wallet-send-message.body-wallet-send-message-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -3265,7 +3245,6 @@
     text-shadow: none;
 }
 
-/* /wallet/messages/send — black-to-gold metallic panel */
 .body-wallet-send-message.body-wallet-send-message-gold-panel .wallet-panel--admin-send-message.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -3343,7 +3322,6 @@
     }
 }
 
-/* /admin/messages/send — wallet-style B&W gradient panel (page bg unchanged) */
 .body-admin-send-message.body-admin-send-message-wallet-panel .wallet-landing {
     padding: 16px 20px;
     overflow: visible;
@@ -3509,7 +3487,6 @@
     }
 }
 
-/* /wallet/messages — light page + white panel */
 .body-wallet-messages.body-wallet-messages-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -3633,7 +3610,6 @@
     text-shadow: none;
 }
 
-/* /wallet/messages — black-to-gold metallic panel */
 .body-wallet-messages.body-wallet-messages-gold-panel .wallet-panel--messages.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -3705,7 +3681,6 @@
     }
 }
 
-/* /admin/messages/inbox — wallet-style B&W gradient panel */
 .body-admin-message-inbox.body-admin-message-inbox-wallet-panel .wallet-landing {
     padding: 16px 20px 28px;
     overflow: visible;
@@ -3836,7 +3811,6 @@
     }
 }
 
-/* /wallet/messages/{id} — light page + white panel */
 .body-wallet-message-view.body-wallet-message-view-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -3933,7 +3907,6 @@
     text-shadow: none;
 }
 
-/* /wallet/messages/{id} — black-to-gold metallic panel */
 .body-wallet-message-view.body-wallet-message-view-gold-panel .wallet-panel--message-view.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -3993,7 +3966,6 @@
     }
 }
 
-/* /admin/login-activity — wallet-style B&W gradient panel (page bg unchanged) */
 .body-admin-login-activity.body-admin-login-activity-wallet-panel .wallet-landing {
     overflow: visible;
 }
@@ -4151,7 +4123,6 @@
     }
 }
 
-/* /admin — wallet-style B&W gradient panel (page bg unchanged) */
 .body-admin.body-admin-wallet-panel .wallet-landing {
     overflow: visible;
     padding-top: 18px;
@@ -4436,7 +4407,6 @@
     }
 }
 
-/* /admin — trial: red → white → black metallic panel (remove body-admin-rwb-panel to revert) */
 .body-admin.body-admin-wallet-panel.body-admin-rwb-panel .wallet-panel--admin.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -4562,7 +4532,6 @@
     }
 }
 
-/* /admin/messages/users/{user}/thread — wallet-style B&W gradient panel (trial) */
 .body-admin-message-thread.body-admin-message-thread-wallet-panel .wallet-landing {
     overflow: visible;
 }
@@ -4692,7 +4661,6 @@
     }
 }
 
-/* /admin/users/{id}/manage — wallet-style B&W gradient panel */
 .body-admin-user-manage.body-admin-user-manage-wallet-panel .wallet-landing {
     overflow: visible;
     padding-top: 14px;

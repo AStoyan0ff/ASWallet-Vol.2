@@ -1,10 +1,9 @@
-﻿.body-transaction-history .wallet-landing {
+.body-transaction-history .wallet-landing {
     align-items: safe center;
     padding-top: 28px;
     padding-bottom: 28px;
 }
 
-/* Advanced — clear history button on /transactions/history */
 .body-transaction-history .tx-clear-history-form {
     margin: 0;
 }
@@ -20,7 +19,7 @@
 }
 
 .body-transaction-history .tx-clear-history-btn:hover {
-    /* metallic red — see base/buttons.css */
+    
 }
 
 .withdraw-limit-summary {
@@ -207,7 +206,6 @@
     background: transparent;
 }
 
-/* Advanced - profile status column in transaction history */
 .body-transaction-history .wallet-panel--history {
     width: min(1400px, 99%);
     padding: 28px 36px 32px;
@@ -423,7 +421,6 @@
     }
 }
 
-/* /transactions/history — light page + white panel */
 .body-transaction-history.body-transaction-history-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -643,7 +640,6 @@
     text-shadow: none;
 }
 
-/* /transactions/history — black-to-gold metallic panel */
 .body-transaction-history.body-transaction-history-gold-panel .wallet-panel--history.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -742,12 +738,6 @@
     }
 }
 
-/* =========================================================
-   HISTORY COMPACT v2 — /transactions/history
-   Revert: delete this entire block (+ restore Category/Accounts
-   headers in transaction-history.html to Spending Category /
-   Account Status).
-   ========================================================= */
 .body-transaction-history.body-transaction-history-light .wallet-landing {
     padding: 14px 16px 24px;
 }
@@ -818,7 +808,7 @@
 }
 
 .body-transaction-history.body-transaction-history-gold-panel .tx-account-dot-sep {
-    color: rgba(255, 244, 225, 0.7);
+    color: #1a1610;
 }
 
 .body-transaction-history .tx-account-status-row {

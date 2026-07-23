@@ -1,40 +1,23 @@
 package STARTER.Controllers;
 
-import STARTER.DTOs.BankCardRequest;
-import STARTER.DTOs.ChangePasswordRequest;
-import STARTER.DTOs.DeleteAccountRequest;
-import STARTER.DTOs.PaymentItemDTO;
-import STARTER.DTOs.TransactionViewDTO;
-import STARTER.DTOs.WalletSettingsRequest;
-import STARTER.DTOs.WalletViewDTO;
-import STARTER.Services.Interface.AdminMailboxService;
-import STARTER.Services.Interface.AdminRiskReviewService;
-import STARTER.Services.Interface.BankCardService;
-import STARTER.Services.Interface.PaymentService;
-import STARTER.Services.Interface.TransactionService;
-import STARTER.Services.Interface.UserProfileDetailsService;
-import STARTER.Services.Interface.UserService;
-import STARTER.Services.Interface.WalletService;
-import org.springframework.data.domain.Page;
+import STARTER.DTOs.*;
+import STARTER.Services.Interface.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WalletController {
@@ -67,7 +50,6 @@ public class WalletController {
         this.paymentService = paymentService;
         this.transactionService = transactionService;
     }
-//      addAttribute() -> Добавя данни към текущия request
 
     @GetMapping("/wallet")
     public String wallet(Model model, Principal principal, Authentication authentication) {
@@ -84,12 +66,14 @@ public class WalletController {
         if (isAdmin) {
             model.addAttribute("adminInboxUnreadCount", adminMailboxService.countUnreadForAdminInbox());
             model.addAttribute("pendingRiskReviewCount", adminRiskReviewService.countPendingReviews());
+
         } else {
             model.addAttribute("unreadMessageCount", adminMailboxService.countUnreadForUser(principal.getName()));
         }
 
         bankCardService.getBankCardByUsername(principal.getName())
-                .ifPresent(card -> model.addAttribute("savedBankCard", card));
+                .ifPresent(card ->
+                    model.addAttribute("savedBankCard", card));
 
         Page<TransactionViewDTO> recentPage =
                 transactionService.getUserTransactionsPage(wallet.getUserId(), 0, 3);
@@ -117,8 +101,8 @@ public class WalletController {
             @Valid @ModelAttribute("bankCardRequest") BankCardRequest bankCardRequest,
             BindingResult bindingResult,
             Principal principal,
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("bankCardRequest", bankCardRequest);
             redirectAttributes.addFlashAttribute(
@@ -129,16 +113,19 @@ public class WalletController {
         }
 
         if (bankCardService.getBankCardByUsername(principal.getName()).isPresent()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Bank card is already registered.");
+
+            redirectAttributes.addFlashAttribute("errorMessage",
+                                                "Bank card is already registered.");
             return "redirect:/wallet/bank-details";
         }
 
         boolean welcomeBonusGranted = bankCardService.saveBankCard(principal.getName(), bankCardRequest);
 
         if (welcomeBonusGranted) {
+
             redirectAttributes.addFlashAttribute(
                     "successMessage",
-                    "Bank card saved. €50.00 welcome bonus added to your wallet."
+                   "Bank card saved. €50.00 welcome bonus added to your wallet."
             );
 
         } else {
@@ -157,21 +144,19 @@ public class WalletController {
 
         return "change-password";
     }
-//      addFlashAttribute() -> Запазва данните временно за следващия request без да ги показва в URL
 
     @PostMapping("/wallet/change-password")
     public String changePassword(
             @Valid @ModelAttribute("changePasswordRequest") ChangePasswordRequest request,
             BindingResult bindingResult,
             Principal principal,
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
+
             redirectAttributes.addFlashAttribute("changePasswordRequest", request);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.changePasswordRequest",
-                    bindingResult
-            );
+                    "org.springframework.validation.BindingResult.changePasswordRequest", bindingResult);
 
             return "redirect:/wallet/change-password";
         }
@@ -180,7 +165,7 @@ public class WalletController {
 
         redirectAttributes.addFlashAttribute(
                 "successMessage",
-                "Password changed successfully"
+               "Password changed successfully"
         );
 
         return "redirect:/wallet/change-password";
@@ -189,19 +174,18 @@ public class WalletController {
     @GetMapping("/wallet/payments")
     public String paymentsPage(Model model, Principal principal) {
         List<PaymentItemDTO> payments = paymentService.listPaymentsForUsername(principal.getName());
+
         model.addAttribute("payments", payments);
         return "payments";
     }
 
-    // Advanced — wallet settings (/wallet/settings)
     @GetMapping("/wallet/settings")
     public String settingsPage(Model model, Principal principal, Authentication authentication) {
 
         if (!model.containsAttribute("walletSettingsRequest")) {
 
             model.addAttribute("walletSettingsRequest",
-                    userProfileDetailsService.buildWalletSettingsRequest(principal.getName())
-            );
+                    userProfileDetailsService.buildWalletSettingsRequest(principal.getName()));
         }
 
         boolean isAdmin = authentication.getAuthorities()
@@ -220,8 +204,8 @@ public class WalletController {
             @RequestParam(defaultValue = "false") boolean emailOnTransfer,
             Principal principal,
             RedirectAttributes redirectAttributes,
-            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith
-    ) {
+            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith) {
+
         WalletSettingsRequest walletSettingsRequest = new WalletSettingsRequest();
 
         walletSettingsRequest.setBalanceHidden(balanceHidden);
@@ -252,6 +236,7 @@ public class WalletController {
         if (!model.containsAttribute("deleteAccountRequest")) {
             model.addAttribute("deleteAccountRequest", new DeleteAccountRequest());
         }
+
         return "delete-account";
     }
 
@@ -262,14 +247,13 @@ public class WalletController {
             Principal principal,
             HttpServletRequest httpRequest,
             HttpServletResponse httpResponse,
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes) {
+
         if (bindingResult.hasErrors()) {
 
             redirectAttributes.addFlashAttribute("deleteAccountRequest", request);
             redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.deleteAccountRequest",
-                    bindingResult);
+                    "org.springframework.validation.BindingResult.deleteAccountRequest", bindingResult);
 
             return "redirect:/wallet/delete-account";
         }
@@ -278,7 +262,7 @@ public class WalletController {
         new SecurityContextLogoutHandler().logout(httpRequest, httpResponse, null);
 
         redirectAttributes.addFlashAttribute("successMessage",
-                "Your account has been deleted successfully.");
+                                            "Your account has been deleted successfully.");
 
         return "redirect:/account-deleted";
     }

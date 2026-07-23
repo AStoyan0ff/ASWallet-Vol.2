@@ -17,10 +17,8 @@ public class AppUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserProfileDetailsRepository profileDetailsRepository;
 
-    public AppUserDetailsService(
-            UserRepository userRepository,
-            UserProfileDetailsRepository profileDetailsRepository
-    ) {
+    public AppUserDetailsService(UserRepository userRepository,UserProfileDetailsRepository profileDetailsRepository) {
+
         this.userRepository = userRepository;
         this.profileDetailsRepository = profileDetailsRepository;
     }
@@ -35,7 +33,6 @@ public class AppUserDetailsService implements UserDetailsService {
             .map(UserProfileDetails::getAccountStatus)
             .orElse(AccountStatus.ACTIVE);
 
-        // Advanced: load account status for isEnabled()
         return new AppUserPrincipal(user, accountStatus);
     }
 }

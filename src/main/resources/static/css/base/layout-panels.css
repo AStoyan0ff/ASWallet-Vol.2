@@ -1,4 +1,4 @@
-﻿.body-home {
+.body-home {
     color: #3d3428;
     background: #f7f3ea;
     position: relative;
@@ -17,7 +17,6 @@
     object-fit: cover;
     object-position: center;
 }
-
 
 .home-bg-overlay {
     position: absolute;
@@ -66,7 +65,6 @@
     -webkit-backdrop-filter: none;
 }
 
-/* Unified surface — fields & containers (not buttons) */
 .wallet-card-notice,
 .withdraw-no-card,
 .deposit-flow-end,
@@ -141,7 +139,6 @@
     background: var(--surface-bg);
 }
 
-/* Page-level flash alerts — centered in panel */
 .success.auth-stagger,
 .error.auth-stagger,
 .settings-alert,

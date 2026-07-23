@@ -79,7 +79,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional
-    // Advanced — submit transfer as PENDING; funds held on sender until processed
     public void transfer(UUID senderUserId, TransferMoneyDTO transferMoneyDTO) {
 
         Wallet senderWallet = walletRepository.findByUser_Id(senderUserId).orElseThrow(() ->
@@ -95,8 +94,8 @@ public class TransactionServiceImpl implements TransactionService {
             throw new NotTransferMoneyYourselfException("You cannot transfer money to yourself");
         }
 
-        BankCard receiverCard = bankCardRepository.findByUser_Id(receiverUser.getId())
-                .orElseThrow(() -> new ReceiverBankCardNotFoundException("Receiver has no registered bank card"));
+        BankCard receiverCard = bankCardRepository.findByUser_Id(receiverUser.getId()) .orElseThrow(() ->
+            new ReceiverBankCardNotFoundException("Receiver has no registered bank card"));
 
         String receiverCardMask = "****" + receiverCard.getLastFourDigits();
 
@@ -118,12 +117,11 @@ public class TransactionServiceImpl implements TransactionService {
 
         senderWallet.setBalance(senderWallet.getBalance().subtract(transferMoneyDTO.getAmount()));
 
-        String description = formatSpendingDescription(
-                transferMoneyDTO.getSpendingCategory(),
-                " (to card " + receiverCardMask + ")"
-        );
+        String description = formatSpendingDescription(transferMoneyDTO.getSpendingCategory(),
+            " (to card " + receiverCardMask + ")");
 
         Transaction transaction = new Transaction();
+
         transaction.setId(transactionId);
         transaction.setAmount(transferMoneyDTO.getAmount());
         transaction.setDescription(description);
@@ -165,12 +163,13 @@ public class TransactionServiceImpl implements TransactionService {
                 new PendingTransferNotFoundException("Pending transfer not found."));
 
         if (transaction.getType() != TransactionType.TRANSFER ||
-            (transaction.getStatus() != TransactionStatus.PENDING &&
-             transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW)) {
+           (transaction.getStatus() != TransactionStatus.PENDING &&
+            transaction.getStatus() != TransactionStatus.PENDING_RISK_REVIEW)) {
                 throw new CannotCancelTransferException("Only pending transfers can be cancelled.");
         }
 
         Wallet senderWallet = transaction.getSenderWallet();
+
         if (senderWallet == null || !senderWallet.getUser().getId().equals(userId)) {
             throw new CannotCancelTransferException("You can only cancel transfers that you initiated.");
         }
@@ -332,15 +331,16 @@ public class TransactionServiceImpl implements TransactionService {
 
         int safePage = Math.max(page, 0);
         int safeSize = size > 0 ? size : 5;
-        Pageable pageable = PageRequest.of(safePage, safeSize, Sort.by(Sort.Direction.DESC, "createdAt"));
-        Specification<Transaction> specification =
-                TransactionSpecifications.forUserWallet(wallet, new TransactionHistoryFilter());
-        Map<String, AccountStatus> accountStatusCache = new HashMap<>();
 
+        Pageable pageable = PageRequest.of(safePage, safeSize, Sort.by(Sort.Direction.DESC, "createdAt"));
+
+        Specification<Transaction> specification = TransactionSpecifications.forUserWallet(wallet, new TransactionHistoryFilter());
+        Map<String, AccountStatus> accountStatusCache = new HashMap<>();
         Page<Transaction> transactionPage = transactionRepository.findAll(specification, pageable);
 
         if (transactionPage.isEmpty() && safePage > 0 && transactionPage.getTotalPages() > 0) {
             int lastPage = transactionPage.getTotalPages() - 1;
+
             pageable = PageRequest.of(lastPage, safeSize, Sort.by(Sort.Direction.DESC, "createdAt"));
             transactionPage = transactionRepository.findAll(specification, pageable);
         }
@@ -350,18 +350,16 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public boolean hasPendingTransfers(UUID userId) {
+
         Wallet wallet = walletRepository.findByUser_Id(userId).orElseThrow(() ->
                 new WalletNotFoundException("Wallet not found"));
 
-        return transactionRepository.existsByWalletInvolvedAndStatusIn(
-                wallet.getId(),
-                List.of(TransactionStatus.PENDING, TransactionStatus.PENDING_RISK_REVIEW)
-        );
+        return transactionRepository.existsByWalletInvolvedAndStatusIn(wallet.getId(),
+                List.of(TransactionStatus.PENDING, TransactionStatus.PENDING_RISK_REVIEW));
     }
 
     @Override
     @Transactional
-    // Advanced — remove transaction records for this user's wallet (balance unchanged)
     public void clearUserTransactionHistory(UUID userId) {
 
         Wallet wallet = walletRepository.findByUser_Id(userId).orElseThrow(() ->
@@ -433,7 +431,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private AccountStatus resolveAccountStatus(String username, Map<String, AccountStatus> accountStatusCache) {
-        // Advanced: account status per user in transaction history
+
         return accountStatusCache.computeIfAbsent(username, key ->
                 profileDetailsRepository.findByUser_Username(key)
                         .map(UserProfileDetails::getAccountStatus)
@@ -445,21 +443,25 @@ public class TransactionServiceImpl implements TransactionService {
         return category.getLabel() + suffix;
     }
 
-    /** History/export display: category only (strip card / top-up suffix). */
     private String toCategoryLabel(String description) {
+
         if (description == null || description.isBlank()) {
             return description;
         }
+
         if (description.regionMatches(true, 0, "Welcome bonus", 0, "Welcome bonus".length())) {
             return WELCOME_BONUS_DESCRIPTION;
         }
+
         for (SpendingCategory category : SpendingCategory.values()) {
             String label = category.getLabel();
+
             if (description.equals(label)) {
                 return label;
             }
             if (description.startsWith(label) && description.length() > label.length()) {
                 char next = description.charAt(label.length());
+
                 if (next == ' ' || next == '(' || next == '—' || next == '–' || next == '-') {
                     return label;
                 }
@@ -473,16 +475,20 @@ public class TransactionServiceImpl implements TransactionService {
             BigDecimal amount,
             String description,
             User primaryUser,
-            User secondaryUser
-    ) {
+            User secondaryUser) {
+
         eventPublisher.publishEvent(new TransactionCompletedEvent(
                 type,
                 amount,
                 description != null ? description : "-",
                 primaryUser.getEmail(),
                 primaryUser.getUsername(),
-                secondaryUser != null ? secondaryUser.getEmail() : null,
-                secondaryUser != null ? secondaryUser.getUsername() : null
+                secondaryUser != null
+                    ? secondaryUser.getEmail()
+                    : null,
+                secondaryUser != null
+                    ? secondaryUser.getUsername()
+                    : null
         ));
     }
 }

@@ -26,6 +26,7 @@ public class TransferRefundSupport {
         }
 
         Wallet senderWallet = transaction.getSenderWallet();
+
         senderWallet.setBalance(senderWallet.getBalance().add(transaction.getAmount()));
         walletRepository.save(senderWallet);
 

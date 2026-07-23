@@ -1,17 +1,17 @@
 package STARTER.Services.Impl;
 
-import STARTER.DTOs.ChangePasswordRequest;
-import STARTER.DTOs.DeleteAccountRequest;
-import STARTER.DTOs.UserDTO;
-import STARTER.DTOs.UserViewDTO;
 import STARTER.CustomException.EmailAlreadyExistsException;
 import STARTER.CustomException.PasswordMismatchException;
 import STARTER.CustomException.UserAlreadyExistsException;
 import STARTER.CustomException.UserNotFoundException;
+import STARTER.DTOs.ChangePasswordRequest;
+import STARTER.DTOs.DeleteAccountRequest;
+import STARTER.DTOs.UserDTO;
+import STARTER.DTOs.UserViewDTO;
 import STARTER.Enums.UserRole;
+import STARTER.Events.UserRegisteredEvent;
 import STARTER.Models.User;
 import STARTER.Repositories.UserRepository;
-import STARTER.Events.UserRegisteredEvent;
 import STARTER.Services.Interface.UserProfileDetailsService;
 import STARTER.Services.Interface.UserService;
 import STARTER.Services.Interface.WalletService;
@@ -78,12 +78,12 @@ public class UserServiceImpl implements UserService {
                 .role(UserRole.USER)
                 .build();
 
-        // Advanced - create default profile on register
         User savedUser = userRepository.save(user);
 
         userProfileDetailsService.createDefaultForUser(savedUser);
         walletService.createWalletForUser(savedUser.getId());
         eventPublisher.publishEvent(new UserRegisteredEvent(savedUser.getEmail(), savedUser.getUsername()));
+
         logger.info("User registered: username={}, userId={}", savedUser.getUsername(), savedUser.getId());
     }
 
@@ -125,6 +125,7 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
+
         logger.info("Password changed: username={}", username);
     }
 
@@ -140,6 +141,7 @@ public class UserServiceImpl implements UserService {
         }
 
         userDeletionService.deleteUserFully(user);
+
         logger.info("Account deleted by user: username={}, userId={}", username, user.getId());
     }
 

@@ -29,7 +29,6 @@ public class BankCard extends BaseClass {
     @Column(name = "expiry_year", nullable = false)
     private String expiryYear;
 
-    // length = 22
     @Column(name = "iban", unique = true)
     private String iban;
 }

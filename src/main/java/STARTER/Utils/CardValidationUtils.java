@@ -25,10 +25,12 @@ public class CardValidationUtils {
                 || expiryMonth.isBlank() || expiryYear.isBlank()) {
             return true;
         }
+
         if (!expiryMonth.matches(ValidationPatterns.EXPIRY_MONTH)
                 || !expiryYear.matches(ValidationPatterns.EXPIRY_YEAR)) {
             return true;
         }
+
         return isExpiryInFuture(expiryMonth, expiryYear);
     }
 }

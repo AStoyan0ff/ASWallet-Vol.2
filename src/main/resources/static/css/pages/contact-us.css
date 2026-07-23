@@ -171,7 +171,6 @@
     color: rgba(61, 52, 40, 0.55);
 }
 
-/* /wallet/contact-us — black-to-gold metallic panel */
 .body-contact-us.body-contact-us-gold-panel .contact-us-panel.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,

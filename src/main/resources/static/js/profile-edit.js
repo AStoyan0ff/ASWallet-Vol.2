@@ -1,5 +1,5 @@
-// Advanced — avatar preview on /profile/edit
 document.addEventListener('DOMContentLoaded', function () {
+
     const fileInput = document.getElementById('avatarFile');
     const preview = document.getElementById('avatarPreview');
 

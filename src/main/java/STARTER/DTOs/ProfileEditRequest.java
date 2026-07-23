@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// Advanced - profile edit request DTO
 @Getter
 @Setter
 @NoArgsConstructor

@@ -4,11 +4,7 @@ import STARTER.DTOs.DepositMoneyDTO;
 import STARTER.DTOs.TransferMoneyDTO;
 import STARTER.DTOs.WalletViewDTO;
 import STARTER.DTOs.WithdrawMoneyDTO;
-import STARTER.Services.Interface.BankCardService;
-import STARTER.Services.Interface.TransactionService;
-import STARTER.Services.Interface.UserService;
-import STARTER.Services.Interface.WalletService;
-import STARTER.Services.Interface.WithdrawDailyLimitService;
+import STARTER.Services.Interface.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -184,8 +180,10 @@ public class TransactionController {
 
     @GetMapping("/transactions/withdraw")
     public String withdraw(Model model, Principal principal) {
-        bankCardService.getBankCardByUsername(principal.getName())
-                .ifPresent(card -> model.addAttribute("savedBankCard", card));
+
+        bankCardService.getBankCardByUsername(principal.getName()).ifPresent(card ->
+            model.addAttribute("savedBankCard", card));
+
         model.addAttribute("withdrawDailyLimit", withdrawDailyLimitService.getViewForUsername(principal.getName()));
         return "withdraw";
     }
@@ -216,7 +214,8 @@ public class TransactionController {
             .getId();
 
         transactionService.withdraw(userId, withdrawMoneyDTO);
-        redirectAttributes.addFlashAttribute("successMessage", "Withdrawal completed successfully.");
+        redirectAttributes.addFlashAttribute("successMessage",
+                                            "Withdrawal completed successfully.");
 
         return "redirect:/wallet";
     }

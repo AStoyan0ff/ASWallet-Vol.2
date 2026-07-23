@@ -32,7 +32,7 @@ public class Transaction extends BaseClass implements Persistable<UUID> {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, length = 32, columnDefinition = "varchar(32)")
+    @Column(nullable = false) //length = 32, columnDefinition = "varchar(32)"
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 

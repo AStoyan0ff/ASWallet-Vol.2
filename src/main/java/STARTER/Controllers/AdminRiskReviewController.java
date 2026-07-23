@@ -24,8 +24,10 @@ public class AdminRiskReviewController {
 
     @GetMapping
     public String listPendingReviews(Model model, Principal principal, RedirectAttributes redirectAttributes) {
+
         try {
             model.addAttribute("assessments", adminRiskReviewService.listRiskReviews());
+
         } catch (RuntimeException ex) {
             model.addAttribute("assessments", java.util.List.of());
             model.addAttribute("errorMessage", ex.getMessage());
@@ -91,8 +93,11 @@ public class AdminRiskReviewController {
 
             if (approve) {
                 adminRiskReviewService.approve(id, principal.getName());
+                redirectAttributes.addFlashAttribute("successMessage", "Risk assessment approved.");
+
             } else {
                 adminRiskReviewService.reject(id, principal.getName());
+                redirectAttributes.addFlashAttribute("successMessage", "Risk assessment rejected.");
             }
 
         } catch (RuntimeException ex) {

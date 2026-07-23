@@ -66,21 +66,22 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
         }
 
         try {
-            // Same source as /admin/risk-reviews — not listAssessments (can diverge / return empty).
-            return riskAssessmentClient.listManualReviews().stream()
-                    .filter(assessment -> assessment.getStatus() == AssessmentStatus.PENDING)
-                    .filter(assessment -> assessment.getDecision() == null
-                            || assessment.getDecision() == RiskDecision.REVIEW)
-                    .count();
+
+            return riskAssessmentClient.listManualReviews()
+                .stream()
+                .filter(assessment -> assessment.getStatus() == AssessmentStatus.PENDING)
+                .filter(assessment -> assessment.getDecision() == null || assessment.getDecision() == RiskDecision.REVIEW)
+                .count();
 
         } catch (Exception ex) {
-            logger.warn("Could not count pending risk reviews from microservice, using local transfers: {}",
-                    ex.getMessage());
+
+            logger.warn("Could not count pending risk reviews from microservice, using local transfers: {}", ex.getMessage());
             return countLocalPendingRiskHeldTransfers();
         }
     }
 
     private long countLocalPendingRiskHeldTransfers() {
+
         return transactionRepository.countByTypeAndStatus(
                 TransactionType.TRANSFER,
                 TransactionStatus.PENDING_RISK_REVIEW
@@ -116,12 +117,14 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
         }
 
         try {
+
             riskAssessmentClient.deleteManualReviews();
             logger.info("Deleted {} manual risk review(s)", reviews.size());
 
             return reviews.size();
 
         } catch (Exception ex) {
+
             logger.warn("Failed to delete risk reviews", ex);
             throw new RiskReviewServiceException("Could not delete risk reviews.");
         }
@@ -201,9 +204,7 @@ public class AdminRiskReviewServiceImpl implements AdminRiskReviewService {
         } catch (Exception ex) {
 
             logger.warn("Failed to review risk assessment {}", assessmentId, ex);
-            throw new RiskReviewServiceException(
-                    "Could not update the risk assessment. It may have already been reviewed."
-            );
+            throw new RiskReviewServiceException("Could not update the risk assessment. It may have already been reviewed.");
         }
     }
 

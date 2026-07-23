@@ -1,7 +1,6 @@
 package STARTER.Events;
 
 import STARTER.Enums.TransactionType;
-
 import java.math.BigDecimal;
 
 public record TransactionCompletedEvent(

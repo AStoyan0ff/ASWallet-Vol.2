@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-// Advanced — evict transaction history cache for one or both transfer parties
 public class ApplicationCacheEviction {
 
     private final CacheManager cacheManager;

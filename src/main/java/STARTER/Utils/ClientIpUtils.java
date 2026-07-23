@@ -31,7 +31,7 @@ public class ClientIpUtils {
         String value = ip.trim();
 
         if ("0:0:0:0:0:0:0:1".equals(value) || "::1".equals(value)) {
-            return "127.0.0.1"; // localhost real path
+            return "127.0.0.1";
         }
 
         if (value.regionMatches(true, 0, "::ffff:", 0, 7)) {

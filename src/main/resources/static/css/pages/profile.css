@@ -1,4 +1,3 @@
-﻿/* Advanced — profile view (/profile) */
 .body-user-details {
     color: #3d3428;
     background: #f2ebe0;
@@ -27,7 +26,6 @@
     overflow: visible;
 }
 
-/* Advanced — edit profile (/profile/edit) */
 .body-edit-details {
     color: #3d3428;
     background: #f2ebe0;
@@ -56,7 +54,6 @@
     overflow: visible;
 }
 
-/* Advanced — daily limit edit background (/wallet/daily-limit/edit) */
 .body-daily-limit .home-bg-image {
     object-position: center center;
 }
@@ -236,7 +233,7 @@
 }
 
 .user-profile-avatar-choose-btn:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .user-profile-avatar-hint {
@@ -424,7 +421,6 @@
     }
 }
 
-/* /profile — white panel + cream inset detail fields */
 .body-user-details .user-profile-panel.wallet-panel--materialize.reveal-child {
     overflow: visible;
     background: rgba(255, 255, 255, 0.88);
@@ -585,7 +581,6 @@
     color: rgba(61, 52, 40, 0.55);
 }
 
-/* /profile — black-to-gold metallic panel */
 .body-user-details.body-user-details-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -692,7 +687,6 @@
     );
 }
 
-/* /profile/edit — white panel + cream inset inputs */
 .body-edit-details .user-profile-panel.wallet-panel--materialize.reveal-child {
     overflow: visible;
     background: rgba(255, 255, 255, 0.88);
@@ -784,11 +778,11 @@
 }
 
 .body-edit-details .user-profile-avatar-choose-btn {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-edit-details .user-profile-avatar-choose-btn:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-edit-details .auth-field-group .error {
@@ -801,7 +795,6 @@
     color: rgba(61, 52, 40, 0.55);
 }
 
-/* /profile/edit — black-to-gold metallic panel */
 .body-edit-details.body-edit-details-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -871,7 +864,6 @@
     }
 }
 
-/* /wallet/daily-limit/edit — light page + white panel + cream picker */
 .body-daily-limit.body-daily-limit-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -1011,7 +1003,6 @@
     text-shadow: none;
 }
 
-/* /wallet/daily-limit/edit — black-to-gold metallic panel */
 .body-daily-limit.body-daily-limit-gold-panel .user-profile-panel.wallet-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,

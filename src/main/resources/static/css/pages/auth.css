@@ -1,4 +1,4 @@
-﻿.body-auth {
+.body-auth {
     color: #fef2d6;
     background: #060606;
     position: relative;
@@ -120,7 +120,7 @@
 }
 
 .body-auth .auth-submit:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-wallet .auth-submit {
@@ -131,7 +131,7 @@
 }
 
 .body-wallet .auth-submit:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-auth .error,
@@ -584,7 +584,6 @@
     color: #b8a48a;
 }
 
-/* /login — gold & /register — silver bimetallic glass panels */
 .body-auth-gold-glass {
     --auth-accent: #ffb74d;
     --auth-accent-soft: #ffcc80;
@@ -989,7 +988,7 @@
 
 .body-auth-gold-glass .auth-glass-submit:hover,
 .body-auth-silver-glass .auth-glass-submit:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-auth-gold-glass .auth-glass-signup,
@@ -1033,7 +1032,6 @@
     }
 }
 
-/* /login — neon orbit rings around glass panel */
 .body-auth-gold-glass .auth-orbit-wrap {
     position: relative;
     width: fit-content;
@@ -1185,7 +1183,6 @@
     line-height: 1.45;
 }
 
-/* /login & /register — light premium card */
 .body-auth-light-card {
     color: #3d3428;
     background: #f7f3ea;
@@ -1459,7 +1456,7 @@
 }
 
 .body-auth-light-card .auth-login-submit:hover {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .body-auth-light-card .auth-login-or {
@@ -1561,7 +1558,6 @@
     }
 }
 
-/* /register — compact proportional card (avoids page scroll; login unchanged) */
 .body-auth-register .auth-landing {
     min-height: 100dvh;
     padding: 12px 16px 28px;
@@ -1698,7 +1694,6 @@
     }
 }
 
-/* /login & /register — black-to-gold metallic panel (wallet-style gradient) */
 .body-auth-light-card.body-auth-gold-panel .auth-login-card {
     overflow: visible;
     background: linear-gradient(
@@ -1813,7 +1808,6 @@
     }
 }
 
-/* /forgot-password — light page + white panel + cream field */
 .body-auth-forgot-password.body-auth-forgot-password-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -1944,7 +1938,6 @@
     }
 }
 
-/* /forgot-password — black-to-gold metallic panel */
 .body-auth-forgot-password.body-auth-forgot-password-gold-panel .auth-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -2023,7 +2016,6 @@
     }
 }
 
-/* /reset-password — black-to-gold metallic panel (background unchanged) */
 .body-auth-reset-password.body-auth-reset-password-gold-panel .auth-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,

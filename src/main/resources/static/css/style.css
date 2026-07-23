@@ -1,5 +1,3 @@
-/* ASWallet — entry stylesheet (import order matches original cascade) */
-
 @import url("base/variables.css");
 @import url("base/reset.css");
 @import url("base/layout-panels.css");

@@ -8,8 +8,7 @@ public class RiskServiceFeignConfig {
 
     @Bean
     public RequestInterceptor riskServiceApiKeyInterceptor(
-                @Value("${app.risk-service.api-key}") String apiKey) {
-
-        return template -> template.header("X-API-Key", apiKey);
+        @Value("${app.risk-service.api-key}") String apiKey) {
+            return template -> template.header("X-API-Key", apiKey);
     }
 }

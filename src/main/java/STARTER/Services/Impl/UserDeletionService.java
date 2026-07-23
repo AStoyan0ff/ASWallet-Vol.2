@@ -3,13 +3,7 @@ package STARTER.Services.Impl;
 import STARTER.Models.Transaction;
 import STARTER.Models.User;
 import STARTER.Models.Wallet;
-import STARTER.Repositories.AdminMailboxMessageRepository;
-import STARTER.Repositories.BankCardRepository;
-import STARTER.Repositories.PasswordResetTokenRepository;
-import STARTER.Repositories.TransactionRepository;
-import STARTER.Repositories.UserProfileDetailsRepository;
-import STARTER.Repositories.UserRepository;
-import STARTER.Repositories.WalletRepository;
+import STARTER.Repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -67,7 +61,6 @@ public class UserDeletionService {
             userRepository.saveAndFlush(user);
         }
 
-        // Advanced - delete profile details on user removal
         profileDetailsRepository.deleteByUser_Id(user.getId());
         user.setProfileDetails(null);
         userRepository.delete(user);

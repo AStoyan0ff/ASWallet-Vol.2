@@ -2,13 +2,10 @@ package STARTER.DTOs;
 
 import STARTER.Enums.SpendingCategory;
 import STARTER.Utils.ValidationPatterns;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.*;
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -19,10 +16,9 @@ public class TransferMoneyDTO {
 
     @NotBlank(message = "Receiver username is required")
     @Size(min = 3, max = 30, message = "Username must be between 3 and 30 characters")
-    @Pattern(
-            regexp = ValidationPatterns.USERNAME,
-            message = "Username must start with a letter and contain only letters, numbers, or underscore"
-    )
+    @Pattern(regexp = ValidationPatterns.USERNAME,
+             message = "Username must start with a letter and contain only letters, numbers, or underscore")
+
     private String receiverUsername;
 
     @NotNull(message = "Amount is required")

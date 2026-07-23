@@ -36,7 +36,6 @@ public class User extends BaseClass {
     @OneToOne(mappedBy = "user")
     private Wallet wallet;
 
-    // Advanced — user profile details relationship
     @OneToOne(mappedBy = "user")
     private UserProfileDetails profileDetails;
 

@@ -1,4 +1,4 @@
-﻿.body-bank-details {
+.body-bank-details {
     overflow-x: hidden;
     overflow-y: auto;
     min-height: 100vh;
@@ -40,7 +40,6 @@ html:has(.body-bank-details) {
     box-sizing: border-box;
 }
 
-/* After card save — slightly larger panel + more spacing (View only) */
 .body-bank-details .bank-card-panel:has(.asw-bank-card-scene--view) {
     width: min(460px, 94vw);
     padding: 18px 20px 22px;
@@ -94,8 +93,6 @@ html:has(.body-bank-details) {
     padding: 8px 10px;
     font-size: 0.85rem;
 }
-
-/* —— ASW Bank card (black / gold, like /home) —— */
 
 .asw-bank-card-scene {
     width: 100%;
@@ -438,8 +435,6 @@ html:has(.body-bank-details) {
     color: #d4af37;
 }
 
-/* —— Semi-transparent form overlay on card —— */
-
 .asw-bank-card__form-overlay {
     position: absolute;
     left: 0;
@@ -603,10 +598,8 @@ html:has(.body-bank-details) {
 }
 
 .asw-bank-card__form-overlay .bank-card-submit:hover {
-    /* metallic — see base/buttons.css */
+    
 }
-
-/* —— Account details below card —— */
 
 .bank-details-list {
     margin: 0;
@@ -680,7 +673,6 @@ html:has(.body-bank-details) {
     }
 }
 
-/* /wallet/bank-details — light page + white panel + cream form */
 .body-bank-details.body-bank-details-light {
     color: #3d3428;
     background: #f2ebe0;
@@ -873,7 +865,6 @@ html:has(.body-bank-details) {
     }
 }
 
-/* /wallet/bank-details — black-to-gold metallic panel */
 .body-bank-details.body-bank-details-gold-panel .bank-card-panel--materialize.reveal-child {
     background: linear-gradient(
             145deg,
@@ -941,7 +932,6 @@ html:has(.body-bank-details) {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
-/* Inner form blends into panel gradient — soft corners, no hard box */
 .body-bank-details.body-bank-details-gold-panel .asw-bank-card-scene--edit .asw-bank-card {
     background: transparent;
     border: none;
@@ -1008,7 +998,6 @@ html:has(.body-bank-details) {
     border-radius: 12px;
 }
 
-/* Soft top corners on Username / Registered block + clip panel bottom */
 .body-bank-details.body-bank-details-gold-panel .bank-card-panel--materialize.reveal-child,
 .body-bank-details.body-bank-details-gold-panel .reveal-item.is-visible .bank-card-panel--materialize.reveal-child {
     overflow: hidden;

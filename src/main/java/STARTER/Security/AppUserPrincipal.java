@@ -26,7 +26,6 @@ public class AppUserPrincipal implements UserDetails {
     private final boolean credentialsNonExpired = true;
     private final boolean enabled;
 
-    // Advanced - isEnabled() checks ACTIVE account status
     public AppUserPrincipal(User user, AccountStatus accountStatus) {
 
         this.id = user.getId();

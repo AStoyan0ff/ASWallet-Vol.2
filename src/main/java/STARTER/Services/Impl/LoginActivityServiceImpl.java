@@ -42,7 +42,7 @@ public class LoginActivityServiceImpl implements LoginActivityService {
 
     @Override
     public List<LoginActivityViewDTO> getLastLogins(int limit) {
-        int safeLimit = Math.clamp(limit, 1, 50); //  Math.max(1, Math.min(limit, 50)
+        int safeLimit = Math.clamp(limit, 1, 50);
 
         return loginActivityRepository.findAllByOrderByLoggedInAtDesc(PageRequest.of(0, safeLimit))
                 .stream()

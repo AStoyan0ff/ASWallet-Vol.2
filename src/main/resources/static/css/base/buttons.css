@@ -1,5 +1,3 @@
-/* ASWallet — global metallic button system (gold primary, red danger) */
-
 .btn-metal-gold,
 .btn-primary,
 .form-pill-link,
@@ -210,7 +208,6 @@
             0 2px 0 var(--btn-blue-shadow-hover);
 }
 
-/* Unified text on gold buttons */
 .form-pill-link,
 .auth-submit,
 .pwd-submit,
@@ -246,7 +243,6 @@
     text-shadow: 0 1px 0 var(--btn-red-text-shadow);
 }
 
-/* Icons on metallic quick actions */
 .wallet-quick-action:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
 .wallet-quick-action--deposit .wallet-quick-action-icon,
 .wallet-quick-action--withdraw .wallet-quick-action-icon,
@@ -285,19 +281,15 @@ button:disabled,
     filter: grayscale(0.35);
 }
 
-/* User routes — unified light-darkened page overlay (admin .body-admin excluded) */
 body:not(.body-admin) .home-bg-overlay {
     background: var(--user-bg-overlay);
 }
 
-/* Admin routes — unified light-darkened page overlay */
 body.body-admin .home-bg-overlay,
 .body-wallet.body-admin .home-bg-overlay {
     background: var(--user-bg-overlay);
 }
 
-/* /wallet premium-fe — black action tiles, gold labels, colored icons
-   (must live here: buttons.css loads after wallet.css and otherwise wins) */
 .body-wallet-premium-fe .wallet-quick-actions-grid--elevated .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove),
 .body-wallet-premium-fe .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.wallet-quick-action--admin-remove) {
     border: none;
@@ -467,7 +459,6 @@ body.body-admin .home-bg-overlay,
     stroke: #38bdf8;
 }
 
-/* /admin — soft black sweep on Admin Tools + User Accounts action buttons */
 .admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled),
 .admin-users-actions__row .admin-users-action-btn:not(.is-disabled):not([aria-disabled="true"]) {
     overflow: hidden;

@@ -24,7 +24,6 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
-// Advanced — transactional pending transfer processing (separate bean for @Transactional proxy)
 public class PendingTransferProcessingService {
 
     private static final Logger logger = LoggerFactory.getLogger(PendingTransferProcessingService.class);
@@ -75,9 +74,8 @@ public class PendingTransferProcessingService {
             try {
                 self.finalizePendingTransfer(transaction.getId());
 
-            } catch (RuntimeException ignored) {
-                // Transfer may have been canceled or processed concurrently.
-            }
+            } catch (RuntimeException ignored) {}
+
         }
 
         if (!pending.isEmpty()) {
@@ -95,12 +93,12 @@ public class PendingTransferProcessingService {
         );
 
         for (Transaction transaction : stale) {
+
             try {
                 self.cancelPendingTransfer(transaction.getId());
 
-            } catch (RuntimeException ignored) {
-                // Transfer may have been processed concurrently.
-            }
+            } catch (RuntimeException ignored) {}
+
         }
 
         if (!stale.isEmpty()) {
@@ -127,7 +125,8 @@ public class PendingTransferProcessingService {
 
         completeTransfer(transaction);
 
-        logger.info("Pending transfer completed: txId={}, sender={}, receiver={}, amount={}", transactionId,
+        logger.info("Pending transfer completed: txId={}, sender={}, receiver={}, amount={}",
+                transactionId,
                 transaction.getSenderWallet().getUser().getUsername(),
                 transaction.getReceiverWallet().getUser().getUsername(),
                 transaction.getAmount()
@@ -186,7 +185,6 @@ public class PendingTransferProcessingService {
     }
 
     private Transaction findPendingTransfer(UUID transactionId) {
-
         return findTransferByStatus(transactionId, TransactionStatus.PENDING);
     }
 

@@ -14,7 +14,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-// Advanced — reload roles from DB so promoted admins work without re-login
 @Component
 public class ReloadUserAuthoritiesFilter extends OncePerRequestFilter {
 
@@ -38,8 +37,7 @@ public class ReloadUserAuthoritiesFilter extends OncePerRequestFilter {
             UsernamePasswordAuthenticationToken refreshed = new UsernamePasswordAuthenticationToken(
                     updated,
                     authentication.getCredentials(),
-                    updated.getAuthorities()
-            );
+                    updated.getAuthorities());
 
             refreshed.setDetails(authentication.getDetails());
             SecurityContextHolder.getContext().setAuthentication(refreshed);

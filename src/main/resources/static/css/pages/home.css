@@ -1,4 +1,4 @@
-﻿.body-home .home-bg-image {
+.body-home .home-bg-image {
     object-position: center center;
 }
 
@@ -126,7 +126,6 @@
     margin: 0 auto;
 }
 
-/* Advanced — home landing bank-card action links */
 .body-home .home-bank-card {
     position: relative;
     display: block;
@@ -315,7 +314,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    /*color: #000;*/
+    
     color: #6b5c45;
     text-shadow: none;
 }
@@ -352,7 +351,6 @@
     }
 }
 
-/* /home — Login & Register bank cards: black-to-gold metallic */
 .body-home.body-home-gold-cards .home-bank-card--login,
 .body-home.body-home-gold-cards .home-bank-card--register {
     border: 1px solid rgba(212, 175, 55, 0.55);
@@ -608,7 +606,7 @@
 }
 
 .home-btn-login {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .home-btn-login::after {
@@ -616,7 +614,7 @@
 }
 
 .home-btn-register {
-    /* metallic — see base/buttons.css */
+    
 }
 
 .home-btn-register::after {

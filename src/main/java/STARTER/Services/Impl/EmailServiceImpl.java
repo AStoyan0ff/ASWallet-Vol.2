@@ -57,19 +57,19 @@ public class EmailServiceImpl implements EmailService {
         msg.setSubject("ASWallet - Reset your password");
         msg.setText(
         """
-        Hello %s,
+            Hello %s,
 
-        We received a request to reset your ASWallet password.
+            We received a request to reset your ASWallet password.
 
-        Click the link below to choose a new password:
-        %s
+            Click the link below to choose a new password:
+            %s
 
-        This link expires in 1 hour and can only be used once.
+            This link expires in 1 hour and can only be used once.
 
-        If you did not request a password reset, you can safely ignore this email.
+            If you did not request a password reset, you can safely ignore this email.
 
-        Regards,
-        ASWallet Team
+            Regards,
+            ASWallet Team
         """
             .formatted(username, resetLink));
 
@@ -142,8 +142,8 @@ public class EmailServiceImpl implements EmailService {
             String username,
             BigDecimal amount,
             String senderUsername,
-            String description
-    ) {
+            String description) {
+
         sendTransactionEmail(
                 to,
                 "ASWallet - Transfer received",
@@ -156,12 +156,12 @@ public class EmailServiceImpl implements EmailService {
 
                 Regards,
                 ASWallet Team
-                """.formatted(username, amount, senderUsername, description)
-        );
+                """.formatted(username, amount, senderUsername, description));
     }
 
     private void sendTransactionEmail(String to, String subject, String text) {
         SimpleMailMessage msg = new SimpleMailMessage();
+
         msg.setFrom(from);
         msg.setTo(to);
         msg.setSubject(subject);

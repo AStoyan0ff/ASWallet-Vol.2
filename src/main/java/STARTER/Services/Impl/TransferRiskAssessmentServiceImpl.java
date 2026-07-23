@@ -67,8 +67,8 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
             User receiverUser,
             Wallet receiverWallet,
             TransferMoneyDTO transferMoneyDTO,
-            boolean receiverHasBankCard
-    ) {
+            boolean receiverHasBankCard) {
+
         if (!enabled) {
             return allowedResponse();
         }
@@ -85,6 +85,7 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
 
         try {
             RiskAssessmentClientResponse response = riskAssessmentClient.createAssessment(request);
+
             assertTransferAllowed(response);
             return response;
 
@@ -123,16 +124,15 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         }
     }
 
-    private RiskAssessmentCreateRequest buildRequest
-        (
+    private RiskAssessmentCreateRequest buildRequest(
+
             UUID transactionRef,
             User senderUser,
             Wallet senderWallet,
             User receiverUser,
             Wallet receiverWallet,
             TransferMoneyDTO transferMoneyDTO,
-            boolean receiverHasBankCard
-        ) {
+            boolean receiverHasBankCard) {
 
         WithdrawDailyLimitViewDTO limitView = withdrawDailyLimitService.getViewForUsername(senderUser.getUsername());
 
@@ -152,17 +152,14 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
         LocalDateTime startOfDay = today.atStartOfDay(dayZoneId).toLocalDateTime();
         LocalDateTime endOfDay = today.plusDays(1).atStartOfDay(dayZoneId).toLocalDateTime();
 
-        long transfersTodayCount = transactionRepository.countTransfersBetween
-            (
+        long transfersTodayCount = transactionRepository.countTransfersBetween(
                 senderWallet.getId(),
                 startOfDay,
-                endOfDay
-            );
+                endOfDay);
 
         boolean newReceiver = !transactionRepository.existsTransferBetweenSenderAndReceiver(
                 senderWallet.getId(),
-                receiverWallet.getId()
-        );
+                receiverWallet.getId());
 
         RiskAssessmentCreateRequest request = new RiskAssessmentCreateRequest();
 
@@ -189,17 +186,18 @@ public class TransferRiskAssessmentServiceImpl implements TransferRiskAssessment
             return "Transfer blocked by risk assessment (score " + response.getRiskScore() + ").";
         }
 
-        String joined = reasons.stream()
-                .filter(reason -> reason != null && !reason.isBlank())
-                .map(reason -> reason.replaceAll("[.\\s]+$", ""))
-                .collect(Collectors.joining("; "));
+        String joined = reasons
+            .stream()
+            .filter(reason -> reason != null && !reason.isBlank())
+            .map(reason -> reason.replaceAll("[.\\s]+$", ""))
+            .collect(Collectors.joining("; "));
 
         return "Transfer blocked by risk assessment: " + joined + ".";
     }
 
     private RiskAssessmentClientResponse allowedResponse() {
-
         RiskAssessmentClientResponse response = new RiskAssessmentClientResponse();
+
         response.setDecision(RiskDecision.ALLOW);
         response.setRiskScore(0);
 

@@ -29,11 +29,11 @@ public interface RiskAssessmentClient {
     List<RiskAssessmentClientResponse> listManualReviews();
 
     @GetMapping("/api/risk-assessments/{id}")
-    RiskAssessmentClientResponse getAssessment(@PathVariable() UUID id); // "id"
+    RiskAssessmentClientResponse getAssessment(@PathVariable() UUID id);
 
     @PatchMapping("/api/risk-assessments/{id}/review")
     RiskAssessmentClientResponse reviewAssessment(
-            @PathVariable() UUID id, // "id"
+            @PathVariable() UUID id,
             @RequestBody RiskAssessmentReviewRequest request
     );
 

@@ -1,5 +1,4 @@
 function normalizeIban(iban) {
-
     return (iban || "").replace(/\s/g, "").toUpperCase();
 }
 

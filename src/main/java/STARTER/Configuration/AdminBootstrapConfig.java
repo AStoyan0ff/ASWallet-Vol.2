@@ -50,7 +50,6 @@ public class AdminBootstrapConfig {
                 .build();
 
         return args -> {
-            // Advanced backfill missing user profiles
             userProfileDetailsService.ensureProfileExistsForAllUsers();
 
             int corrected = 0;
@@ -96,7 +95,6 @@ public class AdminBootstrapConfig {
                     .build();
 
             User savedAdmin = userRepository.save(admin);
-            // Advanced — create admin profile
             userProfileDetailsService.createDefaultForUser(savedAdmin);
 
             walletService.createWalletForUser(savedAdmin.getId());

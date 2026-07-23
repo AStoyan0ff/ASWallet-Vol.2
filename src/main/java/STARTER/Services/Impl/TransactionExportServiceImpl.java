@@ -4,13 +4,7 @@ import STARTER.DTOs.TransactionHistoryFilter;
 import STARTER.DTOs.TransactionViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Services.Interface.TransactionExportService;
-import com.lowagie.text.Document;
-import com.lowagie.text.Element;
-import com.lowagie.text.Font;
-import com.lowagie.text.FontFactory;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.Phrase;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -29,7 +23,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-// Advanced — generates PDF downloads (not email)
 public class TransactionExportServiceImpl implements TransactionExportService {
 
     private static final Logger logger = LoggerFactory.getLogger(TransactionExportServiceImpl.class);
@@ -45,7 +38,7 @@ public class TransactionExportServiceImpl implements TransactionExportService {
     public void exportPdf(List<TransactionViewDTO> transactions, TransactionHistoryFilter filter, String username, HttpServletResponse response
 
     ) throws IOException {
-        String filename = "aswallet-transactions-" + LocalDate.now().format(FILE_DATE) + ".pdf";
+        String filename = "wallet-transactions-" + LocalDate.now().format(FILE_DATE) + ".pdf";
 
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
@@ -150,6 +143,7 @@ public class TransactionExportServiceImpl implements TransactionExportService {
     }
 
     private String describeFilters(TransactionHistoryFilter filter) {
+
         if (filter == null || !filter.hasActiveFilters()) {
             return "All transactions";
         }

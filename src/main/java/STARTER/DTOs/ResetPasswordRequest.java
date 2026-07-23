@@ -24,6 +24,7 @@ public class ResetPasswordRequest {
             regexp = ValidationPatterns.PASSWORD,
             message = "Password must include an uppercase letter, a lowercase letter, a digit, and a special character"
     )
+
     private String newPassword;
 
     @NotBlank(message = "Confirm password is required")
@@ -36,6 +37,7 @@ public class ResetPasswordRequest {
         if (newPassword == null || confirmPassword == null) {
             return true;
         }
+
         return newPassword.equals(confirmPassword);
     }
 }

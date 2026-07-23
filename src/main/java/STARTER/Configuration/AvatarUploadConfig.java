@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Configuration
-// Advanced — serve locally uploaded avatars at /uploads/avatars/**
 public class AvatarUploadConfig implements WebMvcConfigurer {
 
     @Value("${app.upload.avatars-dir:uploads/avatars}")

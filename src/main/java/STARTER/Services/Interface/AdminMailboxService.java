@@ -8,7 +8,6 @@ import STARTER.DTOs.UserSendMessageRequest;
 import java.util.List;
 import java.util.UUID;
 
-// Advanced — admin ↔ user mailbox
 public interface AdminMailboxService {
 
     void sendMessageToUser(String adminUsername, AdminSendMessageRequest request);

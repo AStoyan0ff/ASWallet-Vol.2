@@ -1,5 +1,4 @@
 (function (global) {
-
     global.initTransactionAmountStep = function (amountInput) {
 
         if (!amountInput) {

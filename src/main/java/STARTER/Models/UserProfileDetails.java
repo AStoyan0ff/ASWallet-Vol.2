@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Table(name = "user_profile_details")
-// Advanced: user profile details entity
 public class UserProfileDetails extends BaseClass {
 
     @OneToOne
@@ -37,7 +37,6 @@ public class UserProfileDetails extends BaseClass {
     @Builder.Default
     private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
-    // Advanced — wallet settings (privacy & notifications)
     @Column(name = "balance_hidden", nullable = false)
     @Builder.Default
     private boolean balanceHidden = false;
@@ -53,12 +52,13 @@ public class UserProfileDetails extends BaseClass {
     @Column(name = "email_on_transfer", nullable = false)
     @Builder.Default
     private boolean emailOnTransfer = true;
-    //precision = 10, scale = 2
+
     @Column(name = "daily_withdraw_limit")
     private BigDecimal dailyWithdrawLimit;
 
     @Override
     protected void onPrePersist() {
+
         if (this.accountStatus == null) {
             this.accountStatus = AccountStatus.ACTIVE;
         }

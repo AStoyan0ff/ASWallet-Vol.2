@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// Advanced: dynamic JPA filters for transaction history/export
 public final class TransactionSpecifications {
 
     private TransactionSpecifications() {}

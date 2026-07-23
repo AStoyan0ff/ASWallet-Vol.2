@@ -1,11 +1,8 @@
 package STARTER.Services.Impl;
 
-import STARTER.CustomException.CannotChangeAdminRoleException;
-import STARTER.CustomException.CannotChangeSelfRoleException;
-import STARTER.CustomException.CannotDeleteAdminException;
-import STARTER.CustomException.CannotDeleteSelfException;
-import STARTER.CustomException.UserNotFoundException;
+import STARTER.CustomException.*;
 import STARTER.DTOs.AdminUserViewDTO;
+import STARTER.DTOs.UserProfileDetailsViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
 import STARTER.Models.User;
@@ -53,10 +50,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<AdminUserViewDTO> getAllUsers() {
-        return userRepository.findAll().stream()
-                .sorted(Comparator.comparing(User::getCreatedAt).reversed())
-                .map(this::mapToAdminView)
-                .toList();
+
+        return userRepository
+            .findAll()
+            .stream()
+            .sorted(Comparator.comparing(User::getCreatedAt)
+            .reversed())
+            .map(this::mapToAdminView)
+            .toList();
     }
 
     @Override
@@ -86,14 +87,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    // Advanced - admin account status management
     public void updateAccountStatus(String adminUsername, UUID userId, AccountStatus newStatus) {
         userProfileDetailsService.updateAccountStatus(adminUsername, userId, newStatus);
     }
 
     @Override
     @Transactional
-    // Advanced — admin role management
     public void updateUserRole(String adminUsername, UUID userId, UserRole newRole) {
         User admin = findUser(adminUsername);
         User target = findUserById(userId);
@@ -123,7 +122,6 @@ public class AdminServiceImpl implements AdminService {
         return mapToAdminView(target);
     }
 
-    // Advanced — primary admin (app.admin.username) can manage secondary admins; others manage USERs only
     private void assertActorIsAdmin(User admin) {
 
         if (admin.getRole() != UserRole.ADMIN) {
@@ -133,6 +131,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     private void assertCanManageUser(User admin, User target) {
+
         if (admin.getId().equals(target.getId())) {
             throw new CannotChangeSelfRoleException("You cannot manage your own account here.");
         }
@@ -146,7 +145,6 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    // Advanced — Support Admin: only super admin may promote/demote roles (USER ↔ ADMIN)
     private void assertPrimaryAdminCanChangeRoles(User admin) {
 
         if (!isPrimaryAdmin(admin.getUsername())) {
@@ -173,8 +171,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     private AdminUserViewDTO mapToAdminView(User user) {
+
         Wallet wallet = walletRepository.findByUser_Id(user.getId()).orElse(null);
-        var profileView = userProfileDetailsService.getProfileView(user.getUsername());
+        UserProfileDetailsViewDTO profileView = userProfileDetailsService.getProfileView(user.getUsername());
 
         return AdminUserViewDTO.builder()
                 .id(user.getId())

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-// Advanced — user send message to admin
+
 public class UserSendMessageRequest {
 
     @NotBlank(message = "Select an admin to send your message to.")

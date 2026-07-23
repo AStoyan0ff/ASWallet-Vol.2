@@ -68,6 +68,7 @@ public class IbanGenerator {
         String numeric = toNumericString(rearranged);
         int remainder = mod97(numeric);
         int checkDigits = 98 - remainder;
+
         return String.format("%02d", checkDigits);
     }
 

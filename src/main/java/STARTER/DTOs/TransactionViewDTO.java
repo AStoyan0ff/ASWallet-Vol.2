@@ -3,7 +3,9 @@ package STARTER.DTOs;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.TransactionStatus;
 import STARTER.Enums.TransactionType;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -24,11 +26,9 @@ public class TransactionViewDTO {
 
     private UUID senderWalletId;
     private String senderUsername;
-    // Advanced: sender account status in transaction history
     private AccountStatus senderAccountStatus;
 
     private UUID receiverWalletId;
     private String receiverUsername;
-    // Advanced: receiver account status in transaction history
     private AccountStatus receiverAccountStatus;
 }

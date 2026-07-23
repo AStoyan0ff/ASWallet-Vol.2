@@ -1,10 +1,6 @@
 package STARTER.Services.Interface;
 
-import STARTER.DTOs.DepositMoneyDTO;
-import STARTER.DTOs.TransactionHistoryFilter;
-import STARTER.DTOs.TransactionViewDTO;
-import STARTER.DTOs.TransferMoneyDTO;
-import STARTER.DTOs.WithdrawMoneyDTO;
+import STARTER.DTOs.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -16,25 +12,14 @@ public interface TransactionService {
     void deposit(UUID userID, DepositMoneyDTO depositMoneyDTO);
     void withdraw(UUID userID, WithdrawMoneyDTO withdrawMoneyDTO);
     void grantWelcomeBonus(UUID userId);
-
-    // Advanced — process pending transfers (scheduler)
     void processPendingTransfers();
-
-    // Advanced — auto-cancel stale pending transfers (scheduler)
     void cancelStalePendingTransfers();
-
-    // Advanced — user cancels own pending transfer
     void cancelPendingTransfer(UUID transactionId, UUID userId);
 
     List<TransactionViewDTO> getUserTransactions(UUID userID);
-
     Page<TransactionViewDTO> getUserTransactionsPage(UUID userId, int page, int size);
 
     boolean hasPendingTransfers(UUID userId);
-
-    // Advanced — filtered history shared by UI and exports
     List<TransactionViewDTO> getFilteredUserTransactions(UUID userId, TransactionHistoryFilter filter);
-
-    // Advanced — clear all transactions involving the user's wallet
     void clearUserTransactionHistory(UUID userId);
 }

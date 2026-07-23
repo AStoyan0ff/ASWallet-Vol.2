@@ -16,7 +16,6 @@ public interface PasswordResetTokenRepository extends JpaRepository<PasswordRese
     Optional<PasswordResetToken> findByTokenHash(String tokenHash);
     void deleteByUser(User user);
 
-    // Advanced — scheduled cleanup of expired and used reset tokens
     @Modifying
     long deleteByExpiresAtBeforeOrUsedTrue(LocalDateTime expiresAt);
 }

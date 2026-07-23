@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
-// Advanced user profile pages (/profile, /profile/edit)
 @Controller
 public class ProfileController {
     private final UserProfileDetailsService userProfileDetailsService;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
-// Advanced: user profile details repository
 @Repository
 public interface UserProfileDetailsRepository extends JpaRepository<UserProfileDetails, UUID> {
 

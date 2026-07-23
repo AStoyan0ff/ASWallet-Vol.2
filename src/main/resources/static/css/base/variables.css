@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --yellow: #ffd54f;
     --yellow-soft: #fff8de;
     --orange: #ff8f00;
@@ -28,7 +28,7 @@
             rgba(12, 8, 4, 0.46) 100%
     );
 
-    /* Metallic buttons — gold (primary) & red (danger) */
+    
     --btn-gold-text: #1a1208;
     --btn-gold-border: rgba(255, 214, 140, 0.35);
     --btn-gold-border-hover: rgba(255, 224, 160, 0.5);

@@ -1,6 +1,8 @@
 package STARTER.Models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,13 +21,14 @@ public abstract class BaseClass {
 
     @PrePersist
     private void basePrePersist() {
+
         if (id == null) {
             id = UUID.randomUUID();
         }
+
         onPrePersist();
     }
 
-    protected void onPrePersist() {
-        // Override in entities that need extra initialization before insert.
-    }
+    protected void onPrePersist()
+    {}
 }

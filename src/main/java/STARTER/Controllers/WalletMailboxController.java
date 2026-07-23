@@ -18,7 +18,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
-// Advanced — user mailbox (/wallet/messages)
 @Controller
 public class WalletMailboxController {
 
@@ -30,6 +29,7 @@ public class WalletMailboxController {
 
     @GetMapping("/wallet/messages/send")
     public String sendMessagePage(Model model, Principal principal, Authentication authentication) {
+
         if (isAdmin(authentication)) {
             return "redirect:/admin/messages/send";
         }
@@ -40,6 +40,7 @@ public class WalletMailboxController {
 
         model.addAttribute("currentUsername", principal.getName());
         model.addAttribute("adminRecipients", adminMailboxService.listAdminRecipients());
+
         return "wallet-send-message";
     }
 
@@ -56,13 +57,16 @@ public class WalletMailboxController {
         }
 
         if (bindingResult.hasErrors()) {
+
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userSendMessageRequest", bindingResult);
             redirectAttributes.addFlashAttribute("userSendMessageRequest", request);
+
             return "redirect:/wallet/messages/send";
         }
 
         adminMailboxService.sendMessageToAdmin(principal.getName(), request);
         redirectAttributes.addFlashAttribute("successMessage", "Your message was sent to the admin.");
+
         return "redirect:/wallet";
     }
 
@@ -104,12 +108,13 @@ public class WalletMailboxController {
 
         adminMailboxService.deleteUserMailbox(principal.getName());
         redirectAttributes.addFlashAttribute("successMessage",
-                "All messages were deleted.");
+                                            "All messages were deleted.");
 
         return "redirect:/wallet/messages";
     }
 
     private boolean isAdmin(Authentication authentication) {
+
         return authentication.getAuthorities()
                 .stream()
                 .anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()));

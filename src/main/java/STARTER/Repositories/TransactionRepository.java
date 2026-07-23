@@ -19,15 +19,11 @@ import java.util.UUID;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, UUID>, JpaSpecificationExecutor<Transaction> {
 
-    // List<Transaction> findAllBySenderWallet(Wallet senderWallet);
-    // List<Transaction> findAllByReceiverWallet(Wallet receiverWallet);
-
     List<Transaction> findAllBySenderWalletOrReceiverWallet(
         Wallet senderWallet,
         Wallet receiverWallet
     );
 
-    // Advanced — pending transfer processing
     List<Transaction> findByStatusAndTypeAndCreatedAtBefore(
             TransactionStatus status,
             TransactionType type,

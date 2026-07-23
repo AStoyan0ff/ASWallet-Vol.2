@@ -1,12 +1,13 @@
 package STARTER.Services.Impl;
 
+import STARTER.Configuration.CacheConfig;
 import STARTER.CustomException.CannotChangeAdminAccountStatusException;
 import STARTER.CustomException.CannotChangeSelfAccountStatusException;
 import STARTER.CustomException.UserNotFoundException;
+import STARTER.DTOs.DailyLimitEditRequest;
 import STARTER.DTOs.ProfileEditRequest;
 import STARTER.DTOs.UserProfileDetailsViewDTO;
 import STARTER.DTOs.WalletSettingsRequest;
-import STARTER.DTOs.DailyLimitEditRequest;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.TransactionType;
 import STARTER.Enums.UserRole;
@@ -17,7 +18,6 @@ import STARTER.Repositories.UserRepository;
 import STARTER.Services.Interface.AvatarStorageService;
 import STARTER.Services.Interface.UserProfileDetailsService;
 import STARTER.Services.Interface.WithdrawDailyLimitService;
-import STARTER.Configuration.CacheConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +31,6 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
-// Advanced: user profile details service impl
 public class UserProfileDetailsServiceImpl implements UserProfileDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserProfileDetailsServiceImpl.class);
@@ -97,6 +96,7 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
     @Override
     @Cacheable(value = CacheConfig.PROFILES, key = "#username")
     public UserProfileDetailsViewDTO getProfileView(String username) {
+
         User user = findUser(username);
         UserProfileDetails profile = findProfile(user.getId());
 
@@ -146,7 +146,6 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
 
     @Override
     @Transactional
-    // Advanced: admin updates user account status
     public void updateAccountStatus(String adminUsername, UUID userId, AccountStatus newStatus) {
         User admin = findUser(adminUsername);
 
@@ -250,8 +249,7 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
 
         profileDetailsRepository.save(profile);
 
-        logger.info(
-                "Wallet settings updated: username={}, balanceHidden={}, emailOnDeposit={}, emailOnWithdraw={}, emailOnTransfer={}",
+        logger.info("Wallet settings updated: username={}, balanceHidden={}, emailOnDeposit={}, emailOnWithdraw={}, emailOnTransfer={}",
                 username,
                 request.isBalanceHidden(),
                 request.isEmailOnDeposit(),

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-// Advanced — admin send mailbox message form
+
 public class AdminSendMessageRequest {
 
     @NotBlank(message = "Username is required.")

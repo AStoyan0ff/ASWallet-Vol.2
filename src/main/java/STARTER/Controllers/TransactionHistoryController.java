@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.UUID;
 
-// Advanced — transaction history
 @Controller
 public class TransactionHistoryController {
 
@@ -39,6 +38,7 @@ public class TransactionHistoryController {
             Principal principal) {
 
         UUID userId = userService.findByUsername(principal.getName()).getId();
+
         Page<TransactionViewDTO> transactionPage =
                 transactionService.getUserTransactionsPage(userId, page, PAGE_SIZE);
 
@@ -64,7 +64,9 @@ public class TransactionHistoryController {
 
         UUID userId = userService.findByUsername(principal.getName()).getId();
         transactionService.cancelPendingTransfer(id, userId);
-        redirectAttributes.addFlashAttribute("successMessage", "Pending transfer cancelled. Funds returned to your wallet.");
+
+        redirectAttributes.addFlashAttribute("successMessage",
+                                            "Pending transfer cancelled. Funds returned to your wallet.");
 
         return "redirect:/transactions/history?page=" + Math.max(page, 0);
     }
@@ -74,7 +76,9 @@ public class TransactionHistoryController {
         UUID userId = userService.findByUsername(principal.getName()).getId();
 
         transactionService.clearUserTransactionHistory(userId);
-        redirectAttributes.addFlashAttribute("successMessage", "Transaction history cleared successfully.");
+
+        redirectAttributes.addFlashAttribute("successMessage",
+                                            "Transaction history cleared successfully.");
 
         return "redirect:/transactions/history";
     }

@@ -19,7 +19,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
             UserAlreadyExistsException.class,
-            EmailAlreadyExistsException.class})
+            EmailAlreadyExistsException.class}
+    )
 
     public String handleRegistrationConflict(RuntimeException ex, RedirectAttributes redirectAttributes) {
 
@@ -31,6 +32,7 @@ public class GlobalExceptionHandler {
     public String handlePasswordMismatch(PasswordMismatchException ex,
                                          HttpServletRequest request,
                                          RedirectAttributes redirectAttributes) {
+
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
         String uri = request.getRequestURI();
@@ -44,10 +46,10 @@ public class GlobalExceptionHandler {
 
             if (token != null && !token.isBlank()) {
 
-                redirectAttributes.addFlashAttribute(
-                        "resetPasswordRequest",
-                        ResetPasswordRequest.builder().token(token).build()
-                );
+                redirectAttributes.addFlashAttribute("resetPasswordRequest",
+                        ResetPasswordRequest.builder()
+                            .token(token)
+                            .build());
             }
         }
 
@@ -83,7 +85,8 @@ public class GlobalExceptionHandler {
             NotTransferMoneyYourselfException.class,
             SenderNotFoundException.class,
             ReceiverNotFoundException.class,
-            TransferBlockedByRiskException.class})
+            TransferBlockedByRiskException.class}
+    )
 
     public String handleTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
 
@@ -93,7 +96,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
             CannotCancelTransferException.class,
-            PendingTransferNotFoundException.class})
+            PendingTransferNotFoundException.class}
+    )
 
     public String handlePendingTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
 

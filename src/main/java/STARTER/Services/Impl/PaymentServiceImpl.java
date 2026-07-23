@@ -61,7 +61,6 @@ public class PaymentServiceImpl implements PaymentService {
         Wallet wallet = walletRepository.findByUser_Id(currentUser.getId()).orElseThrow(() ->
                 new WalletNotFoundException("Wallet not found"));
 
-        // Payments = only transfers this user sent to another user (not incoming, deposit, withdraw)
         Specification<Transaction> outgoingTransfers = (root, query, criteriaBuilder) ->
                 criteriaBuilder.and(
                         criteriaBuilder.equal(root.get("senderWallet"), wallet),
@@ -79,26 +78,31 @@ public class PaymentServiceImpl implements PaymentService {
 
     private PaymentItemDTO toPaymentItem(
             Transaction transaction,
-            Map<String, UserProfileDetails> profileCache
-    ) {
+            Map<String, UserProfileDetails> profileCache) {
+
         User receiver = transaction.getReceiverWallet() != null
                 ? transaction.getReceiverWallet().getUser()
                 : null;
-        String receiverUsername = receiver != null ? receiver.getUsername() : "Unknown";
+
+        String receiverUsername = receiver != null
+            ? receiver.getUsername()
+            : "Unknown";
 
         UserProfileDetails profile = profileCache.computeIfAbsent(
                 receiverUsername,
-                this::findProfileByUsername
-        );
+                this::findProfileByUsername);
 
         String displayName = resolveDisplayName(profile, receiverUsername);
-        boolean hasCustomAvatar = profile != null
-                && profile.getAvatarUrl() != null
-                && !profile.getAvatarUrl().isBlank();
+
+        boolean hasCustomAvatar = profile != null &&
+                 profile.getAvatarUrl() != null &&
+                !profile.getAvatarUrl().isBlank();
 
         return PaymentItemDTO.builder()
                 .receiverUser(displayName)
-                .avatarImageSrc(resolveAvatarImageSrc(profile != null ? profile.getAvatarUrl() : null))
+                .avatarImageSrc(resolveAvatarImageSrc(profile != null
+                    ? profile.getAvatarUrl()
+                    : null))
                 .hasCustomAvatar(hasCustomAvatar)
                 .initials(resolveInitials(profile, receiverUsername))
                 .avatarTone(Math.floorMod(receiverUsername.hashCode(), AVATAR_TONE_COUNT))
@@ -112,6 +116,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String resolveDisplayName(UserProfileDetails profile, String username) {
+
         if (profile == null) {
             return username;
         }
@@ -122,9 +127,11 @@ public class PaymentServiceImpl implements PaymentService {
         if (first != null && last != null) {
             return first + " " + last;
         }
+
         if (first != null) {
             return first;
         }
+
         if (last != null) {
             return last;
         }
@@ -133,17 +140,22 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String resolveInitials(UserProfileDetails profile, String username) {
+
         String first = profile != null ? normalize(profile.getFirstName()) : null;
         String last = profile != null ? normalize(profile.getLastName()) : null;
 
         if (first != null && last != null) {
             return ("" + first.charAt(0) + last.charAt(0)).toUpperCase(Locale.ROOT);
         }
+
         if (first != null) {
             return first.substring(0, Math.min(2, first.length())).toUpperCase(Locale.ROOT);
         }
 
-        String safe = username == null ? "?" : username.trim();
+        String safe = username == null
+            ? "?"
+            : username.trim();
+
         if (safe.isEmpty()) {
             return "?";
         }
@@ -152,6 +164,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String buildDataLine(Transaction transaction) {
+
         TransactionStatus status = transaction.getStatus();
         String amountLabel = formatAmount(transaction.getAmount());
 
@@ -175,11 +188,16 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String formatAmount(BigDecimal amount) {
-        BigDecimal safe = amount != null ? amount : BigDecimal.ZERO;
+
+        BigDecimal safe = amount != null
+            ? amount
+            : BigDecimal.ZERO;
+
         return "€ " + safe.setScale(2, RoundingMode.HALF_UP).toPlainString();
     }
 
     private String formatPaymentDate(LocalDateTime createdAt) {
+
         if (createdAt == null) {
             return "-";
         }
@@ -195,6 +213,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String resolveAvatarImageSrc(String avatarUrl) {
+
         if (avatarUrl == null || avatarUrl.isBlank()) {
             return defaultAvatarImage;
         }
@@ -207,11 +226,15 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private String normalize(String value) {
+
         if (value == null) {
             return null;
         }
 
         String trimmed = value.trim();
-        return trimmed.isEmpty() ? null : trimmed;
+
+        return trimmed.isEmpty()
+            ? null
+            : trimmed;
     }
 }

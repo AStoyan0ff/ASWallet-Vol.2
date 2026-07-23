@@ -16,6 +16,7 @@ public class DailyWithdrawLimitExceededException extends RuntimeException {
     }
 
     private static String buildMessage(BigDecimal remainingToday) {
+
         if (remainingToday == null || remainingToday.signum() <= 0) {
             return "Daily withdraw limit reached. Try again tomorrow.";
         }

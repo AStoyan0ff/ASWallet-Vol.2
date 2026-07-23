@@ -42,6 +42,7 @@ public class UserController {
 
     @ModelAttribute("userDTO")
     public UserDTO createUser(UserDTO userDTO) {
+
         return userDTO != null
                 ? userDTO
                 : new UserDTO();
@@ -53,6 +54,7 @@ public class UserController {
         if (!model.containsAttribute("userDTO")) {
             model.addAttribute("userDTO", new UserDTO());
         }
+
         return "register";
     }
 
@@ -67,6 +69,7 @@ public class UserController {
         }
 
         userService.register(userDTO);
+
         redirectAttributes.addFlashAttribute("successMessage", "Account created successfully. Please log in.");
         return "redirect:/login";
     }
@@ -77,6 +80,7 @@ public class UserController {
         if (!model.containsAttribute("loginDTO")) {
             model.addAttribute("loginDTO", new LoginDTO());
         }
+
         return "login";
     }
 
@@ -89,20 +93,20 @@ public class UserController {
             HttpServletResponse response
     ) {
         if (bindingResult.hasErrors()) {
+
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
-            redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.loginDTO",
-                    bindingResult
-            );
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO", bindingResult);
+
             return "redirect:/login";
         }
 
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginDTO.getUsername(),
-                            loginDTO.getPassword()
-                    )
+            Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(
+
+                    loginDTO.getUsername(),
+                    loginDTO.getPassword()
+                )
             );
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -116,6 +120,7 @@ public class UserController {
         } catch (BadCredentialsException ex) {
 
             loginDTO.setPassword(null);
+
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
             redirectAttributes.addFlashAttribute(
                     "errorMessage",
@@ -123,7 +128,7 @@ public class UserController {
             );
 
             return "redirect:/login";
-        // Advanced - block login for inactive accounts
+
         } catch (DisabledException ex) {
 
             loginDTO.setPassword(null);

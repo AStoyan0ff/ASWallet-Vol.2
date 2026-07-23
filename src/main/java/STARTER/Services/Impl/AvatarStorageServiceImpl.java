@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-// Advanced — saves uploaded avatars under uploads/avatars/
 public class AvatarStorageServiceImpl implements AvatarStorageService {
 
     private static final String PUBLIC_PREFIX = "/uploads/avatars/";

@@ -22,6 +22,7 @@ public class BankCardIbanBackfillConfig {
             int updated = 0;
 
             for (BankCard bankCard : bankCardRepository.findAll()) {
+
                 if (bankCard.getIban() != null && !bankCard.getIban().isBlank()) {
                     continue;
                 }
@@ -30,6 +31,7 @@ public class BankCardIbanBackfillConfig {
                         bankCard.getUser().getId(),
                         candidate -> !bankCardRepository.existsByIban(candidate)
                 ));
+
                 bankCardRepository.save(bankCard);
                 updated++;
             }

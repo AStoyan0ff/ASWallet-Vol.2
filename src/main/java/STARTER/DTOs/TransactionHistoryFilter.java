@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-// Advanced: shared filters for history and exports
 @Getter
 @Setter
 @NoArgsConstructor

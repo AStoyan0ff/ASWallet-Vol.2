@@ -4,20 +4,13 @@ import STARTER.DTOs.AdminDashboardSummaryDTO;
 import STARTER.DTOs.AdminUserViewDTO;
 import STARTER.Enums.AccountStatus;
 import STARTER.Enums.UserRole;
-import STARTER.Services.Interface.AdminDashboardService;
-import STARTER.Services.Interface.AdminMailboxService;
-import STARTER.Services.Interface.AdminRiskReviewService;
-import STARTER.Services.Interface.AdminService;
-import STARTER.Services.Interface.LoginActivityService;
+import STARTER.Services.Interface.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 import java.util.UUID;
 
@@ -61,7 +54,6 @@ public class AdminController {
         return "admin";
     }
 
-    // Advanced — last successful logins for admins
     @GetMapping("/login-activity")
     public String loginActivityPage(Model model, Principal principal) {
 
@@ -88,7 +80,6 @@ public class AdminController {
         return "redirect:/admin/login-activity";
     }
 
-    // Advanced — manage user status and role
     @GetMapping("/users/{id}/manage")
     public String manageUserPage(
 

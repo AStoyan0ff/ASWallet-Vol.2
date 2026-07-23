@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-// Advanced — delete expired and used password reset tokens
 public class PasswordResetTokenCleanupScheduler {
 
     private static final Logger logger = LoggerFactory.getLogger(PasswordResetTokenCleanupScheduler.class);

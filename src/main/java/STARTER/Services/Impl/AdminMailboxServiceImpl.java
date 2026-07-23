@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-// Advanced: admin <-> user mailbox messaging
 public class AdminMailboxServiceImpl implements AdminMailboxService {
 
     private static final Logger logger = LoggerFactory.getLogger(AdminMailboxServiceImpl.class);
@@ -105,6 +104,7 @@ public class AdminMailboxServiceImpl implements AdminMailboxService {
 
     @Override
     public List<MailboxMessageViewDTO> listMessagesForUser(String username) {
+
         return mailboxMessageRepository.findAllByRecipientUsernameOrderByCreatedAtDesc(username)
             .stream()
             .map(message -> mapToViewForUser(message, username))
@@ -132,6 +132,7 @@ public class AdminMailboxServiceImpl implements AdminMailboxService {
 
     @Override
     public List<AdminRecipientOptionDTO> listAdminRecipients() {
+
         return userRepository.findAllByRole(UserRole.ADMIN)
             .stream()
             .sorted(Comparator.comparing((User admin) -> !isPrimaryAdminAccount(admin)).reversed()

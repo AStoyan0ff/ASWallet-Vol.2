@@ -8,10 +8,8 @@ import java.util.UUID;
 public interface WithdrawDailyLimitService {
 
     WithdrawDailyLimitViewDTO getViewForUsername(String username);
-
     void assertWithinDailyLimit(UUID userId, BigDecimal amount);
 
     BigDecimal normalizeUserDailyLimit(BigDecimal requestedLimit);
-
     BigDecimal defaultDailyLimit();
 }

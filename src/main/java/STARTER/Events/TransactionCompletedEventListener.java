@@ -44,8 +44,7 @@ public class TransactionCompletedEventListener {
                             event.primaryEmail(),
                             event.primaryUsername(),
                             event.amount(),
-                            event.description()
-                    );
+                            event.description());
                 }
             }
             case TRANSFER -> {
@@ -56,9 +55,9 @@ public class TransactionCompletedEventListener {
                             event.primaryUsername(),
                             event.amount(),
                             event.secondaryUsername(),
-                            event.description()
-                    );
+                            event.description());
                 }
+
                 if (event.secondaryUsername() != null &&
                          isEmailEnabled(event.secondaryUsername(), TransactionType.TRANSFER)) {
 
@@ -67,8 +66,7 @@ public class TransactionCompletedEventListener {
                             event.secondaryUsername(),
                             event.amount(),
                             event.primaryUsername(),
-                            event.description()
-                    );
+                            event.description());
                 }
             }
         }

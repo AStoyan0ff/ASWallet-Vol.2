@@ -9,7 +9,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-// Advanced — user mailbox message view
+
 public class MailboxMessageViewDTO {
 
     private UUID id;

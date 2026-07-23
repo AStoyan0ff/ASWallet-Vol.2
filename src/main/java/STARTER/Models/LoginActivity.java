@@ -3,11 +3,7 @@ package STARTER.Models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -17,14 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Table(name = "login_activities")
-// Advanced — login activity audit (last logins for admin)
 public class LoginActivity extends BaseClass {
 
     @Column(nullable = false)
     private String username;
 
-    @Column(name = "ip_address", nullable = false, length = 45)
+    @Column(name = "ip_address", nullable = false)
     private String ipAddress;
 
     @Column(name = "logged_in_at", nullable = false)
@@ -32,6 +28,7 @@ public class LoginActivity extends BaseClass {
 
     @Override
     protected void onPrePersist() {
+
         if (loggedInAt == null) {
             loggedInAt = LocalDateTime.now();
         }
