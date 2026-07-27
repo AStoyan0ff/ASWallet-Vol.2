@@ -56,6 +56,9 @@ class WalletControllerWebMvcTest {
     @MockitoBean
     private TransactionService transactionService;
 
+    @MockitoBean
+    private MoneyRequestService moneyRequestService;
+
     private WalletViewDTO walletView;
     private UserViewDTO userView;
     private BankCardViewDTO bankCardView;
@@ -88,6 +91,7 @@ class WalletControllerWebMvcTest {
         when(userService.findByUsername("Plamen")).thenReturn(userView);
         when(userProfileDetailsService.isBalanceHidden("Plamen")).thenReturn(false);
         when(adminMailboxService.countUnreadForUser("Plamen")).thenReturn(2L);
+        when(moneyRequestService.countPendingIncoming("Plamen")).thenReturn(0L);
         when(transactionService.getUserTransactionsPage(any(UUID.class), anyInt(), anyInt()))
                 .thenReturn(new PageImpl<>(Collections.emptyList()));
     }

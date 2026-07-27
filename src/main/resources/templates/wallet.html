@@ -202,6 +202,21 @@
                     <span class="wallet-quick-action-label">HISTORY</span>
                 </a>
 
+                <a class="wallet-quick-action wallet-quick-action--request wallet-quick-action--badge"
+                   th:href="@{/transactions/requests}">
+                    <span class="wallet-quick-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v7"/>
+                            <path d="M9 11l3 3 3-3"/>
+                        </svg>
+                    </span>
+                    <span class="wallet-quick-action-label">REQUEST</span>
+                    <span class="wallet-quick-action-badge"
+                          th:if="${pendingMoneyRequestCount != null and pendingMoneyRequestCount > 0}"
+                          th:text="${pendingMoneyRequestCount}"></span>
+                </a>
+
                 <a class="wallet-quick-action wallet-quick-action--send"
                    th:unless="${isAdmin}"
                    th:href="@{/wallet/messages/send}">

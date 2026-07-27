@@ -88,10 +88,22 @@ public class GlobalExceptionHandler {
             TransferBlockedByRiskException.class}
     )
 
-    public String handleTransferErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
+    public String handleTransferErrors(RuntimeException ex,
+                                       HttpServletRequest request,
+                                       RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-        return "redirect:/transactions/transfer";
+        return "redirect:" + resolveTransferRelatedRedirect(request);
+    }
+
+    @ExceptionHandler({
+            MoneyRequestNotFoundException.class,
+            MoneyRequestActionNotAllowedException.class}
+    )
+    public String handleMoneyRequestErrors(RuntimeException ex, RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+        return "redirect:/transactions/requests";
     }
 
     @ExceptionHandler({
@@ -231,10 +243,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ReceiverBankCardNotFoundException.class)
     public String handleReceiverBankCardNotFound(ReceiverBankCardNotFoundException ex,
+                                                 HttpServletRequest request,
                                                  RedirectAttributes redirectAttributes) {
 
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
-        return "redirect:/transactions/transfer";
+        return "redirect:" + resolveTransferRelatedRedirect(request);
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -277,11 +290,25 @@ public class GlobalExceptionHandler {
             return "/transactions/withdraw";
         }
 
+        if (uri.contains("/transactions/requests")) {
+            return "/transactions/requests";
+        }
+
         if (uri.contains("/transactions/transfer/confirm") || uri.contains("/transactions/transfer")) {
             return "/transactions/transfer";
         }
 
         return "/wallet";
+    }
+
+    private String resolveTransferRelatedRedirect(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+
+        if (uri != null && uri.contains("/transactions/requests")) {
+            return "/transactions/requests";
+        }
+
+        return "/transactions/transfer";
     }
 
     private String resolveUserNotFoundRedirect(HttpServletRequest request) {
@@ -298,6 +325,10 @@ public class GlobalExceptionHandler {
 
         if (uri.contains("/wallet/change-password")) {
             return "/wallet/change-password";
+        }
+
+        if (uri.contains("/transactions/requests")) {
+            return "/transactions/requests";
         }
 
         if (uri.contains("/transactions/transfer")) {
@@ -324,6 +355,10 @@ public class GlobalExceptionHandler {
 
         if (uri.contains("/reset-password")) {
             return "/forgot-password";
+        }
+
+        if (uri.contains("/transactions/requests")) {
+            return "/transactions/requests";
         }
 
         if (uri.contains("/transactions/transfer")) {

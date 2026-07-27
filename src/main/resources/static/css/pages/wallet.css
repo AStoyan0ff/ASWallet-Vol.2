@@ -629,6 +629,7 @@
 .wallet-quick-action--transfer .wallet-quick-action-icon,
 .wallet-quick-action--settings .wallet-quick-action-icon,
 .wallet-quick-action--history .wallet-quick-action-icon,
+.wallet-quick-action--request .wallet-quick-action-icon,
 .wallet-quick-action--send .wallet-quick-action-icon,
 .wallet-quick-action--inbox .wallet-quick-action-icon,
 .wallet-quick-action--bank .wallet-quick-action-icon,
@@ -1912,7 +1913,7 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 8px;
-    color: #2c2418;
+    color: #c9a85c;
     font-size: 0.66rem;
     letter-spacing: 0.14em;
 }
@@ -2032,8 +2033,33 @@
     color: #ef4444;
 }
 
-.body-wallet-premium-fe .wallet-quick-action--login-activity .wallet-quick-action-icon {
-    color: #38bdf8;
+.body-wallet-premium-fe .wallet-quick-action--request .wallet-quick-action-icon {
+    color: #090;
+}
+
+.body-wallet-premium-fe .wallet-more-actions .wallet-quick-actions-grid--elevated {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.body-wallet-premium-fe .wallet-more-actions .wallet-quick-actions-grid--elevated .wallet-quick-action {
+    min-height: 46px;
+    padding: 6px 4px;
+    gap: 4px;
+}
+
+.body-wallet-premium-fe .wallet-more-actions .wallet-quick-actions-grid--elevated .wallet-quick-action-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.body-wallet-premium-fe .wallet-more-actions .wallet-quick-actions-grid--elevated .wallet-quick-action-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.03em;
+}
+
+.body-wallet-premium-fe .wallet-dashboard-side .wallet-more-actions .wallet-quick-actions-grid--elevated {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .body-wallet-premium-fe .wallet-more-actions {
@@ -2168,6 +2194,10 @@
 
     .body-wallet-premium-fe .wallet-dashboard-side .wallet-quick-actions-grid--elevated {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .body-wallet-premium-fe .wallet-dashboard-side .wallet-more-actions .wallet-quick-actions-grid--elevated {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .body-wallet-premium-fe .wallet-balance-box.wallet-bank-card {
@@ -3357,8 +3387,578 @@
     .body-deposit-light .reveal-item.is-visible .wallet-panel--deposit.wallet-panel--materialize.reveal-child,
     .body-withdraw-light .reveal-item.is-visible .wallet-panel--withdraw.wallet-panel--materialize.reveal-child,
     .body-transfer-light .reveal-item.is-visible .wallet-panel--transfer.wallet-panel--materialize.reveal-child,
-    .body-transfer-light .reveal-item.is-visible .wallet-panel--transfer-confirm.wallet-panel--materialize.reveal-child {
+    .body-transfer-light .reveal-item.is-visible .wallet-panel--transfer-confirm.wallet-panel--materialize.reveal-child,
+    .body-money-requests .reveal-item.is-visible .wallet-panel--money-requests.wallet-panel--materialize.reveal-child {
         border-radius: 24px;
     }
 }
+
+.body-money-requests {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-money-requests .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-money-requests .wallet-landing {
+    padding: 10px 14px 24px;
+    overflow: visible;
+    align-items: safe center;
+}
+
+.body-money-requests .wallet-panel--money-requests.wallet-panel--materialize.reveal-child {
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 8px 24px rgba(180, 140, 60, 0.1);
+}
+
+.body-money-requests .reveal-item.is-visible .wallet-panel--money-requests.wallet-panel--materialize.reveal-child {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 28px;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+    animation: none;
+}
+
+.body-money-requests .wallet-panel--money-requests.wallet-panel--materialize::after {
+    display: none;
+}
+
+.body-money-requests .wallet-panel--money-requests {
+    width: min(920px, 96vw);
+    max-width: 96vw;
+    margin-inline: auto;
+    padding: 14px 16px 12px;
+    text-align: left;
+}
+
+.body-money-requests .wallet-panel--money-requests .form-panel-top {
+    margin-bottom: 4px;
+}
+
+.body-money-requests .form-panel-top--split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.body-money-requests .money-requests-clear-form {
+    margin: 0;
+}
+
+.body-money-requests .money-requests-clear-btn {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.body-money-requests .wallet-panel--money-requests .wallet-title {
+    margin: 0 0 10px;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: #2c2418;
+    text-shadow: none;
+    text-align: center;
+}
+
+.body-money-requests .wallet-panel--money-requests .wallet-form-hint {
+    margin: 0 auto 16px;
+    max-width: 36rem;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: #7a6e5c;
+    text-align: center;
+}
+
+.body-money-requests .wallet-panel--money-requests > .success,
+.body-money-requests .wallet-panel--money-requests > .error {
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+.body-money-requests .money-request-master-detail {
+    display: grid;
+    grid-template-columns: minmax(240px, 38%) minmax(0, 62%);
+    grid-template-areas:
+        "create lists"
+        "submit respond";
+    gap: 14px;
+    margin-top: 12px;
+    align-items: start;
+}
+
+.body-money-requests .money-request-create-col {
+    grid-area: create;
+    min-width: 0;
+}
+
+.body-money-requests .money-request-lists-col {
+    grid-area: lists;
+    min-width: 0;
+}
+
+.body-money-requests .money-request-submit-col {
+    grid-area: submit;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.body-money-requests .money-request-respond-col {
+    grid-area: respond;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 2.6rem;
+}
+
+.body-money-requests .money-request-send-btn {
+    width: 100%;
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+}
+
+.body-money-requests .money-request-respond-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+.body-money-requests .money-request-respond-bar--cancel {
+    justify-content: flex-end;
+}
+
+.body-money-requests .money-request-respond-bar form {
+    margin: 0;
+}
+
+.body-money-requests .money-request-card__actions-end {
+    margin-left: auto;
+}
+
+.body-money-requests .money-request-create-form {
+    margin: 0;
+    max-width: 100%;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.body-money-requests .money-request-create-form .auth-field-group {
+    margin-bottom: 6px;
+}
+
+.body-money-requests .money-request-create-form .auth-field-group:last-child {
+    margin-bottom: 0;
+}
+
+.body-money-requests .money-request-create-form label {
+    color: rgba(255, 236, 190, 0.92);
+    font-size: 0.7rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.body-money-requests .money-request-create-form input,
+.body-money-requests .money-request-create-form select {
+    padding: 6px 9px;
+    font-size: 0.8rem;
+    color: #2c2418;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: var(--surface-radius);
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+}
+
+.body-money-requests .money-request-create-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 32px 6px 9px;
+    font-family: inherit;
+    font-weight: 600;
+    color-scheme: light;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #e8e0d4;
+    background-image:
+            linear-gradient(45deg, transparent 50%, #8a7340 50%),
+            linear-gradient(135deg, #8a7340 50%, transparent 50%),
+            linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    background-position:
+            calc(100% - 18px) calc(50% + 2px),
+            calc(100% - 13px) calc(50% + 2px),
+            0 0;
+    background-size: 5px 5px, 5px 5px, 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.body-money-requests .money-request-create-form input::placeholder {
+    color: #b0a595;
+}
+
+.body-money-requests .money-request-create-form input:focus,
+.body-money-requests .money-request-create-form select:focus {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.body-money-requests .money-request-create-form .auth-submit {
+    margin-top: 2px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+}
+
+.body-money-requests .money-request-respond-bar .wallet-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+}
+
+.body-money-requests .money-request-respond-bar .money-request-btn--accept {
+    border: 1px solid rgba(46, 125, 50, 0.65);
+    background: linear-gradient(180deg, #66bb6a 0%, #2e7d32 100%);
+    color: #f3fff4;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            0 3px 0 rgba(27, 94, 32, 0.55),
+            0 6px 14px rgba(0, 0, 0, 0.18);
+    filter: none;
+}
+
+.body-money-requests .money-request-respond-bar .money-request-btn--accept:hover {
+    border-color: rgba(27, 94, 32, 0.8);
+    background: linear-gradient(180deg, #81c784 0%, #388e3c 100%);
+    color: #ffffff;
+    filter: brightness(1.03);
+}
+
+.body-money-requests .money-request-respond-bar .money-request-btn--accept:active {
+    transform: translateY(1px);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            0 1px 0 rgba(27, 94, 32, 0.55),
+            0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+.body-money-requests .money-request-lists-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.body-money-requests .money-request-section {
+    margin-top: 0;
+}
+
+.body-money-requests .money-request-section--outgoing {
+    margin-top: 6px;
+}
+
+.body-money-requests .money-request-section__title {
+    margin: 0 0 6px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #5c4f3a;
+}
+
+.body-money-requests .money-request-list {
+    display: grid;
+    gap: 6px;
+}
+
+.body-money-requests .money-request-list--incoming,
+.body-money-requests .money-request-list--outgoing {
+    height: 7.6rem;
+    max-height: 7.6rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 2px;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(90, 80, 60, 0.45) transparent;
+}
+
+.body-money-requests .money-request-list--incoming::-webkit-scrollbar,
+.body-money-requests .money-request-list--outgoing::-webkit-scrollbar {
+    width: 5px;
+}
+
+.body-money-requests .money-request-list--incoming::-webkit-scrollbar-thumb,
+.body-money-requests .money-request-list--outgoing::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(90, 80, 60, 0.4);
+}
+
+.body-money-requests .money-request-card {
+    box-sizing: border-box;
+    min-height: 6.85rem;
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(158, 142, 118, 0.35);
+    background: rgba(255, 255, 255, 0.42);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.body-money-requests .money-request-card--pending {
+    border-color: rgba(212, 175, 55, 0.55);
+}
+
+.body-money-requests .money-request-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+}
+
+.body-money-requests .money-request-card__route {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: #2c2418;
+}
+
+.body-money-requests .money-request-card__amount {
+    margin: 0 0 2px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #2c2418;
+}
+
+.body-money-requests .money-request-section--incoming .money-request-card__amount {
+    color: #1b5e20;
+}
+
+.body-money-requests .money-request-section--outgoing .money-request-card__amount {
+    color: #b71c1c;
+}
+
+.body-money-requests .money-request-card__meta,
+.body-money-requests .money-request-card__note {
+    margin: 0 0 2px;
+    font-size: 0.72rem;
+    color: #7a6e5c;
+    min-height: 1.05em;
+}
+
+.body-money-requests .money-request-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.body-money-requests .money-request-card__actions form {
+    margin: 0;
+}
+
+.body-money-requests .money-request-card__actions-end {
+    margin-left: auto;
+}
+
+.body-money-requests .money-request-card__actions .wallet-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+}
+
+.body-money-requests .money-request-card__actions .money-request-btn--accept {
+    border: 1px solid rgba(46, 125, 50, 0.65);
+    background: linear-gradient(180deg, #66bb6a 0%, #2e7d32 100%);
+    color: #f3fff4;
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            0 3px 0 rgba(27, 94, 32, 0.55),
+            0 6px 14px rgba(0, 0, 0, 0.18);
+    filter: none;
+}
+
+.body-money-requests .money-request-card__actions .money-request-btn--accept:hover {
+    border-color: rgba(27, 94, 32, 0.8);
+    background: linear-gradient(180deg, #81c784 0%, #388e3c 100%);
+    color: #ffffff;
+    filter: brightness(1.03);
+}
+
+.body-money-requests .money-request-card__actions .money-request-btn--accept:active {
+    transform: translateY(1px);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            0 1px 0 rgba(27, 94, 32, 0.55),
+            0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+.body-money-requests .money-request-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid rgba(158, 142, 118, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    color: #5c4f3a;
+}
+
+.body-money-requests .money-request-status--pending {
+    color: #8a5a00;
+    border-color: rgba(212, 175, 55, 0.55);
+}
+
+.body-money-requests .money-request-status--accepted {
+    color: #1b5e20;
+    border-color: rgba(46, 125, 50, 0.45);
+}
+
+.body-money-requests .money-request-status--declined,
+.body-money-requests .money-request-status--cancelled {
+    color: #7f1d1d;
+    border-color: rgba(185, 28, 28, 0.4);
+}
+
+.body-money-requests .tx-empty {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #7a6e5c;
+}
+
+.body-money-requests .money-request-empty {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255, 248, 230, 0.78);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+}
+
+.body-money-requests .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+@media (max-width: 760px) {
+    .body-money-requests .money-request-master-detail {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "create"
+            "lists"
+            "submit"
+            "respond";
+    }
+}
+
+.body-money-requests.body-money-requests-gold-panel .wallet-panel--money-requests.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(120, 116, 110, 0.78) 52%,
+            rgba(255, 255, 255, 0.9) 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-money-requests.body-money-requests-gold-panel .reveal-item.is-visible .wallet-panel--money-requests.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #8a8580 52%,
+            #c8c2ba 58%,
+            #ebe5dd 66%,
+            #faf7f2 78%,
+            #ffffff 88%,
+            #ffffff 100%
+    );
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-money-requests.body-money-requests-gold-panel .wallet-panel--money-requests .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-money-requests.body-money-requests-gold-panel .wallet-panel--money-requests .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.88);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.body-money-requests.body-money-requests-gold-panel .wallet-panel--money-requests .wallet-username {
+    color: #fff8e8;
+    font-weight: 800;
+}
+
+.body-money-requests.body-money-requests-gold-panel .money-request-create-form label,
+.body-money-requests.body-money-requests-gold-panel .money-request-create-col .money-request-section__title,
+.body-money-requests.body-money-requests-gold-panel .money-request-section--incoming .money-request-section__title,
+.body-money-requests.body-money-requests-gold-panel .money-request-section--outgoing .money-request-section__title {
+    color: rgba(255, 236, 190, 0.92);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.body-money-requests.body-money-requests-gold-panel .money-request-card__route {
+    color: #2c2418;
+    text-shadow: none;
+}
+
+.body-money-requests.body-money-requests-gold-panel .money-request-section--incoming .money-request-card__amount {
+    color: #1b5e20;
+}
+
+.body-money-requests.body-money-requests-gold-panel .money-request-section--outgoing .money-request-card__amount {
+    color: #b71c1c;
+}
+
+.body-money-requests.body-money-requests-gold-panel .tx-empty,
+.body-money-requests.body-money-requests-gold-panel .money-request-empty {
+    color: rgba(255, 248, 230, 0.82);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+}
+
+.body-money-requests.body-money-requests-gold-panel .money-request-card__meta,
+.body-money-requests.body-money-requests-gold-panel .money-request-card__note {
+    color: #5c4f3a;
+}
+
 

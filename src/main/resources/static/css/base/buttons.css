@@ -1,7 +1,7 @@
 .btn-metal-gold,
 .btn-primary,
 .form-pill-link,
-.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn),
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.money-requests-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn),
 .auth-submit,
 .pwd-submit,
 .auth-login-submit,
@@ -13,7 +13,7 @@
 .wallet-btn-outline,
 .wallet-btn-muted,
 .wallet-btn-settings,
-.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled),
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):not(.money-request-btn--accept),
 .wallet-dashboard-pill,
 .admin-action-btn--update,
 .admin-action-btn--role,
@@ -39,7 +39,7 @@
 .btn-metal-gold:hover,
 .btn-primary:hover,
 .form-pill-link:hover,
-.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn):hover,
+.home-pill.form-pill-link:not(.export-nav-pill--clear):not(.mailbox-delete-btn):not(.tx-clear-history-btn):not(.risk-reviews-clear-btn):not(.money-requests-clear-btn):not(.login-activity-clear-btn):not(.tx-pagination-btn):hover,
 .auth-submit:hover:not(:disabled),
 .pwd-submit:hover,
 .auth-login-submit:hover,
@@ -51,7 +51,7 @@
 .wallet-btn-outline:hover,
 .wallet-btn-muted:hover,
 .wallet-btn-settings:hover,
-.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):hover,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):not(.money-request-btn--accept):hover,
 .wallet-dashboard-pill:hover,
 .admin-action-btn--update:hover,
 .admin-action-btn--role:hover,
@@ -89,7 +89,7 @@
 .wallet-btn-outline:active,
 .wallet-btn-muted:active,
 .wallet-btn-settings:active,
-.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):active,
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):not(.money-request-btn--accept):active,
 .admin-action-btn--update:active,
 .admin-action-btn--role:active,
 .admin-action-btn--manage:active,
@@ -115,6 +115,7 @@
 .mailbox-delete-btn,
 .tx-clear-history-btn,
 .risk-reviews-clear-btn,
+.money-requests-clear-btn,
 .login-activity-clear-btn,
 .export-nav-pill--clear,
 .wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder) {
@@ -136,6 +137,7 @@
 .mailbox-delete-btn:hover,
 .tx-clear-history-btn:hover,
 .risk-reviews-clear-btn:hover,
+.money-requests-clear-btn:hover,
 .login-activity-clear-btn:hover,
 .export-nav-pill--clear:hover,
 .wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder):hover {
@@ -158,6 +160,7 @@
 .mailbox-delete-btn:active,
 .tx-clear-history-btn:active,
 .risk-reviews-clear-btn:active,
+.money-requests-clear-btn:active,
 .login-activity-clear-btn:active,
 .export-nav-pill--clear:active,
 .wallet-quick-action--admin-remove:not(.wallet-quick-action--placeholder):active {
@@ -217,7 +220,7 @@
 .wallet-btn-outline,
 .wallet-btn-muted,
 .wallet-btn-settings,
-.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled),
+.wallet-btn:not(.wallet-btn-danger):not(.wallet-btn-disabled):not(.money-request-btn--accept),
 .wallet-dashboard-pill,
 .admin-action-btn--update,
 .admin-action-btn--role,
@@ -236,6 +239,7 @@
 .mailbox-delete-btn,
 .tx-clear-history-btn,
 .risk-reviews-clear-btn,
+.money-requests-clear-btn,
 .login-activity-clear-btn,
 .export-nav-pill--clear,
 .wallet-btn-danger,
@@ -427,6 +431,12 @@ body.body-admin .home-bg-overlay,
 .body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--history:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
     color: #1d4ed8 !important;
     stroke: #1d4ed8;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--request:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--request:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #090 !important;
+    stroke: #090;
 }
 
 .body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--send:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,

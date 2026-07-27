@@ -131,13 +131,28 @@ class GlobalExceptionHandlerTest {
 
     @Test
     void handleTransferErrors_redirectsToTransferForm() {
+        when(request.getRequestURI()).thenReturn("/transactions/transfer");
 
         String result = handler.handleTransferErrors(
                 new ReceiverNotFoundException("Receiver not found"),
+                request,
                 redirectAttributes
         );
 
         assertThat(result).isEqualTo("redirect:/transactions/transfer");
+    }
+
+    @Test
+    void handleTransferErrors_onMoneyRequests_redirectsToRequests() {
+        when(request.getRequestURI()).thenReturn("/transactions/requests/abc/accept");
+
+        String result = handler.handleTransferErrors(
+                new NotTransferMoneyYourselfException("You cannot request money from yourself."),
+                request,
+                redirectAttributes
+        );
+
+        assertThat(result).isEqualTo("redirect:/transactions/requests");
     }
 
     @Test
@@ -289,9 +304,11 @@ class GlobalExceptionHandlerTest {
 
     @Test
     void handleReceiverBankCardNotFound_redirectsToTransfer() {
+        when(request.getRequestURI()).thenReturn("/transactions/transfer");
 
         String result = handler.handleReceiverBankCardNotFound(
                 new ReceiverBankCardNotFoundException("Receiver has no card"),
+                request,
                 redirectAttributes
         );
 
