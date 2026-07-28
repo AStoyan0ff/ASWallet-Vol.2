@@ -696,11 +696,7 @@ Run the test suite:
 mvn test
 ```
 
-If the application context test requires a running MySQL instance, run:
-
-```powershell
-mvn test "-Dtest=!ASWalletApplicationTests"
-```
+Tests use the `test` profile (`@ActiveProfiles("test")`) with an in-memory H2 database via `application-test.properties`. MySQL is not required to run the suite.
 
 ### Test Categories
 
