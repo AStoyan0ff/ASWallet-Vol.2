@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Spending - ASWallet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="body-wallet body-spending body-spending-gold-panel">
+<div class="home-bg-media" aria-hidden="true">
+    <img class="home-bg-image" th:src="@{/images/spending.png}" alt="">
+    <div class="home-bg-overlay"></div>
+</div>
+
+<main class="wallet-landing reveal-item">
+    <section class="wallet-panel wallet-panel--spending wallet-panel--materialize reveal-child">
+        <div class="form-panel-top auth-stagger">
+            <a class="home-pill form-pill-link" th:href="@{/wallet}">Back to wallet</a>
+        </div>
+
+        <h2 class="wallet-title wallet-title--center auth-stagger">Spending</h2>
+        <p class="wallet-form-hint auth-stagger">
+            See where your money goes by category.
+            Signed in as <span class="wallet-username" th:text="${currentUsername}"></span>.
+        </p>
+
+        <div class="spending-period-tabs auth-stagger">
+            <a class="spending-period-tab"
+               th:each="period : ${periods}"
+               th:href="@{/transactions/spending(period=${period.name()})}"
+               th:classappend="${selectedPeriod == period.name()} ? ' is-active' : ''"
+               th:text="${period.label}">
+            </a>
+        </div>
+
+        <div class="spending-summary auth-stagger">
+            <p class="spending-summary__label">Total spent</p>
+            <p class="spending-summary__amount"
+               th:text="${'€' + #numbers.formatDecimal(insights.totalSpent, 1, 'NONE', 2, 'POINT')}">€0.00</p>
+            <p class="spending-summary__meta"
+               th:text="|${insights.periodLabel} - ${insights.transactionCount} transaction(s)|">
+            </p>
+        </div>
+
+        <div class="spending-chart-layout auth-stagger" th:unless="${insights.isEmpty()}">
+            <script id="spending-chart-labels" type="application/json" th:utext="${chartLabelsJson}"></script>
+            <script id="spending-chart-amounts" type="application/json" th:utext="${chartAmountsJson}"></script>
+            <script id="spending-chart-colors" type="application/json" th:utext="${chartColorsJson}"></script>
+
+            <div class="spending-chart-wrap">
+                <canvas id="spendingChart"></canvas>
+            </div>
+
+            <ul class="spending-legend">
+                <li class="spending-legend__item" th:each="slice : ${insights.categories}">
+                    <span class="spending-legend__swatch" th:style="|background:${slice.color}|"></span>
+                    <span class="spending-legend__name" th:text="${slice.category}"></span>
+                    <span class="spending-legend__pct" th:text="|${slice.percent}%|"></span>
+                    <span class="spending-legend__amount"
+                          th:text="${'€' + #numbers.formatDecimal(slice.amount, 1, 'NONE', 2, 'POINT')}">
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <p class="tx-empty spending-empty auth-stagger" th:if="${insights.isEmpty()}">
+            No spending in this period yet.
+        </p>
+    </section>
+</main>
+
+<footer th:replace="~{fragments/app-footer :: footer}"></footer>
+<script th:src="@{/js/home.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script th:src="@{/js/spending.js}"></script>
+</body>
+</html>

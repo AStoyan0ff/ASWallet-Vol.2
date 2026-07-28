@@ -767,18 +767,18 @@
 
 .admin-chart-card__canvas-wrap--status {
     height: 118px;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .admin-chart-status {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) max-content;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     height: 100%;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .admin-chart-status__stage {
@@ -788,13 +788,13 @@
     justify-content: center;
     height: 100%;
     min-width: 0;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .admin-chart-status__plot {
     position: relative;
-    width: 78px;
-    height: 78px;
+    width: 108px;
+    height: 108px;
     flex: 0 0 auto;
     z-index: 1;
 }
@@ -1272,6 +1272,11 @@
     .admin-chart-card__canvas-wrap--status,
     .admin-chart-card__canvas-wrap--week {
         height: 110px;
+    }
+
+    .admin-chart-status__plot {
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -4387,7 +4392,7 @@
 .body-admin-wallet-panel .admin-user-card__meta .status-chip--inactive {
     color: #ffffff;
     background: linear-gradient(180deg, #ef9a9a 0%, #e53935 52%, #c62828 100%);
-    border: 1.5px solid #b71c1c;
+    border: 2px solid #b71c1c;
     box-shadow:
             inset 0 1px 0 rgba(255, 255, 255, 0.35),
             0 2px 8px rgba(198, 40, 40, 0.28);
@@ -4480,7 +4485,7 @@
 .body-admin-wallet-panel .admin-user-card__role.type-chip {
     color: #0d3d12;
     background: linear-gradient(180deg, #b9f6ca 0%, #66bb6a 52%, #43a047 100%);
-    border: 1.5px solid #2e7d32;
+    border: 2px solid #2e7d32;
     box-shadow:
             inset 0 1px 0 rgba(255, 255, 255, 0.55),
             0 2px 8px rgba(46, 125, 50, 0.28);
@@ -4489,13 +4494,13 @@
 .body-admin-wallet-panel .admin-user-card__role.type-chip--super-admin {
     color: #1a0f00;
     background: linear-gradient(180deg, #ffe082 0%, #ffb300 48%, #f9a825 100%);
-    border: 1.5px solid #c4931a;
+    border: 2px solid #c4931a;
 }
 
 .body-admin-wallet-panel .admin-user-card__role.type-chip--admin {
     color: #ffffff;
     background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
-    border: 1.5px solid #283593;
+    border: 2px solid #283593;
 }
 
 .body-admin.body-admin-wallet-panel .admin-split__pane .admin-kpi-card {
@@ -4642,7 +4647,7 @@
 }
 
 .body-admin-message-thread-wallet-panel .type-chip--admin {
-    color: #ffffff;
+    color: #fff;
     background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
     border: 1px solid rgba(57, 73, 171, 0.55);
 }
@@ -4818,19 +4823,19 @@
 .body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip {
     color: #0d3d12;
     background: linear-gradient(180deg, #b9f6ca 0%, #66bb6a 52%, #43a047 100%);
-    border: 1.5px solid #2e7d32;
+    border: 2px solid #2e7d32;
 }
 
 .body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip--super-admin {
     color: #1a0f00;
     background: linear-gradient(180deg, #ffe082 0%, #ffb300 48%, #f9a825 100%);
-    border: 1.5px solid #c4931a;
+    border: 2px solid #c4931a;
 }
 
 .body-admin-user-manage-wallet-panel .admin-manage-summary .type-chip--admin {
-    color: #ffffff;
+    color: #fff;
     background: linear-gradient(180deg, #9fa8da 0%, #5c6bc0 50%, #3949ab 100%);
-    border: 1.5px solid #283593;
+    border: 2px solid #283593;
 }
 
 .body-admin-user-manage-wallet-panel .admin-manage-role-restricted {

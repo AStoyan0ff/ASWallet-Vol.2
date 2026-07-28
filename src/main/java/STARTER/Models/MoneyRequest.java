@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Table(name = "money_requests")
 public class MoneyRequest extends BaseClass {
 
@@ -28,7 +29,7 @@ public class MoneyRequest extends BaseClass {
     @Column(nullable = false)
     private BigDecimal amount;
 
-    @Column(length = 200)
+    @Column
     private String note;
 
     @Enumerated(EnumType.STRING)

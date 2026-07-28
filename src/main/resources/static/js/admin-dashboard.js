@@ -41,146 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
     }
 
-    const statusRoot = todayCanvas.closest(".admin-chart-status");
-    const stage = todayCanvas.closest(".admin-chart-status__stage");
-    const plot = todayCanvas.closest(".admin-chart-status__plot");
-    const calloutSvg = stage ? stage.querySelector(".admin-chart-callout-svg") : null;
+    const calloutSvg = todayCanvas.closest(".admin-chart-status__stage")
+        ? todayCanvas.closest(".admin-chart-status__stage").querySelector(".admin-chart-callout-svg")
+        : null;
     const calloutsHost = document.getElementById("adminTodayStatusCallouts");
 
-    let hoveredStatusIndex = null;
-    let todayChart = null;
-
-    function clearCallouts() {
-
-        if (calloutSvg) {
-            calloutSvg.innerHTML = "";
-        }
-
-        if (calloutsHost) {
-            calloutsHost.innerHTML = "";
-        }
+    if (calloutSvg) {
+        calloutSvg.innerHTML = "";
+        calloutSvg.style.display = "none";
     }
 
-    function setHoveredStatus(index) {
-        const next = typeof index === "number" && todayCounts[index] > 0
-            ? index
-            : null;
-
-        if (next === hoveredStatusIndex) {
-            return;
-        }
-
-        hoveredStatusIndex = next;
-
-        if (todayChart) {
-            renderStatusCallouts(todayChart);
-        }
+    if (calloutsHost) {
+        calloutsHost.innerHTML = "";
+        calloutsHost.style.display = "none";
     }
 
-    function renderStatusCallouts(chart) {
-
-        if (
-            !hasTodayData ||
-            hoveredStatusIndex === null ||
-            !stage ||
-            !plot ||
-            !calloutSvg ||
-            !calloutsHost) {
-
-            clearCallouts();
-            return;
-        }
-
-        const meta = chart.getDatasetMeta(0);
-        const dataIndex = hoveredStatusIndex;
-        const arc = meta && meta.data
-            ? meta.data[dataIndex]
-            : null;
-
-        if (!arc || !(todayCounts[dataIndex] > 0)) {
-            clearCallouts();
-
-            return;
-        }
-
-        const label = todayLabels[dataIndex] || "";
-        const value = todayCounts[dataIndex] || 0;
-        const expected = label + ": " + value;
-
-        const props = arc.getProps(["x", "y", "startAngle", "endAngle", "outerRadius"], true);
-
-        const midAngle = (props.startAngle + props.endAngle) / 2;
-        const onLeft = Math.cos(midAngle) < 0;
-        const sideClass = onLeft
-            ? "is-left"
-            : "is-right";
-
-        let box = calloutsHost.querySelector(".admin-chart-callout-box");
-
-        if (!box ||
-            box.getAttribute("data-index") !== String(dataIndex) ||
-            box.textContent !== expected) {
-
-            calloutsHost.innerHTML =
-                '<div ' +
-                    'class="admin-chart-callout-box ' + sideClass + '" data-index="' + dataIndex + '">' + expected +
-                "</div>";
-
-            box = calloutsHost.querySelector(".admin-chart-callout-box");
-
-        } else {
-
-            box.classList.remove("is-left", "is-right");
-            box.classList.add(sideClass);
-        }
-
-        const stageRect = stage.getBoundingClientRect();
-        const plotRect = plot.getBoundingClientRect();
-        const stageWidth = stage.clientWidth;
-        const stageHeight = stage.clientHeight;
-        const centerX = plotRect.left - stageRect.left + props.x;
-        const centerY = plotRect.top - stageRect.top + props.y;
-        const lineLength = 16;
-        const startX = centerX + Math.cos(midAngle) * props.outerRadius;
-        const startY = centerY + Math.sin(midAngle) * props.outerRadius;
-
-        let endX = centerX + Math.cos(midAngle) * (props.outerRadius + lineLength);
-        let endY = centerY + Math.sin(midAngle) * (props.outerRadius + lineLength);
-
-        endX = Math.max(8, Math.min(stageWidth - 8, endX));
-        endY = Math.max(10, Math.min(stageHeight - 10, endY));
-
-        calloutSvg.setAttribute("viewBox", "0 0 " + stageWidth + " " + stageHeight);
-        calloutSvg.setAttribute("width", String(stageWidth));
-        calloutSvg.setAttribute("height", String(stageHeight));
-
-        calloutSvg.style.width = stageWidth + "px";
-        calloutSvg.style.height = stageHeight + "px";
-
-        if (!box) {
-
-            calloutSvg.innerHTML = "";
-            return;
-        }
-
-        const gap = 4;
-
-        box.style.left = Math.round(endX + (onLeft ? -gap : gap)) + "px";
-        box.style.top = Math.round(endY) + "px";
-
-        calloutSvg.innerHTML =
-            '<line class="admin-chart-callout-path" x1="' +
-            startX.toFixed(1) +
-            '" y1="' +
-            startY.toFixed(1) +
-            '" x2="' +
-            endX.toFixed(1) +
-            '" y2="' +
-            endY.toFixed(1) +
-            '" />';
-    }
-
-    todayChart = new Chart(todayCanvas, {
+    new Chart(todayCanvas, {
 
         type: "doughnut",
         data: {
@@ -190,10 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 data: todayValues,
                 backgroundColor: todayColors,
-                borderWidth: 0,
-                hoverOffset: hasTodayData
-                    ? 2
-                    : 0
+                borderColor: "rgba(255, 255, 255, 0.55)",
+                borderWidth: hasTodayData ? 2 : 0,
+                hoverOffset: hasTodayData ? 6 : 0
             }]
         },
         options: {
@@ -201,61 +76,34 @@ document.addEventListener("DOMContentLoaded", () => {
             responsive: true,
             maintainAspectRatio: false,
             cutout: "58%",
-
             layout: {
-                padding: 2
+                padding: 4
             },
             onHover: function (event, elements) {
-
-                if (!hasTodayData) {
-                    setHoveredStatus(null);
-
-                    if (event && event.native && event.native.target) {
-                        event.native.target.style.cursor = "default";
-                    }
-
+                if (!event || !event.native || !event.native.target) {
                     return;
                 }
 
-                if (elements && elements.length) {
-                    setHoveredStatus(elements[0].index);
-
-                    if (event && event.native && event.native.target) {
-                        event.native.target.style.cursor = "pointer";
-                    }
-
-                } else {
-                    setHoveredStatus(null);
-
-                    if (event && event.native && event.native.target) {
-                        event.native.target.style.cursor = "default";
-                    }
-                }
+                event.native.target.style.cursor =
+                    hasTodayData && elements && elements.length
+                        ? "pointer"
+                        : "default";
             },
             plugins: {
                 legend: {
                     display: false
                 },
-
                 tooltip: {
-                    enabled: false
+                    enabled: hasTodayData,
+                    callbacks: {
+                        label: function (context) {
+                            const value = Number(context.raw || 0);
+                            return " " + context.label + ": " + value;
+                        }
+                    }
                 }
             }
-        },
-        plugins: [{
-
-            id: "adminStatusHoverCallouts",
-            afterDraw: function (chart) {
-
-                if (hoveredStatusIndex !== null) {
-                    renderStatusCallouts(chart);
-                }
-            }
-        }]
-    });
-
-    todayCanvas.addEventListener("mouseleave", function () {
-        setHoveredStatus(null);
+        }
     });
 
     new Chart(weekCanvas, {

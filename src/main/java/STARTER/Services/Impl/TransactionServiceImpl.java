@@ -175,12 +175,7 @@ public class TransactionServiceImpl implements TransactionService {
         }
 
         pendingTransferProcessingService.cancelPendingTransfer(transactionId);
-
-        logger.info(
-                "Pending transfer cancelled by user: userId={}, txId={}",
-                userId,
-                transactionId
-        );
+        logger.info("Pending transfer cancelled by user: userId={}, txId={}", userId, transactionId);
     }
 
     @Override
@@ -201,7 +196,7 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setAmount(depositMoneyDTO.getAmount());
         transaction.setDescription(formatSpendingDescription(
                 depositMoneyDTO.getSpendingCategory(),
-                " — top-up from card " + maskedCard
+                " -- top-up from card " + maskedCard
         ));
 
         transaction.setType(TransactionType.DEPOSIT);
@@ -321,11 +316,13 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Cacheable(value = CacheConfig.TRANSACTION_HISTORY, key = "#userID")
     public List<TransactionViewDTO> getUserTransactions(UUID userID) {
+
         return getFilteredUserTransactions(userID, new TransactionHistoryFilter());
     }
 
     @Override
     public Page<TransactionViewDTO> getUserTransactionsPage(UUID userId, int page, int size) {
+
         Wallet wallet = walletRepository.findByUser_Id(userId).orElseThrow(() ->
                 new WalletNotFoundException("Wallet not found"));
 
@@ -459,14 +456,16 @@ public class TransactionServiceImpl implements TransactionService {
             if (description.equals(label)) {
                 return label;
             }
+
             if (description.startsWith(label) && description.length() > label.length()) {
                 char next = description.charAt(label.length());
 
-                if (next == ' ' || next == '(' || next == '—' || next == '–' || next == '-') {
+                if (next == ' ' || next == '(' || next == '-') {
                     return label;
                 }
             }
         }
+
         return description;
     }
 
@@ -480,7 +479,9 @@ public class TransactionServiceImpl implements TransactionService {
         eventPublisher.publishEvent(new TransactionCompletedEvent(
                 type,
                 amount,
-                description != null ? description : "-",
+                description != null
+                    ? description
+                    : "-",
                 primaryUser.getEmail(),
                 primaryUser.getUsername(),
                 secondaryUser != null

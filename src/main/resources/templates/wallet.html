@@ -217,6 +217,18 @@
                           th:text="${pendingMoneyRequestCount}"></span>
                 </a>
 
+                <a class="wallet-quick-action wallet-quick-action--spending"
+                   th:unless="${isAdmin}"
+                   th:href="@{/transactions/spending}">
+                    <span class="wallet-quick-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 3a9 9 0 1 0 9 9h-9V3z"/>
+                            <path d="M12 3a9 9 0 0 1 7.5 13.5L12 12V3z"/>
+                        </svg>
+                    </span>
+                    <span class="wallet-quick-action-label">SPENDING</span>
+                </a>
+
                 <a class="wallet-quick-action wallet-quick-action--send"
                    th:unless="${isAdmin}"
                    th:href="@{/wallet/messages/send}">

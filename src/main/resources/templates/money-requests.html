@@ -81,7 +81,7 @@
                                       th:text="${item.status}"></span>
                             </div>
                             <p class="money-request-card__amount"
-                               th:text="|€${#numbers.formatDecimal(item.amount, 1, 2)}|"></p>
+                               th:text="${'€' + #numbers.formatDecimal(item.amount, 1, 'NONE', 2, 'POINT')}"></p>
                             <p class="money-request-card__meta"
                                th:text="|${item.spendingCategory} · ${item.createdAt}|"></p>
                             <p class="money-request-card__note"
@@ -106,7 +106,7 @@
                                       th:text="${item.status}"></span>
                             </div>
                             <p class="money-request-card__amount"
-                               th:text="|€${#numbers.formatDecimal(item.amount, 1, 2)}|"></p>
+                               th:text="${'€' + #numbers.formatDecimal(item.amount, 1, 'NONE', 2, 'POINT')}"></p>
                             <p class="money-request-card__meta"
                                th:text="|${item.spendingCategory} · ${item.createdAt}|"></p>
                             <p class="money-request-card__note"

@@ -104,4 +104,25 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>,
     );
 
     long countByTypeAndStatus(TransactionType type, TransactionStatus status);
+
+    @Query(
+            """
+                SELECT t
+                FROM Transaction t
+                WHERE t.senderWallet.id = :walletId
+                    AND t.type IN :types
+                    AND t.status IN :statuses
+                    AND (:fromInclusive IS NULL OR t.createdAt >= :fromInclusive)
+                    AND (:toExclusive IS NULL OR t.createdAt < :toExclusive)
+                ORDER BY t.createdAt DESC
+            """
+    )
+
+    List<Transaction> findOutgoingSpending(
+            @Param("walletId") UUID walletId,
+            @Param("types") Collection<TransactionType> types,
+            @Param("statuses") Collection<TransactionStatus> statuses,
+            @Param("fromInclusive") LocalDateTime fromInclusive,
+            @Param("toExclusive") LocalDateTime toExclusive
+    );
 }
