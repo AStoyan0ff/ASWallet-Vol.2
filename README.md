@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="https://readme-typing-svg.demolab.com?font=Orbitron&size=42&duration=2500&pause=1000&color=E53935&center=true&vCenter=true&width=700&lines=%F0%9F%92%B0+ASWallet-Vol.2+%F0%9F%92%B0"
+    src="https://readme-typing-svg.demolab.com?font=Orbitron&size=42&duration=2500&pause=1000&color=E53935&center=true&vCenter=true&width=700&lines=ASWallet-Vol.2"
     alt="ASWallet-Vol.2"
   />
 </p>
@@ -63,7 +63,7 @@
 
 **ASWallet-Vol.2** is a full-stack personal finance application built with Spring Boot and Thymeleaf.
 
-It provides wallet management, deposits, withdrawals, transfers, transaction history, PDF export, user profiles, messaging, administration tools and security features.
+It provides wallet management, deposits, withdrawals, transfers, money requests, spending insights, transaction history, PDF export, user profiles, messaging, system announcements, administration tools and security features.
 
 Transfers are evaluated by an independent REST microservice:
 
@@ -76,23 +76,23 @@ The applications communicate through Spring Cloud OpenFeign and are protected wi
 
 | Area                    |       Count |
 |-------------------------|------------:|
-| Java source files       |         163 |
-| Controllers             |          15 |
-| Service interfaces      |          17 |
-| Service implementations |          22 |
-| JPA repositories        |           8 |
-| JPA entities            |           9 |
-| DTOs                    |          29 |
-| Enums                   |           8 |
-| Custom exceptions       |          26 |
+| Java source files       |         189 |
+| Controllers             |          18 |
+| Service interfaces      |          20 |
+| Service implementations |          25 |
+| JPA repositories        |          10 |
+| JPA entities            |          11 |
+| DTOs                    |          35 |
+| Enums                   |          10 |
+| Custom exceptions       |          28 |
 | Configuration classes   |          11 |
-| Thymeleaf pages         |          34 |
+| Thymeleaf pages         |          37 |
 | Reusable fragments      |           4 |
-| CSS files               |          16 |
-| JavaScript files        |          19 |
-| Test classes            |          26 |
-| Test methods            |        ~272 |
-| JaCoCo line coverage    | **77.8%** ✅ |
+| CSS files               |          17 |
+| JavaScript files        |          18 |
+| Test classes            |          28 |
+| Test methods            |         280 |
+| Line coverage           | **77.8%** ✅ |
 
 ---
 
@@ -179,9 +179,11 @@ User (1) ───── (1) Wallet
   ├──── (1) UserProfileDetails
   ├──── (1) BankCard
   ├──── (*) LoginActivity
-  └──── (*) PasswordResetToken
+  ├──── (*) PasswordResetToken
+  └──── (*) MoneyRequest (as requester or payer)
 
 AdminMailboxMessage ───── User
+SystemAnnouncement ───── (global, admin-managed)
 ```
 
 ### Entities
@@ -195,21 +197,25 @@ AdminMailboxMessage ───── User
 | `UserProfileDetails`  | `user_profile_details`   | Profile, status and wallet settings            |
 | `AdminMailboxMessage` | `admin_mailbox_messages` | Communication between users and administrators |
 | `PasswordResetToken`  | `password_reset_tokens`  | Forgot-password tokens                         |
-| `LoginActivity`       | `login_activity`         | Authentication audit records                   |
+| `LoginActivity`       | `login_activities`       | Authentication audit records                   |
+| `MoneyRequest`        | `money_requests`         | Peer-to-peer money requests (friendly loan)    |
+| `SystemAnnouncement`  | `system_announcements`   | Global wallet header banner for users          |
 | `BaseClass`           | —                        | UUID mapped superclass                         |
 
 ### Enums
 
-| Enum                | Values                                                               |
-|---------------------|----------------------------------------------------------------------|
-| `UserRole`          | `USER`, `ADMIN`                                                      |
-| `AccountStatus`     | `ACTIVE`, `INACTIVE`                                                 |
-| `TransactionType`   | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                                    |
-| `TransactionStatus` | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED` |
-| `SpendingCategory`  | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT`            |
-| `RiskDecision`      | `ALLOW`, `REVIEW`, `BLOCK`                                           |
-| `AssessmentStatus`  | `PENDING`, `APPROVED`, `REJECTED`                                    |
-| `RiskLevel`         | `LOW`, `MEDIUM`, `HIGH`                                              |
+| Enum                 | Values                                                               |
+|----------------------|----------------------------------------------------------------------|
+| `UserRole`           | `USER`, `ADMIN`                                                      |
+| `AccountStatus`      | `ACTIVE`, `INACTIVE`                                                 |
+| `TransactionType`    | `DEPOSIT`, `WITHDRAW`, `TRANSFER`                                    |
+| `TransactionStatus`  | `COMPLETED`, `PENDING`, `PENDING_RISK_REVIEW`, `FAILED`, `CANCELLED` |
+| `SpendingCategory`   | `FOOD`, `SHOPPING`, `BILLS`, `ENTERTAINMENT`, `TRANSPORT`            |
+| `SpendingPeriod`     | `THIS_WEEK`, `THIS_MONTH`, `ALL_TIME`                                |
+| `MoneyRequestStatus` | `PENDING`, `ACCEPTED`, `DECLINED`, `CANCELLED`                       |
+| `RiskDecision`       | `ALLOW`, `REVIEW`, `BLOCK`                                           |
+| `AssessmentStatus`   | `PENDING`, `APPROVED`, `REJECTED`                                    |
+| `RiskLevel`          | `LOW`, `MEDIUM`, `HIGH`                                              |
 
 ---
 
@@ -241,6 +247,8 @@ AdminMailboxMessage ───── User
 - Transaction categories
 - Transaction history with filters and pagination
 - PDF export using JPA Specifications
+- Spending insights (doughnut chart) for regular users — This week / This month / All time
+- Money requests (Friendly Loan) — request money from another user; accept runs a normal transfer with risk checks
 
 ### Bank Card
 
@@ -297,6 +305,8 @@ Administrators can:
 - Approve or reject transfers
 - Clear completed risk reviews
 - Administrative mailbox
+- System Announcement — publish or clear a scrolling wallet header banner for regular users
+- Admin dashboard KPIs and transfer charts (today by status, last 7 days)
 
 ---
 
@@ -368,6 +378,8 @@ When enabled, transfers can continue if the risk microservice is temporarily una
 | `transfer.html`            | `/transactions/transfer`         |
 | `transfer-confirm.html`    | `/transactions/transfer/confirm` |
 | `transaction-history.html` | `/transactions/history`          |
+| `money-requests.html`      | `/transactions/requests`         |
+| `spending.html`            | `/transactions/spending`         |
 | `profile.html`             | `/profile`                       |
 | `profile-edit.html`        | `/profile/edit`                  |
 
@@ -382,6 +394,7 @@ When enabled, transfers can continue if the risk microservice is temporarily una
 | `admin-message-inbox.html`  | `/admin/messages/inbox`                   |
 | `admin-message-thread.html` | `/admin/messages/users/{username}/thread` |
 | `admin-risk-reviews.html`   | `/admin/risk-reviews`                     |
+| `admin-announcement.html`   | `/admin/announcement`                     |
 
 ### Reusable Thymeleaf Fragments
 
@@ -396,36 +409,33 @@ When enabled, transfers can continue if the risk microservice is temporarily una
 
 ### Main Application
 
-| Mechanism           | Implementation                    |
-|---------------------|-----------------------------------|
-| Authentication      | Spring Security form login        |
-| Login processing    | `/spring-security-login`          |
-| Password storage    | BCrypt                            |
-| Session management  | HTTP session and `JSESSIONID`     |
-| CSRF protection     | Enabled for state-changing forms  |
-| User roles          | `ROLE_USER`, `ROLE_ADMIN`         |
-| Admin authorization | `/admin/**` requires `ROLE_ADMIN` |
-| Account protection  | Inactive accounts cannot log in   |
-| Secrets             | Loaded from environment variables |
+| Mechanism           | Implementation                                                         |
+|---------------------|------------------------------------------------------------------------|
+| Authentication      | Spring Security + custom `POST /login` (AuthenticationManager)         |
+| Login page          | `GET /login`                                                           |
+| Login processing    | Active: `POST /login` · Configured unused: `/spring-security-login`    |
+| Password storage    | BCrypt                                                                 |
+| Session management  | HTTP session and `JSESSIONID`                                          |
+| CSRF protection     | Enabled for state-changing forms                                       |
+| User roles          | `ROLE_USER`, `ROLE_ADMIN`                                              |
+| Admin authorization | `/admin/**` requires `ROLE_ADMIN`                                      |
+| Account protection  | Inactive accounts cannot log in                                        |
+| Secrets             | See [Configuration](#configuration) — only `MAIL_PASSWORD` is required |
 
 ### Microservice API Key
 
 Service-to-service communication is protected with the `X-API-Key` header.
 
-| Application       | Property                   |
-|-------------------|----------------------------|
-| Main application  | `app.risk-service.api-key` |
-| Risk microservice | `app.security.api-key`     |
+| Application       | Property                   | Source                                              |
+|-------------------|----------------------------|-----------------------------------------------------|
+| Main application  | `app.risk-service.api-key` | Hardcoded default in `application.properties`       |
+| Risk microservice | `app.security.api-key`     | Must match the main application value               |
 
----
+Optional override (not required for local demo):
 
-### Optional Environment Variables
-
-| Variable               | Purpose                  |
-|------------------------|--------------------------|
-| `RISK_SERVICE_API_KEY` | **aswallet-dev-api-key** |
-
----
+| Variable               | Default in properties      |
+|------------------------|----------------------------|
+| `RISK_SERVICE_API_KEY` | `aswallet-dev-api-key`     |
 
 ## Scheduling and Caching
 
@@ -473,7 +483,7 @@ The email password is loaded from `MAIL_PASSWORD`.
 
 `GlobalExceptionHandler` provides centralized handling for validation, upload and domain exceptions.
 
-The application contains 26 custom exceptions, including:
+The application contains 28 custom exceptions, including:
 
 - `InsufficientBalanceException`
 - `TransferBlockedByRiskException`
@@ -527,9 +537,9 @@ src
 
 The frontend contains:
 
-- Sixteen modular CSS files
-- 19 JavaScript files
-- 34 Thymeleaf pages
+- Seventeen modular CSS files
+- 18 JavaScript files
+- 37 Thymeleaf pages
 - Four reusable Thymeleaf fragments
 - Separate page backgrounds and application assets
 
@@ -545,16 +555,43 @@ This directory is excluded from Git.
 
 ## Configuration
 
-### Required Environment Variables
+### Database (hardcoded in `application.properties`)
 
-| Variable         | Purpose                                   |
-|------------------|-------------------------------------------|
-| `DB_PASSWORD`    | MySQL database password: `your pass`      |
-| `MAIL_PASSWORD`  | SMTP `my pass`                            |
-| `ADMIN_PASSWORD` | admin123                                  |
-| `ADMIN_CARD_*`   | Optional administrator card configuration |
+MySQL credentials are set directly in the properties file (not loaded from environment variables):
 
-Local credentials can be stored in:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/as_wallet?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=07808
+```
+
+Update these values to match your local MySQL installation before starting the app.
+
+### Required Environment Variable
+
+| Variable        | Purpose                                      |
+|-----------------|----------------------------------------------|
+| `MAIL_PASSWORD` | SMTP password for `spring.mail.username`     |
+
+```powershell
+$env:MAIL_PASSWORD = "my-pass-smtp"
+```
+
+Without `MAIL_PASSWORD`, registration / transaction emails will not send. The rest of the application still runs.
+
+### Values with defaults in `application.properties` (not required as env vars)
+
+These support optional `${ENV:default}` overrides, but work out of the box with the defaults below:
+
+| Property / key              | Default in properties   |
+|-----------------------------|-------------------------|
+| `app.admin.password`        | `admin123`              |
+| `app.admin.card.*`          | Demo admin card values  |
+| `app.risk-service.api-key`  | `aswallet-dev-api-key`  |
+
+### Local overrides (optional)
+
+You may keep machine-specific values in:
 
 ```text
 application-local.properties
@@ -563,6 +600,8 @@ application-local.properties
 This file should remain excluded from Git.
 
 ---
+
+## Getting Started
 
 ### 1. Clone the Main Application
 
@@ -577,6 +616,7 @@ Clone it next to the main application:
 ```powershell
 git clone https://github.com/AStoyan0ff/ASWallet-Vol.2-svc.git
 ```
+
 ### 3. Create the Databases
 
 ```sql
@@ -584,13 +624,10 @@ CREATE DATABASE as_wallet;
 CREATE DATABASE as_wallet_svc;
 ```
 
-### 4. Set Environment Variables
+### 4. Set the Mail Password (required for email)
 
 ```powershell
-$env:DB_PASSWORD = "your password"
-$env:MAIL_PASSWORD = "my password"
-$env:ADMIN_PASSWORD = "admin123"
-$env:RISK_SERVICE_API_KEY = "aswallet-dev-api-key"
+$env:MAIL_PASSWORD = "my-pass-smtp"
 ```
 
 ### 5. Start the Risk Microservice
@@ -621,6 +658,8 @@ Open:
 http://localhost:8080
 ```
 
+Ensure MySQL is running and the datasource username/password in `application.properties` match your local setup.
+
 ### LAN and Phone Testing
 
 The application can listen on all network interfaces:
@@ -632,24 +671,24 @@ server.address=0.0.0.0
 Open the application from another device with:
 
 ```text
-https://<PC-LAN-IP>:8080
+http://<PC-LAN-IP>:8080
 ```
 
 Configure the risk service URL when testing across the local network:
 
 ```properties
-app.risk-service.base-url=https://<PC-LAN-IP>:8081
+app.risk-service.base-url=http://<PC-LAN-IP>:8081
 ```
 
 ---
 
 ## Testing and Coverage
 
-| Metric               |    Result |
-|----------------------|----------:|
-| Test classes         |      26+- |
-| Test methods         |     +-272 |
-| JaCoCo line coverage | **77.8%** |
+| Metric        |    Result |
+|---------------|----------:|
+| Test classes  |        28 |
+| Test methods  |       280 |
+| Line coverage | **77.8%** |
 
 Run the test suite:
 
@@ -684,17 +723,19 @@ mvn test "-Dtest=!ASWalletApplicationTests"
 2. Add a bank card and receive the welcome bonus
 3. Make a deposit
 4. Create a transfer that triggers risk review
-5. Open the paginated transaction history
-6. Log in as administrator
-7. Approve or reject the risk review
-8. Export the transaction history as PDF
-9. Open the Privacy Policy and Terms of Service
+5. Open Spending insights and Money Requests (Friendly Loan)
+6. Open the paginated transaction history
+7. Log in as administrator
+8. Publish a System Announcement and view it as a regular user on `/wallet`
+9. Approve or reject the risk review
+10. Export the transaction history as PDF
+11. Open the Privacy Policy and Terms of Service
 
 ### Test Card
 
 ```text
 Card number: 4111 1111 1111 1111
-Expiration:  Any future date
+Expiration:  2030
 CVC:         123
 ```
 
@@ -702,19 +743,21 @@ CVC:         123
 
 ```text
 Username: admin
-Password: ADMIN_PASSWORD: admin123
+Password: admin123
 ```
+
+(Unless you override `app.admin.password` / `ADMIN_PASSWORD`.)
 
 ### Troubleshooting
 
-| Problem                             | Solution                                                  |
-|-------------------------------------|-----------------------------------------------------------|
-| Risk-review list is empty           | Start the risk microservice on port `8081`                |
-| Transfer is blocked unexpectedly    | Verify the receiver has a card and inspect the risk score |
-| Microservice returns `401`          | Ensure both applications use the same API key             |
-| Phone cannot connect                | Use the computer's LAN IP instead of `localhost`          |
-| Email cannot be sent                | Verify `MAIL_PASSWORD` and the SMTP configuration         |
-| Application cannot connect to MySQL | Verify the databases and `DB_PASSWORD`                    |
+| Problem                             | Solution                                                                     |
+|-------------------------------------|------------------------------------------------------------------------------|
+| Risk-review list is empty           | Start the risk microservice on port `8081`                                   |
+| Transfer is blocked unexpectedly    | Verify the receiver has a card and inspect the risk score                    |
+| Microservice returns `401`          | Ensure both applications use the same API key                                |
+| Phone cannot connect                | Use the computer's LAN IP instead of `localhost`                             |
+| Email cannot be sent                | Set `MAIL_PASSWORD` and verify the SMTP configuration                        |
+| Application cannot connect to MySQL | Check MySQL is running and `spring.datasource.*` in `application.properties` |
 
 ---
 
@@ -722,6 +765,10 @@ Password: ADMIN_PASSWORD: admin123
 
 ### v2.0.2 — Current
 
+- Added Money Request (Friendly Loan) flow between users
+- Added Spending insights page with week / month / all-time periods
+- Added admin System Announcement banner on `/wallet` for regular users
+- Added champagne-gold wallet panel styling
 - Added risk-review history and status indicators
 - Added manual review approval and rejection
 - Added deletion of risk-review history
