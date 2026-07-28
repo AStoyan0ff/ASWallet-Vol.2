@@ -258,6 +258,7 @@
 .wallet-quick-action--bank .wallet-quick-action-icon,
 .wallet-quick-action--users .wallet-quick-action-icon,
 .wallet-quick-action--login-activity .wallet-quick-action-icon,
+.wallet-quick-action--announce .wallet-quick-action-icon,
 .wallet-quick-action--admin .wallet-quick-action-icon,
 .wallet-quick-action--admin-manage .wallet-quick-action-icon {
     color: var(--btn-gold-text);
@@ -473,6 +474,12 @@ body.body-admin .home-bg-overlay,
 .body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--login-activity:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
     color: #38bdf8 !important;
     stroke: #38bdf8;
+}
+
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--announce:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon,
+.body-wallet-premium-fe .wallet-quick-action.wallet-quick-action--announce:not(.wallet-quick-action--admin-remove):not(.wallet-quick-action--placeholder) .wallet-quick-action-icon svg {
+    color: #f59e0b !important;
+    stroke: #f59e0b;
 }
 
 .admin-tools-grid--left .wallet-quick-action:not(.wallet-quick-action--placeholder):not(.is-disabled),

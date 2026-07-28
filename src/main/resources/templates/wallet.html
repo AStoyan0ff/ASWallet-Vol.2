@@ -6,10 +6,25 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="body-wallet body-wallet-page body-wallet-white-panel body-wallet-light-page body-wallet-premium-fe">
+<body class="body-wallet body-wallet-page body-wallet-white-panel body-wallet-light-page body-wallet-premium-fe"
+      th:classappend="${systemAnnouncement != null} ? ' has-wallet-announce-ticker' : ''">
 <div class="home-bg-media" aria-hidden="true">
     <img class="home-bg-image" th:src="@{/images/wallet.png}" alt="">
     <div class="home-bg-overlay"></div>
+</div>
+
+<div class="wallet-announce-ticker"
+     th:if="${systemAnnouncement != null}"
+     role="status"
+     aria-live="polite"
+     aria-label="System announcement">
+    <div class="wallet-announce-ticker__viewport">
+        <div class="wallet-announce-ticker__track">
+            <div class="wallet-announce-ticker__content">
+                <span class="wallet-announce-ticker__message" th:text="${systemAnnouncement.message}">Announcement</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <main class="wallet-landing reveal-item">
@@ -211,7 +226,7 @@
                             <path d="M9 11l3 3 3-3"/>
                         </svg>
                     </span>
-                    <span class="wallet-quick-action-label">REQUEST</span>
+                    <span class="wallet-quick-action-label">FRIENDLY LOAN</span>
                     <span class="wallet-quick-action-badge"
                           th:if="${pendingMoneyRequestCount != null and pendingMoneyRequestCount > 0}"
                           th:text="${pendingMoneyRequestCount}"></span>
@@ -227,6 +242,23 @@
                         </svg>
                     </span>
                     <span class="wallet-quick-action-label">SPENDING</span>
+                </a>
+
+                <a class="wallet-quick-action wallet-quick-action--announce"
+                   th:if="${isAdmin}"
+                   th:href="@{/admin/announcement}">
+                    <span class="wallet-quick-action-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M3 11v2"/>
+                            <path d="M6 8v8"/>
+                            <path d="M9 5v14"/>
+                            <path d="M12 8v8"/>
+                            <path d="M15 10v4"/>
+                            <path d="M18 7v10"/>
+                            <path d="M21 11v2"/>
+                        </svg>
+                    </span>
+                    <span class="wallet-quick-action-label">ANNOUNCE</span>
                 </a>
 
                 <a class="wallet-quick-action wallet-quick-action--send"

@@ -1,0 +1,355 @@
+/* ===== Admin Announcement page ===== */
+.body-admin-announcement {
+    color: #3d3428;
+    background: #f2ebe0;
+}
+
+.body-admin-announcement .home-bg-image {
+    object-position: center center;
+}
+
+.body-admin-announcement .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(255, 252, 245, 0.14) 0%,
+            rgba(0, 0, 0, 0.04) 45%,
+            rgba(228, 218, 200, 0.28) 100%
+    );
+}
+
+.body-admin-announcement .wallet-landing {
+    justify-content: center;
+    align-items: safe center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px 20px 36px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.admin-announcement-panel {
+    width: min(520px, 96%);
+    padding: 28px 28px 24px;
+}
+
+.body-admin-announcement .form-panel-top {
+    margin-bottom: 12px;
+}
+
+.body-admin-announcement .form-panel-top--split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.body-admin-announcement .tx-clear-history-form {
+    margin: 0;
+}
+
+.body-admin-announcement .tx-clear-history-btn {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border-radius: 999px;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-announcement-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.body-admin-announcement .wallet-title {
+    margin: 0 0 6px;
+    font-size: clamp(1.2rem, 2.6vw, 1.45rem);
+}
+
+.body-admin-announcement .wallet-form-hint {
+    margin: 0 0 4px;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.admin-announcement-status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(158, 142, 118, 0.35);
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.admin-announcement-status__label {
+    font-size: 0.84rem;
+    font-weight: 800;
+}
+
+.admin-announcement-status.is-active .admin-announcement-status__label {
+    color: #1b5e20;
+}
+
+.admin-announcement-status.is-off .admin-announcement-status__label {
+    color: #8b3a2a;
+}
+
+.admin-announcement-status__meta {
+    font-size: 0.74rem;
+    color: #7a6e5c;
+}
+
+.admin-announcement-empty {
+    margin: 0 0 16px;
+    font-size: 0.84rem;
+    color: #7a6e5c;
+    text-align: center;
+}
+
+.admin-announcement-form .auth-field-group {
+    margin-bottom: 16px;
+}
+
+.admin-announcement-form textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 110px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #2c2418;
+    border: 1px solid rgba(158, 142, 118, 0.42);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);
+    box-shadow:
+            inset 0 2px 4px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38);
+    box-sizing: border-box;
+}
+
+.admin-announcement-form textarea:focus {
+    outline: none;
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow:
+            inset 0 2px 5px rgba(0, 0, 0, 0.14),
+            inset 0 1px 0 rgba(0, 0, 0, 0.05),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.38),
+            0 0 0 3px rgba(212, 175, 55, 0.14);
+}
+
+.admin-announcement-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5c4f3a;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.admin-announcement-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.admin-announcement-off-form {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            rgba(8, 8, 8, 0.92) 0%,
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .reveal-item.is-visible .admin-announcement-panel.wallet-panel--materialize.reveal-child {
+    background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #0c0c0c 24%,
+            #171717 36%,
+            #3f3d3a 46%,
+            #5c4a18 52%,
+            #8a7024 58%,
+            #b8922e 66%,
+            #d4af37 74%,
+            #e6c04a 82%,
+            #f0d060 90%,
+            #ffe082 100%
+    );
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+            14px 0 36px rgba(0, 0, 0, 0.3),
+            6px 18px 44px rgba(0, 0, 0, 0.34),
+            0 28px 56px rgba(100, 75, 30, 0.22);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .wallet-title {
+    color: #fff8e8;
+    text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.18),
+            0 3px 12px rgba(0, 0, 0, 0.42);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .wallet-form-hint {
+    color: rgba(255, 236, 190, 0.82);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .wallet-username {
+    color: #ffe082;
+    font-weight: 800;
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .success {
+    color: #fff8e8;
+    background: rgba(46, 125, 50, 0.42);
+    border: 1px solid rgba(165, 214, 167, 0.65);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .error {
+    color: #fff5f5;
+    background: rgba(183, 28, 28, 0.42);
+    border: 1px solid rgba(239, 154, 154, 0.55);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+            0 4px 14px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-status {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-status.is-active .admin-announcement-status__label {
+    color: #b9f6ca;
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-status.is-off .admin-announcement-status__label {
+    color: #ffcdd2;
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-status__meta,
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-empty,
+.body-admin-announcement.body-admin-announcement-gold-panel .admin-announcement-form label {
+    color: rgba(255, 236, 190, 0.82);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .home-bg-overlay {
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.22) 0%,
+            rgba(20, 12, 4, 0.28) 45%,
+            rgba(40, 28, 10, 0.38) 100%
+    );
+}
+
+.body-admin-announcement .app-version-footer {
+    color: rgba(61, 52, 40, 0.55);
+}
+
+.body-admin-announcement.body-admin-announcement-gold-panel .app-version-footer {
+    color: rgba(255, 236, 190, 0.45);
+}
+
+/* ===== Wallet announcement ticker ===== */
+.body-wallet-page .wallet-announce-ticker {
+    --wallet-announce-ticker-height: 42px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--wallet-announce-ticker-height);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: rgba(23, 23, 23, 0.35);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+    box-shadow:
+            inset 0 1px 0 rgba(255, 236, 190, 0.05),
+            0 4px 14px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(12px) saturate(105%);
+    -webkit-backdrop-filter: blur(12px) saturate(105%);
+}
+
+.body-wallet-page .wallet-announce-ticker__viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.body-wallet-page .wallet-announce-ticker__track {
+    display: block;
+    width: 100%;
+}
+
+.body-wallet-page .wallet-announce-ticker__content {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    will-change: transform;
+    animation: walletAnnounceScroll 24s linear infinite;
+}
+
+.body-wallet-page .wallet-announce-ticker:hover .wallet-announce-ticker__content {
+    animation-play-state: paused;
+}
+
+.body-wallet-page .wallet-announce-ticker__message {
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #ff1744;
+    text-shadow:
+            0 0 8px rgba(255, 23, 68, 0.55),
+            0 1px 2px rgba(0, 0, 0, 0.45);
+    white-space: nowrap;
+}
+
+.body-wallet-page .wallet-announce-ticker__sep {
+    display: none;
+}
+
+.body-wallet-page.has-wallet-announce-ticker .wallet-landing {
+    padding-top: calc(42px + 12px);
+}
+
+/* Single message: enters from right, exits left, then repeats */
+@keyframes walletAnnounceScroll {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .body-wallet-page .wallet-announce-ticker__content {
+        animation: none;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+}

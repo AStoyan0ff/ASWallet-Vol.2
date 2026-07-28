@@ -59,6 +59,9 @@ class WalletControllerWebMvcTest {
     @MockitoBean
     private MoneyRequestService moneyRequestService;
 
+    @MockitoBean
+    private SystemAnnouncementService systemAnnouncementService;
+
     private WalletViewDTO walletView;
     private UserViewDTO userView;
     private BankCardViewDTO bankCardView;
@@ -92,6 +95,7 @@ class WalletControllerWebMvcTest {
         when(userProfileDetailsService.isBalanceHidden("Plamen")).thenReturn(false);
         when(adminMailboxService.countUnreadForUser("Plamen")).thenReturn(2L);
         when(moneyRequestService.countPendingIncoming("Plamen")).thenReturn(0L);
+        when(systemAnnouncementService.getActiveAnnouncement()).thenReturn(Optional.empty());
         when(transactionService.getUserTransactionsPage(any(UUID.class), anyInt(), anyInt()))
                 .thenReturn(new PageImpl<>(Collections.emptyList()));
     }

@@ -31,6 +31,7 @@ public class WalletController {
     private final PaymentService paymentService;
     private final TransactionService transactionService;
     private final MoneyRequestService moneyRequestService;
+    private final SystemAnnouncementService systemAnnouncementService;
 
     public WalletController(
             WalletService walletService,
@@ -41,7 +42,8 @@ public class WalletController {
             AdminRiskReviewService adminRiskReviewService,
             PaymentService paymentService,
             TransactionService transactionService,
-            MoneyRequestService moneyRequestService
+            MoneyRequestService moneyRequestService,
+            SystemAnnouncementService systemAnnouncementService
     ) {
         this.walletService = walletService;
         this.userService = userService;
@@ -52,6 +54,7 @@ public class WalletController {
         this.paymentService = paymentService;
         this.transactionService = transactionService;
         this.moneyRequestService = moneyRequestService;
+        this.systemAnnouncementService = systemAnnouncementService;
     }
 
     @GetMapping("/wallet")
@@ -72,6 +75,8 @@ public class WalletController {
 
         } else {
             model.addAttribute("unreadMessageCount", adminMailboxService.countUnreadForUser(principal.getName()));
+            systemAnnouncementService.getActiveAnnouncement()
+                    .ifPresent(announcement -> model.addAttribute("systemAnnouncement", announcement));
         }
 
         model.addAttribute(

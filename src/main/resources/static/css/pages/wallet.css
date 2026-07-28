@@ -1175,8 +1175,8 @@
     background: linear-gradient(
             145deg,
             rgba(8, 8, 8, 0.92) 0%,
-            rgba(120, 116, 110, 0.78) 52%,
-            rgba(255, 255, 255, 0.9) 100%
+            rgba(92, 74, 24, 0.78) 52%,
+            rgba(212, 175, 55, 0.9) 100%
     );
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -1187,24 +1187,25 @@
     background: linear-gradient(
             145deg,
             #050505 0%,
-            #0c0c0c 24%,
-            #171717 36%,
-            #3f3d3a 46%,
-            #8a8580 52%,
-            #c8c2ba 58%,
-            #ebe5dd 66%,
-            #faf7f2 78%,
-            #ffffff 88%,
-            #ffffff 100%
+            #0c0c0c 22%,
+            #171717 34%,
+            #2a2a2a 42%,
+            #3f3d3a 48%,
+            #5c4a18 54%,
+            #8a7024 62%,
+            #b8922e 70%,
+            #d4af37 78%,
+            #e6c04a 88%,
+            #f0d060 100%
     );
     border: 1px solid rgba(212, 175, 55, 0.55);
     border-radius: 28px;
     box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.22),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+            inset 0 1px 0 rgba(255, 236, 190, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.12),
             14px 0 36px rgba(0, 0, 0, 0.3),
             6px 18px 44px rgba(0, 0, 0, 0.34),
-            0 28px 56px rgba(100, 75, 30, 0.18);
+            0 28px 56px rgba(100, 75, 30, 0.22);
     animation: none;
 }
 
