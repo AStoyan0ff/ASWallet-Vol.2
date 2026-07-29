@@ -10,7 +10,7 @@
 <p align="center">
   <img
     src="src/main/resources/static/images/asset/screenShot.png"
-    width="520"
+    width="560"
     alt="ASWallet application preview"
   />
 </p>
