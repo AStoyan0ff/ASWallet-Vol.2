@@ -364,11 +364,17 @@
     letter-spacing: 0.08em;
 }
 
-.wallet-balance-box.is-balance-hidden .wallet-balance-value {
+.wallet-balance-box.is-balance-hidden .wallet-balance-value,
+.body-wallet .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-value,
+.body-wallet-white-panel .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-value,
+.body-wallet-premium-fe .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-value {
     display: none;
 }
 
-.wallet-balance-box.is-balance-hidden .wallet-balance-mask {
+.wallet-balance-box.is-balance-hidden .wallet-balance-mask,
+.body-wallet .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-mask,
+.body-wallet-white-panel .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-mask,
+.body-wallet-premium-fe .wallet-balance-box.wallet-bank-card.is-balance-hidden .wallet-balance-mask {
     display: inline;
 }
 
