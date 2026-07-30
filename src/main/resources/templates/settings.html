@@ -60,6 +60,34 @@
                                 </label>
                             </div>
                         </div>
+
+                        <div class="pref-card">
+                            <div class="pref-card-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M4 5h16v4H4z"/>
+                                    <path d="M4 11h16v8H4z"/>
+                                    <path d="M8 15h8"/>
+                                </svg>
+                            </div>
+                            <div class="pref-card-body">
+                                <div class="pref-card-title">Show Announcements</div>
+                                <div class="pref-card-desc">Display admin banners on Wallet</div>
+                            </div>
+                            <div class="pref-toggle-wrap">
+                                <label class="pref-toggle"
+                                       th:classappend="${walletSettingsRequest.showAnnouncements} ? ' pref-toggle--on' : ''">
+                                    <input type="checkbox"
+                                           name="showAnnouncements"
+                                           value="true"
+                                           th:checked="${walletSettingsRequest.showAnnouncements}">
+                                    <span class="pref-toggle-track" aria-hidden="true"><span
+                                            class="pref-toggle-thumb"></span></span>
+                                </label>
+                                <span class="pref-toggle-state"
+                                      th:classappend="${walletSettingsRequest.showAnnouncements} ? ' pref-toggle-state--on' : ' pref-toggle-state--off'"
+                                      th:text="${walletSettingsRequest.showAnnouncements} ? 'ON' : 'OFF'">ON</span>
+                            </div>
+                        </div>
                     </div>
                 </section>
 

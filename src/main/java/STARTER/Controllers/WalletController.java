@@ -75,8 +75,10 @@ public class WalletController {
 
         } else {
             model.addAttribute("unreadMessageCount", adminMailboxService.countUnreadForUser(principal.getName()));
-            systemAnnouncementService.getActiveAnnouncement()
-                    .ifPresent(announcement -> model.addAttribute("systemAnnouncement", announcement));
+            if (userProfileDetailsService.isShowAnnouncements(principal.getName())) {
+                systemAnnouncementService.getActiveAnnouncement()
+                        .ifPresent(announcement -> model.addAttribute("systemAnnouncement", announcement));
+            }
         }
 
         model.addAttribute(
@@ -212,6 +214,7 @@ public class WalletController {
     @PostMapping("/wallet/settings")
     public Object saveSettings(
             @RequestParam(defaultValue = "false") boolean balanceHidden,
+            @RequestParam(defaultValue = "false") boolean showAnnouncements,
             @RequestParam(defaultValue = "false") boolean emailOnDeposit,
             @RequestParam(defaultValue = "false") boolean emailOnWithdraw,
             @RequestParam(defaultValue = "false") boolean emailOnTransfer,
@@ -222,6 +225,7 @@ public class WalletController {
         WalletSettingsRequest walletSettingsRequest = new WalletSettingsRequest();
 
         walletSettingsRequest.setBalanceHidden(balanceHidden);
+        walletSettingsRequest.setShowAnnouncements(showAnnouncements);
         walletSettingsRequest.setEmailOnDeposit(emailOnDeposit);
         walletSettingsRequest.setEmailOnWithdraw(emailOnWithdraw);
         walletSettingsRequest.setEmailOnTransfer(emailOnTransfer);
@@ -233,6 +237,7 @@ public class WalletController {
                     "success", true,
                     "message", "Settings saved successfully.",
                     "balanceHidden", balanceHidden,
+                    "showAnnouncements", showAnnouncements,
                     "emailOnDeposit", emailOnDeposit,
                     "emailOnWithdraw", emailOnWithdraw,
                     "emailOnTransfer", emailOnTransfer

@@ -73,6 +73,7 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
                 .user(user)
                 .accountStatus(AccountStatus.ACTIVE)
                 .balanceHidden(false)
+                .showAnnouncements(true)
                 .emailOnDeposit(true)
                 .emailOnWithdraw(true)
                 .emailOnTransfer(true)
@@ -192,6 +193,7 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
         WalletSettingsRequest request = new WalletSettingsRequest();
 
         request.setBalanceHidden(profile.isBalanceHidden());
+        request.setShowAnnouncements(profile.isShowAnnouncements());
         request.setEmailOnDeposit(profile.isEmailOnDeposit());
         request.setEmailOnWithdraw(profile.isEmailOnWithdraw());
         request.setEmailOnTransfer(profile.isEmailOnTransfer());
@@ -243,15 +245,17 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
         UserProfileDetails profile = findProfile(user.getId());
 
         profile.setBalanceHidden(request.isBalanceHidden());
+        profile.setShowAnnouncements(request.isShowAnnouncements());
         profile.setEmailOnDeposit(request.isEmailOnDeposit());
         profile.setEmailOnWithdraw(request.isEmailOnWithdraw());
         profile.setEmailOnTransfer(request.isEmailOnTransfer());
 
         profileDetailsRepository.save(profile);
 
-        logger.info("Wallet settings updated: username={}, balanceHidden={}, emailOnDeposit={}, emailOnWithdraw={}, emailOnTransfer={}",
+        logger.info("Wallet settings updated: username={}, balanceHidden={}, showAnnouncements={}, emailOnDeposit={}, emailOnWithdraw={}, emailOnTransfer={}",
                 username,
                 request.isBalanceHidden(),
+                request.isShowAnnouncements(),
                 request.isEmailOnDeposit(),
                 request.isEmailOnWithdraw(),
                 request.isEmailOnTransfer()
@@ -261,6 +265,11 @@ public class UserProfileDetailsServiceImpl implements UserProfileDetailsService 
     @Override
     public boolean isBalanceHidden(String username) {
         return findProfile(findUser(username).getId()).isBalanceHidden();
+    }
+
+    @Override
+    public boolean isShowAnnouncements(String username) {
+        return findProfile(findUser(username).getId()).isShowAnnouncements();
     }
 
     @Override

@@ -31,5 +31,6 @@ public interface UserProfileDetailsService {
     void updateDailyLimit(String username, BigDecimal dailyWithdrawLimit);
 
     boolean isBalanceHidden(String username);
+    boolean isShowAnnouncements(String username);
     boolean isTransactionEmailEnabled(String username, TransactionType type);
 }

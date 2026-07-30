@@ -93,6 +93,7 @@ class WalletControllerWebMvcTest {
         when(walletService.getWalletByUsername("Plamen")).thenReturn(walletView);
         when(userService.findByUsername("Plamen")).thenReturn(userView);
         when(userProfileDetailsService.isBalanceHidden("Plamen")).thenReturn(false);
+        when(userProfileDetailsService.isShowAnnouncements("Plamen")).thenReturn(true);
         when(adminMailboxService.countUnreadForUser("Plamen")).thenReturn(2L);
         when(moneyRequestService.countPendingIncoming("Plamen")).thenReturn(0L);
         when(systemAnnouncementService.getActiveAnnouncement()).thenReturn(Optional.empty());
@@ -117,6 +118,39 @@ class WalletControllerWebMvcTest {
                 .andExpect(model().attribute("unreadMessageCount", 2L))
                 .andExpect(model().attributeExists("savedBankCard"))
                 .andExpect(model().attributeExists("recentTransactions"));
+    }
+
+    @Test
+    void getWallet_whenShowAnnouncementsEnabled_addsActiveAnnouncement() throws Exception {
+        SystemAnnouncementViewDTO announcement = SystemAnnouncementViewDTO.builder()
+                .message("Maintenance tonight")
+                .active(true)
+                .updatedByUsername("admin")
+                .build();
+
+        when(userProfileDetailsService.isShowAnnouncements("Plamen")).thenReturn(true);
+        when(systemAnnouncementService.getActiveAnnouncement()).thenReturn(Optional.of(announcement));
+        when(bankCardService.getBankCardByUsername("Plamen")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/wallet")
+                        .with(csrf())
+                        .with(user("Plamen")))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("systemAnnouncement", announcement));
+    }
+
+    @Test
+    void getWallet_whenShowAnnouncementsDisabled_skipsAnnouncement() throws Exception {
+        when(userProfileDetailsService.isShowAnnouncements("Plamen")).thenReturn(false);
+        when(bankCardService.getBankCardByUsername("Plamen")).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/wallet")
+                        .with(csrf())
+                        .with(user("Plamen")))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeDoesNotExist("systemAnnouncement"));
+
+        verify(systemAnnouncementService, never()).getActiveAnnouncement();
     }
 
     @Test
@@ -295,6 +329,7 @@ class WalletControllerWebMvcTest {
                         .with(csrf())
                         .with(user("Plamen"))
                         .param("balanceHidden", "true")
+                        .param("showAnnouncements", "true")
                         .param("emailOnDeposit", "true")
                         .param("emailOnWithdraw", "false")
                         .param("emailOnTransfer", "true"))
@@ -312,6 +347,7 @@ class WalletControllerWebMvcTest {
                         .with(user("Plamen"))
                         .header("X-Requested-With", "XMLHttpRequest")
                         .param("balanceHidden", "true")
+                        .param("showAnnouncements", "false")
                         .param("emailOnDeposit", "false")
                         .param("emailOnWithdraw", "true")
                         .param("emailOnTransfer", "false")
@@ -320,6 +356,7 @@ class WalletControllerWebMvcTest {
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.message").value("Settings saved successfully."))
                 .andExpect(jsonPath("$.balanceHidden").value(true))
+                .andExpect(jsonPath("$.showAnnouncements").value(false))
                 .andExpect(jsonPath("$.emailOnWithdraw").value(true));
 
         verify(userProfileDetailsService).updateWalletSettings(eq("Plamen"), any(WalletSettingsRequest.class));

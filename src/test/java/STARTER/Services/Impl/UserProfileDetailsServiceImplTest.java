@@ -77,6 +77,7 @@ class UserProfileDetailsServiceImplTest {
                 .avatarUrl("uploads/avatars/plamen.png")
                 .accountStatus(AccountStatus.ACTIVE)
                 .balanceHidden(false)
+                .showAnnouncements(true)
                 .emailOnDeposit(true)
                 .emailOnWithdraw(true)
                 .emailOnTransfer(false)
@@ -101,6 +102,7 @@ class UserProfileDetailsServiceImplTest {
         assertThat(saved.getUser()).isEqualTo(user);
         assertThat(saved.getAccountStatus()).isEqualTo(AccountStatus.ACTIVE);
         assertThat(saved.isBalanceHidden()).isFalse();
+        assertThat(saved.isShowAnnouncements()).isTrue();
         assertThat(saved.isEmailOnDeposit()).isTrue();
         assertThat(saved.getDailyWithdrawLimit()).isEqualByComparingTo("500.00");
     }
@@ -303,6 +305,7 @@ class UserProfileDetailsServiceImplTest {
         WalletSettingsRequest request = profileDetailsService.buildWalletSettingsRequest("Plamen");
 
         assertThat(request.isBalanceHidden()).isFalse();
+        assertThat(request.isShowAnnouncements()).isTrue();
         assertThat(request.isEmailOnDeposit()).isTrue();
         assertThat(request.isEmailOnWithdraw()).isTrue();
         assertThat(request.isEmailOnTransfer()).isFalse();
@@ -314,6 +317,7 @@ class UserProfileDetailsServiceImplTest {
 
         WalletSettingsRequest request = new WalletSettingsRequest();
         request.setBalanceHidden(true);
+        request.setShowAnnouncements(false);
         request.setEmailOnDeposit(false);
         request.setEmailOnWithdraw(false);
         request.setEmailOnTransfer(true);
@@ -321,6 +325,7 @@ class UserProfileDetailsServiceImplTest {
         profileDetailsService.updateWalletSettings("Plamen", request);
 
         assertThat(profile.isBalanceHidden()).isTrue();
+        assertThat(profile.isShowAnnouncements()).isFalse();
         assertThat(profile.isEmailOnDeposit()).isFalse();
         assertThat(profile.isEmailOnWithdraw()).isFalse();
         assertThat(profile.isEmailOnTransfer()).isTrue();
@@ -379,6 +384,14 @@ class UserProfileDetailsServiceImplTest {
         stubUserAndProfile(user, profile);
 
         assertThat(profileDetailsService.isBalanceHidden("Plamen")).isTrue();
+    }
+
+    @Test
+    void isShowAnnouncements_returnsProfileValue() {
+        profile.setShowAnnouncements(false);
+        stubUserAndProfile(user, profile);
+
+        assertThat(profileDetailsService.isShowAnnouncements("Plamen")).isFalse();
     }
 
     @Test

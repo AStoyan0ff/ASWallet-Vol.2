@@ -81,7 +81,7 @@ html:has(.body-wallet-settings) {
 .settings-sections-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 14px;
 }
 
 .settings-sections-form {
@@ -90,7 +90,7 @@ html:has(.body-wallet-settings) {
 
 .settings-section-box {
     min-width: 0;
-    padding: 8px 10px 6px;
+    padding: 8px 10px 12px;
 }
 
 .settings-section-label {
@@ -152,6 +152,29 @@ html:has(.body-wallet-settings) {
     height: 22px;
 }
 
+.body-wallet-settings .pref-toggle input[type="checkbox"] {
+    width: 38px;
+    height: 22px;
+}
+
+.body-wallet-settings .pref-toggle-track {
+    width: 38px;
+    height: 22px;
+    border-color: rgba(255, 152, 0, 0.28);
+}
+
+.body-wallet-settings .pref-toggle-thumb {
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+.body-wallet-settings .pref-toggle--on .pref-toggle-thumb,
+.body-wallet-settings .pref-toggle:has(input[type="checkbox"]:checked) .pref-toggle-thumb {
+    transform: translateX(16px);
+}
+
 .body-wallet-settings .pref-section-title:first-of-type {
     margin-top: 0;
 }
@@ -177,10 +200,6 @@ html:has(.body-wallet-settings) {
     background: rgba(255, 152, 0, 0.07);
 }
 
-.body-wallet-settings .pref-toggle-track {
-    border-color: rgba(255, 152, 0, 0.28);
-}
-
 .body-wallet-settings .pref-toggle--on .pref-toggle-track,
 .body-wallet-settings .pref-toggle:has(input[type="checkbox"]:checked) .pref-toggle-track {
     background: linear-gradient(135deg, #ff9800, #e65100);
@@ -195,7 +214,7 @@ html:has(.body-wallet-settings) {
     }
 
     .settings-sections-grid {
-        gap: 8px;
+        gap: 12px;
     }
 
     .settings-page-head {
@@ -228,7 +247,7 @@ html:has(.body-wallet-settings) {
     }
 
     .settings-section-box {
-        padding: 8px 10px 6px;
+        padding: 8px 10px 12px;
     }
 }
 
@@ -548,7 +567,7 @@ html:has(.body-wallet-settings) {
 }
 
 .body-wallet-settings .settings-section-box {
-    padding: 8px 10px 6px;
+    padding: 8px 10px 12px;
     border: 1px solid rgba(158, 142, 118, 0.42);
     border-radius: var(--surface-radius);
     background: linear-gradient(180deg, #e4dcd0 0%, #ede6db 100%);

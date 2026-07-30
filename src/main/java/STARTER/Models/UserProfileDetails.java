@@ -41,6 +41,10 @@ public class UserProfileDetails extends BaseClass {
     @Builder.Default
     private boolean balanceHidden = false;
 
+    @Column(name = "show_announcements", nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
+    @Builder.Default
+    private boolean showAnnouncements = true;
+
     @Column(name = "email_on_deposit", nullable = false)
     @Builder.Default
     private boolean emailOnDeposit = true;

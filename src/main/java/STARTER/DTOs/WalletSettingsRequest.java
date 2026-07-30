@@ -10,6 +10,7 @@ import lombok.Setter;
 public class WalletSettingsRequest {
 
     private boolean balanceHidden;
+    private boolean showAnnouncements;
     private boolean emailOnDeposit;
     private boolean emailOnWithdraw;
     private boolean emailOnTransfer;

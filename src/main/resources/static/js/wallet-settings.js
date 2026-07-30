@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const statusEl = document.getElementById("prefSaveStatus");
     const toggles = form.querySelectorAll('.pref-toggle input[type="checkbox"]');
-    const settingNames = ["balanceHidden", "emailOnDeposit", "emailOnWithdraw", "emailOnTransfer"];
+    const settingNames = ["balanceHidden", "showAnnouncements", "emailOnDeposit", "emailOnWithdraw", "emailOnTransfer"];
 
     let saveTimer = null;
     let saving = false;

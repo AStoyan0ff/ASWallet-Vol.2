@@ -75,8 +75,10 @@
 
 .admin-announcement-status {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     margin-bottom: 16px;
     padding: 12px 14px;
     border-radius: 12px;
@@ -100,6 +102,8 @@
 .admin-announcement-status__meta {
     font-size: 0.74rem;
     color: #7a6e5c;
+    text-align: right;
+    margin-left: auto;
 }
 
 .admin-announcement-empty {
