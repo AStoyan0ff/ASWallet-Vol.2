@@ -67,16 +67,16 @@ It provides wallet management, deposits, withdrawals, transfers, money requests,
 
 Transfers are evaluated by an independent REST microservice:
 
----
-
-## Portfolio
-
-- **ASWallet-Website:** [`ASWallet-Website`](https://aswallet.eu)
-
----
-
 - **Main application:** `ASWallet-Vol.2`
 - **Risk microservice:** [`ASWallet-Vol.2-svc`](https://github.com/AStoyan0ff/ASWallet-Vol.2-svc)
+
+---
+
+- ## Portfolio
+
+- **Website & interactive demo:** [Live Demo](https://aswallet.eu/) · [Source Code](https://github.com/AStoyan0ff/ASWallet-Website)
+
+---
 
 The applications communicate through Spring Cloud OpenFeign and are protected with a shared API key.
 
@@ -84,7 +84,7 @@ The applications communicate through Spring Cloud OpenFeign and are protected wi
 
 | Area                    |       Count |
 |-------------------------|------------:|
-| Java source files       |         189 |
+| Java source files       |         190 |
 | Controllers             |          18 |
 | Service interfaces      |          20 |
 | Service implementations |          25 |
